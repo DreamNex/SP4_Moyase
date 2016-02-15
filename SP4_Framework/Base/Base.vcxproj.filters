@@ -39,6 +39,12 @@
     <Filter Include="Source Files\Scenes\Gameplay">
       <UniqueIdentifier>{5bc642f6-9368-4efe-86af-37fee31cc5ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{19eb03cd-3a73-4f0e-8f24-373523dd969e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{6b2dd19c-b2c7-4bd8-9a8e-eed06ac05016}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -100,6 +106,18 @@
     </ClCompile>
     <ClCompile Include="Source\GSM\GameplayState.cpp">
       <Filter>Source Files\Game State Management\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\CollisionComponent.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\Box.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision\Circle.cpp">
+      <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics\PhysicsComponent.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +192,18 @@
     </ClInclude>
     <ClInclude Include="Source\GSM\GameplayState.h">
       <Filter>Source Files\Game State Management\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\CollisionComponent.h">
+      <Filter>Source Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\Box.h">
+      <Filter>Source Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision\Circle.h">
+      <Filter>Source Files\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics\PhysicsComponent.h">
+      <Filter>Source Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
