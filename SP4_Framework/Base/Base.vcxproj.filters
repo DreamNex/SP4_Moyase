@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Game State Management">
+      <UniqueIdentifier>{bc9aa255-6d35-4617-84f6-0535a9414778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{a5c4fda7-9a1c-4e3c-b1d6-c0c2951810e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Gameplay">
+      <UniqueIdentifier>{dc15eebe-479c-42a8-8cee-e9f950303d56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Intro">
+      <UniqueIdentifier>{e4252c81-f893-437b-83c6-0c97afc313af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Mainmenu">
+      <UniqueIdentifier>{9fb30931-0c93-4f38-bc2a-6c9e7c196bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{1d865184-5c6d-48b6-82ef-e86ffc424ef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\Base">
+      <UniqueIdentifier>{566388e6-9c68-41d6-8c63-793684ac2ace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\Intro">
+      <UniqueIdentifier>{569eff87-c640-43a3-80ec-9536fbbd8331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\Mainmenu">
+      <UniqueIdentifier>{a89acea3-197d-42e1-8eb6-ccc82f511140}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\Gameplay">
+      <UniqueIdentifier>{5bc642f6-9368-4efe-86af-37fee31cc5ea}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTGA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadOBJ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ClickText.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Luala.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scenes\GameplayScene.cpp">
+      <Filter>Source Files\Scenes\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scenes\SceneManager2D_Intro.cpp">
+      <Filter>Source Files\Scenes\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scenes\SceneManager2D.cpp">
+      <Filter>Source Files\Scenes\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scenes\SceneManager2D_Menu.cpp">
+      <Filter>Source Files\Scenes\Mainmenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GSM\GameStateManager.cpp">
+      <Filter>Source Files\Game State Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GSM\MenuState.cpp">
+      <Filter>Source Files\Game State Management\Mainmenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GSM\IntroState.cpp">
+      <Filter>Source Files\Game State Management\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GSM\GameplayState.cpp">
+      <Filter>Source Files\Game State Management\Gameplay</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\shader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTGA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadOBJ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ClickText.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Luala.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scenes\GameplayScene.h">
+      <Filter>Source Files\Scenes\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scenes\SceneManager2D_Intro.h">
+      <Filter>Source Files\Scenes\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scenes\Scene.h">
+      <Filter>Source Files\Scenes\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scenes\SceneManager2D.h">
+      <Filter>Source Files\Scenes\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scenes\SceneManager2D_Menu.h">
+      <Filter>Source Files\Scenes\Mainmenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GSM\GameStateManager.h">
+      <Filter>Source Files\Game State Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GSM\GameState.h">
+      <Filter>Source Files\Game State Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GSM\MenuState.h">
+      <Filter>Source Files\Game State Management\Mainmenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GSM\IntroState.h">
+      <Filter>Source Files\Game State Management\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GSM\GameplayState.h">
+      <Filter>Source Files\Game State Management\Gameplay</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
