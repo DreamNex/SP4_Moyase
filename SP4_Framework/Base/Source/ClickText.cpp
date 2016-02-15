@@ -14,7 +14,7 @@ ClickText::ClickText(std::string name, float size, float x, float y)
 	this->name = name;
 	this->size = size;
 	min.Set(x, y, 0);
-	max.Set(x + name.size()*(size/2.2), y + size/1.3, 0);
+	max.Set(x + name.size()*(size / 2.2), y + size / 1.3, 0);
 	mouseover = false;
 }
 

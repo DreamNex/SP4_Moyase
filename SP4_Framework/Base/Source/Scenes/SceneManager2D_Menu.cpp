@@ -22,7 +22,7 @@ CSceneManager2D(m_window_width, m_window_height)
 
 CSceneManager2D_Menu::~CSceneManager2D_Menu()
 {
-	for (int i = 0; i < clickTexts.size(); ++i)
+	for (unsigned int i = 0; i < clickTexts.size(); ++i)
 	{
 		if (clickTexts[i])
 			delete clickTexts[i];
@@ -40,8 +40,8 @@ void CSceneManager2D_Menu::Init()
 	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("GEO_SPLASH", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
 	meshList[GEO_BG]->textureID = LoadTGA("Image//menu_bg.tga");
 
-	clickTexts.push_back(new ClickText("Start", 50, m_window_width * 0.45, m_window_height * 0.4));
-	clickTexts.push_back(new ClickText("Exit", 50, m_window_width * 0.45, m_window_height * 0.32));
+	clickTexts.push_back(new ClickText("Start", 50.f, m_window_width * 0.45f, m_window_height * 0.4f));
+	clickTexts.push_back(new ClickText("Exit", 50.f, m_window_width * 0.45f, m_window_height * 0.32f));
 }
 
 void CSceneManager2D_Menu::Update(double dt)
@@ -59,7 +59,7 @@ void CSceneManager2D_Menu::Render()
 	RenderMeshIn2D(meshList[GEO_BG], false);
 	modelStack.PopMatrix();
 	
-	for (int i = 0; i < clickTexts.size(); ++i)
+	for (unsigned int i = 0; i < clickTexts.size(); ++i)
 	{
 		if (clickTexts[i]->GetMouseover())
 			RenderTextOnScreen(meshList[GEO_TEXT], clickTexts[i]->GetName(), Color(1, 0, 0), clickTexts[i]->GetSize(), clickTexts[i]->GetX(), clickTexts[i]->GetY());

@@ -46,9 +46,9 @@ void CMenuState::HandleEvents(CGameStateManager* theGSM, const unsigned char key
 void CMenuState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, const double mouse_y,
 							  const int button_Left, const int button_Middle, const int button_Right)
 {
-	for (int i = 0; i < scene->clickTexts.size(); ++i)
+	for (unsigned int i = 0; i < scene->clickTexts.size(); ++i)
 	{
-		scene->clickTexts[i]->CheckMouseOver(mouse_x, mouse_y);
+		scene->clickTexts[i]->CheckMouseOver((float)mouse_x, (float)mouse_y);
 
 		if (scene->clickTexts[i]->GetName() == "Start" && scene->clickTexts[i]->GetMouseover() && button_Left == 1)
 		{

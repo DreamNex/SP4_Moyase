@@ -20,7 +20,7 @@ CSceneManager2D(m_window_width, m_window_height)
 
 CGameplayScene::~CGameplayScene()
 {
-	for (int i = 0; i < clickTexts.size(); ++i)
+	for (unsigned int i = 0; i < clickTexts.size(); ++i)
 	{
 		if (clickTexts[i])
 			delete clickTexts[i];
@@ -41,8 +41,8 @@ void CGameplayScene::Init()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
-	clickTexts.push_back(new ClickText("Resume", 50, m_window_width * 0.45, m_window_height * 0.4));
-	clickTexts.push_back(new ClickText("Quit", 50, m_window_width * 0.45, m_window_height * 0.32));
+	clickTexts.push_back(new ClickText("Resume", 50, (float)m_window_width * 0.45, (float)m_window_height * 0.4));
+	clickTexts.push_back(new ClickText("Quit", 50, (float)m_window_width * 0.45, (float)m_window_height * 0.32));
 }
 
 void CGameplayScene::Update(double dt)
@@ -72,7 +72,7 @@ void CGameplayScene::Render()
 		break;
 
 	case S_Pause:
-		for (int i = 0; i < clickTexts.size(); ++i)
+		for (unsigned int i = 0; i < clickTexts.size(); ++i)
 		{
 			if (clickTexts[i]->GetMouseover())
 				RenderTextOnScreen(meshList[GEO_TEXT], clickTexts[i]->GetName(), Color(1, 0, 0), clickTexts[i]->GetSize(), clickTexts[i]->GetX(), clickTexts[i]->GetY());

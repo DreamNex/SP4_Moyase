@@ -730,19 +730,19 @@ Mesh* MeshBuilder::Generate2DMesh(const std::string &meshName, Color color, int 
 	v.texCoord.Set(0, 0);
 	vertex_buffer_data.push_back(v);
 	// Vertex #2
-	v.pos.Set(width, 0, 0);
+	v.pos.Set((float)width, 0, 0);
 	v.color = color;
 	v.normal.Set(0, 0, 1);
 	v.texCoord.Set(1.0f, 0);
 	vertex_buffer_data.push_back(v);
 	// Vertex #3
-	v.pos.Set(width, height, 0);
+	v.pos.Set((float)width, (float)height, 0);
 	v.color = color;
 	v.normal.Set(0, 0, 1);
 	v.texCoord.Set(1.0f, 1.0f);
 	vertex_buffer_data.push_back(v);
 	// Vertex #4
-	v.pos.Set(0, height, 0);
+	v.pos.Set(0, (float)height, 0);
 	v.color = color;
 	v.normal.Set(0, 0, 1);
 	v.texCoord.Set(0, 1.0f);

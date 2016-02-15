@@ -61,7 +61,7 @@ void CIntroState::Update(CGameStateManager* theGSM, const double m_dElapsedTime)
 {
 	scene->Update(m_dElapsedTime);
 
-	timepass += m_dElapsedTime;
+	timepass += (float)m_dElapsedTime;
 	if (timepass > 2)
 	{
 		theGSM->ChangeState(CMenuState::Instance());

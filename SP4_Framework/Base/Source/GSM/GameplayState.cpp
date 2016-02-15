@@ -47,9 +47,9 @@ void CGameplayState::HandleEvents(CGameStateManager* theGSM, const double mouse_
 {
 	if (scene->getCurentStae() == CGameplayScene::S_Pause)
 	{
-		for (int i = 0; i < scene->clickTexts.size(); ++i)
+		for (unsigned int i = 0; i < scene->clickTexts.size(); ++i)
 		{
-			scene->clickTexts[i]->CheckMouseOver(mouse_x, mouse_y);
+			scene->clickTexts[i]->CheckMouseOver((float)mouse_x, (float)mouse_y);
 
 			if (scene->clickTexts[i]->GetName() == "Resume" && scene->clickTexts[i]->GetMouseover() && button_Left == 1)
 			{
