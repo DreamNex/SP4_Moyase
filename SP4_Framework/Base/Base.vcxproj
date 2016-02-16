@@ -15,6 +15,7 @@
     <ClCompile Include="Source\ButtonUI.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
+    <ClCompile Include="Source\FileReading.cpp" />
     <ClCompile Include="Source\GSM\GameplayState.cpp" />
     <ClCompile Include="Source\GSM\GameStateManager.cpp" />
     <ClCompile Include="Source\GSM\IntroState.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="Source\Scenes\SceneManager2D_Intro.cpp" />
     <ClCompile Include="Source\Scenes\SceneManager2D_Menu.cpp" />
     <ClCompile Include="Source\shader.cpp" />
+    <ClCompile Include="Source\SoundManager.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +39,7 @@
     <ClInclude Include="Source\ButtonUI.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera3.h" />
+    <ClInclude Include="Source\FileReading.h" />
     <ClInclude Include="Source\GSM\GameplayState.h" />
     <ClInclude Include="Source\GSM\GameState.h" />
     <ClInclude Include="Source\GSM\GameStateManager.h" />
@@ -55,6 +58,7 @@
     <ClInclude Include="Source\Scenes\SceneManager2D_Intro.h" />
     <ClInclude Include="Source\Scenes\SceneManager2D_Menu.h" />
     <ClInclude Include="Source\shader.hpp" />
+    <ClInclude Include="Source\SoundManager.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>
