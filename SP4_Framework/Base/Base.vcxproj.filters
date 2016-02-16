@@ -101,6 +101,12 @@
     <ClCompile Include="Source\GSM\GameplayState.cpp">
       <Filter>Source Files\Game State Management\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="Source\FileReading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SoundManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -174,6 +180,12 @@
     </ClInclude>
     <ClInclude Include="Source\GSM\GameplayState.h">
       <Filter>Source Files\Game State Management\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FileReading.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SoundManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
