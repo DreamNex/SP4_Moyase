@@ -4,7 +4,8 @@
 *.obj
 *.lastbuildstate
 *.log
-Debug/
+Base/Debug/
+Common/Debug/
 *.opensdf
 *.exe
 *.lib
