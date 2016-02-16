@@ -12,9 +12,6 @@
     <Filter Include="Source Files\Game State Management">
       <UniqueIdentifier>{bc9aa255-6d35-4617-84f6-0535a9414778}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\UI">
-      <UniqueIdentifier>{a5c4fda7-9a1c-4e3c-b1d6-c0c2951810e3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game State Management\Gameplay">
       <UniqueIdentifier>{dc15eebe-479c-42a8-8cee-e9f950303d56}</UniqueIdentifier>
     </Filter>
@@ -38,6 +35,9 @@
     </Filter>
     <Filter Include="Source Files\Scenes\Gameplay">
       <UniqueIdentifier>{5bc642f6-9368-4efe-86af-37fee31cc5ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{a5c4fda7-9a1c-4e3c-b1d6-c0c2951810e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -71,9 +71,6 @@
     <ClCompile Include="Source\LoadOBJ.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ClickText.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Luala.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -100,6 +97,9 @@
     </ClCompile>
     <ClCompile Include="Source\GSM\GameplayState.cpp">
       <Filter>Source Files\Game State Management\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ButtonUI.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,9 +139,6 @@
     <ClInclude Include="Source\LoadOBJ.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ClickText.h">
-      <Filter>Source Files\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Luala.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -174,6 +171,9 @@
     </ClInclude>
     <ClInclude Include="Source\GSM\GameplayState.h">
       <Filter>Source Files\Game State Management\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ButtonUI.h">
+      <Filter>Source Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

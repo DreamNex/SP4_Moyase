@@ -46,16 +46,16 @@ void CMenuState::HandleEvents(CGameStateManager* theGSM, const unsigned char key
 void CMenuState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, const double mouse_y,
 							  const int button_Left, const int button_Middle, const int button_Right)
 {
-	for (unsigned int i = 0; i < scene->clickTexts.size(); ++i)
+	for (unsigned int i = 0; i < scene->Buttons.size(); ++i)
 	{
-		scene->clickTexts[i]->CheckMouseOver((float)mouse_x, (float)mouse_y);
+		scene->Buttons[i]->CheckMouseOver((float)mouse_x, (float)mouse_y);
 
-		if (scene->clickTexts[i]->GetName() == "Start" && scene->clickTexts[i]->GetMouseover() && button_Left == 1)
+		if (scene->Buttons[i]->GetText() == "Start" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
 		{
 			theGSM->ChangeState(CGameplayState::Instance());
 			break;
 		}
-		if (scene->clickTexts[i]->GetName() == "Exit" && scene->clickTexts[i]->GetMouseover() && button_Left == 1)
+		if (scene->Buttons[i]->GetText() == "Exit" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
 		{
 			Application::exitbool = true;
 			break;
