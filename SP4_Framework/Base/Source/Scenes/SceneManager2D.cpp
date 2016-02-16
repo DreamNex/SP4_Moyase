@@ -139,7 +139,7 @@ void CSceneManager2D::RenderTextOnScreen(Mesh* mesh, std::string text, Color col
 /********************************************************************************
  Render a mesh in 2D
  ********************************************************************************/
-void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float size, float x, float y, bool rotate)
+void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, float sizeY, float x, float y, bool rotate)
 {
 	Mtx44 ortho;
 	ortho.SetToOrtho(0, m_window_width, 0, m_window_height, -10, 10);
@@ -150,7 +150,7 @@ void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float size, f
 			modelStack.PushMatrix();
 				modelStack.LoadIdentity();
 				modelStack.Translate( (float)x, (float)y, 0);
-				modelStack.Scale( (float)size, (float)size, (float)size);
+				modelStack.Scale( (float)sizeX, (float)sizeY, 1);
 				if (rotate)
 					modelStack.Rotate(rotateAngle, 0, 0, 1);
        

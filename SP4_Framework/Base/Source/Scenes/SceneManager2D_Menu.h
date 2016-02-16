@@ -1,6 +1,6 @@
 #pragma once
 #include "SceneManager2D.h"
-#include "../ClickText.h"
+#include "../ButtonUI.h"
 #include <vector>
 
 class CSceneManager2D_Menu: public CSceneManager2D
@@ -23,7 +23,7 @@ public:
 	virtual void Render();
 	virtual void Exit();
 	
-	std::vector<ClickText*> clickTexts;
+	std::vector<ButtonUI*> Buttons;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 };

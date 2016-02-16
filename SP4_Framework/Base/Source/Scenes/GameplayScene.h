@@ -1,6 +1,6 @@
 #pragma once
 #include "SceneManager2D.h"
-#include "../ClickText.h"
+//#include "../ClickText.h"
 #include <vector>
 
 class CGameplayScene: public CSceneManager2D
@@ -30,7 +30,7 @@ public:
 	virtual void Render();
 	virtual void Exit();
 	
-	std::vector<ClickText*> clickTexts;
+	//std::vector<ClickText*> clickTexts;
 
 private:
 	Mesh* meshList[NUM_GEOMETRY];

@@ -12,9 +12,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\ButtonUI.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
-    <ClCompile Include="Source\ClickText.cpp" />
     <ClCompile Include="Source\GSM\GameplayState.cpp" />
     <ClCompile Include="Source\GSM\GameStateManager.cpp" />
     <ClCompile Include="Source\GSM\IntroState.cpp" />
@@ -34,9 +34,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\ButtonUI.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera3.h" />
-    <ClInclude Include="Source\ClickText.h" />
     <ClInclude Include="Source\GSM\GameplayState.h" />
     <ClInclude Include="Source\GSM\GameState.h" />
     <ClInclude Include="Source\GSM\GameStateManager.h" />
