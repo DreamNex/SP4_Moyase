@@ -8,5 +8,4 @@ Base/Debug/
 Common/Debug/
 *.opensdf
 *.exe
-*.lib
 /ipch/
