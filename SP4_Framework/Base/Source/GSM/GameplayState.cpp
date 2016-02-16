@@ -45,7 +45,7 @@ void CGameplayState::HandleEvents(CGameStateManager* theGSM, const unsigned char
 void CGameplayState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, const double mouse_y,
 							  const int button_Left, const int button_Middle, const int button_Right)
 {
-	if (scene->getCurentStae() == CGameplayScene::S_Pause)
+	/*if (scene->getCurentStae() == CGameplayScene::S_Pause)
 	{
 		for (unsigned int i = 0; i < scene->clickTexts.size(); ++i)
 		{
@@ -62,7 +62,7 @@ void CGameplayState::HandleEvents(CGameStateManager* theGSM, const double mouse_
 				break;
 			}
 		}
-	}
+	}*/
 }
 
 void CGameplayState::Update(CGameStateManager* theGSM)
