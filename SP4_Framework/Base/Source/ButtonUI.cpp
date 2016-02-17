@@ -103,7 +103,6 @@ void ButtonUI::render(CSceneManager2D* SceneManager2D)
 	else
 		SceneManager2D->RenderMeshIn2D(normalMesh, false, 1, 1, pos.x - sizeX / 2, pos.y - sizeY / 2);
 	if (showText)
-		SceneManager2D->RenderTextOnScreen(textMesh, "Start", Color(1, 1, 1), textScaling, pos.x - textOffset.x, pos.y - textOffset.y);
+		SceneManager2D->RenderTextOnScreen(textMesh, "Start", Color(1, 1, 1), textScaling, textOffset.x, textOffset.y);
 
-	SceneManager2D->RenderTextOnScreen(textMesh, "Start", Color(0, 0, 0), 40, 0, 0);
 }

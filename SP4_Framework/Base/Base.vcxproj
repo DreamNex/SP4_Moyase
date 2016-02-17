@@ -29,9 +29,9 @@
     <ClCompile Include="Source\Scenes\GameplayScene.cpp" />
     <ClCompile Include="Source\Scenes\SceneManager2D.cpp" />
     <ClCompile Include="Source\Scenes\SceneManager2D_Intro.cpp" />
-    <ClCompile Include="Source\Scenes\SceneManager2D_Menu.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
+    <ClCompile Include="Source\Timer\Timer.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +59,7 @@
     <ClInclude Include="Source\Scenes\SceneManager2D_Menu.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\SoundManager.h" />
+    <ClInclude Include="Source\Timer\Timer.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>

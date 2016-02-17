@@ -39,6 +39,9 @@
     <Filter Include="Source Files\Scenes\Gameplay">
       <UniqueIdentifier>{5bc642f6-9368-4efe-86af-37fee31cc5ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Timer">
+      <UniqueIdentifier>{2af26410-02af-48b1-b81e-4dbc26f58a2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -83,9 +86,6 @@
     <ClCompile Include="Source\Scenes\SceneManager2D.cpp">
       <Filter>Source Files\Scenes\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scenes\SceneManager2D_Menu.cpp">
-      <Filter>Source Files\Scenes\Mainmenu</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GSM\GameStateManager.cpp">
       <Filter>Source Files\Game State Management</Filter>
     </ClCompile>
@@ -106,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="Source\ButtonUI.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer\Timer.cpp">
+      <Filter>Source Files\Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +189,9 @@
     </ClInclude>
     <ClInclude Include="Source\ButtonUI.h">
       <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer\Timer.h">
+      <Filter>Source Files\Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
