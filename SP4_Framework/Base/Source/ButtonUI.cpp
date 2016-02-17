@@ -15,9 +15,6 @@ ButtonUI::ButtonUI(std::string text, char* normalMesh, char* hoverMesh, float si
 	this->hoverMesh = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, sizeX, sizeY);
 	this->hoverMesh->textureID = LoadTGA(hoverMesh);
 
-	this->textMesh = MeshBuilder::GenerateText("text", 16, 16);
-	this->textMesh->textureID = LoadTGA("Image//calibri.tga");
-
 	this->sizeX = sizeX;
 	this->sizeY = sizeY;
 	pos.Set(x, y, 0);
@@ -30,7 +27,6 @@ ButtonUI::~ButtonUI()
 {
 	delete normalMesh;
 	delete hoverMesh;
-	delete textMesh;
 }
 
 void ButtonUI::CheckMouseOver(float x, float y)
@@ -96,13 +92,12 @@ bool ButtonUI::GetMouseover()
 	return mouseover;
 }
 
-void ButtonUI::render(CSceneManager2D* SceneManager2D)
+void ButtonUI::render(CSceneManager2D* SceneManager2D, Mesh* textMesh, Color textCol)
 {
 	if (mouseover)
 		SceneManager2D->RenderMeshIn2D(hoverMesh, false, 1, 1, pos.x - sizeX / 2, pos.y - sizeY / 2);
 	else
 		SceneManager2D->RenderMeshIn2D(normalMesh, false, 1, 1, pos.x - sizeX / 2, pos.y - sizeY / 2);
 	if (showText)
-		SceneManager2D->RenderTextOnScreen(textMesh, "Start", Color(1, 1, 1), textScaling, textOffset.x, textOffset.y);
-
+		SceneManager2D->RenderTextOnScreen(textMesh, text, textCol, textScaling, textOffset.x, textOffset.y);
 }

@@ -4,6 +4,7 @@ using namespace std;
 #include "menustate.h"
 #include "GameStateManager.h"
 #include "GameplayState.h"
+#include "TutorialState.h"
 #include "../Application.h"
 
 CMenuState CMenuState::theMenuState;
@@ -55,7 +56,12 @@ void CMenuState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, c
 			theGSM->ChangeState(CGameplayState::Instance());
 			break;
 		}
-		if (scene->Buttons[i]->GetText() == "Exit" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
+		else if (scene->Buttons[i]->GetText() == "How 2 Play" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
+		{
+			theGSM->ChangeState(CTutorialState::Instance());
+			break;
+		}
+		else if (scene->Buttons[i]->GetText() == "Exit" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
 		{
 			Application::exitbool = true;
 			break;

@@ -7,12 +7,19 @@ struct Vector2
 	Vector2( float a = 0, float b = 0 ); //default constructor
 	Vector2( const Vector2 &rhs ); //copy constructor
 	void Set( float a, float b ); //Set all data
+	void SetZero(void);
+	bool IsZero(void)const;
 	Vector2 operator+( const Vector2& rhs ) const; //Vector addition
 	Vector2 operator-( const Vector2& rhs ) const; //Vector subtraction
 	Vector2 operator-( void ) const; //Unary negation
 	Vector2 operator*( float scalar ) const; //Scalar multiplication
+	Vector2 operator/ (float scalar) const;
+	bool operator==(const Vector2& rhs)const;
+	bool operator!=(const Vector2& rhs)const;
 	float Length( void ) const; //Get magnitude
+	float LengthSquared(void)const;//Get Magnitude Squared
 	float Dot( const Vector2& rhs ) const; //Dot product
-	Vector2 Normalized( void ); //Return a copy of this vector, normalized
+	float AngleBetween(const Vector2& rhs) const; //Angle Between
+	Vector2 Normalized(void)const; //Return a copy of this vector, normalized
 };
 #endif
