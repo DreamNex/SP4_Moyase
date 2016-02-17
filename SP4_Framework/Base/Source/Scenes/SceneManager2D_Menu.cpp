@@ -39,7 +39,7 @@ void CSceneManager2D_Menu::Init()
 	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("GEO_SPLASH", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
 	meshList[GEO_BG]->textureID = LoadTGA("Image//menu_bg.tga");
 
-	Buttons.push_back(new ButtonUI("Start", "Image//menu_bg.tga", "Image//calibri.tga", 200, 100, 400, 300, 0.6, true));
+	Buttons.push_back(new ButtonUI("Start", "Image//menu_bg.tga", "Image//calibri.tga", 200.f, 100.f, 400.f, 300.f, 0.6f, true));
 	//Buttons.push_back(new Buttons("Exit", 50.f, m_window_width * 0.45f, m_window_height * 0.32f));
 }
 
