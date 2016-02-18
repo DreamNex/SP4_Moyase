@@ -11,12 +11,11 @@ class FileReading
 public:
 	FileReading();
 	~FileReading();
-
-	void Init();
-	
+	std::vector<std::string> storage;
 	//It will check the type of gameobject and get variables[FORMATT: pos.x, pos.y, scale x, scale y ]
-	std::vector<std::string> loadVariables(std::vector<std::string> &storage, std::string filename);
-	void saveVariables(std::string filename);
+	void loadVariables(std::string filename, bool unlock, int tool[3]);
+
+	
 	
 private:
 	

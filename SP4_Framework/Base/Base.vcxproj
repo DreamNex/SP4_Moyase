@@ -20,6 +20,7 @@
     <ClCompile Include="Source\GSM\GameStateManager.cpp" />
     <ClCompile Include="Source\GSM\IntroState.cpp" />
     <ClCompile Include="Source\GSM\MenuState.cpp" />
+    <ClCompile Include="Source\Level.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\Luala.cpp" />
@@ -45,6 +46,7 @@
     <ClInclude Include="Source\GSM\GameStateManager.h" />
     <ClInclude Include="Source\GSM\IntroState.h" />
     <ClInclude Include="Source\GSM\MenuState.h" />
+    <ClInclude Include="Source\Level.h" />
     <ClInclude Include="Source\Light.h" />
     <ClInclude Include="Source\LoadOBJ.h" />
     <ClInclude Include="Source\LoadTGA.h" />

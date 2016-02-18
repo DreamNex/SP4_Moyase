@@ -107,6 +107,9 @@
     <ClCompile Include="Source\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -185,6 +188,9 @@
       <Filter>Source Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="Source\SoundManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
