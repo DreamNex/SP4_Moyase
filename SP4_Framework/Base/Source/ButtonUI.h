@@ -28,14 +28,14 @@ public:
 	bool GetMouseover();
 	void CheckMouseOver(float x, float y);
 
-	void render(CSceneManager2D* SceneManager2D);
+	void render(CSceneManager2D* SceneManager2D, Mesh* textMesh, Color textCol = Color(0, 0, 0));
 	
 private:
-	Mesh *normalMesh, *hoverMesh, *textMesh;
+	Mesh *normalMesh, *hoverMesh;
 	float sizeX, sizeY;
 	Vector3 pos, min, max;
 
-	std::string text, a;
+	std::string text;
 	float textScaling;
 	Vector3 textOffset;
 	bool showText;

@@ -39,6 +39,36 @@
     <Filter Include="Source Files\Scenes\Gameplay">
       <UniqueIdentifier>{5bc642f6-9368-4efe-86af-37fee31cc5ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scenes\Tutorial">
+      <UniqueIdentifier>{ada20931-c642-4b85-bd12-2628cf975a77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RigidBody">
+      <UniqueIdentifier>{ee23b440-dcba-48f9-bf7c-84feb3d59e84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RigidBody\Physics">
+      <UniqueIdentifier>{8f181d51-6f61-4baf-9401-c50bc5aeda41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RigidBody\Colision">
+      <UniqueIdentifier>{2c350cd3-aa22-4825-83bb-4e126b78ab0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Tutorial">
+      <UniqueIdentifier>{b72994cb-7822-49ef-9df7-fec796747f9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{1efe7a35-61f6-40ca-9dff-fe5c4e9ab493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Balls">
+      <UniqueIdentifier>{fbe669d1-7b0d-42ad-9bbe-f683523d7466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment">
+      <UniqueIdentifier>{e51127c7-201e-46d1-beb0-ca9cb008418b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment\Wall">
+      <UniqueIdentifier>{1d96ea83-1d7b-45e8-8257-45c60ef5a0d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment\Spikes">
+      <UniqueIdentifier>{12e4224b-4154-49bc-ad10-059c56acd504}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -109,6 +139,48 @@
     </ClCompile>
     <ClCompile Include="Source\Level.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\RigidBody.cpp">
+      <Filter>Source Files\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\Box.cpp">
+      <Filter>Source Files\RigidBody\Colision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\Circle.cpp">
+      <Filter>Source Files\RigidBody\Colision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\CollisionComponent.cpp">
+      <Filter>Source Files\RigidBody\Colision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\CollisionHandler.cpp">
+      <Filter>Source Files\RigidBody\Colision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\Ray.cpp">
+      <Filter>Source Files\RigidBody\Colision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\PhysicsComponent.cpp">
+      <Filter>Source Files\RigidBody\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scenes\TutorialScene.cpp">
+      <Filter>Source Files\Scenes\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GSM\TutorialState.cpp">
+      <Filter>Source Files\Game State Management\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Balls.cpp">
+      <Filter>Source Files\GameObjects\Balls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Enviroment.cpp">
+      <Filter>Source Files\GameObjects\Enviroment</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Wall.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Spikes.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +264,48 @@
     </ClInclude>
     <ClInclude Include="Source\Level.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\RigidBody.h">
+      <Filter>Source Files\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\Box.h">
+      <Filter>Source Files\RigidBody\Colision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\Circle.h">
+      <Filter>Source Files\RigidBody\Colision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\CollisionComponent.h">
+      <Filter>Source Files\RigidBody\Colision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\CollisionHandler.h">
+      <Filter>Source Files\RigidBody\Colision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\Ray.h">
+      <Filter>Source Files\RigidBody\Colision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\PhysicsComponent.h">
+      <Filter>Source Files\RigidBody\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scenes\TutorialScene.h">
+      <Filter>Source Files\Scenes\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GSM\TutorialState.h">
+      <Filter>Source Files\Game State Management\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\GameObject.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Balls.h">
+      <Filter>Source Files\GameObjects\Balls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Enviroment.h">
+      <Filter>Source Files\GameObjects\Enviroment</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Wall.h">
+      <Filter>Source Files\GameObjects\Enviroment\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Spikes.h">
+      <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

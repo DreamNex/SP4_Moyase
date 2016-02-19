@@ -36,11 +36,14 @@ void CSceneManager2D_Menu::Init()
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 
-	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("GEO_SPLASH", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
-	meshList[GEO_BG]->textureID = LoadTGA("Image//menu_bg.tga");
+	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("GB", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
+	meshList[GEO_BG]->textureID = LoadTGA("Image//Tits//MainMenuBG.tga");
 
-	Buttons.push_back(new ButtonUI("Start", "Image//menu_bg.tga", "Image//calibri.tga", 200.f, 100.f, 400.f, 300.f, 0.6f, true));
-	//Buttons.push_back(new Buttons("Exit", 50.f, m_window_width * 0.45f, m_window_height * 0.32f));
+
+	Buttons.push_back(new ButtonUI("Start", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2, 0.6, true));
+	Buttons.push_back(new ButtonUI("How 2 Play", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2 - 80, 0.35, true));
+	Buttons.push_back(new ButtonUI("Options", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2 - 160, 0.5, true));
+	Buttons.push_back(new ButtonUI("Exit", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2 - 240, 0.6, true));
 }
 
 void CSceneManager2D_Menu::Update(double dt)
@@ -54,14 +57,7 @@ void CSceneManager2D_Menu::Render()
 	
 	for (unsigned int i = 0; i < Buttons.size(); ++i)
 	{
-		if (Buttons[i]->GetMouseover())
-			RenderMeshIn2D(Buttons[i]->getHoverMesh(), false, 1, 1, Buttons[i]->GetX() - Buttons[i]->GetSizeX() / 2, Buttons[i]->GetY() - Buttons[i]->GetSizeY() / 2);
-		else
-			RenderMeshIn2D(Buttons[i]->getNormalMesh(), false, 1, 1, Buttons[i]->GetX() - Buttons[i]->GetSizeX() / 2, Buttons[i]->GetY() - Buttons[i]->GetSizeY() / 2);
-		if (Buttons[i]->GetShowText())
-		{
-			RenderTextOnScreen(meshList[GEO_TEXT], Buttons[i]->GetText(), Color(0, 1, 0), Buttons[i]->GetTextScale(), Buttons[i]->GetTextPos().x, Buttons[i]->GetTextPos().y);
-		}
+		Buttons[i]->render(this, meshList[GEO_TEXT]);
 	}
 
 	modelStack.PushMatrix();
