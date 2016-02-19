@@ -49,7 +49,7 @@ void FileReading::loadVariables(std::string filename, bool unlock, int tool[3])
 		
 		for (int i = 0; i != 3; i++)
 		{
-			tool[i] = atoi(token.c_str);
+			tool[i] = atoi(token.c_str());
 		}
 	}
 }
