@@ -10,4 +10,7 @@ public:
 
 	bool checkColision(GameObject *GO2);
 	void SpecialcolisionResponce();
+
+private:
+	Vector2 originalPos;
 };

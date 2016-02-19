@@ -4,10 +4,9 @@
 #include "GL\glew.h"
 #include "../LoadTGA.h"
 
-Spikes::Spikes(Vector2 pos, Vector2 RespawnPos, float width, float height)
+Spikes::Spikes(Vector2 pos, float width, float height)
 : Enviroment(pos)
 {
-	this->respawnPos = RespawnPos;
 	this->rigidBody = new RigidBody(new Box(this->pos, width, height), new PhysicsComponent(this->pos, 1, false, false), true, false, false);
 	this->mesh = MeshBuilder::Generate2DMesh("Mesh", Color(0.741, 0, 0.470), 0, 0, 1, 1);
 	this->outerMesh = MeshBuilder::Generate2DMesh("Mesh", Color(0, 1, 0), 0, 0, 1, 1);
