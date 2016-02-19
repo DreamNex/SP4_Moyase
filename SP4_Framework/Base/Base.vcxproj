@@ -29,6 +29,8 @@
     <ClCompile Include="Source\GSM\MenuState.cpp" />
     <ClCompile Include="Source\Level.cpp" />
     <ClCompile Include="Source\GSM\TutorialState.cpp" />
+    <ClCompile Include="Source\GUIManager\GUI.cpp" />
+    <ClCompile Include="Source\GUIManager\GUIManager.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\Luala.cpp" />
@@ -49,6 +51,7 @@
     <ClCompile Include="Source\Scenes\TutorialScene.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
+    <ClCompile Include="Source\Timer\Timer.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +74,8 @@
     <ClInclude Include="Source\GSM\MenuState.h" />
     <ClInclude Include="Source\Level.h" />
     <ClInclude Include="Source\GSM\TutorialState.h" />
+    <ClInclude Include="Source\GUIManager\GUI.h" />
+    <ClInclude Include="Source\GUIManager\GUIManager.h" />
     <ClInclude Include="Source\Light.h" />
     <ClInclude Include="Source\LoadOBJ.h" />
     <ClInclude Include="Source\LoadTGA.h" />
@@ -93,6 +98,7 @@
     <ClInclude Include="Source\Scenes\TutorialScene.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\SoundManager.h" />
+    <ClInclude Include="Source\Timer\Timer.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>

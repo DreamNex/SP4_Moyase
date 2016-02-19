@@ -1,9 +1,8 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <vector>
-#include <string>
-#include "Vector2.h"
+#include "FileReading.h"
+
 class Level
 {
 	Level();

@@ -11,5 +11,6 @@ public:
 	bool checkColision(GameObject *GO2);
 
 private:
+	Vector2 originalPos;
 	void SpecialcolisionResponce(GameObject *GO2);
 };

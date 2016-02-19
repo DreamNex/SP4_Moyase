@@ -38,7 +38,12 @@ public:
 	void SetActive(bool active){ this->active = active; }
 	void SetGravity(bool gravity){ this->gravity = gravity; }
 
-	void ApplyForce(Vector2 appliedForce){ v_Force = v_Force + appliedForce; }
+	void ApplyForce(Vector2 appliedForce)
+	{ 
+		v_Force = v_Force + appliedForce; 
+		if (v_Force.y != 0)
+			gravity = true;
+	}
 	void Update(float dt);
 
 private:

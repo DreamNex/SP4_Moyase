@@ -38,9 +38,9 @@ void CTutorialScene::Init()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
-	gameObjects.push_back(new Balls(Vector2(700, 700), 50, "Image//Tits//Avatar_Censored.tga"));
-	gameObjects.push_back(new Wall(Vector2(1280 /2, 400), 1280 - 100, 100));
-	gameObjects.push_back(new Spikes(Vector2(1280 / 2, 400), Vector2(700, 700), 1280, 100));
+	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Tits//Avatar_Censored.tga"));
+	gameObjects.push_back(new Wall(Vector2(m_window_width /2, 100), m_window_width - 100, 100));
+	gameObjects.push_back(new Spikes(Vector2(m_window_width / 2, 100), m_window_width, 100));
 }
 
 void CTutorialScene::Update(double dt)
@@ -48,8 +48,23 @@ void CTutorialScene::Update(double dt)
 	std::cout << gameObjects[0]->getPos().x << ", " << gameObjects[0]->getPos().y << std::endl;
 	if (Application::IsKeyPressed('W'))
 	{
-		std::cout << "W: ";
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(0, 0.00002f));
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(0, 20.f));
+	}
+	if(Application::IsKeyPressed('S'))
+	{
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(0, -1.f));
+	}
+	if (Application::IsKeyPressed('A'))
+	{
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(-30.f, 0));
+	}
+	if (Application::IsKeyPressed('D'))
+	{
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(30.f, 0));
+	}
+	if (Application::IsKeyPressed('L'))
+	{
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(150.f, 50));
 	}
 	
 	gameObjects[0]->checkColision(gameObjects[1]);
