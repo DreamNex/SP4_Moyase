@@ -29,12 +29,18 @@ void RigidBody::CollisionResolve_Bounce(RigidBody *rb1, RigidBody *rb2)
 		toCollide = rb1;
 	}
 
-	Vector2 compt;
-	compt.componentVector(resolve->pC_Compt->GetVelocity(), toCollide->cC_Compt->GetCollideNormal());
-	resolve->pC_Compt->SetVelocity( resolve->pC_Compt->GetVelocity() - ( compt * 2.f ));
-	resolve->pC_Compt->SetAcceleration(resolve->pC_Compt->GetVelocity().Normalized());
-	Vector2 test;
-
+	if (resolve->pC_Compt->GetVelocity().Dot(toCollide->cC_Compt->GetCollideNormal() == -1))
+	{
+		resolve->pC_Compt->SetVelocity(toCollide->cC_Compt->GetCollideNormal() * resolve->pC_Compt->GetVelocity().Length());
+	}
+	else
+	{
+		Vector2 compt;
+		compt.componentVector(resolve->pC_Compt->GetVelocity(), toCollide->cC_Compt->GetCollideNormal());
+		resolve->pC_Compt->SetVelocity(resolve->pC_Compt->GetVelocity() - (compt * 2.f));
+		Vector2 test;
+	}
+	resolve->pC_Compt->SetAcceleration(resolve->pC_Compt->GetVelocity().Normalized() * resolve->pC_Compt->GetAcceleration().Length());
 }
 
 void RigidBody::CollisionResolve_PushOut(RigidBody *rb1, RigidBody *rb2)
@@ -64,6 +70,8 @@ void RigidBody::CollisionResolve_PushOut(RigidBody *rb1, RigidBody *rb2)
 	resolve->pC_Compt->SetForce(Vector2(0, 0));
 	resolve->pC_Compt->SetVelocity(Vector2(0, 0));
 	resolve->pC_Compt->SetAcceleration(Vector2(0, 0));
+	if (dynamic_cast<Ray*>(toCollide->cC_Compt) == false)
+		resolve->pC_Compt->SetGravity(false);
 }
 
 bool RigidBody::CollideWith(RigidBody *otherObject)
@@ -88,12 +96,10 @@ bool RigidBody::CollideWith(RigidBody *otherObject)
 
 		if (toCollide->response)
 		{
-			/*
-			if (bounce)
-				CollisionResolve_Bounce(this, otherObject);
-			*/
 			if (pushout)
 				CollisionResolve_PushOut(this, otherObject);
+			//if (bounce)
+				//CollisionResolve_Bounce(this, otherObject);
 		}
 		return true;
 	}
