@@ -54,6 +54,21 @@
     <Filter Include="Source Files\Game State Management\Tutorial">
       <UniqueIdentifier>{b72994cb-7822-49ef-9df7-fec796747f9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{1efe7a35-61f6-40ca-9dff-fe5c4e9ab493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Balls">
+      <UniqueIdentifier>{fbe669d1-7b0d-42ad-9bbe-f683523d7466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment">
+      <UniqueIdentifier>{e51127c7-201e-46d1-beb0-ca9cb008418b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment\Wall">
+      <UniqueIdentifier>{1d96ea83-1d7b-45e8-8257-45c60ef5a0d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment\Spikes">
+      <UniqueIdentifier>{12e4224b-4154-49bc-ad10-059c56acd504}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -148,6 +163,21 @@
     </ClCompile>
     <ClCompile Include="Source\GSM\TutorialState.cpp">
       <Filter>Source Files\Game State Management\Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Balls.cpp">
+      <Filter>Source Files\GameObjects\Balls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Enviroment.cpp">
+      <Filter>Source Files\GameObjects\Enviroment</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Wall.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Spikes.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +285,21 @@
     </ClInclude>
     <ClInclude Include="Source\GSM\TutorialState.h">
       <Filter>Source Files\Game State Management\Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\GameObject.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Balls.h">
+      <Filter>Source Files\GameObjects\Balls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Enviroment.h">
+      <Filter>Source Files\GameObjects\Enviroment</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Wall.h">
+      <Filter>Source Files\GameObjects\Enviroment\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Spikes.h">
+      <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

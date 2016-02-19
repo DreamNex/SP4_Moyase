@@ -16,6 +16,11 @@
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
     <ClCompile Include="Source\FileReading.cpp" />
+    <ClCompile Include="Source\GameObjects\Balls.cpp" />
+    <ClCompile Include="Source\GameObjects\Enviroment.cpp" />
+    <ClCompile Include="Source\GameObjects\GameObject.cpp" />
+    <ClCompile Include="Source\GameObjects\Spikes.cpp" />
+    <ClCompile Include="Source\GameObjects\Wall.cpp" />
     <ClCompile Include="Source\GSM\GameplayState.cpp" />
     <ClCompile Include="Source\GSM\GameStateManager.cpp" />
     <ClCompile Include="Source\GSM\IntroState.cpp" />
@@ -49,6 +54,11 @@
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera3.h" />
     <ClInclude Include="Source\FileReading.h" />
+    <ClInclude Include="Source\GameObjects\Balls.h" />
+    <ClInclude Include="Source\GameObjects\Enviroment.h" />
+    <ClInclude Include="Source\GameObjects\GameObject.h" />
+    <ClInclude Include="Source\GameObjects\Spikes.h" />
+    <ClInclude Include="Source\GameObjects\Wall.h" />
     <ClInclude Include="Source\GSM\GameplayState.h" />
     <ClInclude Include="Source\GSM\GameState.h" />
     <ClInclude Include="Source\GSM\GameStateManager.h" />

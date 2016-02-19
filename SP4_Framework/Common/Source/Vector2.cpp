@@ -96,3 +96,19 @@ Vector2 Vector2::Normalized(void)const
 {
 	return Vector2(-y, +x);
 }
+
+float Vector2::component(Vector2 v, Vector2 dV)
+{
+	float alpha = atan2(dV.y, dV.x);
+	float theta = atan2(v.y, v.x);
+
+	float length = v.Length();
+	
+	return length * cos(theta - alpha);
+}
+
+void Vector2::componentVector(Vector2 v, Vector2 dV)
+{
+	v = dV.Normalized();
+	*this = component(v, dV);
+}
