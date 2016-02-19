@@ -6,11 +6,24 @@ class GUI :
 	public ButtonUI
 {
 
+public:
+	enum GUITYPEID
+	{
+		CANNONGUI,
+		SLOWGUI,
+		BOOSTGUI
+	};
+
 private:
 	bool BtnIsActive;
+	int g_typeID;
+
 public:
-	GUI(std::string text, char* normalMesh, char* hoverMesh, float sizeX, float sizeY, float x, float y, float textScaling, bool showTex);
+	GUI(std::string text, char* normalMesh, char* hoverMesh, float sizeX, float sizeY, float x, float y, float textScaling, bool showTex, GUITYPEID GUITYPEID);
 	~GUI();
+
+	int GetType();
+	void SetType(int g_typeID);
 
 	bool GetActive();
 	void SetActive(bool Active);

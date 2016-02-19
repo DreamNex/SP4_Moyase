@@ -72,6 +72,9 @@
     <Filter Include="Source Files\RigidBody\Physics">
       <UniqueIdentifier>{0ddaabe7-746f-4e7e-a742-bd9bfb9849f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Controls">
+      <UniqueIdentifier>{7af832a9-e29e-4d0a-b859-dadf82f63dda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -193,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="Source\RigidBody\PhysicsComponent.cpp">
       <Filter>Source Files\RigidBody\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Controls\Controls.cpp">
+      <Filter>Source Files\Controls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -327,6 +333,9 @@
     </ClInclude>
     <ClInclude Include="Source\RigidBody\PhysicsComponent.h">
       <Filter>Source Files\RigidBody\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Controls\Controls.h">
+      <Filter>Source Files\Controls</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
