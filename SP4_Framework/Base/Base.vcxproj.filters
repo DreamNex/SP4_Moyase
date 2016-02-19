@@ -69,6 +69,12 @@
     <Filter Include="Source Files\GameObjects\Enviroment\Spikes">
       <UniqueIdentifier>{12e4224b-4154-49bc-ad10-059c56acd504}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObjects\Tools">
+      <UniqueIdentifier>{4a6a0566-6cb0-444e-a038-7937a97c1a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Tools\Cannon">
+      <UniqueIdentifier>{d543516a-bde2-4bac-adc8-49406afa3ade}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -181,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameObjects\Spikes.cpp">
       <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Tools.cpp">
+      <Filter>Source Files\GameObjects\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Cannon.cpp">
+      <Filter>Source Files\GameObjects\Tools\Cannon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +318,12 @@
     </ClInclude>
     <ClInclude Include="Source\GameObjects\Spikes.h">
       <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Tools.h">
+      <Filter>Source Files\GameObjects\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Cannon.h">
+      <Filter>Source Files\GameObjects\Tools\Cannon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

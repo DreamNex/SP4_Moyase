@@ -39,8 +39,8 @@ void CTutorialScene::Init()
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
 	gameObjects.push_back(new Balls(Vector2(700, 700), 50, "Image//Tits//Avatar_Censored.tga"));
-	gameObjects.push_back(new Wall(Vector2(m_window_width /2, 400), m_window_width - 100, 100, "Image//Tits//btn.tga"));
-	gameObjects.push_back(new Spikes(Vector2(m_window_width / 2, 400), Vector2(700, 700), m_window_width, 100));
+	gameObjects.push_back(new Wall(Vector2(1280 /2, 400), 1280 - 100, 100));
+	gameObjects.push_back(new Spikes(Vector2(1280 / 2, 400), Vector2(700, 700), 1280, 100));
 }
 
 void CTutorialScene::Update(double dt)

@@ -1,6 +1,7 @@
 #include "Vector2.h"
 #include <math.h>
 #include <cmath>
+#include "MyMath.h"
 
 /*
 ADDDD ALL TEEH MATTHHH STUFFFFF!!!
@@ -111,4 +112,15 @@ void Vector2::componentVector(Vector2 v, Vector2 dV)
 {
 	v = dV.Normalized();
 	*this = component(v, dV);
+}
+
+void Vector2::rotateVector(float angle)
+{
+	float tempx = this->x;
+	float tempy = this->y;
+	
+	angle = Math::DegreeToRadian(angle);
+
+	this->x = tempx * cos(angle) - tempy * sin(angle);
+	this->y = tempx * sin(angle) + tempy * cos(angle);
 }

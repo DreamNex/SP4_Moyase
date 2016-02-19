@@ -40,6 +40,7 @@ public:
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX = 1.0f, float sizeY = 1.0f, float x = 0.0f, float y = 0.0f, float rotate = 0);
 	void RenderMesh(Mesh *mesh, bool enableLight);
+	void Render2DMesh(Mesh *mesh, float scaleX = 1.f, float scaleY = 1.f, float x = 0, float y = 0, float rotate = 0);
 
 protected:
 	unsigned m_vertexArrayID;

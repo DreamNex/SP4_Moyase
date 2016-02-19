@@ -9,5 +9,7 @@ public:
 	~Balls();
 
 	bool checkColision(GameObject *GO2);
-	void SpecialcolisionResponce();
+
+private:
+	void SpecialcolisionResponce(GameObject *GO2);
 };
