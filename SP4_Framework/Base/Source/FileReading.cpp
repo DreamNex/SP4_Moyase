@@ -90,7 +90,7 @@ void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 	std::string token;
 	for (std::vector<std::string>::iterator it = storage.begin(); it < storage.end(); it++)
 	{
-		if (it->find("spike") != std::string::npos)
+		if (it->find("wall") != std::string::npos)
 		{
 			float x, y, scaleX, scaleY;
 			std::stringstream splitter(it->c_str());
@@ -115,17 +115,9 @@ void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 			std::getline(splitter, token, ',');
 			scaleY = (float)atoi(token.c_str());
 
-			(*EnviromentObjs).push_back(new Wall(Vector2(x, y), scaleX, scaleY);
+			(*EnviromentObjs).push_back(new Wall(Vector2(x, y), scaleX, scaleY));
 		}
-	}
-}
-
-void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
-{
-	std::string token;
-	for (std::vector<std::string>::iterator it = storage.begin(); it < storage.end(); it++)
-	{
-		if (it->find("wall") != std::string::npos)
+		else if (it->find("wall") != std::string::npos)
 		{
 			float x, y, scaleX, scaleY;
 			std::stringstream splitter(it->c_str());

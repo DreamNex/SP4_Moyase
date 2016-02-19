@@ -5,6 +5,6 @@
 class Wall : public Enviroment
 {
 public:
-	Wall(Vector2 pos, float width, float height, char* texurePath);
+	Wall(Vector2 pos, float width, float height);
 	~Wall();
 };

@@ -20,7 +20,6 @@ public:
 	void loadVariables(std::string filename, bool &unlock, int (&tool)[3]);
 	void loadVariables(Balls* Ball);
 	void loadVariables(std::vector<Enviroment*>* EnviromentObjs);
-	void loadVariables(std::vector<Enviroment*>* EnviromentObjs);
 	
 	//Clear vector storage
 	void ClearStorage();
