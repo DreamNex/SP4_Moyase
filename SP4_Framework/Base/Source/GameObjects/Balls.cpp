@@ -9,6 +9,7 @@
 Balls::Balls(Vector2 pos, float diameter, char* texturePath)
 : GameObject(pos)
 {
+	originalPos = pos;
 	this->rigidBody = new RigidBody(new Circle(this->pos, diameter * 0.5), new PhysicsComponent(this->pos, 1, true, true), true, true, true);
 	this->mesh = MeshBuilder::Generate2DMesh("Mesh", Color(0, 0, 0), 0, 0, 1, 1);
 	this->mesh->textureID = LoadTGA(texturePath);
@@ -25,7 +26,7 @@ bool Balls::checkColision(GameObject *GO2)
 	{
 		if (dynamic_cast<Spikes*>(GO2))
 		{
-			this->pos = dynamic_cast<Spikes*>(GO2)->getRespawnPos();
+			this->pos = originalPos;
 		}
 		return true;
 	}
