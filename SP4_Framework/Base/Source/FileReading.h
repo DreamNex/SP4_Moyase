@@ -4,17 +4,22 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include <cstring>
 
 class FileReading
 {
+public:
 	FileReading();
 	~FileReading();
+	std::vector<std::string> storage;
+	//It will check the type of gameobject and get variables[FORMATT: pos.x, pos.y, scale x, scale y ]
+	void loadVariables(std::string filename, bool unlock, int tool[3]);
 
-	void Init();
 	
-	void loadVariables(std::vector<float> storage, std::string filename);
-	void saveVariables(std::string filename);
-
+	
+private:
+	
+	
 
 };
 #endif

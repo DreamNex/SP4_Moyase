@@ -21,5 +21,8 @@ struct Vector2
 	float Dot( const Vector2& rhs ) const; //Dot product
 	float AngleBetween(const Vector2& rhs) const; //Angle Between
 	Vector2 Normalized(void)const; //Return a copy of this vector, normalized
+
+	float component(Vector2 v, Vector2 dV);
+	void componentVector(Vector2 v, Vector2 dV);
 };
 #endif

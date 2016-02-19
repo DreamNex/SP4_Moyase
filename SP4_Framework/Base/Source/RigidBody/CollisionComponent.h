@@ -12,6 +12,7 @@ public:
 
 	//Accessor(s)
 	Vector2 GetOrigin(){ return *origin; }
+	Vector2* GetPointerOrigin(){ return origin; }
 	Vector2 GetCollideNormal(){ return this->collideNormal; }
 
 	//Mutator(s)

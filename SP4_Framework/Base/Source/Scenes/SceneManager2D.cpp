@@ -139,7 +139,7 @@ void CSceneManager2D::RenderTextOnScreen(Mesh* mesh, std::string text, Color col
 /********************************************************************************
  Render a mesh in 2D
  ********************************************************************************/
-void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, float sizeY, float x, float y, bool rotate)
+void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, float sizeY, float x, float y, float rotate)
 {
 	Mtx44 ortho;
 	ortho.SetToOrtho(0, m_window_width, 0, m_window_height, -10, 10);
@@ -149,10 +149,10 @@ void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, 
 			viewStack.LoadIdentity();
 			modelStack.PushMatrix();
 				modelStack.LoadIdentity();
-				modelStack.Translate( (float)x, (float)y, 0);
-				modelStack.Scale( (float)sizeX, (float)sizeY, 1);
+				modelStack.Translate((float)x, (float)y, 0);
 				if (rotate)
-					modelStack.Rotate(rotateAngle, 0, 0, 1);
+					modelStack.Rotate(rotate, 0, 0, 1);
+				modelStack.Scale( (float)sizeX, (float)sizeY, 1);
        
 				Mtx44 MVP, modelView, modelView_inverse_transpose;
 	

@@ -48,6 +48,21 @@
     <Filter Include="Source Files\Scenes\Tutorial">
       <UniqueIdentifier>{caa8f1e3-1f53-4319-88ac-07cbbe78e293}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{1efe7a35-61f6-40ca-9dff-fe5c4e9ab493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Balls">
+      <UniqueIdentifier>{fbe669d1-7b0d-42ad-9bbe-f683523d7466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment">
+      <UniqueIdentifier>{e51127c7-201e-46d1-beb0-ca9cb008418b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment\Wall">
+      <UniqueIdentifier>{1d96ea83-1d7b-45e8-8257-45c60ef5a0d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment\Spikes">
+      <UniqueIdentifier>{12e4224b-4154-49bc-ad10-059c56acd504}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -107,11 +122,14 @@
     <ClCompile Include="Source\FileReading.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ButtonUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
     <ClCompile Include="Source\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ButtonUI.cpp">
-      <Filter>Source Files\UI</Filter>
+    <ClCompile Include="Source\Level.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Timer\Timer.cpp">
       <Filter>Source Files\Timer</Filter>
@@ -130,6 +148,21 @@
     </ClCompile>
     <ClCompile Include="Source\GUIManager\GUIManager.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Balls.cpp">
+      <Filter>Source Files\GameObjects\Balls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Enviroment.cpp">
+      <Filter>Source Files\GameObjects\Enviroment</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Wall.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Spikes.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,11 +238,14 @@
     <ClInclude Include="Source\FileReading.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ButtonUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
     <ClInclude Include="Source\SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ButtonUI.h">
-      <Filter>Source Files\UI</Filter>
+    <ClInclude Include="Source\Level.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Timer\Timer.h">
       <Filter>Source Files\Timer</Filter>
@@ -225,6 +261,21 @@
     </ClInclude>
     <ClInclude Include="Source\GUIManager\GUIManager.h">
       <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\GameObject.h">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Balls.h">
+      <Filter>Source Files\GameObjects\Balls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Enviroment.h">
+      <Filter>Source Files\GameObjects\Enviroment</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Wall.h">
+      <Filter>Source Files\GameObjects\Enviroment\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Spikes.h">
+      <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
