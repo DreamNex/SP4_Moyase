@@ -13,9 +13,10 @@ FileReading::~FileReading()
 }
 
 // Be abl to open any text file you want and store it into a vector
-void FileReading::loadVariables(std::string filename, bool unlock, int tool[3])
+void FileReading::loadVariables(std::string filename, bool unlock, int tool[3], std::vector<Balls> Ball)
 {
 	char commas;
+	std::string typeName;
 	std::ifstream myfile;
 	myfile.open(filename);
 	std::string line;
@@ -52,4 +53,13 @@ void FileReading::loadVariables(std::string filename, bool unlock, int tool[3])
 			tool[i] = atoi(token.c_str());
 		}
 	}
+
+	for (std::vector<std::string>::iterator it = storage.begin(); it < storage.end(); it++)
+	{
+		if (it->find("ball") != std::string::npos)
+		{
+			//while ()
+		}
+	}
+
 }
