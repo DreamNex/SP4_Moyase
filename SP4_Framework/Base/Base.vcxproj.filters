@@ -39,20 +39,14 @@
     <Filter Include="Source Files\Scenes\Gameplay">
       <UniqueIdentifier>{5bc642f6-9368-4efe-86af-37fee31cc5ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Scenes\Tutorial">
-      <UniqueIdentifier>{ada20931-c642-4b85-bd12-2628cf975a77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\RigidBody">
-      <UniqueIdentifier>{ee23b440-dcba-48f9-bf7c-84feb3d59e84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\RigidBody\Physics">
-      <UniqueIdentifier>{8f181d51-6f61-4baf-9401-c50bc5aeda41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\RigidBody\Colision">
-      <UniqueIdentifier>{2c350cd3-aa22-4825-83bb-4e126b78ab0e}</UniqueIdentifier>
+    <Filter Include="Source Files\Timer">
+      <UniqueIdentifier>{2af26410-02af-48b1-b81e-4dbc26f58a2a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game State Management\Tutorial">
-      <UniqueIdentifier>{b72994cb-7822-49ef-9df7-fec796747f9f}</UniqueIdentifier>
+      <UniqueIdentifier>{c6db3fd1-b013-45c2-9024-413a4dd6d653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\Tutorial">
+      <UniqueIdentifier>{caa8f1e3-1f53-4319-88ac-07cbbe78e293}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{1efe7a35-61f6-40ca-9dff-fe5c4e9ab493}</UniqueIdentifier>
@@ -113,9 +107,6 @@
     <ClCompile Include="Source\Scenes\SceneManager2D.cpp">
       <Filter>Source Files\Scenes\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scenes\SceneManager2D_Menu.cpp">
-      <Filter>Source Files\Scenes\Mainmenu</Filter>
-    </ClCompile>
     <ClCompile Include="Source\GSM\GameStateManager.cpp">
       <Filter>Source Files\Game State Management</Filter>
     </ClCompile>
@@ -140,32 +131,23 @@
     <ClCompile Include="Source\Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RigidBody\RigidBody.cpp">
-      <Filter>Source Files\RigidBody</Filter>
+    <ClCompile Include="Source\Timer\Timer.cpp">
+      <Filter>Source Files\Timer</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RigidBody\Box.cpp">
-      <Filter>Source Files\RigidBody\Colision</Filter>
+    <ClCompile Include="Source\Scenes\SceneManager2D_Menu.cpp">
+      <Filter>Source Files\Scenes\Mainmenu</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RigidBody\Circle.cpp">
-      <Filter>Source Files\RigidBody\Colision</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\RigidBody\CollisionComponent.cpp">
-      <Filter>Source Files\RigidBody\Colision</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\RigidBody\CollisionHandler.cpp">
-      <Filter>Source Files\RigidBody\Colision</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\RigidBody\Ray.cpp">
-      <Filter>Source Files\RigidBody\Colision</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\RigidBody\PhysicsComponent.cpp">
-      <Filter>Source Files\RigidBody\Physics</Filter>
+    <ClCompile Include="Source\GSM\TutorialState.cpp">
+      <Filter>Source Files\Game State Management\Tutorial</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scenes\TutorialScene.cpp">
       <Filter>Source Files\Scenes\Tutorial</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GSM\TutorialState.cpp">
-      <Filter>Source Files\Game State Management\Tutorial</Filter>
+    <ClCompile Include="Source\GUIManager\GUI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUIManager\GUIManager.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameObjects\GameObject.cpp">
       <Filter>Source Files\GameObjects</Filter>
@@ -265,32 +247,20 @@
     <ClInclude Include="Source\Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RigidBody\RigidBody.h">
-      <Filter>Source Files\RigidBody</Filter>
+    <ClInclude Include="Source\Timer\Timer.h">
+      <Filter>Source Files\Timer</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RigidBody\Box.h">
-      <Filter>Source Files\RigidBody\Colision</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RigidBody\Circle.h">
-      <Filter>Source Files\RigidBody\Colision</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RigidBody\CollisionComponent.h">
-      <Filter>Source Files\RigidBody\Colision</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RigidBody\CollisionHandler.h">
-      <Filter>Source Files\RigidBody\Colision</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RigidBody\Ray.h">
-      <Filter>Source Files\RigidBody\Colision</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RigidBody\PhysicsComponent.h">
-      <Filter>Source Files\RigidBody\Physics</Filter>
+    <ClInclude Include="Source\GSM\TutorialState.h">
+      <Filter>Source Files\Game State Management\Tutorial</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scenes\TutorialScene.h">
       <Filter>Source Files\Scenes\Tutorial</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GSM\TutorialState.h">
-      <Filter>Source Files\Game State Management\Tutorial</Filter>
+    <ClInclude Include="Source\GUIManager\GUI.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUIManager\GUIManager.h">
+      <Filter>Source Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameObjects\GameObject.h">
       <Filter>Source Files\GameObjects</Filter>
