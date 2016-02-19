@@ -45,7 +45,7 @@ void CTutorialScene::Init()
 
 void CTutorialScene::Update(double dt)
 {
-	std::cout << gameObjects[0]->getPos().x << ", " << gameObjects[0]->getPos().y << std::endl;
+	//std::cout << gameObjects[0]->getPos().x << ", " << gameObjects[0]->getPos().y << std::endl;
 	if (Application::IsKeyPressed('W'))
 	{
 		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(0, 20.f));
