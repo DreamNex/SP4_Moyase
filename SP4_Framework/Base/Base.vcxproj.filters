@@ -63,6 +63,15 @@
     <Filter Include="Source Files\GameObjects\Enviroment\Spikes">
       <UniqueIdentifier>{12e4224b-4154-49bc-ad10-059c56acd504}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\RigidBody">
+      <UniqueIdentifier>{7eb16047-4288-43ed-ad6e-980c0c5aaf9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RigidBody\Collision">
+      <UniqueIdentifier>{8f576d95-6160-4b97-8604-38083b05b18b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RigidBody\Physics">
+      <UniqueIdentifier>{0ddaabe7-746f-4e7e-a742-bd9bfb9849f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -163,6 +172,27 @@
     </ClCompile>
     <ClCompile Include="Source\GameObjects\Spikes.cpp">
       <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\RigidBody.cpp">
+      <Filter>Source Files\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\Box.cpp">
+      <Filter>Source Files\RigidBody\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\Circle.cpp">
+      <Filter>Source Files\RigidBody\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\CollisionComponent.cpp">
+      <Filter>Source Files\RigidBody\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\CollisionHandler.cpp">
+      <Filter>Source Files\RigidBody\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\Ray.cpp">
+      <Filter>Source Files\RigidBody\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RigidBody\PhysicsComponent.cpp">
+      <Filter>Source Files\RigidBody\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +306,27 @@
     </ClInclude>
     <ClInclude Include="Source\GameObjects\Spikes.h">
       <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\RigidBody.h">
+      <Filter>Source Files\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\Box.h">
+      <Filter>Source Files\RigidBody\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\Circle.h">
+      <Filter>Source Files\RigidBody\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\CollisionComponent.h">
+      <Filter>Source Files\RigidBody\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\CollisionHandler.h">
+      <Filter>Source Files\RigidBody\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\Ray.h">
+      <Filter>Source Files\RigidBody\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RigidBody\PhysicsComponent.h">
+      <Filter>Source Files\RigidBody\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
