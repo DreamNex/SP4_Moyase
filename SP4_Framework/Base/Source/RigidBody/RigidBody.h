@@ -57,5 +57,9 @@ private:
 	bool response;
 	bool bounce;
 	bool pushout;
+
+
+	//Test for Disabling Gravity
+	RigidBody* attached;
 };
 

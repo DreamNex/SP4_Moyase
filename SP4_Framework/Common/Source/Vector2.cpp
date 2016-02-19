@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include "Vector2.h"
 #include <math.h>
 #include <cmath>
@@ -99,16 +100,18 @@ Vector2 Vector2::Normalized(void)const
 
 float Vector2::component(Vector2 v, Vector2 dV)
 {
-	float alpha = atan2(dV.y, dV.x);
-	float theta = atan2(v.y, v.x);
+	float alpha = atan2f(dV.y, dV.x);
+	float theta = atan2f(v.y, v.x);
 
 	float length = v.Length();
 	
-	return length * cos(theta - alpha);
+	return length * cosf(theta - alpha);
 }
 
 void Vector2::componentVector(Vector2 v, Vector2 dV)
 {
-	v = dV.Normalized();
-	*this = component(v, dV);
+	Vector2 temp = dV.Normalized();
+	float cmpt = component(v, dV);
+	*this = temp * cmpt;
+	Vector2 temp1;
 }

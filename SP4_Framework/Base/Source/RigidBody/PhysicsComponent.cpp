@@ -26,60 +26,63 @@ void PhysicsComponent::Update(float dt)
 
 	//Temporary
 	float gravityForce = 9.8f;
-	float co_StaticFriction = 0.6;
-	float co_KineticFriction = 0.55;
+	float co_StaticFriction = 0.55;
+	float co_KineticFriction = 0.50;
 
 	/***************************************************************************************************************************
 	Horizontal Force
 	****************************************************************************************************************************/
-	if (v_Velocity.x != 0)//Moving
+	if (v_Velocity.y == 0)
 	{
-		//Calculate Kinetic Friction
-		float kineticForce = mass * gravityForce * co_KineticFriction;
+		if (v_Velocity.x != 0)//Moving
+		{
+			//Calculate Kinetic Friction
+			float kineticForce = mass * gravityForce * co_KineticFriction;
 
-		//Check Direction of Force
-		if (v_Velocity.x > 0)
-			v_Force.x = v_Force.x - kineticForce;
-		else if (v_Velocity.x < 0)
-			v_Force.x = v_Force.x + kineticForce;
+			//Check Direction of Force
+			if (v_Velocity.x > 0)
+				v_Force.x = v_Force.x - kineticForce;
+			else if (v_Velocity.x < 0)
+				v_Force.x = v_Force.x + kineticForce;
 
-		//Update Acceleration
-		v_Acceleration.x += v_Force.x / mass;
+			//Update Acceleration
+			v_Acceleration.x += v_Force.x / mass;
 
-		if (v_Acceleration.x * v_Velocity.x < 0)//Negative, Not Same Direction
-		{ 
-			if (fabs(v_Acceleration.x) >= fabs(v_Velocity.x))//True = Acceleration will change Velocity Direction
+			if (v_Acceleration.x * v_Velocity.x < 0)//Negative, Not Same Direction
 			{
-				//Reset to Not Moving as Friction cannot change direction.
-				v_Force.x = 0;
-				v_Acceleration.x = 0;
-				v_Velocity.x = 0;
+				if (fabs(v_Acceleration.x) >= fabs(v_Velocity.x))//True = Acceleration will change Velocity Direction
+				{
+					//Reset to Not Moving as Friction cannot change direction.
+					v_Force.x = 0;
+					v_Acceleration.x = 0;
+					v_Velocity.x = 0;
+				}
 			}
 		}
-	}
-	else if (v_Velocity.x == 0 && v_Force.x != 0)//Not Moving
-	{
-		//Calculate Budging Force to overcome for Movement
-		float budgingForce = mass * gravityForce * co_StaticFriction;
-
-		//Check if Force overcome Budging Force
-		if (fabs(v_Force.x) > budgingForce)
+		else if (v_Velocity.x == 0 && v_Force.x != 0)//Not Moving
 		{
-			if (v_Force.x < 0)//Check Direction of Force
-				v_Force.x = v_Force.x + budgingForce;
-			else
-				v_Force.x = v_Force.x - budgingForce;
-			v_Acceleration.x = v_Force.x / mass;
+			//Calculate Budging Force to overcome for Movement
+			float budgingForce = mass * gravityForce * co_StaticFriction;
+
+			//Check if Force overcome Budging Force
+			if (fabs(v_Force.x) > budgingForce)
+			{
+				if (v_Force.x < 0)//Check Direction of Force
+					v_Force.x = v_Force.x + budgingForce;
+				else
+					v_Force.x = v_Force.x - budgingForce;
+				v_Acceleration.x = v_Force.x / mass;
+			}
 		}
 	}
 
 	/***************************************************************************************************************************
 	Vertical Force
 	****************************************************************************************************************************/
-	
-	
+
+
 	if (gravity)
-	{ 
+	{
 		v_Acceleration.y -= gravityForce * 0.35f;
 	}
 

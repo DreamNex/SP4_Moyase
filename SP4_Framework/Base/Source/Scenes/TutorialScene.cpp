@@ -64,7 +64,7 @@ void CTutorialScene::Update(double dt)
 	}
 	if (Application::IsKeyPressed('L'))
 	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(150.f, 150));
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(150.f, 50));
 	}
 	
 	gameObjects[0]->checkColision(gameObjects[1]);
