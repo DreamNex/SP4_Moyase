@@ -63,11 +63,6 @@
     <Filter Include="Source Files\GameObjects\Enviroment\Spikes">
       <UniqueIdentifier>{12e4224b-4154-49bc-ad10-059c56acd504}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObjects\Tools">
-      <UniqueIdentifier>{4a6a0566-6cb0-444e-a038-7937a97c1a6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects\Tools\Cannon">
-      <UniqueIdentifier>{d543516a-bde2-4bac-adc8-49406afa3ade}</UniqueIdentifier>
     <Filter Include="Source Files\RigidBody">
       <UniqueIdentifier>{7eb16047-4288-43ed-ad6e-980c0c5aaf9a}</UniqueIdentifier>
     </Filter>
@@ -76,6 +71,12 @@
     </Filter>
     <Filter Include="Source Files\RigidBody\Physics">
       <UniqueIdentifier>{0ddaabe7-746f-4e7e-a742-bd9bfb9849f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Tools">
+      <UniqueIdentifier>{1dca54c4-e941-41f3-b0ce-d8e5fa48334e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Tools\Cannon">
+      <UniqueIdentifier>{6e58bcf0-e92a-4be4-8fa5-3b70cd9006ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -178,11 +179,6 @@
     <ClCompile Include="Source\GameObjects\Spikes.cpp">
       <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\Tools.cpp">
-      <Filter>Source Files\GameObjects\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GameObjects\Cannon.cpp">
-      <Filter>Source Files\GameObjects\Tools\Cannon</Filter>
     <ClCompile Include="Source\RigidBody\RigidBody.cpp">
       <Filter>Source Files\RigidBody</Filter>
     </ClCompile>
@@ -203,6 +199,12 @@
     </ClCompile>
     <ClCompile Include="Source\RigidBody\PhysicsComponent.cpp">
       <Filter>Source Files\RigidBody\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Tools.cpp">
+      <Filter>Source Files\GameObjects\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Cannon.cpp">
+      <Filter>Source Files\GameObjects\Tools\Cannon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -317,11 +319,6 @@
     <ClInclude Include="Source\GameObjects\Spikes.h">
       <Filter>Source Files\GameObjects\Enviroment\Spikes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObjects\Tools.h">
-      <Filter>Source Files\GameObjects\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameObjects\Cannon.h">
-      <Filter>Source Files\GameObjects\Tools\Cannon</Filter>
     <ClInclude Include="Source\RigidBody\RigidBody.h">
       <Filter>Source Files\RigidBody</Filter>
     </ClInclude>
@@ -342,6 +339,12 @@
     </ClInclude>
     <ClInclude Include="Source\RigidBody\PhysicsComponent.h">
       <Filter>Source Files\RigidBody\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Tools.h">
+      <Filter>Source Files\GameObjects\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Cannon.h">
+      <Filter>Source Files\GameObjects\Tools\Cannon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
