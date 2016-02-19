@@ -24,67 +24,55 @@ void PhysicsComponent::Update(float dt)
 		return;
 
 	//Temporary
-	float gravityForce = 10;
+	float gravityForce = 0.00001f;
 	float co_StaticFriction = 0.6;
 	float co_KineticFriction = 0.55;
 
-
-	float NetForce = v_Force.Length();
-
-	if (NetForce != 0)
+	/***************************************************************************************************************************
+	Horizontal Force
+	****************************************************************************************************************************/
+	if (v_Velocity.x == 0)//Moving
 	{
-		if (!(moving))//Standing Still
+		//Apply Friction
+		float kineticForce = mass * gravityForce * co_KineticFriction;
+		v_Force.x = v_Force.x - kineticForce;
+
+		//Update Acceleration
+		v_Acceleration.x = v_Force.x / mass;
+
+		if (v_Acceleration.x * v_Velocity.x < 0)//Negative Value, Not Same Direction
 		{
-			Vector2 BudgingForce = mass * gravityForce * co_StaticFriction;
-			BudgingForce.y = 0;
-			if (NetForce * NetForce > BudgingForce.LengthSquared())
+			if (v_Acceleration.x >= v_Velocity.x)//True = Acceleration will change Velocity Direction
 			{
-				Vector2 OpposingForce = v_Force.Normalized() * BudgingForce.Length();
-				v_Force = v_Force - OpposingForce;
-				moving = true;
-			}
-		}
-		else if (moving)//Moving
-		{
-			//F = ma
-			v_Acceleration = v_Force / this->mass;
-
-			if (v_Velocity.IsZero() || v_Acceleration.IsZero())//????
-			{
-				v_Velocity.IsZero();
-				v_Acceleration.IsZero();
-				return;
-			}
-
-			Vector2 KineticForce = mass * gravityForce * co_KineticFriction;
-			Vector2 OpposingForce = v_Velocity.Normalized() * KineticForce.Length();
-			OpposingForce.y = 0;
-
-			if (v_Force.LengthSquared() < OpposingForce.LengthSquared()) // Kinetic Force > Forward Force
-			{
-				if (v_Velocity.Normalized() != v_Acceleration.Normalized())//It is decelerating
-				{
-					if (v_Velocity.LengthSquared() < v_Acceleration.LengthSquared())//Deceleration > Velocity
-					{
-						v_Velocity.SetZero();
-						v_Acceleration.SetZero();
-						moving = false;
-					}
-				}
-				else
-					v_Force = v_Force - OpposingForce;
-			}
-			else
-			{
-				v_Velocity.SetZero();
-				v_Acceleration.SetZero();
-				moving = false;
+				//Reset to Not Moving as Friction cannot change direction.
+				v_Force.x = 0;
+				v_Acceleration.x = 0;
+				v_Velocity.x = 0;
 			}
 		}
 	}
+	else if (v_Velocity.x != 0 && v_Force.x != 0)//Not Moving
+	{
+		//Calculate Budging Force to overcome for Movement
+		float budgingForce = mass * gravityForce * co_StaticFriction;
 
+		//Check if Force overcome Budging Force
+		if (v_Force.x > budgingForce)
+		{
+			v_Force.x = v_Force.x - budgingForce; //Apply Opposing Force
+			v_Acceleration.x = v_Force.x / mass;
+		}
+	}
+
+	/***************************************************************************************************************************
+	Vertical Force
+	****************************************************************************************************************************/
 	if (gravity)
-		ApplyForce(Vector2(0, -gravityForce));
+		ApplyForce(Vector2(0, -1) * mass * gravityForce);
+	v_Acceleration.y = v_Force.y / mass;
+	
 
+	//Update Velocity and Position
+	v_Velocity = v_Velocity + v_Acceleration;
 	*v_Pos = (*v_Pos) + v_Velocity;
 }

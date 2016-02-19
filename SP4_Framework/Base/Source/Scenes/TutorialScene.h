@@ -2,6 +2,10 @@
 #include "SceneManager2D.h"
 #include <vector>
 
+#include"../GameObjects/Balls.h"
+#include"../GameObjects/Wall.h"
+#include"../GameObjects/Spikes.h"
+
 class CTutorialScene: public CSceneManager2D
 {
 public:
@@ -20,6 +24,7 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
+	std::vector<GameObject*> gameObjects;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 };
