@@ -9,6 +9,7 @@
 #include <sstream>
 
 CSceneManager2D_Intro::CSceneManager2D_Intro()
+: SE(NULL)
 {
 }
 
@@ -20,13 +21,24 @@ CSceneManager2D(m_window_width, m_window_height)
 
 CSceneManager2D_Intro::~CSceneManager2D_Intro()
 {
+	if (SE != NULL)
+	{
+		SE->drop();
+	}
 }
 
 void CSceneManager2D_Intro::Init()
 {
 	CSceneManager2D::Init();
+	//SM->Init();
+	SE = createIrrKlangDevice();
+	
 	meshList[GEO_SPLASH] = MeshBuilder::Generate2DMesh("GEO_SPLASH", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
 	meshList[GEO_SPLASH]->textureID = LoadTGA("Image//blaze.tga");
+	
+	//SE->setSoundVolume(0.1f);
+	SE->play2D("SoundTracks//SplashScreen.mp3", false, false);
+	
 }
 
 void CSceneManager2D_Intro::Update(double dt)
