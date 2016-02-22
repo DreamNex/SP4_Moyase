@@ -154,3 +154,58 @@ void FileReading::ClearStorage()
 {
 	storage.clear();
 }
+
+std::vector<std::string>  FileReading::SearchFolder(std::string directory)
+{
+	std::vector<std::string> storageFN;
+	std::string searchPattern = "*.txt";
+	std::string fullPath = directory + searchPattern;
+	
+	char ch[260];
+	char DefChar = ' ';
+
+	std::wstring ptemp = std::wstring(directory.begin(), directory.end());
+	std::wstring stemp = std::wstring(fullPath.begin(), fullPath.end());
+	
+	const wchar_t* ptemp2 = ptemp.c_str();
+
+	LPCWSTR fp = stemp.c_str();
+
+	WIN32_FIND_DATA findData;
+	HANDLE handleFind;
+	
+	handleFind = FindFirstFile(fp, &findData);
+
+	if (handleFind == INVALID_HANDLE_VALUE)
+	{
+		std::cout << "Error searching directory \n";
+	}
+
+	do
+	{
+		WideCharToMultiByte(CP_ACP, 0, findData.cFileName, -1, ch, 260, &DefChar, NULL);
+
+		std::string fileName(ch);
+		std::string filePath = directory + fileName;
+		std::ifstream in(filePath.c_str());
+		if (in)
+		{
+			//do things with file here
+			storageFN.push_back(fileName);
+
+		}
+
+		else
+		{
+			std::cout << "Cannot open file " << fileName << std::endl;
+		}
+	}
+
+	while (FindNextFile(handleFind, &findData) > 0);
+	
+	if (GetLastError() != ERROR_NO_MORE_FILES)
+	{
+		std::cout << "Something went wrong during searching \n" << std::endl;
+	}
+	return storageFN;
+}
