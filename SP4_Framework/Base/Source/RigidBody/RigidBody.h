@@ -14,7 +14,7 @@ public:
 		this->bounce = bounce;
 		this->pushout = pushout;
 		this->pos = (cC_Compt)->GetPointerOrigin();
-
+		this->response = response;
 		if (dynamic_cast<Circle*>(cC_Compt))
 		{
 			scale[0] = (dynamic_cast<Circle*>(cC_Compt))->GetRadius() * 2;

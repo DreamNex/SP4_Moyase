@@ -5,6 +5,9 @@
 #include"../GameObjects/Balls.h"
 #include"../GameObjects/Wall.h"
 #include"../GameObjects/Spikes.h"
+#include"../GameObjects/Cannon.h"
+#include"../GameObjects/Boost.h"
+#include"../GameObjects/Slow.h"
 
 class CTutorialScene: public CSceneManager2D
 {

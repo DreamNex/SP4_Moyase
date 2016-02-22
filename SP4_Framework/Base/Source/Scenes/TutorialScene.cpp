@@ -41,6 +41,10 @@ void CTutorialScene::Init()
 	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Tits//Avatar_Censored.tga"));
 	gameObjects.push_back(new Wall(Vector2(m_window_width /2, 100), m_window_width - 100, 100));
 	gameObjects.push_back(new Spikes(Vector2(m_window_width / 2, 100), m_window_width, 100));
+	gameObjects.push_back(new Cannon(Vector2(300, 350), 50, 50));
+	gameObjects.push_back(new Boost(Vector2(300, 500), 50, 50));
+	gameObjects.push_back(new Slow(Vector2(300, 700), 50, 50));
+
 }
 
 void CTutorialScene::Update(double dt)
@@ -68,7 +72,9 @@ void CTutorialScene::Update(double dt)
 	}
 	
 	gameObjects[0]->checkColision(gameObjects[1]);
-	//gameObjects[0]->checkColision(gameObjects[2]);
+	gameObjects[0]->checkColision(gameObjects[3]);
+	gameObjects[0]->checkColision(gameObjects[4]);
+	gameObjects[0]->checkColision(gameObjects[5]);
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->update(dt);
