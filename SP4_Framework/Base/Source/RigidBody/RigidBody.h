@@ -7,12 +7,10 @@
 class RigidBody
 {
 public:
-	RigidBody(CollisionComponent* cC_Compt, PhysicsComponent* pC_Compt, bool response, bool bounce, bool pushout)//RigidBody(new Circle(pos, rad), new PhysicsComponent(pos, 10, enable, false))
+	RigidBody(CollisionComponent* cC_Compt, PhysicsComponent* pC_Compt, bool response)//RigidBody(new Circle(pos, rad), new PhysicsComponent(pos, 10, enable, false))
 	{
 		this->cC_Compt = cC_Compt;
 		this->pC_Compt = pC_Compt;
-		this->bounce = bounce;
-		this->pushout = pushout;
 		this->pos = (cC_Compt)->GetPointerOrigin();
 		this->response = response;
 		if (dynamic_cast<Circle*>(cC_Compt))

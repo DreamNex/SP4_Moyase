@@ -7,7 +7,7 @@
 Spikes::Spikes(Vector2 pos, float width, float height)
 : Enviroment(pos)
 {
-	this->rigidBody = new RigidBody(new Box(this->pos, width, height), new PhysicsComponent(this->pos, 1, false, false), true, false, false);
+	this->rigidBody = new RigidBody(new Box(this->pos, width, height), new PhysicsComponent(this->pos, 1, false), true);
 	this->mesh = MeshBuilder::Generate2DMesh("Mesh", Color(0.741, 0, 0.470), 0, 0, 1, 1);
 	this->outerMesh = MeshBuilder::Generate2DMesh("Mesh", Color(0, 1, 0), 0, 0, 1, 1);
 	//this->mesh->textureID = LoadTGA(texturePath);
