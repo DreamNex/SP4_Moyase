@@ -6,6 +6,7 @@ Controls::Controls(GUIManager * m_GUI)
 {
 	c_state = SELECTION;
 	this->m_GUI = m_GUI;
+	b_Drag = false;
 }
 
 
@@ -24,6 +25,7 @@ void Controls::OnClick(Vector2 mousePos)
 		{
 			if (m_GUI->m_GUI[i]->GetMouseover())
 			{
+				b_Drag = true;
 				//create a non-placed tool here....
 				if (m_GUI->m_GUI[i]->GetType() == GUI::CANNONGUI)
 				{
@@ -47,11 +49,13 @@ void Controls::OnClick(Vector2 mousePos)
 	{
 		//do a bool
 		//if bool = false
-		//the place
+		//then place
+		OnDrag(mousePos);
 		break;
 	}
 	case ROTATION:
 	{
+		b_Drag = false;
 		break;
 	}
 
@@ -60,9 +64,13 @@ void Controls::OnClick(Vector2 mousePos)
 	}
 }
 
-void Controls::OnDrag()
+void Controls::OnDrag(Vector2 MOUSEPOS)
 {
-	//objects,pos = MOUSEPOS;
+	if (b_Drag)
+	{
+		SelctedGO->setPosition(MOUSEPOS);
+		
+	}
 }
 
 GameObject* Controls::GetSelection(Vector2 mousePos)

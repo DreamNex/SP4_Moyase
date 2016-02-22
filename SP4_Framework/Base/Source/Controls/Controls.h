@@ -19,7 +19,7 @@ public:
 	//void SetState(Controls::CONTROLS_STATE c_state);
 
 	void OnClick(Vector2 mousePos);
-	void OnDrag();
+	void OnDrag(Vector2 MOUSEPOS);
 
 private:
 	GameObject *SelctedGO;
@@ -27,6 +27,7 @@ private:
 	CONTROLS_STATE c_state;
 	GUIManager *m_GUI;
 	GameObject *GetSelection(Vector2 mousePos);
+	bool b_Drag;
 	
 };
 
