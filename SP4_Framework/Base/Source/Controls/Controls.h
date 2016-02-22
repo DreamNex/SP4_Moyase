@@ -1,6 +1,9 @@
 #pragma once
 #include "../GUIManager/GUIManager.h"
 #include "../GameObjects/GameObject.h"
+#include "../GameObjects/Cannon.h"
+#include "../GameObjects/Boost.h"
+#include "../GameObjects/Slow.h"
 
 class Controls
 {
@@ -18,7 +21,7 @@ public:
 
 	//void SetState(Controls::CONTROLS_STATE c_state);
 
-	void OnClick(Vector2 mousePos);
+	void OnClick(Vector2 mousePos, std::vector<GameObject*>&gu);
 	void OnDrag(Vector2 MOUSEPOS);
 
 private:
@@ -28,6 +31,11 @@ private:
 	GUIManager *m_GUI;
 	GameObject *GetSelection(Vector2 mousePos);
 	bool b_Drag;
+	int ToolsObj[3];
+
+	Cannon * cannon;
+	Boost * boost;
+	Slow * slow;
 	
 };
 
