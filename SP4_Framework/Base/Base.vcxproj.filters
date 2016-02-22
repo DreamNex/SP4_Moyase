@@ -57,8 +57,6 @@
     <Filter Include="Source Files\RigidBody\Physics">
       <UniqueIdentifier>{0ddaabe7-746f-4e7e-a742-bd9bfb9849f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Controls">
-      <UniqueIdentifier>{7af832a9-e29e-4d0a-b859-dadf82f63dda}</UniqueIdentifier>
     <Filter Include="Source Files\GameObjects\Tools">
       <UniqueIdentifier>{1dca54c4-e941-41f3-b0ce-d8e5fa48334e}</UniqueIdentifier>
     </Filter>
@@ -100,6 +98,9 @@
     </Filter>
     <Filter Include="Source Files\GameObjects\Tools\Cannon">
       <UniqueIdentifier>{6e58bcf0-e92a-4be4-8fa5-3b70cd9006ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controls">
+      <UniqueIdentifier>{d341fe26-35c2-488b-b44c-c65d64f23357}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -214,8 +215,6 @@
     <ClCompile Include="Source\RigidBody\PhysicsComponent.cpp">
       <Filter>Source Files\RigidBody\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Controls\Controls.cpp">
-      <Filter>Source Files\Controls</Filter>
     <ClCompile Include="Source\GameObjects\Tools.cpp">
       <Filter>Source Files\GameObjects\Tools</Filter>
     </ClCompile>
@@ -242,6 +241,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameObjects\Slow.cpp">
       <Filter>Source Files\GameObjects\Tools\Slow</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Controls\Controls.cpp">
+      <Filter>Source Files\Controls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -368,8 +370,6 @@
     <ClInclude Include="Source\RigidBody\PhysicsComponent.h">
       <Filter>Source Files\RigidBody\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Controls\Controls.h">
-      <Filter>Source Files\Controls</Filter>
     <ClInclude Include="Source\GameObjects\Tools.h">
       <Filter>Source Files\GameObjects\Tools</Filter>
     </ClInclude>
@@ -396,6 +396,9 @@
     </ClInclude>
     <ClInclude Include="Source\GameObjects\Slow.h">
       <Filter>Source Files\GameObjects\Tools\Slow</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Controls\Controls.h">
+      <Filter>Source Files\Controls</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
