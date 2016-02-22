@@ -14,6 +14,7 @@
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
+    <ClCompile Include="Source\Controls\Controls.cpp" />
     <ClCompile Include="Source\FileReading.cpp" />
     <ClCompile Include="Source\GameObjects\Balls.cpp" />
     <ClCompile Include="Source\GameObjects\Boost.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera3.h" />
+    <ClInclude Include="Source\Controls\Controls.h" />
     <ClInclude Include="Source\FileReading.h" />
     <ClInclude Include="Source\GameObjects\Balls.h" />
     <ClInclude Include="Source\GameObjects\Boost.h" />

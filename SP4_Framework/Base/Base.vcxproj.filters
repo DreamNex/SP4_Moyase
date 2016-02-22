@@ -57,6 +57,8 @@
     <Filter Include="Source Files\RigidBody\Physics">
       <UniqueIdentifier>{0ddaabe7-746f-4e7e-a742-bd9bfb9849f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Controls">
+      <UniqueIdentifier>{7af832a9-e29e-4d0a-b859-dadf82f63dda}</UniqueIdentifier>
     <Filter Include="Source Files\GameObjects\Tools">
       <UniqueIdentifier>{1dca54c4-e941-41f3-b0ce-d8e5fa48334e}</UniqueIdentifier>
     </Filter>
@@ -212,6 +214,8 @@
     <ClCompile Include="Source\RigidBody\PhysicsComponent.cpp">
       <Filter>Source Files\RigidBody\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Controls\Controls.cpp">
+      <Filter>Source Files\Controls</Filter>
     <ClCompile Include="Source\GameObjects\Tools.cpp">
       <Filter>Source Files\GameObjects\Tools</Filter>
     </ClCompile>
@@ -364,6 +368,8 @@
     <ClInclude Include="Source\RigidBody\PhysicsComponent.h">
       <Filter>Source Files\RigidBody\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Controls\Controls.h">
+      <Filter>Source Files\Controls</Filter>
     <ClInclude Include="Source\GameObjects\Tools.h">
       <Filter>Source Files\GameObjects\Tools</Filter>
     </ClInclude>
