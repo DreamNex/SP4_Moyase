@@ -119,8 +119,7 @@ void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 
 			(*EnviromentObjs).push_back(new Wall(Vector2(x, y), scaleX, scaleY));
 		}
-
-		if (it->find("spike") != std::string::npos)
+		else if (it->find("spike") != std::string::npos)
 		{
 			float x, y, scaleX, scaleY;
 			std::stringstream splitter(it->c_str());
