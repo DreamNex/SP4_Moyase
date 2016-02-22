@@ -1,6 +1,6 @@
 #include "ButtonUI.h"
 #include "GL\glew.h"
-#include "LoadTGA.h"
+#include "../LoadTGA.h"
 
 ButtonUI::ButtonUI(std::string text, char* normalMesh, char* hoverMesh, float sizeX, float sizeY, float x, float y, float textScaling, bool showText)
 {
@@ -29,12 +29,18 @@ ButtonUI::~ButtonUI()
 	delete hoverMesh;
 }
 
-void ButtonUI::CheckMouseOver(float x, float y)
+bool ButtonUI::CheckMouseOver(float x, float y)
 {
 	if (x > min.x && x < max.x && y > min.y && y < max.y)
+	{
 		mouseover = true;
+		return true;
+	}
 	else
+	{
 		mouseover = false;
+		return false;
+	}
 }
 
 Mesh* ButtonUI::getNormalMesh() 

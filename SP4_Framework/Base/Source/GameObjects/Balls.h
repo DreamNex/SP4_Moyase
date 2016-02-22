@@ -9,5 +9,8 @@ public:
 	~Balls();
 
 	bool checkColision(GameObject *GO2);
-	void SpecialcolisionResponce();
+
+private:
+	Vector2 originalPos;
+	void SpecialcolisionResponce(GameObject *GO2);
 };

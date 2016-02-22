@@ -4,7 +4,7 @@
 #include "GL\glew.h"
 #include "../LoadTGA.h"
 
-Wall::Wall(Vector2 pos, float width, float height, char* texturePath)
+Wall::Wall(Vector2 pos, float width, float height)
 : Enviroment(pos)
 {
 	this->rigidBody = new RigidBody(new Box(this->pos, width, height), new PhysicsComponent(this->pos, 1, false, false), true, false, false);

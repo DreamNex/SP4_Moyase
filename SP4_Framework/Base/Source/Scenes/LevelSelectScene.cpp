@@ -1,4 +1,4 @@
-#include "SceneManager2D_Menu.h"
+#include "LevelSelectScene.h"
 #include "GL\glew.h"
 
 #include "../shader.hpp"
@@ -8,11 +8,11 @@
 #include "../LoadTGA.h"
 #include <sstream>
 
-CSceneManager2D_Menu::CSceneManager2D_Menu()
+CLevelSelectScene::CLevelSelectScene()
 {
 }
 
-CSceneManager2D_Menu::CSceneManager2D_Menu(int m_window_width, int m_window_height)
+CLevelSelectScene::CLevelSelectScene(int m_window_width, int m_window_height)
 :
 CSceneManager2D(m_window_width, m_window_height)
 {
@@ -20,7 +20,7 @@ CSceneManager2D(m_window_width, m_window_height)
 	this->m_window_height = m_window_height;
 }
 
-CSceneManager2D_Menu::~CSceneManager2D_Menu()
+CLevelSelectScene::~CLevelSelectScene()
 {
 	for (unsigned int i = 0; i < Buttons.size(); ++i)
 	{
@@ -29,7 +29,7 @@ CSceneManager2D_Menu::~CSceneManager2D_Menu()
 	}
 }
 
-void CSceneManager2D_Menu::Init()
+void CLevelSelectScene::Init()
 {
 	CSceneManager2D::Init();
 
@@ -46,12 +46,12 @@ void CSceneManager2D_Menu::Init()
 	Buttons.push_back(new ButtonUI("Exit", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2 - 240, 0.6, true));
 }
 
-void CSceneManager2D_Menu::Update(double dt)
+void CLevelSelectScene::Update(double dt)
 {
 	CSceneManager2D::Update(dt);
 }
 
-void CSceneManager2D_Menu::Render()
+void CLevelSelectScene::Render()
 {
 	CSceneManager2D::Render();
 	
@@ -66,7 +66,7 @@ void CSceneManager2D_Menu::Render()
 	modelStack.PopMatrix();
 }
 
-void CSceneManager2D_Menu::Exit()
+void CLevelSelectScene::Exit()
 {
 	for (int i = 0; i < NUM_GEOMETRY; ++i)
 	{

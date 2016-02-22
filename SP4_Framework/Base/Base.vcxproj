@@ -12,20 +12,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
-    <ClCompile Include="Source\ButtonUI.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
     <ClCompile Include="Source\FileReading.cpp" />
     <ClCompile Include="Source\GameObjects\Balls.cpp" />
+    <ClCompile Include="Source\GameObjects\Boost.cpp" />
+    <ClCompile Include="Source\GameObjects\Cannon.cpp" />
     <ClCompile Include="Source\GameObjects\Enviroment.cpp" />
     <ClCompile Include="Source\GameObjects\GameObject.cpp" />
+    <ClCompile Include="Source\GameObjects\Slow.cpp" />
     <ClCompile Include="Source\GameObjects\Spikes.cpp" />
+    <ClCompile Include="Source\GameObjects\Tools.cpp" />
     <ClCompile Include="Source\GameObjects\Wall.cpp" />
     <ClCompile Include="Source\GSM\GameplayState.cpp" />
     <ClCompile Include="Source\GSM\GameStateManager.cpp" />
     <ClCompile Include="Source\GSM\IntroState.cpp" />
+    <ClCompile Include="Source\GSM\LevelSelectState.cpp" />
     <ClCompile Include="Source\GSM\MenuState.cpp" />
+    <ClCompile Include="Source\Level.cpp" />
     <ClCompile Include="Source\GSM\TutorialState.cpp" />
+    <ClCompile Include="Source\GUIManager\GUI.cpp" />
+    <ClCompile Include="Source\GUIManager\GUIManager.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\Luala.cpp" />
@@ -40,31 +47,41 @@
     <ClCompile Include="Source\RigidBody\Ray.cpp" />
     <ClCompile Include="Source\RigidBody\RigidBody.cpp" />
     <ClCompile Include="Source\Scenes\GameplayScene.cpp" />
+    <ClCompile Include="Source\Scenes\LevelSelectScene.cpp" />
     <ClCompile Include="Source\Scenes\SceneManager2D.cpp" />
     <ClCompile Include="Source\Scenes\SceneManager2D_Intro.cpp" />
     <ClCompile Include="Source\Scenes\SceneManager2D_Menu.cpp" />
     <ClCompile Include="Source\Scenes\TutorialScene.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
+    <ClCompile Include="Source\Timer\Timer.cpp" />
+    <ClCompile Include="Source\UI\ButtonUI.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
-    <ClInclude Include="Source\ButtonUI.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera3.h" />
     <ClInclude Include="Source\FileReading.h" />
     <ClInclude Include="Source\GameObjects\Balls.h" />
+    <ClInclude Include="Source\GameObjects\Boost.h" />
+    <ClInclude Include="Source\GameObjects\Cannon.h" />
     <ClInclude Include="Source\GameObjects\Enviroment.h" />
     <ClInclude Include="Source\GameObjects\GameObject.h" />
+    <ClInclude Include="Source\GameObjects\Slow.h" />
     <ClInclude Include="Source\GameObjects\Spikes.h" />
+    <ClInclude Include="Source\GameObjects\Tools.h" />
     <ClInclude Include="Source\GameObjects\Wall.h" />
     <ClInclude Include="Source\GSM\GameplayState.h" />
     <ClInclude Include="Source\GSM\GameState.h" />
     <ClInclude Include="Source\GSM\GameStateManager.h" />
     <ClInclude Include="Source\GSM\IntroState.h" />
+    <ClInclude Include="Source\GSM\LevelSelectState.h" />
     <ClInclude Include="Source\GSM\MenuState.h" />
+    <ClInclude Include="Source\Level.h" />
     <ClInclude Include="Source\GSM\TutorialState.h" />
+    <ClInclude Include="Source\GUIManager\GUI.h" />
+    <ClInclude Include="Source\GUIManager\GUIManager.h" />
     <ClInclude Include="Source\Light.h" />
     <ClInclude Include="Source\LoadOBJ.h" />
     <ClInclude Include="Source\LoadTGA.h" />
@@ -80,6 +97,7 @@
     <ClInclude Include="Source\RigidBody\Ray.h" />
     <ClInclude Include="Source\RigidBody\RigidBody.h" />
     <ClInclude Include="Source\Scenes\GameplayScene.h" />
+    <ClInclude Include="Source\Scenes\LevelSelectScene.h" />
     <ClInclude Include="Source\Scenes\Scene.h" />
     <ClInclude Include="Source\Scenes\SceneManager2D.h" />
     <ClInclude Include="Source\Scenes\SceneManager2D_Intro.h" />
@@ -87,6 +105,8 @@
     <ClInclude Include="Source\Scenes\TutorialScene.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\SoundManager.h" />
+    <ClInclude Include="Source\Timer\Timer.h" />
+    <ClInclude Include="Source\UI\ButtonUI.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>
@@ -133,13 +153,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_VARIADIC_MAX=10;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Common/Source;$(SolutionDir)/glew/include;$(SolutionDir)/glfw/include;$(SolutionDir)/lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/irrKlang/include;$(SolutionDir)/Common/Source;$(SolutionDir)/glew/include;$(SolutionDir)/glfw/include;$(SolutionDir)/lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)/glfw/lib-msvc100;$(SolutionDir)/glew/lib;$(SolutionDir)/lua;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Common.lib;winmm.lib;opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;lua5.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)/irrKlang/lib;$(SolutionDir)/glfw/lib-msvc100;$(SolutionDir)/glew/lib;$(SolutionDir)/lua;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Common.lib;winmm.lib;opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;lua5.1.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -155,15 +175,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_VARIADIC_MAX=10;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Common/Source;$(SolutionDir)/glew/include;$(SolutionDir)/glfw/include;$(SolutionDir)/lua;$(SolutionDir)/lua/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/irrKlang/include;$(SolutionDir)/Common/Source;$(SolutionDir)/glew/include;$(SolutionDir)/glfw/include;$(SolutionDir)/lua;$(SolutionDir)/lua/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)/glfw/lib-msvc100;$(SolutionDir)/glew/lib;$(SolutionDir)/lua;$(SolutionDir)/lua/include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Common.lib;winmm.lib;opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;lua5.1.lib;lua5.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration);$(SolutionDir)/irrKlang/lib;$(SolutionDir)/glfw/lib-msvc100;$(SolutionDir)/glew/lib;$(SolutionDir)/lua;$(SolutionDir)/lua/include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Common.lib;winmm.lib;opengl32.lib;glu32.lib;glew32.lib;glfw3.lib;lua5.1.lib;irrKlang.lib;lua5.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
