@@ -3,20 +3,8 @@
 #include "FileReading.h"
 
 
-FileReading::FileReading()
+FileReading::FileReading(std::string filename)
 {
-
-}
-
-FileReading::~FileReading()
-{
-
-}
-
-// Be abl to open any text file you want and store it into a vector
-void FileReading::loadVariables(std::string filename, bool &unlock, int (&tool)[3])
-{
-	char commas;
 	std::ifstream myfile;
 	myfile.open(filename);
 	std::string line;
@@ -32,7 +20,16 @@ void FileReading::loadVariables(std::string filename, bool &unlock, int (&tool)[
 	}
 
 	myfile.close();
-	
+}
+
+FileReading::~FileReading()
+{
+
+}
+
+// Be abl to open any text file you want and store it into a vector
+void FileReading::loadVariables(bool &unlock)
+{	
 	if (storage.at(0) == "true")
 	{
 		unlock = true;
@@ -41,20 +38,22 @@ void FileReading::loadVariables(std::string filename, bool &unlock, int (&tool)[
 	{
 		unlock = false;
 	}
-	
+
+}
+void FileReading::loadVariables(int(&tool)[3])
+{
 	std::stringstream splitter(storage.at(1));
 	std::string token;
-	
+
 	while (std::getline(splitter, token, ','))
 	{
-		
+
 		for (int i = 0; i != 3; i++)
 		{
 			tool[i] = atoi(token.c_str());
 		}
 	}
 }
-
 void FileReading::loadVariables(Balls** Ball)
 {
 	std::string token;
