@@ -9,9 +9,9 @@ public:
 	GUIManager();
 	~GUIManager();
 
-	std::vector<ButtonUI*> m_GUI;
+	std::vector<GUI*> m_GUI;
 
-	void CreateGUI(std::string text, char* normalMesh, char* hoverMesh, float sizeX, float sizeY, float x, float y, float textScaling, bool showText);
+	void CreateGUI(std::string text, char* normalMesh, char* hoverMesh, float sizeX, float sizeY, float x, float y, float textScaling, bool showText, GUI::GUITYPEID g_typeID);
 	
 	void Update(float dt, float mousex, float mousey);
 
