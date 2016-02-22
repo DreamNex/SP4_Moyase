@@ -38,22 +38,45 @@ void CTutorialScene::Init()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
-	gameObjects.push_back(new Balls(Vector2(700, 700), 50, "Image//Tits//Avatar_Censored.tga"));
-	gameObjects.push_back(new Wall(Vector2(m_window_width /2, 400), m_window_width - 100, 100, "Image//Tits//btn.tga"));
-	gameObjects.push_back(new Spikes(Vector2(m_window_width / 2, 400), Vector2(700, 700), m_window_width, 100));
+	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Tits//Avatar_Censored.tga"));
+	gameObjects.push_back(new Wall(Vector2(m_window_width /2, 100), m_window_width - 100, 100));
+	gameObjects.push_back(new Spikes(Vector2(m_window_width / 2, 100), m_window_width, 100));
+	gameObjects.push_back(new Wall(Vector2(m_window_width / 2, m_window_height / 2), 100, m_window_height - 100));
+
+	gameObjects.push_back(new Cannon(Vector2(300, 350), 50, 50));
+	gameObjects.push_back(new Boost(Vector2(300, 500), 50, 50));
+	gameObjects.push_back(new Slow(Vector2(300, 700), 50, 50));
 }
 
 void CTutorialScene::Update(double dt)
 {
-	std::cout << gameObjects[0]->getPos().x << ", " << gameObjects[0]->getPos().y << std::endl;
+	std::cout << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetVelocity().y << std::endl;
 	if (Application::IsKeyPressed('W'))
 	{
-		std::cout << "W: ";
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(0, 0.00002f));
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0, 20.f));
+	}
+	if(Application::IsKeyPressed('S'))
+	{
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0, -1.f));
+	}
+	if (Application::IsKeyPressed('A'))
+	{
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(-35.f, 0));
+	}
+	if (Application::IsKeyPressed('D'))
+	{
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(35.f, 0));
+	}
+	if (Application::IsKeyPressed('L'))
+	{
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(300.f, 40));
 	}
 	
 	gameObjects[0]->checkColision(gameObjects[1]);
-	//gameObjects[0]->checkColision(gameObjects[2]);
+	gameObjects[0]->checkColision(gameObjects[3]);
+	gameObjects[0]->checkColision(gameObjects[4]);
+	gameObjects[0]->checkColision(gameObjects[5]);
+	gameObjects[0]->checkColision(gameObjects[6]);
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->update(dt);

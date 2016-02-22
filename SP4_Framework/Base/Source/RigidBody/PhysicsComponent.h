@@ -3,54 +3,94 @@
 
 #include "Vector2.h"
 
+//By the Legendary Quen
 
 class PhysicsComponent
 {
 public:
-	PhysicsComponent(Vector2 &v, float mass, bool gravity, bool active)
-	{
-		v_Pos = &v;
-		v_Velocity = Vector2(0, 0);
-		v_Acceleration = Vector2(0, 0);
-		v_Force = Vector2(0, 0);
-
-		this->mass = mass;
-		this->active = active;
-		this->gravity = gravity;
-		this->moving = false;
-	}
+	PhysicsComponent(Vector2 &v, float mass, bool active);
 	PhysicsComponent();
 	~PhysicsComponent();
 
-	//Accessor(s)
-	Vector2 GetVelocity(){ return this->v_Velocity; }
-	Vector2 GetAcceleration(){ return this->v_Acceleration; }
-	Vector2 GetForce(){ return this->v_Force; }
-	float GetMass(){ return this->mass; }
-	bool isActive(){ return this->active; }
-	bool hasGravity(){ return this->gravity; }
+	//*************************************************************************************
+	//ACCESSOR(S)
+	float GetMass();
+	float GetGravitationalForce();
 
-	//Mutator(s)
-	void SetVelocity(Vector2 v){ this->v_Velocity = v; }
-	void SetAcceleration(Vector2 a){ this->v_Acceleration = a; }
-	void SetForce(Vector2 f){ this->v_Force = f; }
-	void SetMass(float m){ this->mass = m; }
-	void SetActive(bool active){ this->active = active; }
-	void SetGravity(bool gravity){ this->gravity = gravity; }
+	float GetCoRestitution();
+	float GetCoKinetic();
+	float GetCoStatic();
+	float GetCoDrag();
 
-	void ApplyForce(Vector2 appliedForce){ v_Force = v_Force + appliedForce; }
+	Vector2 GetVelocity();
+	Vector2 GetAcceleration();
+	Vector2 GetForce();
+
+	bool GetActive();
+	bool GetFriction();
+	bool GetDrag();
+	bool GetGravity();
+
+	bool GetBounce();
+	bool GetPush();
+
+	//*************************************************************************************
+	//MUTATOR(S)
+	void SetMass(float);
+	void SetGravitationalForce(float);
+
+	void SetCoRestitution(float);
+	void SetCoKinetic(float);
+	void SetCoStatic(float);
+	void SetCoDrag(float);
+
+	void SetVelocity(Vector2);
+	void SetAcceleration(Vector2);
+	void SetForce(Vector2);
+
+	void SetActive(bool);
+	void SetFriction(bool);
+	void SetDrag(bool);
+	void SetGravity(bool);
+
+	void SetBounce(bool);
+	void SetPush(bool);
+
+	//Manual Apply Functions: Changes the Vector2/Kinematics
+	void Push(Vector2);
+	void toBounce(Vector2);
 	void Update(float dt);
 
 private:
-	float mass;
+
+	//Auto Apply Functions during Update(): Changes the Vector2/Kinematics
+	void ApplyGravity();
+	void ApplyFriction();
+	void ApplyDrag();
+
+	float mass;									// Mass of Object
+	float gravitationalForce;					// Strength of Gravitational Force
+
+	//CoEfficients
+	float co_Restitution;						// CoEfficient of Restitution(For Bounce)
+	float co_KE, co_SE;							// CoEfficient of Static/Kinetic Friction
+	float co_Drag;								// CoEfficient of Drag
+	
+	//Kinematics (Vector Values)
 	Vector2* v_Pos;
 	Vector2 v_Velocity;
 	Vector2 v_Acceleration;
 	Vector2 v_Force;
 
-	bool active;
-	bool gravity;
-	bool moving;
+	//Max Magnitude of Kinematics/Vector Values
+	const float MAX_VELOCITY = 500;
+	const float MAX_ACCELERATION = 500;
+	const float MAX_FORCE = 2000;
+
+	//True = Enable Apply Functions
+	bool isActive;								//Run Update
+	bool hasFriction, hasDrag, hasGravity;		//Updates' Auto Apply Functions
+	bool hasBounce, hasPush;					//Manual Apply Functions
 };
 
 #endif

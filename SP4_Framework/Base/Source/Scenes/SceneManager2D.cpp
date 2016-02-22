@@ -181,6 +181,40 @@ void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, 
 
 }
 
+void CSceneManager2D::Render2DMesh(Mesh *mesh, float scaleX, float scaleY, float x, float y, float rotate, float centerOffsetX, float centerOffsetY)
+{
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity();
+	modelStack.Translate(x, y, 0);
+	if (rotate)
+		modelStack.Rotate(rotate, 0, 0, 1);
+	if (centerOffsetX || centerOffsetY)
+		modelStack.Translate(centerOffsetX, centerOffsetY, 0);
+	modelStack.Scale(scaleX, scaleY, 1);
+
+	Mtx44 MVP, modelView, modelView_inverse_transpose;
+
+	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
+	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+	if (mesh->textureID > 0)
+	{
+		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+		glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
+	}
+	else
+	{
+		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 0);
+	}
+	mesh->Render();
+	if (mesh->textureID > 0)
+	{
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	modelStack.PopMatrix();
+}
+
 /********************************************************************************
  Render this scene
  ********************************************************************************/
@@ -188,8 +222,8 @@ void CSceneManager2D::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	Mtx44 perspective;
-	perspective.SetToPerspective(45.0f, 4.0f / 3.0f, 0.1f, 10000.0f);
-	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
+	//perspective.SetToPerspective(45.0f, 4.0f / 3.0f, 0.1f, 10000.0f);
+	perspective.SetToOrtho(0, m_window_width, 0, m_window_height, -1000, 1000);
 	projectionStack.LoadMatrix(perspective);
 	
 	// Set up the view

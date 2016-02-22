@@ -9,20 +9,8 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\Game State Management">
-      <UniqueIdentifier>{bc9aa255-6d35-4617-84f6-0535a9414778}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{a5c4fda7-9a1c-4e3c-b1d6-c0c2951810e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game State Management\Gameplay">
-      <UniqueIdentifier>{dc15eebe-479c-42a8-8cee-e9f950303d56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game State Management\Intro">
-      <UniqueIdentifier>{e4252c81-f893-437b-83c6-0c97afc313af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game State Management\Mainmenu">
-      <UniqueIdentifier>{9fb30931-0c93-4f38-bc2a-6c9e7c196bf5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Scenes">
       <UniqueIdentifier>{1d865184-5c6d-48b6-82ef-e86ffc424ef9}</UniqueIdentifier>
@@ -41,9 +29,6 @@
     </Filter>
     <Filter Include="Source Files\Timer">
       <UniqueIdentifier>{2af26410-02af-48b1-b81e-4dbc26f58a2a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game State Management\Tutorial">
-      <UniqueIdentifier>{c6db3fd1-b013-45c2-9024-413a4dd6d653}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Scenes\Tutorial">
       <UniqueIdentifier>{caa8f1e3-1f53-4319-88ac-07cbbe78e293}</UniqueIdentifier>
@@ -74,6 +59,47 @@
     </Filter>
     <Filter Include="Source Files\Controls">
       <UniqueIdentifier>{7af832a9-e29e-4d0a-b859-dadf82f63dda}</UniqueIdentifier>
+    <Filter Include="Source Files\GameObjects\Tools">
+      <UniqueIdentifier>{1dca54c4-e941-41f3-b0ce-d8e5fa48334e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management">
+      <UniqueIdentifier>{bc9aa255-6d35-4617-84f6-0535a9414778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Gameplay">
+      <UniqueIdentifier>{dc15eebe-479c-42a8-8cee-e9f950303d56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Intro">
+      <UniqueIdentifier>{e4252c81-f893-437b-83c6-0c97afc313af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Mainmenu">
+      <UniqueIdentifier>{9fb30931-0c93-4f38-bc2a-6c9e7c196bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Tutorial">
+      <UniqueIdentifier>{c6db3fd1-b013-45c2-9024-413a4dd6d653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\LevelSelect">
+      <UniqueIdentifier>{8a5956d3-dbb7-4758-9089-e401037e4d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\LevelSelect">
+      <UniqueIdentifier>{2269e633-928c-44cb-ad8e-1314c7f3c629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\Base">
+      <UniqueIdentifier>{e4cd1000-1b6f-46c8-a083-9e0ec23eb767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\Menus">
+      <UniqueIdentifier>{c0a04797-c0f4-486d-83f9-cf7afaa76f2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\Ingame">
+      <UniqueIdentifier>{687a902a-3184-4277-be43-f71c4484a0a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Tools\Boost">
+      <UniqueIdentifier>{805fd163-d4cb-44e7-8150-ede1c6d58d4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Tools\Slow">
+      <UniqueIdentifier>{695bc285-4136-42f2-b3ea-a02c656bafb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Tools\Cannon">
+      <UniqueIdentifier>{6e58bcf0-e92a-4be4-8fa5-3b70cd9006ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -134,9 +160,6 @@
     <ClCompile Include="Source\FileReading.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ButtonUI.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Source\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -154,12 +177,6 @@
     </ClCompile>
     <ClCompile Include="Source\Scenes\TutorialScene.cpp">
       <Filter>Source Files\Scenes\Tutorial</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GUIManager\GUI.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\GUIManager\GUIManager.cpp">
-      <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameObjects\GameObject.cpp">
       <Filter>Source Files\GameObjects</Filter>
@@ -199,6 +216,32 @@
     </ClCompile>
     <ClCompile Include="Source\Controls\Controls.cpp">
       <Filter>Source Files\Controls</Filter>
+    <ClCompile Include="Source\GameObjects\Tools.cpp">
+      <Filter>Source Files\GameObjects\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Cannon.cpp">
+      <Filter>Source Files\GameObjects\Tools\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUIManager\GUI.cpp">
+      <Filter>Source Files\UI\Ingame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUIManager\GUIManager.cpp">
+      <Filter>Source Files\UI\Ingame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GSM\LevelSelectState.cpp">
+      <Filter>Source Files\Game State Management\LevelSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scenes\LevelSelectScene.cpp">
+      <Filter>Source Files\Scenes\LevelSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\ButtonUI.cpp">
+      <Filter>Source Files\UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Boost.cpp">
+      <Filter>Source Files\GameObjects\Tools\Boost</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Slow.cpp">
+      <Filter>Source Files\GameObjects\Tools\Slow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,9 +317,6 @@
     <ClInclude Include="Source\FileReading.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ButtonUI.h">
-      <Filter>Source Files\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Source\SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -291,12 +331,6 @@
     </ClInclude>
     <ClInclude Include="Source\Scenes\TutorialScene.h">
       <Filter>Source Files\Scenes\Tutorial</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GUIManager\GUI.h">
-      <Filter>Source Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GUIManager\GUIManager.h">
-      <Filter>Source Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameObjects\GameObject.h">
       <Filter>Source Files\GameObjects</Filter>
@@ -336,6 +370,32 @@
     </ClInclude>
     <ClInclude Include="Source\Controls\Controls.h">
       <Filter>Source Files\Controls</Filter>
+    <ClInclude Include="Source\GameObjects\Tools.h">
+      <Filter>Source Files\GameObjects\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Cannon.h">
+      <Filter>Source Files\GameObjects\Tools\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUIManager\GUI.h">
+      <Filter>Source Files\UI\Ingame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GUIManager\GUIManager.h">
+      <Filter>Source Files\UI\Ingame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GSM\LevelSelectState.h">
+      <Filter>Source Files\Game State Management\LevelSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scenes\LevelSelectScene.h">
+      <Filter>Source Files\Scenes\LevelSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\ButtonUI.h">
+      <Filter>Source Files\UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Boost.h">
+      <Filter>Source Files\GameObjects\Tools\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Slow.h">
+      <Filter>Source Files\GameObjects\Tools\Slow</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
