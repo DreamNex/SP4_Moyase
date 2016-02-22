@@ -8,6 +8,8 @@
 #include"../GameObjects/Cannon.h"
 #include"../GameObjects/Boost.h"
 #include"../GameObjects/Slow.h"
+#include"../GUIManager/GUIManager.h"
+#include"../Controls/Controls.h"
 
 class CTutorialScene: public CSceneManager2D
 {
@@ -30,4 +32,6 @@ public:
 	std::vector<GameObject*> gameObjects;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
+	GUIManager * m_GUI;
+	Controls * ctrs;
 };

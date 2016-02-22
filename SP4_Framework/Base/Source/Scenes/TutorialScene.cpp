@@ -46,6 +46,11 @@ void CTutorialScene::Init()
 	gameObjects.push_back(new Cannon(Vector2(300, 350), 50, 50));
 	gameObjects.push_back(new Boost(Vector2(300, 500), 50, 50));
 	gameObjects.push_back(new Slow(Vector2(300, 700), 50, 50));
+
+	m_GUI = new GUIManager();
+	m_GUI->CreateGUI("Start", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width - 100, m_window_height / 2, 0.6, false, GUI::CANNONGUI);
+
+	ctrs = new Controls(m_GUI);
 }
 
 void CTutorialScene::Update(double dt)
@@ -81,6 +86,12 @@ void CTutorialScene::Update(double dt)
 	{
 		gameObjects[i]->update(dt);
 	}
+	m_GUI->Update(dt, Application::mouse_current_x, Application::mouse_current_y);
+	
+	if (Application::Button_Left)
+	{
+		ctrs->OnClick(Vector2 (Application::mouse_current_x, Application::mouse_current_y));
+	}
 }
 
 void CTutorialScene::Render()
@@ -90,6 +101,7 @@ void CTutorialScene::Render()
 	{
 		gameObjects[i]->render(this);
 	}
+	m_GUI->Render(this, meshList[GEO_TEXT], Color(0, 0, 0));
 }
 
 void CTutorialScene::Exit()
