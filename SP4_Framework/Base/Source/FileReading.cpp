@@ -2,20 +2,9 @@
 #include <sstream>
 #include "FileReading.h"
 
-FileReading::FileReading()
+
+FileReading::FileReading(std::string filename)
 {
-
-}
-
-FileReading::~FileReading()
-{
-
-}
-
-// Be abl to open any text file you want and store it into a vector
-void FileReading::loadVariables(std::string filename, bool &unlock, int (&tool)[3])
-{
-	char commas;
 	std::ifstream myfile;
 	myfile.open(filename);
 	std::string line;
@@ -31,7 +20,16 @@ void FileReading::loadVariables(std::string filename, bool &unlock, int (&tool)[
 	}
 
 	myfile.close();
-	
+}
+
+FileReading::~FileReading()
+{
+
+}
+
+// Be abl to open any text file you want and store it into a vector
+void FileReading::loadVariables(bool &unlock)
+{	
 	if (storage.at(0) == "true")
 	{
 		unlock = true;
@@ -40,21 +38,23 @@ void FileReading::loadVariables(std::string filename, bool &unlock, int (&tool)[
 	{
 		unlock = false;
 	}
-	
+
+}
+void FileReading::loadVariables(int(&tool)[3])
+{
 	std::stringstream splitter(storage.at(1));
 	std::string token;
-	
+
 	while (std::getline(splitter, token, ','))
 	{
-		
+
 		for (int i = 0; i != 3; i++)
 		{
 			tool[i] = atoi(token.c_str());
 		}
 	}
 }
-
-void FileReading::loadVariables(Balls* Ball)
+void FileReading::loadVariables(Balls** Ball)
 {
 	std::string token;
 	for (std::vector<std::string>::iterator it = storage.begin(); it < storage.end(); it++)
@@ -80,7 +80,8 @@ void FileReading::loadVariables(Balls* Ball)
 			std::getline(splitter, token, ',');
 			diameter = (float)atoi(token.c_str());
 
-			Ball = new Balls(Vector2(x, y), diameter,"Image//Tits//Avatar_Censored.tga");
+			(*Ball) = new Balls(Vector2(x, y), diameter,"Image//Tits//Avatar_Censored.tga");
+			break;
 		}
 	}
 }
@@ -117,7 +118,7 @@ void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 
 			(*EnviromentObjs).push_back(new Wall(Vector2(x, y), scaleX, scaleY));
 		}
-		else if (it->find("wall") != std::string::npos)
+		else if (it->find("spike") != std::string::npos)
 		{
 			float x, y, scaleX, scaleY;
 			std::stringstream splitter(it->c_str());
@@ -151,4 +152,59 @@ void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 void FileReading::ClearStorage()
 {
 	storage.clear();
+}
+
+std::vector<std::string>  FileReading::SearchFolder(std::string directory)
+{
+	std::vector<std::string> storageFN;
+	std::string searchPattern = "*.txt";
+	std::string fullPath = directory + searchPattern;
+	
+	char ch[260];
+	char DefChar = ' ';
+
+	std::wstring ptemp = std::wstring(directory.begin(), directory.end());
+	std::wstring stemp = std::wstring(fullPath.begin(), fullPath.end());
+	
+	const wchar_t* ptemp2 = ptemp.c_str();
+
+	LPCWSTR fp = stemp.c_str();
+
+	WIN32_FIND_DATA findData;
+	HANDLE handleFind;
+	
+	handleFind = FindFirstFile(fp, &findData);
+
+	if (handleFind == INVALID_HANDLE_VALUE)
+	{
+		std::cout << "Error searching directory \n";
+	}
+
+	do
+	{
+		WideCharToMultiByte(CP_ACP, 0, findData.cFileName, -1, ch, 260, &DefChar, NULL);
+
+		std::string fileName(ch);
+		std::string filePath = directory + fileName;
+		std::ifstream in(filePath.c_str());
+		if (in)
+		{
+			//do things with file here
+			storageFN.push_back(fileName);
+
+		}
+
+		else
+		{
+			std::cout << "Cannot open file " << fileName << std::endl;
+		}
+	}
+
+	while (FindNextFile(handleFind, &findData) > 0);
+	
+	if (GetLastError() != ERROR_NO_MORE_FILES)
+	{
+		std::cout << "Something went wrong during searching \n" << std::endl;
+	}
+	return storageFN;
 }
