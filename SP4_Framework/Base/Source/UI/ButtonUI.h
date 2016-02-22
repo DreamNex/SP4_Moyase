@@ -1,8 +1,8 @@
 #pragma once
 
 #include <string>
-#include "MeshBuilder.h"
-#include "Scenes\SceneManager2D.h"
+#include "../MeshBuilder.h"
+#include "../Scenes\SceneManager2D.h"
 
 class ButtonUI
 {
@@ -26,7 +26,7 @@ public:
 	Vector3 GetTextPos();
 
 	bool GetMouseover();
-	void CheckMouseOver(float x, float y);
+	bool CheckMouseOver(float x, float y);
 
 	void render(CSceneManager2D* SceneManager2D, Mesh* textMesh, Color textCol = Color(0, 0, 0));
 	

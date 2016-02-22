@@ -181,14 +181,16 @@ void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, 
 
 }
 
-void CSceneManager2D::Render2DMesh(Mesh *mesh, float scaleX, float scaleY, float x, float y, float rotate)
+void CSceneManager2D::Render2DMesh(Mesh *mesh, float scaleX, float scaleY, float x, float y, float rotate, float centerOffsetX, float centerOffsetY)
 {
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity();
 	modelStack.Translate(x, y, 0);
-	modelStack.Scale(scaleX, scaleY, 1);
 	if (rotate)
 		modelStack.Rotate(rotate, 0, 0, 1);
+	if (centerOffsetX || centerOffsetY)
+		modelStack.Translate(centerOffsetX, centerOffsetY, 0);
+	modelStack.Scale(scaleX, scaleY, 1);
 
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 

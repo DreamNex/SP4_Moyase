@@ -56,9 +56,9 @@ bool RigidBody::CollideWith(RigidBody *otherObject)
 		{
 			if (dynamic_cast<Ray*>(toCollide->cC_Compt) == false)
 				resolve->pC_Compt->SetGravity(false);
-			if (pushout)
-				CollisionResolve_PushOut(resolve, toCollide);
-			if (bounce)
+
+			CollisionResolve_PushOut(resolve, toCollide);
+			if (resolve->pC_Compt->GetBounce())
 				CollisionResolve_Bounce(resolve, toCollide);
 		}
 		return true;
