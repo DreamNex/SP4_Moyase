@@ -15,23 +15,26 @@
 class FileReading
 {
 public:
-	FileReading();
+	FileReading(std::string filename);
+
 	~FileReading();
 	
 	//It will check the type of gameobject and get variables[FORMATT: pos.x, pos.y, scale x, scale y ]
-	void loadVariables(std::string filename, bool &unlock, int (&tool)[3]);
+	void loadVariables(bool &unlock);
+	void loadVariables(int(&tool)[3]);
 	void loadVariables(Balls** Ball);
 	void loadVariables(std::vector<Enviroment*>* EnviromentObjs);
 	
-
 	//Folder Searching
-	void SearchFolder(std::string directory);
+	std::vector<std::string> SearchFolder(std::string directory);
+	
 	//Clear vector storage
 	void ClearStorage();
 
 private:
 	
 	std::vector<std::string> storage;
+	
 
 };
 #endif
