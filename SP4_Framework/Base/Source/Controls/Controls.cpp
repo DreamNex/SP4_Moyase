@@ -23,7 +23,7 @@ void Controls::OnClick(Vector2 mousePos)
 	{
 		for (unsigned int i = 0; i < m_GUI->m_GUI.size(); ++i)
 		{
-			if (m_GUI->m_GUI[i]->GetMouseover())
+			if (m_GUI->m_GUI[i]->CheckMouseOver(mousePos.x, mousePos.y))
 			{
 				b_Drag = true;
 				//create a non-placed tool here....
