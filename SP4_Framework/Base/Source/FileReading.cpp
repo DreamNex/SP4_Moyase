@@ -2,6 +2,7 @@
 #include <sstream>
 #include "FileReading.h"
 
+
 FileReading::FileReading()
 {
 
@@ -54,7 +55,7 @@ void FileReading::loadVariables(std::string filename, bool &unlock, int (&tool)[
 	}
 }
 
-void FileReading::loadVariables(Balls* Ball)
+void FileReading::loadVariables(Balls** Ball)
 {
 	std::string token;
 	for (std::vector<std::string>::iterator it = storage.begin(); it < storage.end(); it++)
@@ -80,7 +81,8 @@ void FileReading::loadVariables(Balls* Ball)
 			std::getline(splitter, token, ',');
 			diameter = (float)atoi(token.c_str());
 
-			Ball = new Balls(Vector2(x, y), diameter,"Image//Tits//Avatar_Censored.tga");
+			(*Ball) = new Balls(Vector2(x, y), diameter,"Image//Tits//Avatar_Censored.tga");
+			break;
 		}
 	}
 }
@@ -90,7 +92,7 @@ void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 	std::string token;
 	for (std::vector<std::string>::iterator it = storage.begin(); it < storage.end(); it++)
 	{
-		if (it->find("spike") != std::string::npos)
+		if (it->find("wall") != std::string::npos)
 		{
 			float x, y, scaleX, scaleY;
 			std::stringstream splitter(it->c_str());
@@ -115,17 +117,10 @@ void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 			std::getline(splitter, token, ',');
 			scaleY = (float)atoi(token.c_str());
 
-			(*EnviromentObjs).push_back(new Wall(Vector2(x, y), scaleX, scaleY);
+			(*EnviromentObjs).push_back(new Wall(Vector2(x, y), scaleX, scaleY));
 		}
-	}
-}
 
-void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
-{
-	std::string token;
-	for (std::vector<std::string>::iterator it = storage.begin(); it < storage.end(); it++)
-	{
-		if (it->find("wall") != std::string::npos)
+		if (it->find("spike") != std::string::npos)
 		{
 			float x, y, scaleX, scaleY;
 			std::stringstream splitter(it->c_str());
