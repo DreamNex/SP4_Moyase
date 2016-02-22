@@ -11,7 +11,7 @@ Balls::Balls(Vector2 pos, float diameter, char* texturePath)
 : GameObject(pos)
 {
 	originalPos = pos;
-	this->rigidBody = new RigidBody(new Circle(this->pos, diameter * 0.5), new PhysicsComponent(this->pos, 1, true, true), true, true, true);
+	this->rigidBody = new RigidBody(new Circle(this->pos, diameter * 0.5), new PhysicsComponent(this->pos, 5, true), true, true, true);
 
 	this->mesh = MeshBuilder::Generate2DMesh("Mesh", Color(0, 0, 0), 0, 0, 1, 1);
 	this->mesh->textureID = LoadTGA(texturePath);
@@ -57,7 +57,7 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 
 				Vector2 dir(0, 1);
 				dir.rotateVector(dynamic_cast<Cannon*>(GO2)->getAngleByReference());
-				this->getRigidBody()->GetPhysicsCompt()->ApplyForce(dir * 1000);
+				this->getRigidBody()->GetPhysicsCompt()->Push(dir * 1000);
 
 				dynamic_cast<Cannon*>(GO2)->setColided(true);
 			}

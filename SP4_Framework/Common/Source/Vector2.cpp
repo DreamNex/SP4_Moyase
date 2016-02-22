@@ -96,7 +96,10 @@ float Vector2::AngleBetween(const Vector2& rhs)const
 
 Vector2 Vector2::Normalized(void)const
 {
-	return Vector2(-y, +x);
+	float d = Length();
+	if (d <= Math::EPSILON && -d <= Math::EPSILON)
+		throw DivideByZero();
+	return Vector2(x / d, y / d);
 }
 
 float Vector2::component(Vector2 v, Vector2 dV)
@@ -114,7 +117,6 @@ void Vector2::componentVector(Vector2 v, Vector2 dV)
 	Vector2 temp = dV.Normalized();
 	float cmpt = component(v, dV);
 	*this = temp * cmpt;
-	Vector2 temp1;
 }
 
 void Vector2::rotateVector(float angle)

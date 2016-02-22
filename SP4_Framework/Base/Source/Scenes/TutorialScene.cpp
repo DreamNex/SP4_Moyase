@@ -41,30 +41,33 @@ void CTutorialScene::Init()
 	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Tits//Avatar_Censored.tga"));
 	gameObjects.push_back(new Wall(Vector2(m_window_width /2, 100), m_window_width - 100, 100));
 	gameObjects.push_back(new Spikes(Vector2(m_window_width / 2, 100), m_window_width, 100));
+	gameObjects.push_back(new Wall(Vector2(m_window_width /2, m_window_height /2), 100, m_window_height - 100));
 }
 
 void CTutorialScene::Update(double dt)
 {
-	//std::cout << gameObjects[0]->getPos().x << ", " << gameObjects[0]->getPos().y << std::endl;
+	std::cout << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetAcceleration().x << ", " << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetAcceleration().y << " || ";
+
+	std::cout << gameObjects[0]->getPos().x<< ", " << gameObjects[0]->getPos().y << std::endl; 
 	if (Application::IsKeyPressed('W'))
 	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(0, 20.f));
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0, 20.f));
 	}
 	if(Application::IsKeyPressed('S'))
 	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(0, -1.f));
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0, -1.f));
 	}
 	if (Application::IsKeyPressed('A'))
 	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(-30.f, 0));
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(-35.f, 0));
 	}
 	if (Application::IsKeyPressed('D'))
 	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(30.f, 0));
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(35.f, 0));
 	}
 	if (Application::IsKeyPressed('L'))
 	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->ApplyForce(Vector2(150.f, 50));
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(300.f, 40));
 	}
 	
 	gameObjects[0]->checkColision(gameObjects[1]);
