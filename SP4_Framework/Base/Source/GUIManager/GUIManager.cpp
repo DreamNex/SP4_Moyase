@@ -11,9 +11,9 @@ GUIManager::~GUIManager()
 {
 }
 
-void GUIManager::CreateGUI(std::string text, char* normalMesh, char* hoverMesh, float sizeX, float sizeY, float x, float y, float textScaling, bool showText)
+void GUIManager::CreateGUI(std::string text, char* normalMesh, char* hoverMesh, float sizeX, float sizeY, float x, float y, float textScaling, bool showText, GUI::GUITYPEID g_typeID)
 {
-	ButtonUI *BUTTHOLE = new ButtonUI(text, normalMesh, hoverMesh, sizeX, sizeY, x, y, textScaling, showText);
+	GUI *BUTTHOLE = new GUI(text, normalMesh, hoverMesh, sizeX, sizeY, x, y, textScaling, showText, g_typeID);
 
 	m_GUI.push_back(BUTTHOLE);
 }
