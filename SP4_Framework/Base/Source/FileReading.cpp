@@ -90,7 +90,6 @@ void FileReading::loadVariables(Balls** Ball)
 		}
 	}
 }
-
 void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 {
 	std::string token;
@@ -152,11 +151,40 @@ void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 		}
 	}
 }
-
 //Clears the vectors' of strings containing all ur lines frm the test file
 void FileReading::ClearStorage()
 {
 	storage.clear();
+}
+
+void FileReading::changeUnlock(std::string filename)
+{
+	std::ifstream ifile;
+	std::string Checker = "false";
+	std::string line;
+
+	ifile.open(filename);
+	if (ifile.is_open())
+	{
+		while (std::getline(ifile, line))
+		{
+			std::istringstream ss(line);
+			storage2.push_back(line);
+		}
+	}
+
+	ifile.close();
+
+	if (storage2.at(0) == Checker)
+	{
+		storage2.at(0) = "true";
+	}
+
+	std::ofstream ofile(filename);
+	for (auto const& line : storage2)
+	{
+		ofile << line << '\n';
+	}
 }
 
 std::vector<std::string>  FileReading::SearchFolder(std::string directory, std::string fileExtemtion)
