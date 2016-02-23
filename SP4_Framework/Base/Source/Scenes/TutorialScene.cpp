@@ -90,7 +90,7 @@ void CTutorialScene::Update(double dt)
 	
 	if (Application::Button_Left)
 	{
-		ctrs->OnClick(Vector2 (Application::mouse_current_x, Application::mouse_current_y));
+		//ctrs->OnClick(Vector2 (Application::mouse_current_x, Application::mouse_current_y));
 	}
 }
 
