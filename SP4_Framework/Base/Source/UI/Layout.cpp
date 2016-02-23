@@ -4,7 +4,7 @@
 
 Layout::Layout(char* Mesh, float sizeX, float sizeY, float x, float y)
 {
-	this->Mesh = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, sizeX, sizeY);
+	this->Mesh = MeshBuilder::Generate2DMesh("", Color(1.f, 1.f, 1.f), 0, 0, (int)sizeX, (int)sizeY);
 	this->Mesh->textureID = LoadTGA(Mesh);
 
 	this->sizeX = sizeX;

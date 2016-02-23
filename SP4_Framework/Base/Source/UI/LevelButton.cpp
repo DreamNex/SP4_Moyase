@@ -8,7 +8,7 @@ LevelButton::LevelButton(std::string levelName, bool unlock, std::string text, c
 	this->levelName = levelName;
 	this->unlock = unlock;
 	
-	this->lockMesh = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, sizeX, sizeY);
+	this->lockMesh = MeshBuilder::Generate2DMesh("", Color(1.f, 1.f, 1.f), 0, 0, (int)sizeX, (int)sizeY);
 	this->lockMesh->textureID = LoadTGA("Image//lock.tga");
 }
 
