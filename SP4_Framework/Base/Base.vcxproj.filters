@@ -102,6 +102,12 @@
     <Filter Include="Source Files\Controls">
       <UniqueIdentifier>{d341fe26-35c2-488b-b44c-c65d64f23357}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scenes\Options">
+      <UniqueIdentifier>{536fe169-9a49-46b4-a912-bc0f9ba3764a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Options">
+      <UniqueIdentifier>{f6b16df8-0b60-4bf0-87b5-13bd151d571c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -250,6 +256,12 @@
     </ClCompile>
     <ClCompile Include="Source\UI\LevelButton.cpp">
       <Filter>Source Files\UI\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scenes\OptionsScene.cpp">
+      <Filter>Source Files\Scenes\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GSM\OptionsState.cpp">
+      <Filter>Source Files\Game State Management\Options</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -411,6 +423,12 @@
     </ClInclude>
     <ClInclude Include="Source\UI\LevelButton.h">
       <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scenes\OptionsScene.h">
+      <Filter>Source Files\Scenes\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GSM\OptionsState.h">
+      <Filter>Source Files\Game State Management\Options</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
