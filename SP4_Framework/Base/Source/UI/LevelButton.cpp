@@ -8,7 +8,7 @@ LevelButton::LevelButton(std::string levelName, bool unlock, std::string text, c
 	this->levelName = levelName;
 	this->unlock = unlock;
 	
-	this->lockMesh = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, sizeX, sizeY);
+	this->lockMesh = MeshBuilder::Generate2DMesh("", Color(1.f, 1.f, 1.f), 0, 0, (int)sizeX, (int)sizeY);
 	this->lockMesh->textureID = LoadTGA("Image//lock.tga");
 }
 
@@ -29,5 +29,5 @@ void LevelButton::render(CSceneManager2D* SceneManager2D, Mesh* textMesh, Color 
 			SceneManager2D->RenderTextOnScreen(textMesh, text, textCol, textScaling, textOffset.x, textOffset.y, z);
 	}
 	else
-		SceneManager2D->RenderMeshIn2D(lockMesh, false, 1, 1, pos.x, pos.y - sizeY / 2, z, 0, -sizeX / 2, -sizeY / 2);
+		SceneManager2D->RenderMeshIn2D(lockMesh, false, 1, 1, pos.x, pos.y, z, 0, -sizeX / 2, -sizeY / 2);
 }

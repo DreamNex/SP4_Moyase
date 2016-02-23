@@ -5,6 +5,8 @@ using namespace std;
 #include "gamestate.h""
 #include "../Application.h"
 
+string CGameStateManager::selectedLevel = "";
+
 void CGameStateManager::Init(const char* title, int width, int height, 
 						 int bpp, bool fullscreen)
 {

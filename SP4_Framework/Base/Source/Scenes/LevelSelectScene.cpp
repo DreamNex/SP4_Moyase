@@ -19,8 +19,13 @@ CSceneManager2D(m_window_width, m_window_height)
 	this->m_window_width = m_window_width;
 	this->m_window_height = m_window_height;
 
+	curentState = S_Selecting;
+
 	currentPage = 0;
 	numOfPage = 0;
+
+	currentAvatarImage = 0;
+	totalAvatarImages = 0;
 }
 
 CLevelSelectScene::~CLevelSelectScene()
@@ -30,6 +35,9 @@ CLevelSelectScene::~CLevelSelectScene()
 
 	if (levelLayout)
 		delete levelLayout;
+
+	if (AvatarLayout)
+		delete AvatarLayout;
 
 	if (FileReader)
 		delete FileReader;
@@ -48,6 +56,12 @@ CLevelSelectScene::~CLevelSelectScene()
 				delete LevelButtons[i][j];
 		}
 	}
+	
+	for (unsigned int i = 0; i < AvatarImages.size(); ++i)
+	{
+		if (AvatarImages[i])
+			delete AvatarImages[i];
+	}
 }
 
 void CLevelSelectScene::Init()
@@ -60,11 +74,15 @@ void CLevelSelectScene::Init()
 	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("GB", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
 	meshList[GEO_BG]->textureID = LoadTGA("Image//Tits//MainMenuBG.tga");
 
+	//layout planes
 	mainLayout = new Layout("Image//Tits//", m_window_width * 0.7, m_window_height * 0.7, m_window_width * 0.5, m_window_height * 0.5);
 	levelLayout = new Layout("Image//Tits//btn.tga", mainLayout->GetSizeX() * 0.55, mainLayout->GetSizeY() * 0.7, mainLayout->GetX() * 0.7, mainLayout->GetY() * 0.9);
+	AvatarLayout = new Layout("Image//Tits//btn.tga", mainLayout->GetSizeX() * 0.4, mainLayout->GetSizeY() * 0.7, mainLayout->GetX() * 1.4, mainLayout->GetY() * 0.9);
 
 	FileReader = new FileReading();
-	std::vector<string> levelNames = FileReader->SearchFolder("Levels//");
+
+	/***********************************************Search folder and load buttons******************************************************/
+	std::vector<string> levelNames = FileReader->SearchFolder("Levels//", "*.txt");
 
 	numOfPage = levelNames.size()/6 + 1;
 	if (levelNames.size() % 6 == 0)
@@ -124,7 +142,20 @@ void CLevelSelectScene::Init()
 			, pos.x, pos.y
 			, 0.6, true));
 	}
+	/************************************************************************************************************************************/
 
+	/******************************************Search folder and load avatar images******************************************************/
+	std::vector<string> Images = FileReader->SearchFolder("Image//Avatars//", "*.tga");
+	totalAvatarImages = Images.size();
+
+	for (int i = 0; i < Images.size(); ++i)
+	{
+		AvatarImages.push_back(MeshBuilder::Generate2DMesh(Images[i], Color(0, 0, 0), 0, 0, AvatarLayout->GetSizeX() * 0.4f, AvatarLayout->GetSizeX() * 0.4f));
+		AvatarImages.back()->textureID = LoadTGA(("Image//Avatars//" + Images[i]).c_str());
+	}
+	/************************************************************************************************************************************/
+
+	/********************************************Other buttons like back and arrows******************************************************/
 	Buttons.push_back(new ButtonUI("LevelLeft"
 		, "Image//arrow.tga", "Image//arrow_hover.tga"
 		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
@@ -137,6 +168,20 @@ void CLevelSelectScene::Init()
 		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
 		, levelLayout->GetX() + levelLayout->GetSizeX() / 2.5, levelLayout->GetY()
 		, 0.6, false));
+
+	Buttons.push_back(new ButtonUI("AvatarLeft"
+		, "Image//arrow.tga", "Image//arrow_hover.tga"
+		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
+		, AvatarLayout->GetX() - AvatarLayout->GetSizeX() / 2.7, AvatarLayout->GetY()
+		, 0.6, false
+		, 180));
+
+	Buttons.push_back(new ButtonUI("AvatarRight"
+		, "Image//arrow.tga", "Image//arrow_hover.tga"
+		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
+		, AvatarLayout->GetX() + AvatarLayout->GetSizeX() / 2.7, AvatarLayout->GetY()
+		, 0.6, false));
+	/************************************************************************************************************************************/
 }
 
 void CLevelSelectScene::Update(double dt)
@@ -153,10 +198,9 @@ void CLevelSelectScene::Render()
 	modelStack.PopMatrix();
 
 	mainLayout->render(this, 1);
-
 	levelLayout->render(this, 2);
+	AvatarLayout->render(this, 2);
 
-	//Buttons[0]->render(this, meshList[GEO_TEXT], Color(0, 0, 0));
 	for (int i = 0; i < Buttons.size(); i++)
 	{
 		Buttons[i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 3);
@@ -166,6 +210,8 @@ void CLevelSelectScene::Render()
 	{
 		LevelButtons[currentPage][i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 3);
 	}
+
+	RenderMeshIn2D(AvatarImages[currentAvatarImage], false, 1, 1, AvatarLayout->GetX(), AvatarLayout->GetY(), 3, 0, -AvatarLayout->GetSizeX() * 0.4f * 0.5f, -AvatarLayout->GetSizeY() * 0.4f * 0.5f);
 }
 
 void CLevelSelectScene::Exit()

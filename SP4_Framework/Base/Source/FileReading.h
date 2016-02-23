@@ -25,16 +25,19 @@ public:
 	void loadVariables(Balls** Ball);
 	void loadVariables(std::vector<Enviroment*>* EnviromentObjs);
 	
+	//Change the level bool to true
+	void changeUnlock(std::string filename);
+	
 	//Folder Searching
-	std::vector<std::string> SearchFolder(std::string directory);
+	std::vector<std::string> SearchFolder(std::string directory, std::string fileExtention);
 	
 	//Clear vector storage
 	void ClearStorage();
 
 private:
 	
-	std::vector<std::string> storage;
-	
+	std::vector<std::string> storage;  // to store the things from the text file;
+	std::vector<std::string> storage2; // to replace the first line
 
 };
 #endif

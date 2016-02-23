@@ -9,10 +9,10 @@ ButtonUI::ButtonUI(std::string text, char* normalMesh, char* hoverMesh, float si
 	textOffset.Set(x-(this->textScaling / 2 * this->text.size() / 2), y-(this->textScaling / 2));
 	this->showText = showText;
 
-	this->normalMesh = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, sizeX, sizeY);
+	this->normalMesh = MeshBuilder::Generate2DMesh("", Color(1.f, 1.f, 1.f), 0, 0, (int)sizeX, (int)sizeY);
 	this->normalMesh->textureID = LoadTGA(normalMesh);
 
-	this->hoverMesh = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, sizeX, sizeY);
+	this->hoverMesh = MeshBuilder::Generate2DMesh("", Color(1.f, 1.f, 1.f), 0, 0, (int)sizeX, (int)sizeY);
 	this->hoverMesh->textureID = LoadTGA(hoverMesh);
 
 	this->sizeX = sizeX;
