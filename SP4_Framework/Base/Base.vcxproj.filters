@@ -99,6 +99,9 @@
     <Filter Include="Source Files\GameObjects\Tools\Cannon">
       <UniqueIdentifier>{6e58bcf0-e92a-4be4-8fa5-3b70cd9006ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Aesthetics">
+      <UniqueIdentifier>{4a1b41a2-b1bf-4340-b5e4-7d5b2dea7129}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -238,6 +241,12 @@
     </ClCompile>
     <ClCompile Include="Source\GameObjects\Slow.cpp">
       <Filter>Source Files\GameObjects\Tools\Slow</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Aesthetics\Particles.cpp">
+      <Filter>Source Files\Aesthetics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Aesthetics\ParticleManager.cpp">
+      <Filter>Source Files\Aesthetics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +399,12 @@
     </ClInclude>
     <ClInclude Include="Source\GameObjects\Slow.h">
       <Filter>Source Files\GameObjects\Tools\Slow</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Aesthetics\Particles.h">
+      <Filter>Source Files\Aesthetics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Aesthetics\ParticleManager.h">
+      <Filter>Source Files\Aesthetics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

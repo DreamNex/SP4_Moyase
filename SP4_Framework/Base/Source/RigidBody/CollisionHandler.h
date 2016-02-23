@@ -12,6 +12,7 @@ public:
 	CollisionHandler();
 	~CollisionHandler();
 
+	bool FindCollideNormal(Box*, Vector2);
 	bool CheckCollision(CollisionComponent*, CollisionComponent*);
 private:
 	bool CIRCLE_CIRCLE(Circle*, Circle*);
