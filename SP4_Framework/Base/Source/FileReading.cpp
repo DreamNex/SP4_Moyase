@@ -3,7 +3,18 @@
 #include "FileReading.h"
 
 
-FileReading::FileReading(std::string filename)
+FileReading::FileReading()
+{
+	
+}
+
+FileReading::~FileReading()
+{
+
+}
+
+// Be abl to open any text file you want and store it into a vector
+void FileReading::loadFile(std::string filename)
 {
 	std::ifstream myfile;
 	myfile.open(filename);
@@ -22,12 +33,6 @@ FileReading::FileReading(std::string filename)
 	myfile.close();
 }
 
-FileReading::~FileReading()
-{
-
-}
-
-// Be abl to open any text file you want and store it into a vector
 void FileReading::loadVariables(bool &unlock)
 {	
 	if (storage.at(0) == "true")

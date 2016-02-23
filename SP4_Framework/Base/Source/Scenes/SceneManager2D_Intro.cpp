@@ -51,7 +51,6 @@ void CSceneManager2D_Intro::Render()
 	CSceneManager2D::Render();
 
 	modelStack.PushMatrix();
-	modelStack.Scale(800, 600, 1);
 	RenderMeshIn2D(meshList[GEO_SPLASH], false);
 	modelStack.PopMatrix();
 
