@@ -26,7 +26,7 @@ public:
 	void loadVariables(std::vector<Enviroment*>* EnviromentObjs);
 	
 	//Folder Searching
-	std::vector<std::string> SearchFolder(std::string directory);
+	std::vector<std::string> SearchFolder(std::string directory, std::string fileExtention);
 	
 	//Clear vector storage
 	void ClearStorage();

@@ -69,6 +69,32 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 					else
 						scene->setCurrentPage(scene->getCurrentPage() + 1);
 				}
+				if (scene->getButtons()[i]->GetText() == "AvatarLeft")
+				{
+					if (scene->getCurrentAvatarImage() == 0)
+						scene->setCurrentAvatarImage(scene->getTotalAvatarImages() - 1);
+					else
+						scene->setCurrentAvatarImage(scene->getCurrentAvatarImage() - 1);
+				}
+				else if (scene->getButtons()[i]->GetText() == "AvatarRight")
+				{
+					if (scene->getCurrentAvatarImage() == scene->getTotalAvatarImages() - 1)
+						scene->setCurrentAvatarImage(0);
+					else
+						scene->setCurrentAvatarImage(scene->getCurrentAvatarImage() + 1);
+				}
+			}
+			break;
+		}
+	}
+	
+	for (unsigned int i = 0; i < scene->getLevelButtons()[scene->getCurrentPage()].size(); ++i)
+	{
+		if (scene->getLevelButtons()[scene->getCurrentPage()][i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
+		{
+			if (mousePress && button_Left == 0)
+			{
+				CGameStateManager::selectedLevel = scene->getLevelButtons()[scene->getCurrentPage()][i]->getLevelName();
 			}
 			break;
 		}

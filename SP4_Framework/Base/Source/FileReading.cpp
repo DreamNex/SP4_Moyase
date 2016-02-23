@@ -159,10 +159,10 @@ void FileReading::ClearStorage()
 	storage.clear();
 }
 
-std::vector<std::string>  FileReading::SearchFolder(std::string directory)
+std::vector<std::string>  FileReading::SearchFolder(std::string directory, std::string fileExtemtion)
 {
 	std::vector<std::string> storageFN;
-	std::string searchPattern = "*.txt";
+	std::string searchPattern = fileExtemtion;
 	std::string fullPath = directory + searchPattern;
 	
 	char ch[260];
