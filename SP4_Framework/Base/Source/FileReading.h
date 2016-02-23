@@ -15,11 +15,11 @@
 class FileReading
 {
 public:
-	FileReading(std::string filename);
-
+	FileReading();
 	~FileReading();
 	
 	//It will check the type of gameobject and get variables[FORMATT: pos.x, pos.y, scale x, scale y ]
+	void loadFile(std::string filename);
 	void loadVariables(bool &unlock);
 	void loadVariables(int(&tool)[3]);
 	void loadVariables(Balls** Ball);
