@@ -53,13 +53,21 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 	{
 		if (scene->getButtons()[i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
 		{
-			if (mousePress && button_Left == 1)
+			if (mousePress && button_Left == 0)
 			{
-				if (scene->getButtons()[i]->GetText() == "LevelLeft");
+				if (scene->getButtons()[i]->GetText() == "LevelLeft")
 				{
 					if (scene->getCurrentPage() == 0)
-					{
-					}
+						scene->setCurrentPage(scene->getnumOfPage() - 1);
+					else
+						scene->setCurrentPage(scene->getCurrentPage() - 1);
+				}
+				else if (scene->getButtons()[i]->GetText() == "LevelRight")
+				{
+					if (scene->getCurrentPage() == scene->getnumOfPage() - 1)
+						scene->setCurrentPage(0);
+					else
+						scene->setCurrentPage(scene->getCurrentPage() + 1);
 				}
 			}
 			break;
