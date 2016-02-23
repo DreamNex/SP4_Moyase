@@ -29,5 +29,5 @@ void LevelButton::render(CSceneManager2D* SceneManager2D, Mesh* textMesh, Color 
 			SceneManager2D->RenderTextOnScreen(textMesh, text, textCol, textScaling, textOffset.x, textOffset.y, z);
 	}
 	else
-		SceneManager2D->RenderMeshIn2D(lockMesh, false, 1, 1, pos.x, pos.y - sizeY / 2, z, 0, -sizeX / 2, -sizeY / 2);
+		SceneManager2D->RenderMeshIn2D(lockMesh, false, 1, 1, pos.x, pos.y, z, 0, -sizeX / 2, -sizeY / 2);
 }
