@@ -8,5 +8,5 @@ CollisionComponent::CollisionComponent()
 //Destructor
 CollisionComponent::~CollisionComponent()
 {
-	delete origin;
+	//delete origin;
 }

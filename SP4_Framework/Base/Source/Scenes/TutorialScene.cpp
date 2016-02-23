@@ -38,14 +38,20 @@ void CTutorialScene::Init()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
-	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Tits//Avatar_Censored.tga"));
-	gameObjects.push_back(new Wall(Vector2(m_window_width /2, 100), m_window_width - 100, 100));
-	gameObjects.push_back(new Spikes(Vector2(m_window_width / 2, 100), m_window_width, 100));
-	gameObjects.push_back(new Wall(Vector2(m_window_width * 1.5/ 2, m_window_height / 2), 100, m_window_height - 100));
+	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Avatars//Avatar_Censored.tga"));
 
-	gameObjects.push_back(new Cannon(Vector2(300, 350), 50, 50));
-	gameObjects.push_back(new Boost(Vector2(300, 500), 50, 50));
-	gameObjects.push_back(new Slow(Vector2(m_window_width/3, 450), 50, 50));
+	gameObjects.push_back(new Wall(Vector2(((float)m_window_width *0.5f), 100.f), (float)m_window_width - 100.f, 100.f));
+	gameObjects.push_back(new Spikes(Vector2((float)m_window_width *0.5f, 100.f), (float)m_window_width, 100.f));
+	gameObjects.push_back(new Wall(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.5f), 100.f, (float)m_window_height - 100.f));
+
+	gameObjects.push_back(new Cannon(Vector2(300.f, 350.f), 50.f, 50.f));
+	gameObjects.push_back(new Boost(Vector2(300.f, 500.f), 50.f, 50.f));
+	gameObjects.push_back(new Slow(Vector2(300.f, 700.f), 50.f, 50.f));
+
+	m_GUI = new GUIManager();
+	m_GUI->CreateGUI("Start", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150.f, 75.f, (float)m_window_width - 100.f, (float)m_window_height * 0.5f, 0.6f, false, GUI::CANNONGUI);
+
+	ctrs = new Controls(m_GUI);
 }
 
 void CTutorialScene::Update(double dt)
@@ -82,6 +88,12 @@ void CTutorialScene::Update(double dt)
 	{
 		gameObjects[i]->update(dt);
 	}
+	m_GUI->Update((float)dt, (float)Application::mouse_current_x, (float)Application::mouse_current_y);
+	
+	if (Application::Button_Left)
+	{
+		//ctrs->OnClick(Vector2 (Application::mouse_current_x, Application::mouse_current_y));
+	}
 }
 
 void CTutorialScene::Render()
@@ -91,6 +103,7 @@ void CTutorialScene::Render()
 	{
 		gameObjects[i]->render(this);
 	}
+	m_GUI->Render(this, meshList[GEO_TEXT], Color(0, 0, 0));
 }
 
 void CTutorialScene::Exit()

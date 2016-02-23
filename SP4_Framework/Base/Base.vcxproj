@@ -16,6 +16,7 @@
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
+    <ClCompile Include="Source\Controls\Controls.cpp" />
     <ClCompile Include="Source\FileReading.cpp" />
     <ClCompile Include="Source\GameObjects\Balls.cpp" />
     <ClCompile Include="Source\GameObjects\Boost.cpp" />
@@ -58,6 +59,8 @@
     <ClCompile Include="Source\SoundManager.cpp" />
     <ClCompile Include="Source\Timer\Timer.cpp" />
     <ClCompile Include="Source\UI\ButtonUI.cpp" />
+    <ClCompile Include="Source\UI\Layout.cpp" />
+    <ClCompile Include="Source\UI\LevelButton.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +69,7 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera3.h" />
+    <ClInclude Include="Source\Controls\Controls.h" />
     <ClInclude Include="Source\FileReading.h" />
     <ClInclude Include="Source\GameObjects\Balls.h" />
     <ClInclude Include="Source\GameObjects\Boost.h" />
@@ -111,6 +115,8 @@
     <ClInclude Include="Source\SoundManager.h" />
     <ClInclude Include="Source\Timer\Timer.h" />
     <ClInclude Include="Source\UI\ButtonUI.h" />
+    <ClInclude Include="Source\UI\Layout.h" />
+    <ClInclude Include="Source\UI\LevelButton.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>

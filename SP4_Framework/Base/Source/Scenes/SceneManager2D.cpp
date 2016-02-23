@@ -95,7 +95,7 @@ void CSceneManager2D::Update(double dt)
 /********************************************************************************
  Render text onto the screen
  ********************************************************************************/
-void CSceneManager2D::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y)
+void CSceneManager2D::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, float z)
 {
 		if(!mesh || mesh->textureID <= 0)
 		return;
@@ -110,7 +110,7 @@ void CSceneManager2D::RenderTextOnScreen(Mesh* mesh, std::string text, Color col
 			viewStack.LoadIdentity();
 			modelStack.PushMatrix();
 				modelStack.LoadIdentity();
-				modelStack.Translate(x, y, 0);
+				modelStack.Translate(x, y, z);
 				modelStack.Scale(size, size, size);
 				glUniform1i(m_parameters[U_TEXT_ENABLED], 1);
 				glUniform3fv(m_parameters[U_TEXT_COLOR], 1, &color.r);
@@ -139,7 +139,7 @@ void CSceneManager2D::RenderTextOnScreen(Mesh* mesh, std::string text, Color col
 /********************************************************************************
  Render a mesh in 2D
  ********************************************************************************/
-void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, float sizeY, float x, float y, float rotate)
+void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, float sizeY, float x, float y, float z, float rotate, float centerOffsetX, float centerOffsetY)
 {
 	Mtx44 ortho;
 	ortho.SetToOrtho(0, m_window_width, 0, m_window_height, -10, 10);
@@ -148,11 +148,15 @@ void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, 
 		viewStack.PushMatrix();
 			viewStack.LoadIdentity();
 			modelStack.PushMatrix();
-				modelStack.LoadIdentity();
-				modelStack.Translate((float)x, (float)y, 0);
+				//modelStack.LoadIdentity();
+				modelStack.Translate((float)x, (float)y, (float)z);
 				if (rotate)
+				{
 					modelStack.Rotate(rotate, 0, 0, 1);
+				}
 				modelStack.Scale( (float)sizeX, (float)sizeY, 1);
+				if (centerOffsetX || centerOffsetY)
+					modelStack.Translate(centerOffsetX, centerOffsetY, 0);
        
 				Mtx44 MVP, modelView, modelView_inverse_transpose;
 	
@@ -184,13 +188,14 @@ void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, 
 void CSceneManager2D::Render2DMesh(Mesh *mesh, float scaleX, float scaleY, float x, float y, float rotate, float centerOffsetX, float centerOffsetY)
 {
 	modelStack.PushMatrix();
-	modelStack.LoadIdentity();
+	//modelStack.LoadIdentity();
 	modelStack.Translate(x, y, 0);
 	if (rotate)
-		modelStack.Rotate(rotate, 0, 0, 1);
+		modelStack.Rotate(rotate, 0, 0, 1); 
 	if (centerOffsetX || centerOffsetY)
 		modelStack.Translate(centerOffsetX, centerOffsetY, 0);
 	modelStack.Scale(scaleX, scaleY, 1);
+	
 
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 
