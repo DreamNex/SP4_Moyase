@@ -44,31 +44,32 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const unsigned c
 {
 }
 
+bool mousePress = false;
+
 void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, const double mouse_y,
 							  const int button_Left, const int button_Middle, const int button_Right)
 {
-	/*
-	for (unsigned int i = 0; i < scene->Buttons.size(); ++i)
+	for (unsigned int i = 0; i < scene->getButtons().size(); ++i)
 	{
-		scene->Buttons[i]->CheckMouseOver((float)mouse_x, (float)mouse_y);
-
-		if (scene->Buttons[i]->GetText() == "Start" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
+		if (scene->getButtons()[i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
 		{
-			theGSM->ChangeState(CGameplayState::Instance());
-			break;
-		}
-		else if (scene->Buttons[i]->GetText() == "How 2 Play" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
-		{
-			theGSM->ChangeState(CTutorialState::Instance());
-			break;
-		}
-		else if (scene->Buttons[i]->GetText() == "Exit" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
-		{
-			Application::exitbool = true;
+			if (mousePress && button_Left == 1)
+			{
+				if (scene->getButtons()[i]->GetText() == "LevelLeft");
+				{
+					if (scene->getCurrentPage() == 0)
+					{
+					}
+				}
+			}
 			break;
 		}
 	}
-	*/
+
+	if (button_Left == 1)
+		mousePress = true;
+	else
+		mousePress = false;
 }
 
 void CLevelSelectState::Update(CGameStateManager* theGSM)
