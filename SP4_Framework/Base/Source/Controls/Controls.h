@@ -1,0 +1,50 @@
+#pragma once
+#include "../GUIManager/GUIManager.h"
+#include "../GameObjects/GameObject.h"
+#include "../GameObjects/Cannon.h"
+#include "../GameObjects/Boost.h"
+#include "../GameObjects/Slow.h"
+#include"../Timer/Timer.h"
+
+class Controls
+{
+public:
+	enum CONTROLS_STATE
+	{
+		SELECTION,
+		PLACEMENT,
+		ROTATION
+	};
+
+	Controls(GUIManager * m_GUI);
+	~Controls();
+
+	GameObject* Update(CSceneManager2D* sm, std::vector<GameObject*> levelAssets, bool m_state, float dt);
+	void Render(CSceneManager2D *SceneManger2D);
+
+	bool GetSelection(std::vector<GameObject*> levelAssets, Vector2 mousePos);
+	bool GetPlacement(std::vector<GameObject*> levelAssets, Vector2 mousePos);
+	int GetState();
+	void ResetState();
+private:
+	CONTROLS_STATE c_state;
+	GUIManager *m_GUI;
+
+	//Pointer to the Selected/Created GameObject
+	bool SelectedActive;
+	int SelectedIndex;
+	GameObject *SelectedGO;
+	Vector2 oldPos;
+
+	//Cursor
+	Vector2 cursorPos;
+	Mesh* cursorMesh;
+	bool mouse_drag;
+
+	int state;
+
+	
+
+	std::vector<GameObject*> g_Obj;
+};
+

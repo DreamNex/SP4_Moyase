@@ -54,7 +54,6 @@ void CTutorialScene::Init()
 	m_GUI = new GUIManager(5, 5, 5);
 	
 	ctrs = new Controls(m_GUI);
-	ctrs->SetLevelAssets(gameObjects);
 }
 
 void CTutorialScene::Update(double dt)
@@ -100,8 +99,9 @@ void CTutorialScene::Update(double dt)
 
 	m_GUI->Update(dt, Application::mouse_current_x, Application::mouse_current_y);
 
-
-	ctrs->OnClick(mousePos, m_state, dt);
+	GameObject* temp = ctrs->Update(this, gameObjects, m_state, dt);
+	if (temp)
+		gameObjects.push_back(temp);
 }
 
 void CTutorialScene::Render()
