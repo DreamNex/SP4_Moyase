@@ -51,7 +51,7 @@ bool RigidBody::CollideWith(RigidBody *otherObject)
 
 	if (cH.CheckCollision(cC_Compt, otherObject->cC_Compt))
 	{
-		if (toCollide->response && resolve->pC_Compt->GetVelocity().IsZero() == false)
+		if (toCollide->response)
 		{
 			if (dynamic_cast<Ray*>(toCollide->cC_Compt) == false)
 				resolve->pC_Compt->SetGravity(false);

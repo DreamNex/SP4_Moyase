@@ -153,7 +153,7 @@ void PhysicsComponent::toBounce(Vector2 collideNormal)
 	v_Acceleration.SetZero();
 	v_Force.SetZero();
 
-	if (v_Velocity.x == 0 && v_Velocity.Length() <= 100)
+	if (fabs(v_Velocity.x) <= 25 && fabs(v_Velocity.y) <= 25)
 	{
 		v_Velocity.SetZero();
 		isActive = false;

@@ -13,8 +13,8 @@ CTutorialScene::CTutorialScene()
 }
 
 CTutorialScene::CTutorialScene(int m_window_width, int m_window_height)
-:
-CSceneManager2D(m_window_width, m_window_height)
+	:
+	CSceneManager2D(m_window_width, m_window_height)
 {
 }
 
@@ -38,8 +38,10 @@ void CTutorialScene::Init()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
-	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Avatars//Avatar_Censored.tga"));
+	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("Game_bg", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
+	meshList[GEO_BG]->textureID = LoadTGA("Image//g_bg.tga");
 
+	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Avatars//Avatar_Censored.tga"));
 	gameObjects.push_back(new Wall(Vector2(((float)m_window_width *0.5f), 100.f), (float)m_window_width - 100.f, 100.f));
 	gameObjects.push_back(new Spikes(Vector2((float)m_window_width *0.5f, 100.f), (float)m_window_width, 100.f));
 	gameObjects.push_back(new Wall(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.5f), 100.f, (float)m_window_height - 100.f));
@@ -48,21 +50,22 @@ void CTutorialScene::Init()
 	gameObjects.push_back(new Boost(Vector2(300.f, 500.f), 50.f, 50.f));
 	gameObjects.push_back(new Slow(Vector2(300.f, 700.f), 50.f, 50.f));
 
-	m_GUI = new GUIManager();
-	m_GUI->CreateGUI("Start", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150.f, 75.f, (float)m_window_width - 100.f, (float)m_window_height * 0.5f, 0.6f, false, GUI::CANNONGUI);
-
+	m_GUI = new GUIManager(5, 5, 5);
+	
 	ctrs = new Controls(m_GUI);
+	ctrs->SetLevelAssets(gameObjects);
 }
 
 void CTutorialScene::Update(double dt)
 {
+	m_state = false;
 	std::cout << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetVelocity().y << std::endl;
 	std::cout << "~~" << std::endl;
 	if (Application::IsKeyPressed('W'))
 	{
 		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0, 20.f));
 	}
-	if(Application::IsKeyPressed('S'))
+	if (Application::IsKeyPressed('S'))
 	{
 		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0, -1.f));
 	}
@@ -78,7 +81,11 @@ void CTutorialScene::Update(double dt)
 	{
 		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0.f, 1400));
 	}
-	
+	if (Application::Button_Left)
+	{
+		m_state = true;
+	}
+
 	gameObjects[0]->checkColision(gameObjects[1]);
 	gameObjects[0]->checkColision(gameObjects[3]);
 	gameObjects[0]->checkColision(gameObjects[4]);
@@ -88,22 +95,26 @@ void CTutorialScene::Update(double dt)
 	{
 		gameObjects[i]->update(dt);
 	}
-	m_GUI->Update((float)dt, (float)Application::mouse_current_x, (float)Application::mouse_current_y);
-	
-	if (Application::Button_Left)
-	{
-		//ctrs->OnClick(Vector2 (Application::mouse_current_x, Application::mouse_current_y));
-	}
+
+	m_GUI->Update(dt, Application::mouse_current_x, Application::mouse_current_y);
+
+	ctrs->OnClick(Vector2(Application::mouse_current_x, Application::mouse_current_y), m_state, dt);
 }
 
 void CTutorialScene::Render()
 {
 	CSceneManager2D::Render();
+
+	modelStack.PushMatrix();
+	//RenderMeshIn2D(meshList[GEO_BG], false);
+	modelStack.PopMatrix();
+
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->render(this);
 	}
-	m_GUI->Render(this, meshList[GEO_TEXT], Color(0, 0, 0));
+	m_GUI->Render(this);
+
 }
 
 void CTutorialScene::Exit()

@@ -10,6 +10,7 @@
 #include"../GameObjects/Slow.h"
 #include"../GUIManager/GUIManager.h"
 #include"../Controls/Controls.h"
+#include"../Timer/Timer.h"
 
 class CTutorialScene: public CSceneManager2D
 {
@@ -17,6 +18,7 @@ public:
 	enum GEOMETRY_TYPE
 	{
 		GEO_TEXT,
+		GEO_BG,
 		NUM_GEOMETRY,
 	};
 
@@ -34,4 +36,5 @@ private:
 	Mesh* meshList[NUM_GEOMETRY];
 	GUIManager * m_GUI;
 	Controls * ctrs;
+	bool m_state;
 };

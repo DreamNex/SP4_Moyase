@@ -4,6 +4,7 @@
 #include "../GameObjects/Cannon.h"
 #include "../GameObjects/Boost.h"
 #include "../GameObjects/Slow.h"
+#include"../Timer/Timer.h"
 
 class Controls
 {
@@ -18,24 +19,23 @@ public:
 	Controls(GUIManager * m_GUI);
 	~Controls();
 
+	void SetLevelAssets(std::vector<GameObject*> levelAssets);
+	void OnClick(Vector2 mousePos, bool m_state, float dt);
+	void Render(CSceneManager2D *SceneManger2D);
 
-	//void SetState(Controls::CONTROLS_STATE c_state);
-
-	void OnClick(Vector2 mousePos, std::vector<GameObject*>&gu);
-	void OnDrag(Vector2 MOUSEPOS);
+	Timer GetTimer();
+	void SetTimer(Timer timer);
 
 private:
+	bool SelectedActive;
 	GameObject *SelctedGO;
 	std::vector<GameObject*> g_Obj;
+	std::vector<GameObject*> levelAssets;
 	CONTROLS_STATE c_state;
 	GUIManager *m_GUI;
-	GameObject *GetSelection(Vector2 mousePos);
-	bool b_Drag;
-	int ToolsObj[3];
-
-	Cannon * cannon;
-	Boost * boost;
-	Slow * slow;
-	
+	bool GetSelection(Vector2 mousePos);
+	bool GetPlacement(Vector2 mousePos);
+	Timer click_timer;
+	bool enableClick;
 };
 
