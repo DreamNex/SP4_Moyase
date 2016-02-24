@@ -17,51 +17,19 @@ Controls::~Controls()
 
 }
 
-void Controls::OnClick(Vector2 mousePos, bool m_state, float dt)
+bool Controls::OnClick(Vector2 mousePos, GameObject * g_obj)
 {
-	if (enableClick == false)
+
+	//OnClick( mousePos,NULL, GUI::CANNONGUI)
+
+	CollisionHandler ch;
+	Circle* mouseBound = new Circle(mousePos, 0.1f);
+	if (ch.CheckCollision(mouseBound, g_obj->getRigidBody()->GetCollisionCompt()))
 	{
-		if (click_timer.Update(dt))
-		{
-			enableClick = true;
-			click_timer.Start();
-		}
-		return;
+		return true;
 	}
-	
-	switch (c_state)
-	{
-	case SELECTION:
-		{
-			if (m_state == true)
-			{
-				if (GetSelection(mousePos) == true)
-				{
-					c_state = PLACEMENT;
-				}
-			}
-			break;
-		}
-		case PLACEMENT:
-		{
-			SelctedGO->setPosition(mousePos);
-			if (m_state == true)
-			{
-				if (GetPlacement(mousePos) == true)
-				{
-					c_state = ROTATION;
-				}
-			}
-			break;
-		}
-		case ROTATION:
-		{
-			c_state = SELECTION;
-			break;
-		}
-		default:
-			break;
-		}
+	return false;
+
 }
 
 
