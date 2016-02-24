@@ -72,7 +72,9 @@ bool Controls::GetSelection(Vector2 mousePos)
 
 	for (unsigned int i = 0; i < 3; ++i)
 	{
-		if (ch.CheckCollision(m_GUI->GetTools(i)->GetGUIBound(), mouseBound))//if mouse and game object collide
+		Box* temp = (Box*)m_GUI->GetTools(i)->GetGUIBound();
+		if (((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
+			&& (mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y)))
 		{
 			switch (m_GUI->GetTools(i)->GetType())
 			{
@@ -117,15 +119,18 @@ bool Controls::GetPlacement(Vector2 mousePos)
 	CollisionHandler ch;
 	Circle* mouseBound = new Circle(mousePos, 0.1f);
 
+	bool collided = true;
 	for (unsigned int i = 1; i < levelAssets.size(); ++i)
 	{
-		if (ch.CheckCollision(SelctedGO->getRigidBody()->GetCollisionCompt(), levelAssets[i]->getRigidBody()->GetCollisionCompt()) == false)
+		Box* temp = (Box*)levelAssets[i];
+		if (((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
+			&& (mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y)) == false)
 		{
-			//Put in vector
-			return true;
+			collided = false;
+			break;
 		}
 	}
-	return false;
+	return !collided;
 }
 
 void Controls::Render(CSceneManager2D *SceneManger2D)

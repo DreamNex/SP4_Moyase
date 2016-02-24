@@ -138,6 +138,8 @@ bool CollisionHandler::FindCollideNormal(Box* b1, Vector2 origin)
 		b1->SetCollideNormal(right);
 	else if (left.Dot(dir) > horizontalDotLimit && left.Dot(dir) < 1)//Left
 		b1->SetCollideNormal(left);
+	if (b1->GetCollideNormal().IsZero())
+		b1->SetCollideNormal(Vector2(0, 1));
 	return (!(b1->GetCollideNormal().IsZero()));
 	/*
 	if ((closest.y > b1->GetOrigin().y && closest.y <= b1->GetMax().y)
