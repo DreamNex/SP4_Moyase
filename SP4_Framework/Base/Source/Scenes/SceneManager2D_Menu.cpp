@@ -61,7 +61,6 @@ void CSceneManager2D_Menu::Render()
 	}
 
 	modelStack.PushMatrix();
-	modelStack.Scale(800, 600, 1);
 	RenderMeshIn2D(meshList[GEO_BG], false);
 	modelStack.PopMatrix();
 }

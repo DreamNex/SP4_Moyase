@@ -3,29 +3,28 @@
 
 Timer::Timer()
 {
-	countdown = 3.0f;
-	countdowncopy = countdown;
+	duration = 3.0f;
+	dur_Copy = duration;
 }
 
 Timer::Timer(float countdown)
 {
-	this->countdown = countdown;
+	this->duration = countdown;
 
-	countdowncopy = countdown;
+	dur_Copy = countdown;
 }
 Timer::~Timer()
 {
 }
 
-float Timer::GetTimer()
+float Timer::GetDuration()
 {
-	return countdown;
+	return duration;
 }
-void Timer::SetTimer(float countdown)
+void Timer::SetDuration(float duration)
 {
-	this->countdown = countdown;
+	this->duration = duration;
 }
-
 
 bool Timer::GetActive()
 {
@@ -43,18 +42,15 @@ void Timer::Stop()
 
 bool Timer::Update(float dt)
 {
-	if (active == true)
+	if (active)
 	{
-		countdown -= dt;
-		if (countdown <= 0)
+		duration -= dt;
+		if (duration <= 0)
 		{
-			countdown = countdowncopy;
+			duration = dur_Copy;
 			active = false;
 			return true;
 		}
 	}
-	else if (active == false)
-	{
-		return false;
-	}
+	return false;
 }

@@ -99,8 +99,14 @@
     <Filter Include="Source Files\GameObjects\Tools\Cannon">
       <UniqueIdentifier>{6e58bcf0-e92a-4be4-8fa5-3b70cd9006ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Controls">
-      <UniqueIdentifier>{d341fe26-35c2-488b-b44c-c65d64f23357}</UniqueIdentifier>
+    <Filter Include="Source Files\Aesthetics">
+      <UniqueIdentifier>{4a1b41a2-b1bf-4340-b5e4-7d5b2dea7129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes\Options">
+      <UniqueIdentifier>{536fe169-9a49-46b4-a912-bc0f9ba3764a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Options">
+      <UniqueIdentifier>{f6b16df8-0b60-4bf0-87b5-13bd151d571c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -242,8 +248,20 @@
     <ClCompile Include="Source\GameObjects\Slow.cpp">
       <Filter>Source Files\GameObjects\Tools\Slow</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Controls\Controls.cpp">
-      <Filter>Source Files\Controls</Filter>
+    <ClCompile Include="Source\Aesthetics\Particles.cpp">
+      <Filter>Source Files\Aesthetics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Aesthetics\ParticleManager.cpp">
+      <Filter>Source Files\Aesthetics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scenes\OptionsScene.cpp">
+      <Filter>Source Files\Scenes\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GSM\OptionsState.cpp">
+      <Filter>Source Files\Game State Management\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpriteAnimation.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -397,8 +415,20 @@
     <ClInclude Include="Source\GameObjects\Slow.h">
       <Filter>Source Files\GameObjects\Tools\Slow</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Controls\Controls.h">
-      <Filter>Source Files\Controls</Filter>
+    <ClInclude Include="Source\Aesthetics\Particles.h">
+      <Filter>Source Files\Aesthetics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Aesthetics\ParticleManager.h">
+      <Filter>Source Files\Aesthetics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scenes\OptionsScene.h">
+      <Filter>Source Files\Scenes\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GSM\OptionsState.h">
+      <Filter>Source Files\Game State Management\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteAnimation.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

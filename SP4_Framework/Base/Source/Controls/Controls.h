@@ -20,6 +20,8 @@ public:
 	Controls(GUIManager * m_GUI);
 	~Controls();
 
+	void Update(float dt);
+
 	void SetLevelAssets(std::vector<GameObject*> levelAssets);
 	bool OnClick(Vector2 mousePos, GameObject * g_obj, CTutorialScene::GameStates);
 	void Render(CSceneManager2D *SceneManger2D);

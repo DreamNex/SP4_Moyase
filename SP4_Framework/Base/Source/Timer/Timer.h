@@ -1,18 +1,19 @@
-#pragma once
+#ifndef TIMER_H
+#define TIMER_H
+
 class Timer
 {
 private:
-	float countdown;
-	float countdowncopy;
+	float duration;
+	float dur_Copy;
 	bool active;
-
 public:
-	Timer(float countdown);
+	Timer(float duration);
 	Timer();
 	~Timer();
 
-	float GetTimer();
-	void SetTimer(float countdown);
+	float GetDuration();
+	void SetDuration(float duration);
 
 	bool GetActive();
 	void Start();
@@ -21,4 +22,6 @@ public:
 	bool Update(float dt);
 
 };
+
+#endif
 

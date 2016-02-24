@@ -41,26 +41,28 @@ void CTutorialScene::Init()
 	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("Game_bg", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
 	meshList[GEO_BG]->textureID = LoadTGA("Image//g_bg.tga");
 
-	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Tits//Avatar_5.tga"));
-	gameObjects.push_back(new Wall(Vector2(m_window_width / 2, 100), m_window_width - 100, 100));
-	gameObjects.push_back(new Spikes(Vector2(m_window_width / 2, 100), m_window_width, 100));
-	gameObjects.push_back(new Wall(Vector2(m_window_width / 2, m_window_height / 2), 100, m_window_height - 100));
+	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Avatars//Avatar_Censored.tga"));
+	gameObjects.push_back(new Wall(Vector2(((float)m_window_width *0.5f), 100.f), (float)m_window_width - 100.f, 100.f));
+	gameObjects.push_back(new Spikes(Vector2((float)m_window_width *0.5f, 100.f), (float)m_window_width, 100.f));
+	gameObjects.push_back(new Wall(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.5f), 100.f, (float)m_window_height - 100.f));
 
-	gameObjects.push_back(new Cannon(Vector2(300, 350), 50, 50));
-	gameObjects.push_back(new Boost(Vector2(300, 500), 50, 50));
-	gameObjects.push_back(new Slow(Vector2(300, 700), 50, 50));
+	gameObjects.push_back(new Cannon(Vector2(300.f, 350.f), 50.f, 50.f));
+	gameObjects.push_back(new Boost(Vector2(300.f, 500.f), 50.f, 50.f));
+	gameObjects.push_back(new Slow(Vector2(300.f, 700.f), 50.f, 50.f));
 
 
 	m_GUI = new GUIManager(5, 5, 5);
-
+	
 	ctrs = new Controls(m_GUI);
 	ctrs->SetLevelAssets(gameObjects);
 }
 
 void CTutorialScene::Update(double dt)
 {
+	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
 	m_state = false;
 	std::cout << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetVelocity().y << std::endl;
+	std::cout << "~~" << std::endl;
 	if (Application::IsKeyPressed('W'))
 	{
 		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0, 20.f));
@@ -79,7 +81,7 @@ void CTutorialScene::Update(double dt)
 	}
 	if (Application::IsKeyPressed('L'))
 	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(300.f, 40));
+		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0.f, 1400));
 	}
 	if (Application::Button_Left)
 	{
@@ -89,16 +91,17 @@ void CTutorialScene::Update(double dt)
 	gameObjects[0]->checkColision(gameObjects[1]);
 	gameObjects[0]->checkColision(gameObjects[3]);
 	gameObjects[0]->checkColision(gameObjects[4]);
-	gameObjects[0]->checkColision(gameObjects[5]);
-	gameObjects[0]->checkColision(gameObjects[6]);
+	//gameObjects[0]->checkColision(gameObjects[5]);
+	//gameObjects[0]->checkColision(gameObjects[6]);
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->update(dt);
 	}
+
 	m_GUI->Update(dt, Application::mouse_current_x, Application::mouse_current_y);
 
-	//ctrs->OnClick(Vector2(Application::mouse_current_x, Application::mouse_current_y), m_state, dt);
 
+	ctrs->OnClick(mousePos, m_state, dt);
 }
 
 void CTutorialScene::Render()

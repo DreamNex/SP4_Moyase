@@ -27,8 +27,7 @@ public:
 	bool Running() { return m_bRunning; }
 	void Quit() { m_bRunning = false; }
 
-	static void SetSelectedLevel(string filePathOfLevel) { selectedLevel = filePathOfLevel; }
-	static string getSelectedLevel() { return selectedLevel; }
+	static string selectedLevel;
 
 private:
 	// the stack of states
@@ -39,6 +38,4 @@ private:
 
 	bool m_bRunning;
 	bool m_bFullscreen;
-	
-	static string selectedLevel;
 };
