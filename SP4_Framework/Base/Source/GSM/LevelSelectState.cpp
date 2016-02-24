@@ -3,7 +3,7 @@ using namespace std;
 
 #include "LevelSelectState.h"
 #include "GameStateManager.h"
-//#include "MenuState.h"
+#include "MenuState.h"
 #include "GameplayState.h"
 #include "../Application.h"
 
@@ -49,56 +49,77 @@ bool mousePress = false;
 void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, const double mouse_y,
 							  const int button_Left, const int button_Middle, const int button_Right)
 {
-	for (unsigned int i = 0; i < scene->getButtons().size(); ++i)
+	switch (scene->getCurentStae())
 	{
-		if (scene->getButtons()[i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
+		case CLevelSelectScene::S_Selecting:
 		{
-			if (mousePress && button_Left == 0)
+			for (unsigned int i = 0; i < scene->getLevelButtons()[scene->getCurrentPage()].size(); ++i)
 			{
-				if (scene->getButtons()[i]->GetText() == "LevelLeft")
+				if (scene->getLevelButtons()[scene->getCurrentPage()][i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
 				{
-					if (scene->getCurrentPage() == 0)
-						scene->setCurrentPage(scene->getnumOfPage() - 1);
-					else
-						scene->setCurrentPage(scene->getCurrentPage() - 1);
-				}
-				else if (scene->getButtons()[i]->GetText() == "LevelRight")
-				{
-					if (scene->getCurrentPage() == scene->getnumOfPage() - 1)
-						scene->setCurrentPage(0);
-					else
-						scene->setCurrentPage(scene->getCurrentPage() + 1);
-				}
-				if (scene->getButtons()[i]->GetText() == "AvatarLeft")
-				{
-					if (scene->getCurrentAvatarImage() == 0)
-						scene->setCurrentAvatarImage(scene->getTotalAvatarImages() - 1);
-					else
-						scene->setCurrentAvatarImage(scene->getCurrentAvatarImage() - 1);
-				}
-				else if (scene->getButtons()[i]->GetText() == "AvatarRight")
-				{
-					if (scene->getCurrentAvatarImage() == scene->getTotalAvatarImages() - 1)
-						scene->setCurrentAvatarImage(0);
-					else
-						scene->setCurrentAvatarImage(scene->getCurrentAvatarImage() + 1);
+					if (mousePress && button_Left == 0)
+					{
+						CGameStateManager::selectedLevel = scene->getLevelButtons()[scene->getCurrentPage()][i]->getLevelName();
+						scene->setCurrentState(CLevelSelectScene::S_Selected);
+					}
+					break;
 				}
 			}
-			break;
+
+			for (unsigned int i = 0; i < scene->getButtons()[CLevelSelectScene::S_Selecting].size(); ++i)
+			{
+				if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
+				{
+					if (mousePress && button_Left == 0)
+					{
+						if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "LevelLeft")
+						{
+							if (scene->getCurrentPage() == 0)
+								scene->setCurrentPage(scene->getnumOfPage() - 1);
+							else
+								scene->setCurrentPage(scene->getCurrentPage() - 1);
+						}
+						else if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "LevelRight")
+						{
+							if (scene->getCurrentPage() == scene->getnumOfPage() - 1)
+								scene->setCurrentPage(0);
+							else
+								scene->setCurrentPage(scene->getCurrentPage() + 1);
+						}
+						if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "AvatarLeft")
+						{
+							if (scene->getCurrentAvatarImage() == 0)
+								scene->setCurrentAvatarImage(scene->getTotalAvatarImages() - 1);
+							else
+								scene->setCurrentAvatarImage(scene->getCurrentAvatarImage() - 1);
+						}
+						else if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "AvatarRight")
+						{
+							if (scene->getCurrentAvatarImage() == scene->getTotalAvatarImages() - 1)
+								scene->setCurrentAvatarImage(0);
+							else
+								scene->setCurrentAvatarImage(scene->getCurrentAvatarImage() + 1);
+						}
+						else if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "Back")
+						{
+							theGSM->ChangeState(CMenuState::Instance());
+						}
+					}
+					break;
+				}
+			}
 		}
+		break;
+		
+		case CLevelSelectScene::S_Selected:
+		{
+		}
+		break;
 	}
+
 	
-	for (unsigned int i = 0; i < scene->getLevelButtons()[scene->getCurrentPage()].size(); ++i)
-	{
-		if (scene->getLevelButtons()[scene->getCurrentPage()][i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
-		{
-			if (mousePress && button_Left == 0)
-			{
-				CGameStateManager::selectedLevel = scene->getLevelButtons()[scene->getCurrentPage()][i]->getLevelName();
-			}
-			break;
-		}
-	}
+
+	
 
 	if (button_Left == 1)
 		mousePress = true;

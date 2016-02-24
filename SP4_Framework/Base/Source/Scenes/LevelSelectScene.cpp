@@ -30,22 +30,25 @@ CSceneManager2D(m_window_width, m_window_height)
 
 CLevelSelectScene::~CLevelSelectScene()
 {
-	if (mainLayout)
-		delete mainLayout;
-
 	if (levelLayout)
 		delete levelLayout;
 
 	if (AvatarLayout)
 		delete AvatarLayout;
 
+	if (selectedLayout)
+		delete selectedLayout;
+
 	if (FileReader)
 		delete FileReader;
 
 	for (unsigned int i = 0; i < Buttons.size(); ++i)
 	{
-		if (Buttons[i])
-			delete Buttons[i];
+		for (unsigned int j = 0; j < Buttons[i].size(); ++j)
+		{
+			if (Buttons[i][j])
+				delete Buttons[i][j];
+		}
 	}
 
 	for (unsigned int i = 0; i < LevelButtons.size(); ++i)
@@ -75,9 +78,9 @@ void CLevelSelectScene::Init()
 	meshList[GEO_BG]->textureID = LoadTGA("Image//Tits//MainMenuBG.tga");
 
 	//layout planes
-	mainLayout = new Layout("Image//Tits//", m_window_width * 0.7, m_window_height * 0.7, m_window_width * 0.5, m_window_height * 0.5);
-	levelLayout = new Layout("Image//Tits//btn.tga", mainLayout->GetSizeX() * 0.55, mainLayout->GetSizeY() * 0.7, mainLayout->GetX() * 0.7, mainLayout->GetY() * 0.9);
-	AvatarLayout = new Layout("Image//Tits//btn.tga", mainLayout->GetSizeX() * 0.4, mainLayout->GetSizeY() * 0.7, mainLayout->GetX() * 1.4, mainLayout->GetY() * 0.9);
+	levelLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.38, m_window_height * 0.48, m_window_width * 0.35, m_window_height * 0.5);
+	AvatarLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.28, m_window_height * 0.48, m_window_width * 0.7, m_window_height * 0.5);
+	selectedLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.4, m_window_height * 0.5, m_window_width * 0.5, m_window_height * 0.5);
 
 	FileReader = new FileReading();
 
@@ -155,32 +158,51 @@ void CLevelSelectScene::Init()
 	}
 	/************************************************************************************************************************************/
 
+	Buttons.resize(S_TOTAL);
 	/********************************************Other buttons like back and arrows******************************************************/
-	Buttons.push_back(new ButtonUI("LevelLeft"
+	Buttons[S_Selecting].push_back(new ButtonUI("LevelLeft"
 		, "Image//arrow.tga", "Image//arrow_hover.tga"
 		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
 		, levelLayout->GetX() - levelLayout->GetSizeX() / 2.5, levelLayout->GetY()
 		, 0.6, false
 		, 180));
 
-	Buttons.push_back(new ButtonUI("LevelRight"
+	Buttons[S_Selecting].push_back(new ButtonUI("LevelRight"
 		, "Image//arrow.tga", "Image//arrow_hover.tga"
 		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
 		, levelLayout->GetX() + levelLayout->GetSizeX() / 2.5, levelLayout->GetY()
 		, 0.6, false));
 
-	Buttons.push_back(new ButtonUI("AvatarLeft"
+	Buttons[S_Selecting].push_back(new ButtonUI("AvatarLeft"
 		, "Image//arrow.tga", "Image//arrow_hover.tga"
 		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
 		, AvatarLayout->GetX() - AvatarLayout->GetSizeX() / 2.7, AvatarLayout->GetY()
 		, 0.6, false
 		, 180));
 
-	Buttons.push_back(new ButtonUI("AvatarRight"
+	Buttons[S_Selecting].push_back(new ButtonUI("AvatarRight"
 		, "Image//arrow.tga", "Image//arrow_hover.tga"
 		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
 		, AvatarLayout->GetX() + AvatarLayout->GetSizeX() / 2.7, AvatarLayout->GetY()
 		, 0.6, false));
+
+	Buttons[S_Selecting].push_back(new ButtonUI("Back"
+		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
+		, m_window_width * 0.1, m_window_height* 0.1
+		, m_window_width * 0.5f, m_window_height * 0.1f
+		, 0.6, true));
+
+	Buttons[S_Selected].push_back(new ButtonUI("Yes"
+		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
+		, selectedLayout->GetSizeX() * 0.15, selectedLayout->GetSizeX() * 0.15
+		, selectedLayout->GetX() - selectedLayout->GetSizeX() / 2.7, selectedLayout->GetY()
+		, 0.6, true));
+
+	Buttons[S_Selected].push_back(new ButtonUI("No"
+		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
+		, selectedLayout->GetSizeX() * 0.15, selectedLayout->GetSizeX() * 0.15
+		, selectedLayout->GetX() + selectedLayout->GetSizeX() / 2.7, selectedLayout->GetY()
+		, 0.6, true));
 	/************************************************************************************************************************************/
 }
 
@@ -197,21 +219,34 @@ void CLevelSelectScene::Render()
 	RenderMeshIn2D(meshList[GEO_BG], false);
 	modelStack.PopMatrix();
 
-	mainLayout->render(this, 1);
-	levelLayout->render(this, 2);
-	AvatarLayout->render(this, 2);
-
-	for (int i = 0; i < Buttons.size(); i++)
+	switch (curentState)
 	{
-		Buttons[i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 3);
-	}
+	case S_Selecting:
+		levelLayout->render(this, 2);
+		AvatarLayout->render(this, 2);
 
-	for (int i = 0; i < LevelButtons[currentPage].size(); i++)
-	{
-		LevelButtons[currentPage][i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 3);
-	}
+		for (int i = 0; i < Buttons[S_Selecting].size(); i++)
+		{
+			Buttons[S_Selecting][i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 3);
+		}
 
-	RenderMeshIn2D(AvatarImages[currentAvatarImage], false, 1, 1, AvatarLayout->GetX(), AvatarLayout->GetY(), 3, 0, -AvatarLayout->GetSizeX() * 0.4f * 0.5f, -AvatarLayout->GetSizeY() * 0.4f * 0.5f);
+		for (int i = 0; i < LevelButtons[currentPage].size(); i++)
+		{
+			LevelButtons[currentPage][i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 3);
+		}
+
+		RenderMeshIn2D(AvatarImages[currentAvatarImage], false, 1, 1, AvatarLayout->GetX(), AvatarLayout->GetY(), 3, 0, -AvatarLayout->GetSizeX() * 0.4f * 0.5f, -AvatarLayout->GetSizeY() * 0.4f * 0.5f);
+		break;
+
+	case S_Selected:
+		selectedLayout->render(this, 4);
+
+		for (int i = 0; i < Buttons[S_Selected].size(); i++)
+		{
+			Buttons[S_Selected][i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 5);
+		}
+		break;
+	}
 }
 
 void CLevelSelectScene::Exit()

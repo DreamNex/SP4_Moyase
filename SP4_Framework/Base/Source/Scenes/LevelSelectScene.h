@@ -35,7 +35,7 @@ public:
 	virtual void Exit();
 
 	//function for general buttons
-	std::vector<ButtonUI*>& getButtons() { return Buttons; }
+	std::vector<std::vector<ButtonUI*>>& getButtons() { return Buttons; }
 
 	//functions for level buttons
 	int getCurrentPage() { return currentPage; }
@@ -52,11 +52,12 @@ private:
 
 	Mesh* meshList[NUM_GEOMETRY];
 
-	Layout* mainLayout, *levelLayout, *AvatarLayout;
+	Layout *levelLayout, *AvatarLayout, *selectedLayout;
 
 	FileReading* FileReader;
 	
-	std::vector<ButtonUI*> Buttons;
+	//vector of vector of Buttons, 1st vector to detemine the state of game
+	std::vector<std::vector<ButtonUI*>> Buttons;
 	
 	//for the level selection
 	int currentPage;
