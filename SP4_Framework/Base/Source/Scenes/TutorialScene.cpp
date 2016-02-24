@@ -118,6 +118,7 @@ void CTutorialScene::Render()
 	}
 	m_GUI->Render(this);
 
+	ctrs->Render(this);
 }
 
 void CTutorialScene::Exit()
