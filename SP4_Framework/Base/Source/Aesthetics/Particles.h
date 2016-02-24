@@ -10,7 +10,7 @@
 class Particles
 {
 public:
-	Particles(int vPath, Vector2 pos, Vector2 size, float speed, char* mesh, Timer* life);
+	Particles(int vPath, Vector2 start, Vector2 end, Vector2 size, float speed, char* mesh, Timer* life);
 	Particles();
 	~Particles();
 
