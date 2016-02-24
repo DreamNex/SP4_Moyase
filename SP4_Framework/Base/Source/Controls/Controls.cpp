@@ -8,7 +8,7 @@ Controls::Controls(GUIManager * m_GUI)
 {
 	c_state = SELECTION;
 	this->m_GUI = m_GUI;
-	click_timer.SetTimer(3);
+	click_timer.SetDuration(3);
 }
 
 
@@ -97,7 +97,7 @@ bool Controls::GetSelection(Vector2 mousePos)
 			return true;
 		}
 	}
-	for (unsigned int i = 0; i < levelAssets.size(); ++i)
+	for (unsigned int i = 1; i < levelAssets.size(); ++i)
 	{
 		if (dynamic_cast<Tools*>(levelAssets[i]))
 		{
@@ -117,7 +117,7 @@ bool Controls::GetPlacement(Vector2 mousePos)
 	CollisionHandler ch;
 	Circle* mouseBound = new Circle(mousePos, 0.1f);
 
-	for (unsigned int i = 0; i < levelAssets.size(); ++i)
+	for (unsigned int i = 1; i < levelAssets.size(); ++i)
 	{
 		if (ch.CheckCollision(SelctedGO->getRigidBody()->GetCollisionCompt(), levelAssets[i]->getRigidBody()->GetCollisionCompt()) == false)
 		{

@@ -15,18 +15,16 @@ RigidBody::~RigidBody()
 
 void RigidBody::CollisionResolve_Bounce(RigidBody *rb1, RigidBody *rb2)
 {
-	Vector2 temp1 = rb1->pC_Compt->GetVelocity();
-	Vector2 temp = rb1->pC_Compt->GetVelocity().Normalized();
-
 	rb1->pC_Compt->toBounce(rb2->cC_Compt->GetCollideNormal());
 }
 
 void RigidBody::CollisionResolve_PushOut(RigidBody *rb1, RigidBody *rb2)
 {
 	CollisionHandler cH;
+	Vector2 pushOut = (rb1->pC_Compt->GetVelocity()).Normalized();
 	while (cH.CheckCollision(rb1->cC_Compt, rb2->cC_Compt))
 	{
-		*(rb1->pos) = *(rb1->pos) + (rb2->cC_Compt->GetCollideNormal());
+		*(rb1->pos) = *(rb1->pos) - (pushOut);
 	}
 }
 
@@ -42,24 +40,24 @@ bool RigidBody::CollideWith(RigidBody *otherObject)
 		resolve = this;
 		toCollide = otherObject;
 	}
-	else
+	else if (otherObject->pC_Compt->GetActive())
 	{
 		resolve = otherObject;
 		toCollide = this;
 	}
+	else
+		return false;
 
 
 	if (cH.CheckCollision(cC_Compt, otherObject->cC_Compt))
 	{
-		resolve->attached = toCollide;
 		if (toCollide->response)
 		{
 			if (dynamic_cast<Ray*>(toCollide->cC_Compt) == false)
 				resolve->pC_Compt->SetGravity(false);
-
+			
 			CollisionResolve_PushOut(resolve, toCollide);
-			if (resolve->pC_Compt->GetBounce())
-				CollisionResolve_Bounce(resolve, toCollide);
+			CollisionResolve_Bounce(resolve, toCollide);
 		}
 		return true;
 	}

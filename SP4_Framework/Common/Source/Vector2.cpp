@@ -91,7 +91,7 @@ float Vector2::Dot( const Vector2& rhs ) const
 float Vector2::AngleBetween(const Vector2& rhs)const
 {
 	float dp = this->Dot(rhs);
-	return acos(dp / (this->Length() * rhs.Length()));
+	return Math::RadianToDegree(acos(dp / (this->Length() * rhs.Length())));
 }
 
 Vector2 Vector2::Normalized(void)const
