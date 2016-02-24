@@ -194,14 +194,14 @@ void CLevelSelectScene::Init()
 
 	Buttons[S_Selected].push_back(new ButtonUI("Yes"
 		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
-		, selectedLayout->GetSizeX() * 0.15, selectedLayout->GetSizeX() * 0.15
-		, selectedLayout->GetX() - selectedLayout->GetSizeX() / 2.7, selectedLayout->GetY()
+		, selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetSizeY() * 0.2f
+		, selectedLayout->GetX() - selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetY() - selectedLayout->GetSizeY() * 0.2f
 		, 0.6, true));
 
 	Buttons[S_Selected].push_back(new ButtonUI("No"
 		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
-		, selectedLayout->GetSizeX() * 0.15, selectedLayout->GetSizeX() * 0.15
-		, selectedLayout->GetX() + selectedLayout->GetSizeX() / 2.7, selectedLayout->GetY()
+		, selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetSizeY() * 0.2f
+		, selectedLayout->GetX() + selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetY() - selectedLayout->GetSizeY() * 0.2f
 		, 0.6, true));
 	/************************************************************************************************************************************/
 }
