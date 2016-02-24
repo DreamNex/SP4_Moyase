@@ -113,6 +113,7 @@ bool Controls::GetSelection(std::vector<GameObject*> levelAssets, Vector2 mouseP
 	//((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
 		//&& (mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y))
 	CollisionHandler cH;
+	mousePos.y = 720 - mousePos.y;
 	CollisionComponent * mouseBound = new Circle(mousePos, 0.1f);
 	for (unsigned int i = 1; i < levelAssets.size(); ++i)
 	{
