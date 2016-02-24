@@ -63,7 +63,7 @@ GameObject* Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> level
 bool Controls::GetSelection(std::vector<GameObject*> levelAssets, Vector2 mousePos)
 {
 	//check m_gui collides
-	for (unsigned int i = 0; i < 3; ++i)
+	for (unsigned int i = 0; i < 5; ++i)
 	{
 		Box* temp = (Box*)m_GUI->GetTools(i)->GetGUIBound();
 		if (((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
@@ -78,28 +78,30 @@ bool Controls::GetSelection(std::vector<GameObject*> levelAssets, Vector2 mouseP
 				SelectedGO = new Cannon(mousePos,50,50);
 				break;
 			}
-			case 1:
+			case GUI::BOOSTGUI:
 			{
 				mousePos.y = 720 - mousePos.y;
 				SelectedGO = new Boost(mousePos, 50, 50);
 				break;
 			}
-			case 2:
+			case GUI::SLOWGUI:
 			{
-				mousePos.y = 720 - mousePos.y;
+				
 				SelectedGO = new Slow(mousePos, 50, 50);
 				break;
 			}
-			case 3://changestate to start
+			case GUI::STARTGUI://changestate to start
 			{
+				mousePos.y = 720 - mousePos.y;
 				SelectedGO = NULL;
-				state = 3;
+				state = 2;
 				break;
 			}
-			case 4://changestate to Exit
+			case GUI::EXIT://changestate to Exit
 			{
+				mousePos.y = 720 - mousePos.y;
 				SelectedGO = NULL;
-				state = 4;
+				state = 3;
 				break;
 			}
 			default:
