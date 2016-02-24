@@ -13,7 +13,9 @@ public:
 	{
 		CANNONGUI,
 		SLOWGUI,
-		BOOSTGUI
+		BOOSTGUI,
+		STARTGUI,
+		EXIT
 	};
 
 	GUI(Vector2 pos, int g_typeID, CollisionComponent * gui_Bound, char *Mesh, char * hoverMesh);

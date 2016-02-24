@@ -21,7 +21,12 @@ public:
 		GEO_BG,
 		NUM_GEOMETRY,
 	};
-
+	enum GameStates
+	{
+		PAUSE,
+		START,
+		RESET,
+	};
 	CTutorialScene();
 	CTutorialScene(int m_window_width, int m_window_height);
 	~CTutorialScene();
@@ -37,4 +42,5 @@ private:
 	GUIManager * m_GUI;
 	Controls * ctrs;
 	bool m_state;
+	GameStates G_States;
 };
