@@ -9,13 +9,13 @@ CGameplayState CGameplayState::theGameplayState;
 
 void CGameplayState::Init()
 {
-	scene = new CGameplayScene(800, 600);
+	scene = new CGameplayScene();
 	scene->Init();
 }
 
 void CGameplayState::Init(const int width, const int height)
 {
-	scene = new CGameplayScene(width, height);
+	scene = new CGameplayScene(width, height, CGameStateManager::selectedLevel, CGameStateManager::selectedAvatar);
 	scene->Init();
 }
 

@@ -9,7 +9,7 @@
 #include "Boost.h"
 #include "Slow.h"
 
-Balls::Balls(Vector2 pos, float diameter, char* texturePath)
+Balls::Balls(Vector2 pos, float diameter, const char* texturePath)
 : GameObject(pos)
 {
 	originalPos = pos;

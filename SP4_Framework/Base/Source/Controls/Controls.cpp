@@ -43,13 +43,13 @@ GameObject* Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> level
 		SelectedGO->setPosition(mousePos);
 		if (!m_state)
 		{
-			if (GetPlacement(levelAssets, mousePos))//Can place object with no obstructions
+			if (GetPlacement(levelAssets, mousePos) && (!SelectedActive))//Can place object with no obstructions
 			{
-				if (!SelectedActive)
-					temp = SelectedGO;
+				temp = SelectedGO;
 			}
 			else
 			{
+				
 			}
 			ResetState();
 		}
@@ -72,18 +72,21 @@ bool Controls::GetSelection(std::vector<GameObject*> levelAssets, Vector2 mouseP
 			SelectedActive = false;
 			switch (m_GUI->GetTools(i)->GetType())
 			{
-			case 0:
+			case GUI::CANNONGUI:
 			{
+				mousePos.y = 720 - mousePos.y;
 				SelectedGO = new Cannon(mousePos,50,50);
 				break;
 			}
 			case 1:
 			{
+				mousePos.y = 720 - mousePos.y;
 				SelectedGO = new Boost(mousePos, 50, 50);
 				break;
 			}
 			case 2:
 			{
+				mousePos.y = 720 - mousePos.y;
 				SelectedGO = new Slow(mousePos, 50, 50);
 				break;
 			}
@@ -107,13 +110,15 @@ bool Controls::GetSelection(std::vector<GameObject*> levelAssets, Vector2 mouseP
 	}
 
 	//Check if g_obj collides
+	//((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
+		//&& (mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y))
+	CollisionHandler cH;
+	CollisionComponent * mouseBound = new Circle(mousePos, 0.1f);
 	for (unsigned int i = 1; i < levelAssets.size(); ++i)
 	{
 		if (dynamic_cast<Tools*>(levelAssets[i]))
 		{
-			Box* temp = (Box*)levelAssets[i]->getRigidBody()->GetCollisionCompt();
-			if (((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
-				&& (mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y)))//if mouse and game object collide
+			if (cH.CheckCollision(mouseBound, levelAssets[i]->getRigidBody()->GetCollisionCompt()))//if mouse and game object collide
 			{
 				SelectedIndex = i;
 				SelectedActive = true;
@@ -130,20 +135,22 @@ bool Controls::GetPlacement(std::vector<GameObject*> levelAssets, Vector2 mouseP
 {
 	CollisionHandler cH;
 	bool noCollide = true;
+
+	CollisionComponent * mouseBound = new Circle(mousePos, 50.f);
+
 	//((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
 		//&& (mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y))
-	for (unsigned int i = 1; i < levelAssets.size(); ++i)//Check if Collide with anything
+	for (unsigned int i = 1; i < levelAssets.size(); ++i)// check all the obj is level
 	{
 		if (SelectedIndex == i)
 			continue;
-		if (cH.CheckCollision(SelectedGO->getRigidBody()->GetCollisionCompt(), levelAssets[i]->getRigidBody()->GetCollisionCompt()))
+		if (cH.CheckCollision(mouseBound, levelAssets[i]->getRigidBody()->GetCollisionCompt()))//Check if Collide with anything
 		{
+			Vector2 temp = levelAssets[i]->getPos();
 			noCollide = false;
 			break;
 		}
 	}
-	if (noCollide)
-		Vector2 Temp;
 	return noCollide;
 }
 

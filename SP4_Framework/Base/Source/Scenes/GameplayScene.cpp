@@ -9,12 +9,15 @@
 #include <sstream>
 
 CGameplayScene::CGameplayScene()
+:
+gameLevel("", "")
 {
 }
 
-CGameplayScene::CGameplayScene(int m_window_width, int m_window_height)
+CGameplayScene::CGameplayScene(int m_window_width, int m_window_height, std::string level, std::string avatar)
 :
 CSceneManager2D(m_window_width, m_window_height)
+, gameLevel(level, avatar)
 {
 }
 
@@ -43,10 +46,7 @@ void CGameplayScene::Update(double dt)
 	switch (curentState)
 	{
 	case S_Play:
-		if(Application::IsKeyPressed(VK_ESCAPE))
-		{
-			curentState = S_Pause;
-		}
+		gameLevel.update(dt);
 		break;
 
 	case S_Pause:
@@ -61,6 +61,7 @@ void CGameplayScene::Render()
 	switch (curentState)
 	{
 	case S_Play:
+		gameLevel.render(this);
 		RenderTextOnScreen(meshList[GEO_TEXT], "Press esc to pause", Color(0, 1, 0), 50, 0, 0);
 		break;
 
