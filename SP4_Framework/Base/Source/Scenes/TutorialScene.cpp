@@ -50,8 +50,6 @@ void CTutorialScene::Init()
 	gameObjects.push_back(new Boost(Vector2(300.f, 500.f), 50.f, 50.f));
 	gameObjects.push_back(new Slow(Vector2(300.f, 700.f), 50.f, 50.f));
 
-	m_GUI = new GUIManager();
-	m_GUI->CreateGUI("Start", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150.f, 75.f, (float)m_window_width - 100.f, (float)m_window_height * 0.5f, 0.6f, false, GUI::CANNONGUI);
 	m_GUI = new GUIManager(5, 5, 5);
 
 	ctrs = new Controls(m_GUI);
