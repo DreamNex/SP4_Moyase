@@ -291,9 +291,9 @@ void Application::Run()
 		// Get the elapsed time
 		m_dElapsedTime = m_timer.getElapsedTime();
 		m_dAccumulatedTime_ThreadOne += m_dElapsedTime;
-		if (m_dAccumulatedTime_ThreadOne > 0.00)
+		if (m_dAccumulatedTime_ThreadOne > 0.01)
 		{
-			GSM->Update(m_dElapsedTime);
+			GSM->Update(m_dAccumulatedTime_ThreadOne);
 			GetMouseUpdate();
 			GetKeyboardUpdate();
 			GSM->HandleEvents();

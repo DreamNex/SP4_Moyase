@@ -29,7 +29,7 @@ public:
 	void changeUnlock(std::string filename);
 	
 	//Folder Searching
-	std::vector<std::string> SearchFolder(std::string directory);
+	std::vector<std::string> SearchFolder(std::string directory, std::string fileExtention);
 	
 	//Clear vector storage
 	void ClearStorage();

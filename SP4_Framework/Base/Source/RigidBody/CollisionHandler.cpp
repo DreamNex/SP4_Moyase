@@ -1,4 +1,8 @@
 #include "CollisionHandler.h"
+#include <math.h>
+#include "Vector3.h"
+
+#define PI
 
 CollisionHandler::CollisionHandler()
 {
@@ -66,67 +70,31 @@ bool CollisionHandler::CIRCLE_BOX(Circle* c1, Box* b1)
 	float DistanceBetween = 0;
 	float Temp;
 
-	float horDist = 0;
-	bool right = true;
-	float verDist = 0;
-	bool up = true;
-
 	if (c1->GetOrigin().x < b1->GetMin().x) //Left
 	{
 		Temp = c1->GetOrigin().x - b1->GetMin().x;
 		DistanceBetween += Temp*Temp;
-		horDist = Temp;
-		right = false;
 	}
 	else if (c1->GetOrigin().x > b1->GetMax().x) //Right
 	{
 		Temp = c1->GetOrigin().x - b1->GetMax().x;
 		DistanceBetween += Temp*Temp;
-		horDist = Temp;
 	}
-
 	if (c1->GetOrigin().y < b1->GetMin().y) // Down
 	{
 		Temp = c1->GetOrigin().y - b1->GetMin().y;
 		DistanceBetween += Temp*Temp;
-		verDist = Temp;
-		up = false;
 	}
 	else if (c1->GetOrigin().y > b1->GetMax().y) // Up
 	{
 		Temp = c1->GetOrigin().y - b1->GetMax().y;
 		DistanceBetween += Temp*Temp;
-		verDist = Temp;
 	}
-
-	if (DistanceBetween <= (c1->GetRadius() * c1->GetRadius()))
+	
+	//Check for Collision
+	if ((DistanceBetween <= (c1->GetRadius() * c1->GetRadius())))
 	{
-		if (horDist > verDist)
-		{
-			if (right)
-			{
-				c1->SetCollideNormal(Vector2(1, 0)); //This is wrong
-				b1->SetCollideNormal(Vector2(1, 0));
-			}
-			else
-			{
-				c1->SetCollideNormal(Vector2(1, 0)); //This is wrong
-				b1->SetCollideNormal(Vector2(-1, 0));
-			}
-		}
-		else
-		{
-			if (up)
-			{
-				c1->SetCollideNormal(Vector2(0, 1)); //This is wrong
-				b1->SetCollideNormal(Vector2(0, 1));
-			}
-			else
-			{
-				c1->SetCollideNormal(Vector2(0, 1)); //This is wrong
-				b1->SetCollideNormal(Vector2(0, -1));
-			}
-		}
+		FindCollideNormal((Box*)b1, c1->GetOrigin());
 		return true;
 	}
 	return false;
@@ -148,4 +116,68 @@ bool CollisionHandler::BOX_RAY(Box*, Ray*)
 bool CollisionHandler::RAY_RAY(Ray*, Ray*)
 {
 	return false;
+}
+
+
+bool CollisionHandler::FindCollideNormal(Box* b1, Vector2 origin)
+{
+	Vector2 up(0, 1);
+	Vector2 down(0, -1);
+	Vector2 right(1, 0);
+	Vector2 left(-1, 0);
+	Vector2 dir = (origin - b1->GetOrigin()).Normalized();
+
+	float horizontalDotLimit = right.Dot((b1->GetMax() - b1->GetOrigin()).Normalized());
+	float verticalDotLimit = up.Dot((b1->GetMax() - b1->GetOrigin()).Normalized());
+
+	if (up.Dot(dir) > verticalDotLimit && up.Dot(dir) < 1)//Up
+		b1->SetCollideNormal(up);
+	else if (down.Dot(dir) > verticalDotLimit && down.Dot(dir) < 1)//Down
+		b1->SetCollideNormal(down);
+	else if (right.Dot(dir) > horizontalDotLimit && right.Dot(dir) < 1)//Right
+		b1->SetCollideNormal(right);
+	else if (left.Dot(dir) > horizontalDotLimit && left.Dot(dir) < 1)//Left
+		b1->SetCollideNormal(left);
+	return (!(b1->GetCollideNormal().IsZero()));
+	/*
+	if ((closest.y > b1->GetOrigin().y && closest.y <= b1->GetMax().y)
+	&& (origin.y >= b1->GetMax().y))//Up
+	b1->SetCollideNormal(Vector2(0, 1));
+	else if ((closest.y < b1->GetOrigin().y && closest.y >= b1->GetMin().y)
+	&& (origin.y <= b1->GetMin().y))//Down
+	b1->SetCollideNormal(Vector2(0, -1));
+
+	if ((closest.x > b1->GetOrigin().x && closest.x <= b1->GetMax().x)
+	&& (origin.x >= b1->GetMax().x))//Right
+	b1->SetCollideNormal(Vector2(1, 0));
+	else if ((closest.x < b1->GetOrigin().x && closest.x >= b1->GetMin().x)
+	&& (origin.x <= b1->GetMin().x))//Left
+	b1->SetCollideNormal(Vector2(-1, 0));
+	*/
+
+	/*
+	float dotProducts[4];
+
+	Vector2 up(0, 1);
+	Vector2 down(0, -1);
+	Vector2 left(-1, 0);
+	Vector2 right(1, 0);
+
+	dotProducts[0] = up.Dot(direction);
+	dotProducts[1] = down.Dot(direction);
+	dotProducts[2] = left.Dot(direction);
+	dotProducts[3] = right.Dot(direction);
+
+	int indexLowest = 0;
+
+	for (unsigned int i = 0; i < 4; ++i)
+	{
+		if (dotProducts[i] > 0)
+		{
+			if (dotProducts[i] >= dotProducts[indexLowest])
+				indexLowest = i;
+		}
+	}
+	return indexLowest;
+	*/
 }

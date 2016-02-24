@@ -11,8 +11,8 @@ PhysicsComponent::PhysicsComponent(Vector2 &v, float mass, bool active)
 	this->mass = mass;
 	this->gravitationalForce = 10.f;
 	this->co_Restitution = 0.3f;
-	this->co_SE = 0.6f;
-	this->co_KE = 0.5f;
+	this->co_SE = 0.45f;
+	this->co_KE = 0.35f;
 	this->co_Drag = 1.1f;
 
 	this->isActive = active;
@@ -46,7 +46,7 @@ PhysicsComponent::PhysicsComponent()
 
 PhysicsComponent::~PhysicsComponent()
 {
-
+	//delete v_Pos;
 }
 
 void PhysicsComponent::Update(float dt)
@@ -63,7 +63,7 @@ void PhysicsComponent::Update(float dt)
 	Horizontal Force
 	****************************************************************************************************************************/
 	ApplyFriction();
-	
+
 	/***************************************************************************************************************************
 	Vertical Force
 	****************************************************************************************************************************/
@@ -141,20 +141,20 @@ void PhysicsComponent::ApplyGravity()
 void PhysicsComponent::toBounce(Vector2 collideNormal)
 {
 	//Direction before Bounce
-	Vector2 currentDirection = v_Velocity.Normalized();
+	Vector2 currentDirection = v_Velocity;
 
 	//Direction after Bounce
 	Vector2 bounceDirection;
 	bounceDirection.componentVector(v_Velocity, collideNormal);
-	bounceDirection.Normalized();
+	bounceDirection;
 
 	//Apply New Velocity
-	v_Velocity = (currentDirection - bounceDirection * 2) * 0.3f;
+	v_Velocity = (currentDirection - bounceDirection * 2) * 0.5f;
 	v_Acceleration.SetZero();
 	v_Force.SetZero();
 
-	if (v_Velocity.Length() <= 20)
-	{ 
+	if (fabs(v_Velocity.x) <= 25 && fabs(v_Velocity.y) <= 25)
+	{
 		v_Velocity.SetZero();
 		isActive = false;
 	}

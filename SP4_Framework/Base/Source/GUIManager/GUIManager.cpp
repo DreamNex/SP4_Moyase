@@ -1,9 +1,18 @@
 #include "GUIManager.h"
+#include "../RigidBody/Box.h"
 
-
-GUIManager::GUIManager()
+GUIManager::GUIManager(int cannon, int boost , int slow)
 {
-	
+	Vector2 cannonPos(1200, 200);
+	Vector2 slowPos(1200, 350);
+	Vector2 boostPos(1200, 500);
+	tools[0] = new GUI(cannonPos, GUI::CANNONGUI, new Box(cannonPos, 50, 50), "Mesh", "HoverMesh");
+	tools[1] = new GUI(boostPos, GUI::BOOSTGUI, new Box(boostPos, 50, 50), "Mesh", "HoverMesh");
+	tools[2] = new GUI(slowPos, GUI::SLOWGUI, new Box(slowPos, 50, 50), "Mesh", "HoverMesh");
+
+	iteraction[0] = cannon;
+	iteraction[1] = boost;
+	iteraction[2] = slow;
 }
 
 
@@ -11,25 +20,38 @@ GUIManager::~GUIManager()
 {
 }
 
-void GUIManager::CreateGUI(std::string text, char* normalMesh, char* hoverMesh, float sizeX, float sizeY, float x, float y, float textScaling, bool showText, GUI::GUITYPEID g_typeID)
-{
-	GUI *BUTTHOLE = new GUI(text, normalMesh, hoverMesh, sizeX, sizeY, x, y, textScaling, showText, g_typeID);
-
-	m_GUI.push_back(BUTTHOLE);
-}
 
 void GUIManager::Update(float dt, float mousex, float mousey)
 {
-	for (unsigned int i = 0; i < m_GUI.size(); i++)
+	for (unsigned int i = 0; i < 3; i++)
 	{
-		m_GUI[i]->CheckMouseOver(mousex,mousey);
+		if (iteraction[i] == 0)
+		{
+			tools[i]->SetActive(false);
+		}
+	}
+
+	for (unsigned int i = 0; i <3; i++)
+	{
+		if (tools[i]->GetActive())
+		{
+			tools[i]->CheckMO(Vector2(mousex, mousey));
+		}
 	}
 }
 
-void GUIManager::Render(CSceneManager2D* SceneManager2D, Mesh* textMesh, Color textCol)
+GUI *GUIManager::GetTools(int idx)
 {
-	for (unsigned int i = 0; i < m_GUI.size(); i++)
+	return tools[idx];
+}
+
+void GUIManager::Render(CSceneManager2D* SceneManager2D)
+{
+	for (unsigned int i = 0; i < 3; i++)
 	{
-		m_GUI[i]->render(SceneManager2D,textMesh,textCol);
+		if (tools[i]->GetActive())
+		{
+			tools[i]->render(SceneManager2D);
+		}
 	}
 }
