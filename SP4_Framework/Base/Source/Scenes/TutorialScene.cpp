@@ -53,14 +53,14 @@ void CTutorialScene::Init()
 	m_GUI = new GUIManager(5, 5, 5);
 	
 	ctrs = new Controls(m_GUI);
-	ctrs->SetLevelAssets(gameObjects);
 }
 
 void CTutorialScene::Update(double dt)
 {
 	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
+	Vector2 mouseLast(Application::mouse_last_x, Application::mouse_last_x);
 	m_state = false;
-	std::cout << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetVelocity().y << std::endl;
+	std::cout << mousePos.x << ", " << mousePos.y << std::endl;
 	std::cout << "~~" << std::endl;
 	if (Application::IsKeyPressed('W'))
 	{
@@ -87,11 +87,12 @@ void CTutorialScene::Update(double dt)
 		m_state = true;
 	}
 
+
 	gameObjects[0]->checkColision(gameObjects[1]);
 	gameObjects[0]->checkColision(gameObjects[3]);
 	gameObjects[0]->checkColision(gameObjects[4]);
-	//gameObjects[0]->checkColision(gameObjects[5]);
-	//gameObjects[0]->checkColision(gameObjects[6]);
+	gameObjects[0]->checkColision(gameObjects[5]);
+	gameObjects[0]->checkColision(gameObjects[6]);
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->update(dt);
@@ -99,7 +100,9 @@ void CTutorialScene::Update(double dt)
 
 	m_GUI->Update(dt, Application::mouse_current_x, Application::mouse_current_y);
 
-	ctrs->OnClick(mousePos, m_state, dt);
+	GameObject* temp = ctrs->Update(this, gameObjects, mousePos, m_state, dt, mouseLast);
+	if (temp)
+		gameObjects.push_back(temp);
 }
 
 void CTutorialScene::Render()
@@ -115,7 +118,7 @@ void CTutorialScene::Render()
 		gameObjects[i]->render(this);
 	}
 	m_GUI->Render(this);
-
+	ctrs->Render(this);
 }
 
 void CTutorialScene::Exit()
