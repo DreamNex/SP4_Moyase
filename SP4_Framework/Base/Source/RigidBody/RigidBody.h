@@ -31,6 +31,7 @@ public:
 	float GetScale(int axis){ return this->scale[axis]; }
 	bool GetResponse(){ return this->response; }
 	PhysicsComponent* GetPhysicsCompt(){ return this->pC_Compt; }
+	CollisionComponent* GetCollisionCompt(){ return this->cC_Compt; }
 
 	//Mutator(s)
 	void SetScale(float x, float y)
