@@ -263,6 +263,9 @@
     <ClCompile Include="Source\GSM\OptionsState.cpp">
       <Filter>Source Files\Game State Management\Options</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SpriteAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -429,6 +432,9 @@
     </ClInclude>
     <ClInclude Include="Source\GSM\OptionsState.h">
       <Filter>Source Files\Game State Management\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteAnimation.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
