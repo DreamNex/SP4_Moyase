@@ -5,6 +5,7 @@
 #include "../GameObjects/Boost.h"
 #include "../GameObjects/Slow.h"
 #include"../Timer/Timer.h"
+#include"../Scenes/TutorialScene.h"
 
 class Controls
 {
@@ -20,7 +21,7 @@ public:
 	~Controls();
 
 	void SetLevelAssets(std::vector<GameObject*> levelAssets);
-	void OnClick(Vector2 mousePos, bool m_state, float dt);
+	bool OnClick(Vector2 mousePos, GameObject * g_obj, CTutorialScene::GameStates);
 	void Render(CSceneManager2D *SceneManger2D);
 
 	Timer GetTimer();

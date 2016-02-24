@@ -16,9 +16,9 @@ public:
 	GUI * GetTools(int idx);
 
 private:
-	int iteraction[3];
+	int iteraction[5];
 	GUI * toolSelection;
-	GUI* tools[3];
+	GUI* tools[5];
 
 
 };

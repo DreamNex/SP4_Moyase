@@ -50,6 +50,7 @@ void CTutorialScene::Init()
 	gameObjects.push_back(new Boost(Vector2(300, 500), 50, 50));
 	gameObjects.push_back(new Slow(Vector2(300, 700), 50, 50));
 
+
 	m_GUI = new GUIManager(5, 5, 5);
 
 	ctrs = new Controls(m_GUI);
@@ -96,7 +97,7 @@ void CTutorialScene::Update(double dt)
 	}
 	m_GUI->Update(dt, Application::mouse_current_x, Application::mouse_current_y);
 
-	ctrs->OnClick(Vector2(Application::mouse_current_x, Application::mouse_current_y), m_state, dt);
+	//ctrs->OnClick(Vector2(Application::mouse_current_x, Application::mouse_current_y), m_state, dt);
 
 }
 
