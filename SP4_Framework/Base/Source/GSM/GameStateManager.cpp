@@ -6,6 +6,7 @@ using namespace std;
 #include "../Application.h"
 
 string CGameStateManager::selectedLevel = "";
+string CGameStateManager::selectedAvatar = "";
 
 void CGameStateManager::Init(const char* title, int width, int height, 
 						 int bpp, bool fullscreen)

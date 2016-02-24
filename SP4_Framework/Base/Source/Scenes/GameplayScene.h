@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneManager2D.h"
 #include <vector>
+#include "../Level.h"
 
 class CGameplayScene: public CSceneManager2D
 {
@@ -21,7 +22,7 @@ public:
 	void setCurrentState(States s) { curentState = s; }
 
 	CGameplayScene();
-	CGameplayScene(int m_window_width, int m_window_height);
+	CGameplayScene(int m_window_width, int m_window_height, std::string level, std::string avatar);
 	~CGameplayScene();
 
 	virtual void Init();
@@ -33,4 +34,6 @@ private:
 	Mesh* meshList[NUM_GEOMETRY];
 
 	States curentState;
+
+	Level gameLevel;
 };

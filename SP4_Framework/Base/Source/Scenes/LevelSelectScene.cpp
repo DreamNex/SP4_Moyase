@@ -78,9 +78,9 @@ void CLevelSelectScene::Init()
 	meshList[GEO_BG]->textureID = LoadTGA("Image//Tits//MainMenuBG.tga");
 
 	//layout planes
-	levelLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.38, m_window_height * 0.48, m_window_width * 0.35, m_window_height * 0.5);
-	AvatarLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.28, m_window_height * 0.48, m_window_width * 0.7, m_window_height * 0.5);
-	selectedLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.4, m_window_height * 0.5, m_window_width * 0.5, m_window_height * 0.5);
+	levelLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.38f, m_window_height * 0.48f, m_window_width * 0.35f, m_window_height * 0.5f);
+	AvatarLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.28f, m_window_height * 0.48f, m_window_width * 0.7f, m_window_height * 0.5f);
+	selectedLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.4f, m_window_height * 0.5f, m_window_width * 0.5f, m_window_height * 0.5f);
 
 	FileReader = new FileReading();
 
@@ -97,7 +97,7 @@ void CLevelSelectScene::Init()
 	bool unlock;
 	Vector2 pos;
 
-	for (int i = 0; i < levelNames.size(); ++i)
+	for (unsigned int i = 0; i < levelNames.size(); ++i)
 	{
 		FileReader->loadFile("Levels//" + levelNames[i]);
 		FileReader->loadVariables(unlock);
@@ -151,7 +151,7 @@ void CLevelSelectScene::Init()
 	std::vector<string> Images = FileReader->SearchFolder("Image//Avatars//", "*.tga");
 	totalAvatarImages = Images.size();
 
-	for (int i = 0; i < Images.size(); ++i)
+	for (unsigned int i = 0; i < Images.size(); ++i)
 	{
 		AvatarImages.push_back(MeshBuilder::Generate2DMesh(Images[i], Color(0, 0, 0), 0, 0, AvatarLayout->GetSizeX() * 0.4f, AvatarLayout->GetSizeX() * 0.4f));
 		AvatarImages.back()->textureID = LoadTGA(("Image//Avatars//" + Images[i]).c_str());
@@ -215,6 +215,9 @@ void CLevelSelectScene::Render()
 {
 	CSceneManager2D::Render();
 	
+	std::string texts;
+	float textsSize;
+
 	modelStack.PushMatrix();
 	RenderMeshIn2D(meshList[GEO_BG], false);
 	modelStack.PopMatrix();
@@ -225,12 +228,20 @@ void CLevelSelectScene::Render()
 		levelLayout->render(this, 2);
 		AvatarLayout->render(this, 2);
 
-		for (int i = 0; i < Buttons[S_Selecting].size(); i++)
+		texts = "Select Stage";
+		textsSize = levelLayout->GetSizeY() * 0.13f;
+		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(0, 0, 0), textsSize, levelLayout->GetX() - (textsSize * 0.5 * texts.size() * 0.5), levelLayout->GetY() - textsSize * 0.5 + levelLayout->GetSizeY() * 0.39f, 3);
+
+		texts = "Select Avatar";
+		textsSize = AvatarLayout->GetSizeY() * 0.13f;
+		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(0, 0, 0), textsSize, AvatarLayout->GetX() - (textsSize * 0.5 * texts.size() * 0.5), AvatarLayout->GetY() - textsSize * 0.5 + AvatarLayout->GetSizeY() * 0.39f, 3);
+
+		for (unsigned int i = 0; i < Buttons[S_Selecting].size(); i++)
 		{
 			Buttons[S_Selecting][i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 3);
 		}
 
-		for (int i = 0; i < LevelButtons[currentPage].size(); i++)
+		for (unsigned int i = 0; i < LevelButtons[currentPage].size(); i++)
 		{
 			LevelButtons[currentPage][i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 3);
 		}
@@ -241,10 +252,15 @@ void CLevelSelectScene::Render()
 	case S_Selected:
 		selectedLayout->render(this, 4);
 
-		for (int i = 0; i < Buttons[S_Selected].size(); i++)
+		texts = "Start stage " + selectedLevelName + "?";
+		textsSize = selectedLayout->GetSizeY() * 0.15f;
+		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(0, 0, 0), textsSize, selectedLayout->GetX() - (textsSize * 0.5 * texts.size() * 0.5), selectedLayout->GetY() - textsSize * 0.5 + selectedLayout->GetSizeY() * 0.2f, 5);
+
+		for (unsigned int i = 0; i < Buttons[S_Selected].size(); i++)
 		{
 			Buttons[S_Selected][i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 5);
 		}
+
 		break;
 	}
 }

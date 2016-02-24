@@ -22,6 +22,7 @@
     <ClCompile Include="Source\GameObjects\Boost.cpp" />
     <ClCompile Include="Source\GameObjects\Cannon.cpp" />
     <ClCompile Include="Source\GameObjects\Enviroment.cpp" />
+    <ClCompile Include="Source\GameObjects\Exit.cpp" />
     <ClCompile Include="Source\GameObjects\GameObject.cpp" />
     <ClCompile Include="Source\GameObjects\Slow.cpp" />
     <ClCompile Include="Source\GameObjects\Spikes.cpp" />
@@ -59,7 +60,6 @@
     <ClCompile Include="Source\Scenes\TutorialScene.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
-    <ClCompile Include="Source\SpriteAnimation.cpp" />
     <ClCompile Include="Source\Timer\Timer.cpp" />
     <ClCompile Include="Source\UI\ButtonUI.cpp" />
     <ClCompile Include="Source\UI\Layout.cpp" />
@@ -78,6 +78,7 @@
     <ClInclude Include="Source\GameObjects\Boost.h" />
     <ClInclude Include="Source\GameObjects\Cannon.h" />
     <ClInclude Include="Source\GameObjects\Enviroment.h" />
+    <ClInclude Include="Source\GameObjects\Exit.h" />
     <ClInclude Include="Source\GameObjects\GameObject.h" />
     <ClInclude Include="Source\GameObjects\Slow.h" />
     <ClInclude Include="Source\GameObjects\Spikes.h" />
@@ -118,7 +119,6 @@
     <ClInclude Include="Source\Scenes\TutorialScene.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\SoundManager.h" />
-    <ClInclude Include="Source\SpriteAnimation.h" />
     <ClInclude Include="Source\Timer\Timer.h" />
     <ClInclude Include="Source\UI\ButtonUI.h" />
     <ClInclude Include="Source\UI\Layout.h" />

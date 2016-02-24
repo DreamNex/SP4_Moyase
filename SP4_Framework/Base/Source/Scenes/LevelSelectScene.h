@@ -46,7 +46,9 @@ public:
 	int getCurrentAvatarImage() { return currentAvatarImage; }
 	void setCurrentAvatarImage(int i) { currentAvatarImage = i; }
 	int getTotalAvatarImages() { return totalAvatarImages; }
+	std::vector<Mesh*>& getAvatarImages() { return AvatarImages; };
 
+	void setSelectedLevelName(std::string s) { selectedLevelName = s; }
 private:
 	States curentState;
 
@@ -67,4 +69,6 @@ private:
 	int currentAvatarImage;
 	int totalAvatarImages;
 	std::vector<Mesh*> AvatarImages;
+
+	std::string selectedLevelName;
 };

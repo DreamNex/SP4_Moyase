@@ -5,7 +5,7 @@
 class Balls : public GameObject
 {
 public:
-	Balls(Vector2 pos, float diameter, char*  texturePath);
+	Balls(Vector2 pos, float diameter, const char* texturePath);
 	~Balls();
 
 	bool checkColision(GameObject *GO2);
