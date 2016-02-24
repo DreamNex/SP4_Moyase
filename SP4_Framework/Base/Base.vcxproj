@@ -32,6 +32,7 @@
     <ClCompile Include="Source\GSM\IntroState.cpp" />
     <ClCompile Include="Source\GSM\LevelSelectState.cpp" />
     <ClCompile Include="Source\GSM\MenuState.cpp" />
+    <ClCompile Include="Source\GSM\OptionsState.cpp" />
     <ClCompile Include="Source\Level.cpp" />
     <ClCompile Include="Source\GSM\TutorialState.cpp" />
     <ClCompile Include="Source\GUIManager\GUI.cpp" />
@@ -51,12 +52,14 @@
     <ClCompile Include="Source\RigidBody\RigidBody.cpp" />
     <ClCompile Include="Source\Scenes\GameplayScene.cpp" />
     <ClCompile Include="Source\Scenes\LevelSelectScene.cpp" />
+    <ClCompile Include="Source\Scenes\OptionsScene.cpp" />
     <ClCompile Include="Source\Scenes\SceneManager2D.cpp" />
     <ClCompile Include="Source\Scenes\SceneManager2D_Intro.cpp" />
     <ClCompile Include="Source\Scenes\SceneManager2D_Menu.cpp" />
     <ClCompile Include="Source\Scenes\TutorialScene.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\SoundManager.cpp" />
+    <ClCompile Include="Source\SpriteAnimation.cpp" />
     <ClCompile Include="Source\Timer\Timer.cpp" />
     <ClCompile Include="Source\UI\ButtonUI.cpp" />
     <ClCompile Include="Source\UI\Layout.cpp" />
@@ -86,6 +89,7 @@
     <ClInclude Include="Source\GSM\IntroState.h" />
     <ClInclude Include="Source\GSM\LevelSelectState.h" />
     <ClInclude Include="Source\GSM\MenuState.h" />
+    <ClInclude Include="Source\GSM\OptionsState.h" />
     <ClInclude Include="Source\Level.h" />
     <ClInclude Include="Source\GSM\TutorialState.h" />
     <ClInclude Include="Source\GUIManager\GUI.h" />
@@ -106,6 +110,7 @@
     <ClInclude Include="Source\RigidBody\RigidBody.h" />
     <ClInclude Include="Source\Scenes\GameplayScene.h" />
     <ClInclude Include="Source\Scenes\LevelSelectScene.h" />
+    <ClInclude Include="Source\Scenes\OptionsScene.h" />
     <ClInclude Include="Source\Scenes\Scene.h" />
     <ClInclude Include="Source\Scenes\SceneManager2D.h" />
     <ClInclude Include="Source\Scenes\SceneManager2D_Intro.h" />
@@ -113,6 +118,7 @@
     <ClInclude Include="Source\Scenes\TutorialScene.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\SoundManager.h" />
+    <ClInclude Include="Source\SpriteAnimation.h" />
     <ClInclude Include="Source\Timer\Timer.h" />
     <ClInclude Include="Source\UI\ButtonUI.h" />
     <ClInclude Include="Source\UI\Layout.h" />

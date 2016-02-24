@@ -102,6 +102,12 @@
     <Filter Include="Source Files\Aesthetics">
       <UniqueIdentifier>{4a1b41a2-b1bf-4340-b5e4-7d5b2dea7129}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scenes\Options">
+      <UniqueIdentifier>{536fe169-9a49-46b4-a912-bc0f9ba3764a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Options">
+      <UniqueIdentifier>{f6b16df8-0b60-4bf0-87b5-13bd151d571c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -247,6 +253,15 @@
     </ClCompile>
     <ClCompile Include="Source\Aesthetics\ParticleManager.cpp">
       <Filter>Source Files\Aesthetics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scenes\OptionsScene.cpp">
+      <Filter>Source Files\Scenes\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GSM\OptionsState.cpp">
+      <Filter>Source Files\Game State Management\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpriteAnimation.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -405,6 +420,15 @@
     </ClInclude>
     <ClInclude Include="Source\Aesthetics\ParticleManager.h">
       <Filter>Source Files\Aesthetics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scenes\OptionsScene.h">
+      <Filter>Source Files\Scenes\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GSM\OptionsState.h">
+      <Filter>Source Files\Game State Management\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteAnimation.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
