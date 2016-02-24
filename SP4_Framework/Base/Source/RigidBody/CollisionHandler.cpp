@@ -94,6 +94,7 @@ bool CollisionHandler::CIRCLE_BOX(Circle* c1, Box* b1)
 	//Check for Collision
 	if ((DistanceBetween <= (c1->GetRadius() * c1->GetRadius())))
 	{
+		FindCollideNormal((Box*)b1, c1->GetOrigin());
 		return true;
 	}
 	return false;

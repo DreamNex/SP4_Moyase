@@ -260,13 +260,7 @@
     <ClCompile Include="Source\GSM\OptionsState.cpp">
       <Filter>Source Files\Game State Management\Options</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Controls\Controls.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\UI\Layout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\UI\LevelButton.cpp">
+    <ClCompile Include="Source\SpriteAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -433,13 +427,7 @@
     <ClInclude Include="Source\GSM\OptionsState.h">
       <Filter>Source Files\Game State Management\Options</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Controls\Controls.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\UI\Layout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\UI\LevelButton.h">
+    <ClInclude Include="Source\SpriteAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

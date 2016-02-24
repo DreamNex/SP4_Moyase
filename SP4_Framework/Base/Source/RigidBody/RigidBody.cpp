@@ -15,8 +15,6 @@ RigidBody::~RigidBody()
 
 void RigidBody::CollisionResolve_Bounce(RigidBody *rb1, RigidBody *rb2)
 {
-	CollisionHandler cH;
-	cH.FindCollideNormal((Box*)rb2->cC_Compt, rb1->cC_Compt->GetOrigin());
 	rb1->pC_Compt->toBounce(rb2->cC_Compt->GetCollideNormal());
 }
 

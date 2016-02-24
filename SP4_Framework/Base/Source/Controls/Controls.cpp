@@ -3,15 +3,12 @@
 #include"../GameObjects/Balls.h"
 #include"../GameObjects/Wall.h"
 #include"../GameObjects/Tools.h"
-#include"../Application.h"
 
 Controls::Controls(GUIManager * m_GUI)
 {
 	c_state = SELECTION;
 	this->m_GUI = m_GUI;
-	SelectedActive = false;
-	SelectedGO = NULL;
-	mouse_drag = false;
+	click_timer.SetDuration(3);
 }
 
 
@@ -19,66 +16,81 @@ Controls::~Controls()
 {
 
 }
-GameObject* Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> levelAssets, Vector2 mousePos, bool m_state, float dt, Vector2 test)
+
+void Controls::OnClick(Vector2 mousePos, bool m_state, float dt)
 {
-	GameObject* temp = 0;
+	if (enableClick == false)
+	{
+		if (click_timer.Update(dt))
+		{
+			enableClick = true;
+			click_timer.Start();
+		}
+		return;
+	}
+	
 	switch (c_state)
 	{
 	case SELECTION:
-		if (m_state)//Clicked
-		{ 
-			if (GetSelection(levelAssets, mousePos))//Obtained a Selected GO
-			{ 
-				c_state = PLACEMENT;
-			}
-		}
-		break;
-	case PLACEMENT:
-		mousePos.y = 720 - mousePos.y;
-		SelectedGO->setPosition(mousePos);
-		if (!m_state)
 		{
-			if (GetPlacement(levelAssets, mousePos))//Can place object with no obstructions
+			if (m_state == true)
 			{
-				if (!SelectedActive)
-					temp = SelectedGO;
+				if (GetSelection(mousePos) == true)
+				{
+					c_state = PLACEMENT;
+				}
 			}
-			else
-			{
-			}
-			ResetState();
+			break;
 		}
-		break;
-	case ROTATION:
-		break;
-	}
-	return temp;
+		case PLACEMENT:
+		{
+			SelctedGO->setPosition(mousePos);
+			if (m_state == true)
+			{
+				if (GetPlacement(mousePos) == true)
+				{
+					c_state = ROTATION;
+				}
+			}
+			break;
+		}
+		case ROTATION:
+		{
+			c_state = SELECTION;
+			break;
+		}
+		default:
+			break;
+		}
 }
 
-bool Controls::GetSelection(std::vector<GameObject*> levelAssets, Vector2 mousePos)
+
+bool Controls::GetSelection(Vector2 mousePos)
 {
+	CollisionHandler ch;
+	Circle* mouseBound = new Circle(mousePos, 0.1f);
+
 	for (unsigned int i = 0; i < 3; ++i)
 	{
 		Box* temp = (Box*)m_GUI->GetTools(i)->GetGUIBound();
 		if (((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
 			&& (mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y)))
 		{
-			SelectedActive = false;
 			switch (m_GUI->GetTools(i)->GetType())
 			{
 			case 0:
 			{
-				SelectedGO = new Cannon(mousePos,50,50);
+				SelctedGO = new Cannon(mousePos,50,50);
 				break;
 			}
 			case 1:
 			{
-				SelectedGO = new Boost(mousePos, 50, 50);
+				SelctedGO = new Boost(mousePos, 50, 50);
 				break;
 			}
 			case 2:
 			{
-				SelectedGO = new Slow(mousePos, 50, 50);
+				SelctedGO = new Slow(mousePos, 50, 50);
 				break;
 			}
 			default:
@@ -91,53 +103,45 @@ bool Controls::GetSelection(std::vector<GameObject*> levelAssets, Vector2 mouseP
 	{
 		if (dynamic_cast<Tools*>(levelAssets[i]))
 		{
-			Box* temp = (Box*)levelAssets[i]->getRigidBody()->GetCollisionCompt();
-			if (((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
-				&& (mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y)))//if mouse and game object collide
+			if (ch.CheckCollision(levelAssets[i]->getRigidBody()->GetCollisionCompt(), mouseBound))//if mouse and game object collide
 			{
-				SelectedIndex = i;
-				SelectedActive = true;
-				SelectedGO = levelAssets[i];
-				oldPos = SelectedGO->getPos();
+				SelctedGO = levelAssets[i];
 				return true;
 			}
 		}
 	}
+
 	return false;
 }
 
-bool Controls::GetPlacement(std::vector<GameObject*> levelAssets, Vector2 mousePos)
+bool Controls::GetPlacement(Vector2 mousePos)
 {
-	CollisionHandler cH;
-	bool noCollide = true;
-	//((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
-		//&& (mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y))
-	for (unsigned int i = 1; i < levelAssets.size(); ++i)//Check if Collide with anything
+	CollisionHandler ch;
+	Circle* mouseBound = new Circle(mousePos, 0.1f);
+
+	bool collided = true;
+	for (unsigned int i = 1; i < levelAssets.size(); ++i)
 	{
-		if (SelectedIndex == i)
-			continue;
-		if (cH.CheckCollision(SelectedGO->getRigidBody()->GetCollisionCompt(), levelAssets[i]->getRigidBody()->GetCollisionCompt()))
+		Box* temp = (Box*)levelAssets[i];
+		if (((mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x)
+			&& (mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y)) == false)
 		{
-			noCollide = false;
+			collided = false;
 			break;
 		}
 	}
-	if (noCollide)
-		Vector2 Temp;
-	return noCollide;
-}
-
-void Controls::ResetState()
-{
-	mouse_drag = false;
-	SelectedGO = NULL;
-	c_state = SELECTION;
+	return !collided;
 }
 
 void Controls::Render(CSceneManager2D *SceneManger2D)
 {
-	if (SelectedGO)
+	if (SelctedGO)
 	{
-		SelectedGO->render(SceneManger2D);
+		SelctedGO->render(SceneManger2D);
 	}
+}
+
+void Controls::SetLevelAssets(std::vector<GameObject*> levelAssets)
+{
+	this->levelAssets = levelAssets;
 }
