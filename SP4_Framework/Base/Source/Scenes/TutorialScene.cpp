@@ -58,6 +58,7 @@ void CTutorialScene::Init()
 
 void CTutorialScene::Update(double dt)
 {
+	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
 	m_state = false;
 	std::cout << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetVelocity().y << std::endl;
 	std::cout << "~~" << std::endl;
@@ -98,7 +99,7 @@ void CTutorialScene::Update(double dt)
 
 	m_GUI->Update(dt, Application::mouse_current_x, Application::mouse_current_y);
 
-	ctrs->OnClick(Vector2(Application::mouse_current_x, Application::mouse_current_y), m_state, dt);
+	ctrs->OnClick(mousePos, m_state, dt);
 }
 
 void CTutorialScene::Render()
