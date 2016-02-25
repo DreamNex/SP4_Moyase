@@ -100,11 +100,9 @@ void CTutorialScene::Update(double dt)
 		gameObjects[i]->update(dt);
 	}
 
-	m_GUI->Update(dt, Application::mouse_current_x, Application::mouse_current_y);
+	m_GUI->Update(dt);
 
-	GameObject* temp = ctrs->Update(this, gameObjects, m_state, dt);
-	if (temp)
-		gameObjects.push_back(temp);
+	ctrs->Update(this, gameObjects, m_state, dt);
 
 	
 }

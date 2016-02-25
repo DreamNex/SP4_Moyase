@@ -1,6 +1,6 @@
 #include "Enviroment.h"
 
-Enviroment::Enviroment(Vector2 pos)
+Enviroment::Enviroment(Vector2 &pos)
 : GameObject(pos)
 {
 }

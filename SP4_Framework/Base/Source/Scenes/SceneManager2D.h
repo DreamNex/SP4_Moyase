@@ -35,6 +35,8 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
+	int GetScreenHeight(){ return this->m_window_height; }
+
 	// Low level render tools
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, float z = 0);

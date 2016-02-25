@@ -4,7 +4,7 @@
 #include "GL\glew.h"
 #include "../LoadTGA.h"
 
-Boost::Boost(Vector2 pos, float width, float height)
+Boost::Boost(Vector2 &pos, float width, float height)
 : Tools(pos)
 {
 	this->rigidBody = new RigidBody(new Box(this->pos, width, height), new PhysicsComponent(this->pos, 1, false), false);

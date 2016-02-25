@@ -4,7 +4,7 @@
 #include "GL\glew.h"
 #include "../LoadTGA.h"
 
-Cannon::Cannon(Vector2 pos, float width, float height)
+Cannon::Cannon(Vector2& pos, float width, float height)
 : Tools(pos)
 , angle(-15)
 {

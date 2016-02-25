@@ -17,7 +17,10 @@ public:
 	virtual void update(double dt);
 	virtual void render(CSceneManager2D* SceneManager2D);
 
-	void setPosition(Vector2 pos) { this->pos = pos; }
+	void setPosition(Vector2 pos) 
+	{
+		this->pos = pos; 
+	}
 
 	RigidBody* getRigidBody() { return rigidBody; }
 	Mesh* getMesh() { return this->mesh; }

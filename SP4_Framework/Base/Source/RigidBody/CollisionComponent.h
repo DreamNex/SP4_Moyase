@@ -16,8 +16,8 @@ public:
 	Vector2 GetCollideNormal(){ return this->collideNormal; }
 
 	//Mutator(s)
+	void SetOrigin(Vector2& origin){ this->origin = &origin; }
 	void SetCollideNormal(Vector2 collideNormal){ this->collideNormal = collideNormal; }
-
 protected:
 	Vector2* origin;
 	Vector2 collideNormal;

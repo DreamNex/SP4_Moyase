@@ -35,6 +35,8 @@ public:
 	void SetPos(Vector2 pos);
 	void SetGUIBound(CollisionComponent * gui_Bound);
 
+	bool OnClick(Vector2 mousePos);
+
 private:
 	bool BtnIsActive;
 	int g_typeID;
