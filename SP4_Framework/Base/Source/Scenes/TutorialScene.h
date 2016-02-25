@@ -25,7 +25,7 @@ public:
 	{
 		PAUSE,
 		START,
-		RESET,
+		EXIT,
 	};
 	CTutorialScene();
 	CTutorialScene(int m_window_width, int m_window_height);
