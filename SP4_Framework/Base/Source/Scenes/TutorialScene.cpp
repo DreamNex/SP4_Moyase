@@ -95,14 +95,17 @@ void CTutorialScene::Update(double dt)
 	gameObjects[0]->checkColision(gameObjects[4]);
 	//gameObjects[0]->checkColision(gameObjects[5]);
 	//gameObjects[0]->checkColision(gameObjects[6]);
+
+
+	m_GUI->Update(dt);
+
+	ctrs->Update(this, gameObjects, m_state, dt);
+
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->update(dt);
 	}
 
-	m_GUI->Update(dt);
-
-	ctrs->Update(this, gameObjects, m_state, dt);
 
 	
 }

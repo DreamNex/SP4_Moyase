@@ -68,5 +68,13 @@ bool RigidBody::CollideWith(RigidBody *otherObject)
 
 void RigidBody::Update(float dt)
 {
+	if (dynamic_cast<Box*>(cC_Compt))
+	{
+		Box* temp = (Box*)(cC_Compt);
+		Vector2 max = temp->GetOrigin() + Vector2(temp->GetWidth() / 2, temp->GetHeight() / 2);
+		Vector2 min = temp->GetOrigin() - Vector2(temp->GetWidth() / 2, temp->GetHeight() / 2);
+		temp->SetMax(max);
+		temp->SetMin(min);
+	}
 	pC_Compt->Update(dt);
 }
