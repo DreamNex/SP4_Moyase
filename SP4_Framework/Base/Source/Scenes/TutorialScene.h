@@ -23,7 +23,7 @@ public:
 	};
 	enum GameStates
 	{
-		PAUSE,
+		RESET,
 		START,
 		EXIT,
 	};

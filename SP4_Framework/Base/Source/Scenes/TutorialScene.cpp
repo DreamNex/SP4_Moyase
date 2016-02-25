@@ -63,6 +63,7 @@ void CTutorialScene::Update(double dt)
 
 	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
 	mL_state = mR_state = false;
+
 	std::cout << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetVelocity().y << std::endl;
 	std::cout << "~~" << std::endl;
 	if (Application::IsKeyPressed('W'))

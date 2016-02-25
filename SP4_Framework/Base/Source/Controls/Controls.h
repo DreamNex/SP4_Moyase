@@ -44,7 +44,7 @@ private:
 	Mesh* cursorMesh;
 	bool mL_state;
 	bool mR_state;
-
+	bool onClicked = false;
 	int state;
 	std::vector<GameObject*> g_Obj;
 };

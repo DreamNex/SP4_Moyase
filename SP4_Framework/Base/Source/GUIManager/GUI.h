@@ -12,9 +12,10 @@ public:
 	enum GUITYPEID
 	{
 		CANNONGUI,
-		SLOWGUI,
 		BOOSTGUI,
+		SLOWGUI,
 		STARTGUI,
+		RESETGUI,
 		EXIT
 	};
 
