@@ -19,9 +19,10 @@ Controls::~Controls()
 
 }
 
-void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets, bool m_state, float dt)
+void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets, bool ml_state, bool mr_state, float dt)
 {
-	this->m_state = m_state;
+	this->mL_state = ml_state;
+	this->mR_state = mr_state;
 	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
 	mousePos.y = (float)sm->GetScreenHeight() - mousePos.y;
 
@@ -35,14 +36,14 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 		GetPlacement(levelAssets, mousePos);
 		break;
 	case ROTATION:
-		GetRotation(mousePos);
+		DoRotation(mousePos);
 		break;
 	}
 }
 
 void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mousePos)
 {
-	if (m_state)//mouse click
+	if (mL_state)//mouse click
 	{
 		//for tools
 		for (unsigned int i = 0; i < m_GUI->GetToolCount().size(); ++i)//Only 3
@@ -109,9 +110,29 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 				}
 			}
 		}
+		if (SelectedGO)
+			c_state = PLACEMENT;
 	}
-	if (SelectedGO)
-		c_state = PLACEMENT;
+	else if (mR_state)
+	{
+		CollisionHandler cH;
+		CollisionComponent *mouseBound = new Circle(mousePos, 0.1f);
+		for (unsigned int i = 1; i < levelAssets.size(); ++i)
+		{
+			if (dynamic_cast<Cannon*>(levelAssets[i]))
+			{
+				if (cH.CheckCollision(mouseBound, levelAssets[i]->getRigidBody()->GetCollisionCompt()))
+				{
+					oldPos = levelAssets[i]->getPos();
+					SelectedGO = levelAssets[i];
+					SelectedActive = true;
+					SelectedIndex = i;
+				}
+			}
+		}
+		if (SelectedGO)
+			c_state = ROTATION;
+	}
 }
 
 void Controls::GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mousePos)
@@ -119,7 +140,7 @@ void Controls::GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mouse
 	CollisionHandler cH;
 	CollisionComponent *mouseBound = new Circle(mousePos, 50.f);
 
-	if (!m_state)
+	if (!mL_state)
 	{
 		if (SelectedActive)//move tool
 		{ 
@@ -175,9 +196,18 @@ void Controls::GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mouse
 		SelectedGO->setPosition(mousePos);
 }
 
-void Controls::GetRotation(Vector2 mousePos)
+void Controls::DoRotation(Vector2 mousePos)
 {
-
+	if (mR_state)
+	{
+		if (dynamic_cast<Cannon*>(SelectedGO))
+		{
+			dynamic_cast<Cannon*>(SelectedGO)->getAngleByReference() += (mousePos.x - oldPos.x);
+			oldPos = mousePos;
+		}
+	}
+	else
+		ResetState();
 }
 
 void Controls::ResetState()
@@ -191,7 +221,7 @@ void Controls::ResetState()
 
 void Controls::Render(CSceneManager2D *SceneManger2D)
 {
-	if (SelectedGO)
+	if (SelectedGO && !SelectedActive)
 	{
 		SelectedGO->render(SceneManger2D);
 	}

@@ -41,6 +41,6 @@ private:
 	Mesh* meshList[NUM_GEOMETRY];
 	GUIManager * m_GUI;
 	Controls * ctrs;
-	bool m_state;
+	bool mL_state, mR_state;
 	GameStates G_States;
 };

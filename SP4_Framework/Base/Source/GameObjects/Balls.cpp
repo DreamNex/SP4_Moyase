@@ -61,7 +61,7 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 				Vector2 dir(0, 1);
 				dir.rotateVector(dynamic_cast<Cannon*>(GO2)->getAngleByReference());
 
-				this->getRigidBody()->GetPhysicsCompt()->Push(dir * 2000);
+				this->getRigidBody()->GetPhysicsCompt()->Push(dir.Normalized() * 500);
 
 				dynamic_cast<Cannon*>(GO2)->setColided(true);
 			}

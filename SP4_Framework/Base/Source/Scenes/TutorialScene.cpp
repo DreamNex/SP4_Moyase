@@ -62,7 +62,7 @@ void CTutorialScene::Update(double dt)
 	G_States = static_cast<GameStates>(ctrs->GetState());
 
 	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
-	m_state = false;
+	mL_state = mR_state = false;
 	std::cout << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetVelocity().y << std::endl;
 	std::cout << "~~" << std::endl;
 	if (Application::IsKeyPressed('W'))
@@ -87,7 +87,11 @@ void CTutorialScene::Update(double dt)
 	}
 	if (Application::Button_Left)
 	{
-		m_state = true;
+		mL_state = true;
+	}
+	if (Application::Button_Right)
+	{
+		mR_state = true;
 	}
 
 	gameObjects[0]->checkColision(gameObjects[1]);
@@ -99,7 +103,7 @@ void CTutorialScene::Update(double dt)
 
 	m_GUI->Update(dt);
 
-	ctrs->Update(this, gameObjects, m_state, dt);
+	ctrs->Update(this, gameObjects, mL_state, mR_state, dt);
 
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
