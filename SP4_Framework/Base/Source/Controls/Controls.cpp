@@ -12,6 +12,7 @@ Controls::Controls(GUIManager * m_GUI)
 	this->m_GUI = m_GUI;
 	SelectedActive = false;
 	SelectedGO = 0;
+	state = 0;
 }
 
 Controls::~Controls()
@@ -76,22 +77,12 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 			}
 		}
 
-		//for start and exit
 		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
 		{
-			if (m_GUI->GetTools()[i]->OnClick(mousePos))//click on gui
+			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
 			{
-				switch (m_GUI->GetTools()[i]->GetType())
-				{
-				case GUI::STARTGUI:
-					state = 1;
-					break;
-				case GUI::EXIT:
-					SelectedGO = new Boost(mousePos, 50, 50);
-					state = 2;
-				default:
-					break;
-				}
+				onClicked = true;
+				break;
 			}
 		}
 
@@ -112,6 +103,39 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 		}
 		if (SelectedGO)
 			c_state = PLACEMENT;
+	}
+	else if (!mL_state && onClicked)
+	{
+		//for start and exit
+		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
+		{
+			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
+			{
+				switch (m_GUI->GetTools()[i]->GetType())
+				{
+				case GUI::STARTGUI:
+					state = 1;
+					m_GUI->GetTools()[i]->SetActive(false);
+					if (m_GUI->GetTools()[i]->GetActive() == false)
+					{
+						m_GUI->GetTools()[GUI::RESETGUI]->SetActive(true);
+					}
+
+					break;
+				case GUI::EXIT:
+					//SelectedGO = new Boost(mousePos, 50, 50);
+					state = 2;
+				case GUI::RESETGUI:
+					state = 0;
+					m_GUI->GetTools()[i]->SetActive(false);
+					m_GUI->GetTools()[GUI::STARTGUI]->SetActive(true);
+				default:
+					break;
+				}
+				break;
+			}
+		}
+		onClicked = false;
 	}
 	else if (mR_state)
 	{
