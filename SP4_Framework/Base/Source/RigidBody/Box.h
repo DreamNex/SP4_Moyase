@@ -26,14 +26,14 @@ public:
 	void SetMax(Vector2 max)
 	{ 
 		this->max = max;
-		this->width = max.x - (*origin).x;
-		this->height = max.y - (*origin).y;
+		//this->width = max.x - (*origin).x;
+		//this->height = max.y - (*origin).y;
 	}
 	void SetMin(Vector2 min)
 	{
 		this->min = min; 
-		this->width = (*origin).x - this->min.x;
-		this->height = (*origin).y - this->min.y;
+		//this->width = (*origin).x - this->min.x;
+		//this->height = (*origin).y - this->min.y;
 	}
 	void SetWidth(float width)
 	{ 
