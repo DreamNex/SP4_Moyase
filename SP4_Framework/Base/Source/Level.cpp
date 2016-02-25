@@ -44,3 +44,11 @@ void Level::render(CSceneManager2D* sceneManager2D)
 		Allassets[i]->render(sceneManager2D);
 	}
 }
+
+void Level::addTool(Tools* Tool)
+{
+	if (Tool)
+	{
+		Allassets.push_back(Tool);
+	}
+}

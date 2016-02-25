@@ -189,7 +189,7 @@ void CLevelSelectScene::Init()
 	Buttons[S_Selecting].push_back(new ButtonUI("Back"
 		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
 		, m_window_width * 0.1, m_window_height* 0.1
-		, m_window_width * 0.5f, m_window_height * 0.1f
+		, m_window_width * 0.5f, m_window_height * 0.15f
 		, 0.6, true));
 
 	Buttons[S_Selected].push_back(new ButtonUI("Yes"

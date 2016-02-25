@@ -187,6 +187,7 @@ void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, 
 
 void CSceneManager2D::Render2DMesh(Mesh *mesh, float scaleX, float scaleY, float x, float y, float rotate, float centerOffsetX, float centerOffsetY)
 {
+	glDisable(GL_DEPTH_TEST);
 	modelStack.PushMatrix();
 	//modelStack.LoadIdentity();
 	modelStack.Translate(x, y, 0);
@@ -218,6 +219,7 @@ void CSceneManager2D::Render2DMesh(Mesh *mesh, float scaleX, float scaleY, float
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	modelStack.PopMatrix();
+	glEnable(GL_DEPTH_TEST);
 }
 
 /********************************************************************************

@@ -17,7 +17,9 @@ public:
 	void render(CSceneManager2D* sceneManager2D);
 	
 	int* getToolsArray() { return tools; }
-	std::vector<GameObject*>* getGameObjects() { return &Allassets; }
+
+	std::vector<GameObject*> getGameObjects() { return Allassets; }
+	void addTool(Tools* Tool);
 
 private:
 	Balls* theball;
