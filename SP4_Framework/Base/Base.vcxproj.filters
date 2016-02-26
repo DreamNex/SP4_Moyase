@@ -167,9 +167,6 @@
     <ClCompile Include="Source\FileReading.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SoundManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -260,8 +257,17 @@
     <ClCompile Include="Source\GSM\OptionsState.cpp">
       <Filter>Source Files\Game State Management\Options</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SpriteAnimation.cpp">
+    <ClCompile Include="Source\Controls\Controls.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\Layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\LevelButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\SliderUI.cpp">
+      <Filter>Source Files\UI\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,9 +341,6 @@
       <Filter>Source Files\Game State Management\Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="Source\FileReading.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Level.h">
@@ -427,8 +430,17 @@
     <ClInclude Include="Source\GSM\OptionsState.h">
       <Filter>Source Files\Game State Management\Options</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SpriteAnimation.h">
+    <ClInclude Include="Source\Controls\Controls.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\Layout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\LevelButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\SliderUI.h">
+      <Filter>Source Files\UI\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

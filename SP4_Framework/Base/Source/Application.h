@@ -6,6 +6,9 @@
 #include "GSM\GameStateManager.h"
 #include "GSM\IntroState.h"
 #include "Luala.h"
+#include "irrKlang.h"
+using namespace irrklang;
+
 
 
 class Application
@@ -33,6 +36,8 @@ public:
 	static bool exitbool;
 
 	static void mouseMode(bool show);
+	static ISoundEngine* BGM_Engine;
+	static ISoundEngine* SFX_Engine;
 
 private:
 	Application();

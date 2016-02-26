@@ -2,10 +2,10 @@
 using namespace std;
 
 #include "GameStateManager.h"
-#include "MenuState.h"
 #include "OptionsState.h"
+#include "MenuState.h"
 
-//OptionsState OptionsState::theOptionsState;
+OptionsState OptionsState::theOptionsState;
 
 void OptionsState::Init()
 {
@@ -24,6 +24,27 @@ void OptionsState::Cleanup()
 	scene->Exit();
 	delete scene;
 	scene = NULL;
+}
+
+void OptionsState::Pause()
+{
+}
+
+void OptionsState::Resume()
+{
+}
+
+void OptionsState::HandleEvents(CGameStateManager* theGSM)
+{
+}
+
+void OptionsState::HandleEvents(CGameStateManager* theGSM, const unsigned char key, const bool status)
+{
+}
+
+void OptionsState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, const double mouse_y,
+	const int button_Left, const int button_Middle, const int button_Right)
+{
 }
 
 void OptionsState::Update(CGameStateManager* theGSM)
