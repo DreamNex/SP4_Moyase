@@ -278,6 +278,9 @@
     <ClCompile Include="Source\Aesthetics\VectorPathing.cpp">
       <Filter>Source Files\Aesthetics</Filter>
     </ClCompile>
+    <ClCompile Include="Source\UI\SpecialMenuButton.cpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -456,6 +459,9 @@
     </ClInclude>
     <ClInclude Include="Source\Aesthetics\VectorPathing.h">
       <Filter>Source Files\Aesthetics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\SpecialMenuButton.h">
+      <Filter>Source Files\UI\Menus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
