@@ -32,7 +32,6 @@ void Cursor::Update(float dt, bool m_state)
 
 	
 	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
-	mousePos.y = 720 - mousePos.y;
 	if (oldPos.LengthSquared() != 0)
 	{
 

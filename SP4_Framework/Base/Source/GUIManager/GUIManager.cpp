@@ -70,7 +70,7 @@ void GUIManager::Update(float dt)
 	{
 		if (gui_Tools[i]->GetActive())
 		{
-			gui_Tools[i]->CheckMO(Vector2(Application::mouse_current_x, 720 - Application::mouse_current_y));
+			gui_Tools[i]->CheckMO(Vector2(Application::mouse_current_x, Application::mouse_current_y));
 		}
 	}
 }
