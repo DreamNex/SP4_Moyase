@@ -2,9 +2,11 @@
 #include "GL\glew.h"
 #include "../LoadTGA.h"
 #include "VectorPathing.h"
+#include <stdlib.h>
 
 void ParticleManager::SpawnParticles(char* Mesh, Vector2 origin, Vector2 size[2], float angle[2], float speed[2], float dist[2], int type, int amount)
 {
+	srand(time(NULL));
 	for (unsigned int i = 0; i < amount; ++i)
 	{
 	}

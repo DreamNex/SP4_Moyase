@@ -66,6 +66,7 @@
     <ClCompile Include="Source\UI\Layout.cpp" />
     <ClCompile Include="Source\UI\LevelButton.cpp" />
     <ClCompile Include="Source\UI\SpecialMenuButton.cpp" />
+    <ClCompile Include="Source\UI\SliderUI.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +128,7 @@
     <ClInclude Include="Source\UI\Layout.h" />
     <ClInclude Include="Source\UI\LevelButton.h" />
     <ClInclude Include="Source\UI\SpecialMenuButton.h" />
+    <ClInclude Include="Source\UI\SliderUI.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />
   </ItemGroup>
