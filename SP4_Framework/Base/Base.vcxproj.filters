@@ -110,6 +110,8 @@
     </Filter>
     <Filter Include="Source Files\GameObjects\Enviroment\Exit">
       <UniqueIdentifier>{a396df91-71cc-416c-bae7-ac4153982356}</UniqueIdentifier>
+    <Filter Include="Source Files\Cursor">
+      <UniqueIdentifier>{7255ea2d-a762-4520-8fd9-3e0f599181ed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +285,9 @@
     </ClCompile>
     <ClCompile Include="Source\GameObjects\Exit.cpp">
       <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cursor\Cursor.cpp">
+      <Filter>Source Files\Cursor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -468,6 +473,9 @@
     </ClInclude>
     <ClInclude Include="Source\GameObjects\Exit.h">
       <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Cursor\Cursor.h">
+      <Filter>Source Files\Cursor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

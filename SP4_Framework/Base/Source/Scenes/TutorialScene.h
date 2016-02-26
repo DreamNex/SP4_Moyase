@@ -8,7 +8,6 @@
 #include"../GameObjects/Cannon.h"
 #include"../GameObjects/Boost.h"
 #include"../GameObjects/Slow.h"
-#include"../GUIManager/GUIManager.h"
 #include"../Controls/Controls.h"
 #include"../Timer/Timer.h"
 
@@ -43,4 +42,5 @@ private:
 	//Controls * ctrs;
 	//bool mL_state, mR_state;
 	GameStates G_States;
+	Cursor *cursor;
 };

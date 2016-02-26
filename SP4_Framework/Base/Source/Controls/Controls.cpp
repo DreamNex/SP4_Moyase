@@ -13,6 +13,8 @@ Controls::Controls(GUIManager * m_GUI)
 	SelectedActive = false;
 	SelectedGO = 0;
 	state = 0;
+	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
+	
 }
 
 Controls::~Controls()
@@ -24,8 +26,10 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 {
 	this->mL_state = ml_state;
 	this->mR_state = mr_state;
-	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
-	mousePos.y = (float)sm->GetScreenHeight() - mousePos.y;
+
+	cursor->Update(dt, mL_state); //
+	Vector2 mousePos(cursor->GetCursPos().x, cursor->GetCursPos().y );
+
 
 	if (!guiOnly)
 	{
@@ -67,35 +71,39 @@ void Controls::GetSelection(Vector2 mousePos)
 		//for start and exit
 		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
 		{
-			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
+			cursor->CheckCO(m_GUI->GetTools());
 			{
-				switch (m_GUI->GetTools()[i]->GetType())
+				if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
 				{
-				case GUI::STARTGUI:
-					state = 1;
-					m_GUI->GetTools()[i]->SetActive(false);
-					if (m_GUI->GetTools()[i]->GetActive() == false)
+					switch (m_GUI->GetTools()[i]->GetType())
 					{
-						m_GUI->GetTools()[GUI::RESETGUI]->SetActive(true);
-					}
+					case GUI::STARTGUI:
+						state = 1;
+						m_GUI->GetTools()[i]->SetActive(false);
+						if (m_GUI->GetTools()[i]->GetActive() == false)
+						{
+							m_GUI->GetTools()[GUI::RESETGUI]->SetActive(true);
+						}
 
-					break;
-				case GUI::EXIT:
-					//SelectedGO = new Boost(mousePos, 50, 50);
-					state = 2;
-				case GUI::RESETGUI:
-					state = 0;
-					m_GUI->GetTools()[i]->SetActive(false);
-					m_GUI->GetTools()[GUI::STARTGUI]->SetActive(true);
-				default:
+						break;
+					case GUI::EXIT:
+						//SelectedGO = new Boost(mousePos, 50, 50);
+						state = 2;
+					case GUI::RESETGUI:
+						state = 0;
+						m_GUI->GetTools()[i]->SetActive(false);
+						m_GUI->GetTools()[GUI::STARTGUI]->SetActive(true);
+					default:
+						break;
+					}
 					break;
 				}
-				break;
+				onClicked = false;
 			}
 		}
-		onClicked = false;
 	}
 }
+
 
 void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mousePos)
 {
@@ -104,32 +112,35 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 		//for tools
 		for (unsigned int i = 0; i < m_GUI->GetToolCount().size(); ++i)//Only 3
 		{
-			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetToolCount()[i] > 0)//click on gui
-			{
-				switch (m_GUI->GetTools()[i]->GetType())
+			cursor->CheckCO(m_GUI->GetTools());
+
+				if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetToolCount()[i] > 0)//click on gui
 				{
-				case GUI::CANNONGUI:
-				{
-					SelectedGO = new Cannon(mousePos, 50, 50);
-					SelectedIndex = 1;
-				}
+					switch (m_GUI->GetTools()[i]->GetType())
+					{
+					case GUI::CANNONGUI:
+					{
+						SelectedGO = new Cannon(mousePos, 50, 50);
+						SelectedIndex = 1;
+					}
 					break;
-				case GUI::BOOSTGUI:
-				{
-					SelectedGO = new Boost(mousePos, 50, 50);
-					SelectedIndex = 2;
-				}
+					case GUI::BOOSTGUI:
+					{
+						SelectedGO = new Boost(mousePos, 50, 50);
+						SelectedIndex = 2;
+					}
 					break;
-				case GUI::SLOWGUI:
-				{
-					SelectedGO = new Slow(mousePos, 50, 50);
-					SelectedIndex = 3;
-				}
+					case GUI::SLOWGUI:
+					{
+						SelectedGO = new Slow(mousePos, 50, 50);
+						SelectedIndex = 3;
+					}
 					break;
-				default:
-					break;
+					default:
+						break;
+					}
 				}
-			}
+
 		}
 
 		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
@@ -164,6 +175,8 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 		//for start and exit
 		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
 		{
+			cursor->CheckCO(m_GUI->GetTools());
+
 			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
 			{
 				switch (m_GUI->GetTools()[i]->GetType())
@@ -305,6 +318,7 @@ void Controls::Render(CSceneManager2D *SceneManger2D)
 	{
 		SelectedGO->render(SceneManger2D);
 	}
+	cursor->Render(SceneManger2D);
 }
 
 void Controls::SetState(int i)
