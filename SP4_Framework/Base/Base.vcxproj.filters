@@ -108,6 +108,9 @@
     <Filter Include="Source Files\Game State Management\Options">
       <UniqueIdentifier>{f6b16df8-0b60-4bf0-87b5-13bd151d571c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment\Exit">
+      <UniqueIdentifier>{5be9a2fa-0fe5-420c-b7e0-ff2a9e7c4525}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -261,13 +264,20 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\UI\Layout.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\UI\Menus</Filter>
     </ClCompile>
     <ClCompile Include="Source\UI\LevelButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\UI\SliderUI.cpp">
-      <Filter>Source Files\UI\Base</Filter>
+      <Filter>Source Files\UI\Menus</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Exit.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Aesthetics\VectorPathing.cpp">
+      <Filter>Source Files\Aesthetics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -433,14 +443,20 @@
     <ClInclude Include="Source\Controls\Controls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\UI\Layout.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\UI\SliderUI.h">
+      <Filter>Source Files\UI\Menus</Filter>
     </ClInclude>
     <ClInclude Include="Source\UI\LevelButton.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\UI\Menus</Filter>
     </ClInclude>
-    <ClInclude Include="Source\UI\SliderUI.h">
-      <Filter>Source Files\UI\Base</Filter>
+    <ClInclude Include="Source\UI\Layout.h">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Exit.h">
+      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Aesthetics\VectorPathing.h">
+      <Filter>Source Files\Aesthetics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

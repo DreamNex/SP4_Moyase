@@ -60,6 +60,8 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 					if (mousePress && button_Left == 0)
 					{
 						CGameStateManager::selectedLevel = scene->getLevelButtons()[scene->getCurrentPage()][i]->getLevelName();
+						CGameStateManager::selectedAvatar = scene->getAvatarImages()[scene->getCurrentAvatarImage()]->name;
+						scene->setSelectedLevelName(scene->getLevelButtons()[scene->getCurrentPage()][i]->GetText());
 						scene->setCurrentState(CLevelSelectScene::S_Selected);
 					}
 					break;
@@ -113,13 +115,27 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 		
 		case CLevelSelectScene::S_Selected:
 		{
+			for (unsigned int i = 0; i < scene->getButtons()[CLevelSelectScene::S_Selected].size(); ++i)
+			{
+				if (scene->getButtons()[CLevelSelectScene::S_Selected][i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
+				{
+					if (mousePress && button_Left == 0)
+					{
+						if (scene->getButtons()[CLevelSelectScene::S_Selected][i]->GetText() == "Yes")
+						{
+							theGSM->ChangeState(CGameplayState::Instance());
+						}
+						else if (scene->getButtons()[CLevelSelectScene::S_Selected][i]->GetText() == "No")
+						{
+							scene->setCurrentState(CLevelSelectScene::S_Selecting);
+						}
+					}
+					break;
+				}
+			}
 		}
 		break;
 	}
-
-	
-
-	
 
 	if (button_Left == 1)
 		mousePress = true;

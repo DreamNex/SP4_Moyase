@@ -19,25 +19,34 @@ public:
 	Controls(GUIManager * m_GUI);
 	~Controls();
 
-	void Update(float dt);
-
-	void SetLevelAssets(std::vector<GameObject*> levelAssets);
-	void OnClick(Vector2 mousePos, bool m_state, float dt);
+	void Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets, bool ml_state, bool mr_state, float dt, bool guiOnly = false);
 	void Render(CSceneManager2D *SceneManger2D);
 
-	Timer GetTimer();
-	void SetTimer(Timer timer);
+	void GetSelection(Vector2 mousePos);
+	void GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mousePos);
+	void GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mousePos);
+	void DoRotation(Vector2 mousePos);
+	void SetState(int i);
+	int GetState();
+	void ResetState();
 
 private:
-	bool SelectedActive;
-	GameObject *SelctedGO;
-	std::vector<GameObject*> g_Obj;
-	std::vector<GameObject*> levelAssets;
 	CONTROLS_STATE c_state;
 	GUIManager *m_GUI;
-	bool GetSelection(Vector2 mousePos);
-	bool GetPlacement(Vector2 mousePos);
-	Timer click_timer;
-	bool enableClick;
+
+	//Pointer to the Selected/Created GameObject
+	bool SelectedActive;
+	int SelectedIndex;
+	GameObject *SelectedGO;
+	Vector2 oldPos;
+
+	//Cursor
+	Vector2 cursorPos;
+	Mesh* cursorMesh;
+	bool mL_state;
+	bool mR_state;
+	bool onClicked = false;
+	int state;
+	std::vector<GameObject*> g_Obj;
 };
 

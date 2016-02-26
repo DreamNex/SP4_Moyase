@@ -9,7 +9,7 @@
 #include "Boost.h"
 #include "Slow.h"
 
-Balls::Balls(Vector2 pos, float diameter, char* texturePath)
+Balls::Balls(Vector2 pos, float diameter, const char* texturePath)
 : GameObject(pos)
 {
 	originalPos = pos;
@@ -58,10 +58,10 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 				this->getRigidBody()->GetPhysicsCompt()->SetAcceleration(Vector2(0, 0));
 				this->pos = GO2->getPos();
 
-				Vector2 dir(0, 1);
+				Vector2 dir(0, 2000);
 				dir.rotateVector(dynamic_cast<Cannon*>(GO2)->getAngleByReference());
 
-				this->getRigidBody()->GetPhysicsCompt()->Push(dir * 2000);
+				this->getRigidBody()->GetPhysicsCompt()->Push(dir);
 
 				dynamic_cast<Cannon*>(GO2)->setColided(true);
 			}
@@ -83,4 +83,12 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 			}
 		}
 	}
+}
+
+void Balls::reset()
+{
+	pos = originalPos;
+	this->getRigidBody()->GetPhysicsCompt()->SetForce(Vector2(0, 0));
+	this->getRigidBody()->GetPhysicsCompt()->SetVelocity(Vector2(0, 0));
+	this->getRigidBody()->GetPhysicsCompt()->SetAcceleration(Vector2(0, 0));
 }

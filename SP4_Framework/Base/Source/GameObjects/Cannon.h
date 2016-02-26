@@ -5,7 +5,7 @@
 class Cannon : public Tools
 {
 public:
-	Cannon(Vector2 pos, float width, float height);
+	Cannon(Vector2 &pos, float width, float height);
 	~Cannon();
 
 	void render(CSceneManager2D* SceneManager2D);

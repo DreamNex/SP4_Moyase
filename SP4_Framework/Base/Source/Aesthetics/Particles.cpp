@@ -2,12 +2,13 @@
 #include "GL\glew.h"
 #include "../LoadTGA.h"
 
-Particles::Particles(Vector2 pos, Vector2 size, Vector2 speed, char* mesh, Timer* life)
+Particles::Particles(int vPath, Vector2 start, Vector2 end, Vector2 size, float speed, char* mesh, Timer* life)
 {
 	this->pos = pos;
 	this->size = size;
-	this->speed;
+	this->speed = speed;
 	this->life = life;
+	this->particlePath = new VectorPathing(vPath, start, end);
 
 	this->particleMesh = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, size.x, size.y);
 	this->particleMesh->textureID = LoadTGA(mesh);
@@ -16,11 +17,13 @@ Particles::Particles()
 	: life(new Timer(5.0f))
 	, size(Vector2(1, 1))
 	, pos(Vector2(1, 1))
-	, speed(Vector2(1,1))
+	, speed(1)
+	, particlePath(new VectorPathing(1, Vector2(0, 0), Vector2(0, 0)))
 {
 }
 Particles::~Particles()
 {
+	delete particlePath;
 	delete life;
 	delete particleMesh;
 }
@@ -45,7 +48,7 @@ Vector2 Particles::GetPos()
 {
 	return this->pos;
 }
-Vector2 Particles::GetSpeed()
+float Particles::GetSpeed()
 {
 	return this->speed;
 }
@@ -70,7 +73,7 @@ void Particles::SetPos(Vector2 p)
 {
 	this->pos = p;
 }
-void Particles::SetSpeed(Vector2 sp)
+void Particles::SetSpeed(float sp)
 {
 	this->speed = sp;
 }
@@ -79,7 +82,7 @@ bool Particles::Update(float dt)
 {
 	if (life->Update(dt))
 		return true;
-	pos = pos + speed;
+	pos = pos + (particlePath->GetPath() * speed);
 	return false;
 }
 void Particles::Render(CSceneManager2D* scene)

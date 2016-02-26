@@ -12,8 +12,11 @@ public:
 	enum GUITYPEID
 	{
 		CANNONGUI,
+		BOOSTGUI,
 		SLOWGUI,
-		BOOSTGUI
+		STARTGUI,
+		RESETGUI,
+		EXIT
 	};
 
 	GUI(Vector2 pos, int g_typeID, CollisionComponent * gui_Bound, char *Mesh, char * hoverMesh);
@@ -32,6 +35,8 @@ public:
 	void SetType(int g_typeID);
 	void SetPos(Vector2 pos);
 	void SetGUIBound(CollisionComponent * gui_Bound);
+
+	bool OnClick(Vector2 mousePos);
 
 private:
 	bool BtnIsActive;

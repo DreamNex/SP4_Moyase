@@ -1,6 +1,11 @@
 #pragma once
 #include "SceneManager2D.h"
 #include <vector>
+#include "../Level.h"
+
+#include"../GUIManager/GUIManager.h"
+#include"../Controls/Controls.h"
+#include"../Timer/Timer.h"
 
 class CGameplayScene: public CSceneManager2D
 {
@@ -11,17 +16,19 @@ public:
 		NUM_GEOMETRY,
 	};
 
-	enum States
+	enum GameStates
 	{
-		S_Play = 0,
-		S_Pause,
+		S_RESET = 0,
+		S_STARTED,
+		S_EXIT,
+		S_WIN,
 		S_TOTAL,
 	};
-	States getCurentStae() { return curentState; }
-	void setCurrentState(States s) { curentState = s; }
+	GameStates getCurentStae() { return curentState; }
+	void setCurrentState(GameStates s) { curentState = s; }
 
 	CGameplayScene();
-	CGameplayScene(int m_window_width, int m_window_height);
+	CGameplayScene(int m_window_width, int m_window_height, std::string level, std::string avatar);
 	~CGameplayScene();
 
 	virtual void Init();
@@ -32,5 +39,11 @@ public:
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 
-	States curentState;
+	GUIManager * m_GUI;
+	Controls * ctrs;
+	bool mL_state, mR_state;
+
+	GameStates curentState;
+
+	Level gameLevel;
 };

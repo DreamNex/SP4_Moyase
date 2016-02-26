@@ -1,11 +1,63 @@
 #include "Level.h"
 
-Level::Level()
+Level::Level(std::string level2load, std::string avatar2load)
 {
+	FileReading fr;
 
+	fr.loadFile("Levels//" + level2load);
+	
+	fr.loadVariables(&theball, ("Image//Avatars//" + avatar2load).c_str());
+	Allassets.push_back(theball);
+
+	fr.loadVariables(tools);
+
+	fr.loadVariables(&Allassets);
 }
 
-Level::Level(bool unlock, int tools[3])
+Level::~Level()
 {
+	for (int i = 0; i < Allassets.size(); ++i)
+	{
+		delete Allassets[i];
+	}
+}
 
+int Level::update(double dt)
+{
+	for (int i = 0; i < Allassets.size(); ++i)
+	{
+		Allassets[i]->update(dt);
+
+		if (Allassets[i] != theball)
+		{
+			if (theball->checkColision(Allassets[i]))
+			{
+				if (dynamic_cast<Exit*>(Allassets[i]))
+				{
+					return 3;
+				}
+				else if (dynamic_cast<Spikes*>(Allassets[i]))
+				{
+					return 0;
+				}
+			}
+		}
+	}
+	return 1;
+}
+
+void Level::render(CSceneManager2D* sceneManager2D)
+{
+	for (int i = 0; i < Allassets.size(); ++i)
+	{
+		Allassets[i]->render(sceneManager2D);
+	}
+}
+
+void Level::addTool(Tools* Tool)
+{
+	if (Tool)
+	{
+		Allassets.push_back(Tool);
+	}
 }

@@ -69,32 +69,33 @@ bool CollisionHandler::CIRCLE_BOX(Circle* c1, Box* b1)
 {
 	float DistanceBetween = 0;
 	float Temp;
+	Vector2 max = b1->GetOrigin() + Vector2(b1->GetWidth() / 2, b1->GetHeight() / 2);
+	Vector2 min = b1->GetOrigin() - Vector2(b1->GetWidth() / 2, b1->GetHeight() / 2);
 
-	if (c1->GetOrigin().x < b1->GetMin().x) //Left
+	if (c1->GetOrigin().x < min.x) //Left
 	{
-		Temp = c1->GetOrigin().x - b1->GetMin().x;
+		Temp = c1->GetOrigin().x - min.x;
 		DistanceBetween += Temp*Temp;
 	}
-	else if (c1->GetOrigin().x > b1->GetMax().x) //Right
+	else if (c1->GetOrigin().x > max.x) //Right
 	{
-		Temp = c1->GetOrigin().x - b1->GetMax().x;
+		Temp = c1->GetOrigin().x - max.x;
 		DistanceBetween += Temp*Temp;
 	}
-	if (c1->GetOrigin().y < b1->GetMin().y) // Down
+	if (c1->GetOrigin().y < min.y) // Down
 	{
-		Temp = c1->GetOrigin().y - b1->GetMin().y;
+		Temp = c1->GetOrigin().y - min.y;
 		DistanceBetween += Temp*Temp;
 	}
-	else if (c1->GetOrigin().y > b1->GetMax().y) // Up
+	else if (c1->GetOrigin().y > max.y) // Up
 	{
-		Temp = c1->GetOrigin().y - b1->GetMax().y;
+		Temp = c1->GetOrigin().y - max.y;
 		DistanceBetween += Temp*Temp;
 	}
 	
 	//Check for Collision
 	if ((DistanceBetween <= (c1->GetRadius() * c1->GetRadius())))
 	{
-		FindCollideNormal((Box*)b1, c1->GetOrigin());
 		return true;
 	}
 	return false;
@@ -126,9 +127,9 @@ bool CollisionHandler::FindCollideNormal(Box* b1, Vector2 origin)
 	Vector2 right(1, 0);
 	Vector2 left(-1, 0);
 	Vector2 dir = (origin - b1->GetOrigin()).Normalized();
-
-	float horizontalDotLimit = right.Dot((b1->GetMax() - b1->GetOrigin()).Normalized());
-	float verticalDotLimit = up.Dot((b1->GetMax() - b1->GetOrigin()).Normalized());
+	Vector2 max = b1->GetOrigin() + Vector2(b1->GetWidth()/2, b1->GetHeight()/2);
+	float horizontalDotLimit = right.Dot((max - b1->GetOrigin()).Normalized());
+	float verticalDotLimit = up.Dot((max - b1->GetOrigin()).Normalized());
 
 	if (up.Dot(dir) > verticalDotLimit && up.Dot(dir) < 1)//Up
 		b1->SetCollideNormal(up);

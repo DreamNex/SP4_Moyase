@@ -28,6 +28,7 @@ public:
 	void Quit() { m_bRunning = false; }
 
 	static string selectedLevel;
+	static string selectedAvatar;
 
 private:
 	// the stack of states

@@ -21,7 +21,12 @@ public:
 		GEO_BG,
 		NUM_GEOMETRY,
 	};
-
+	enum GameStates
+	{
+		RESET,
+		START,
+		EXIT,
+	};
 	CTutorialScene();
 	CTutorialScene(int m_window_width, int m_window_height);
 	~CTutorialScene();
@@ -34,7 +39,8 @@ public:
 	std::vector<GameObject*> gameObjects;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
-	GUIManager * m_GUI;
-	Controls * ctrs;
-	bool m_state;
+	//GUIManager * m_GUI;
+	//Controls * ctrs;
+	//bool mL_state, mR_state;
+	GameStates G_States;
 };

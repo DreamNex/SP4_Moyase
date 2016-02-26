@@ -59,7 +59,7 @@ void FileReading::loadVariables(int(&tool)[3])
 		}
 	}
 }
-void FileReading::loadVariables(Balls** Ball)
+void FileReading::loadVariables(Balls** Ball, const char* avatarToload)
 {
 	std::string token;
 	for (std::vector<std::string>::iterator it = storage.begin(); it < storage.end(); it++)
@@ -85,12 +85,12 @@ void FileReading::loadVariables(Balls** Ball)
 			std::getline(splitter, token, ',');
 			diameter = (float)atoi(token.c_str());
 
-			(*Ball) = new Balls(Vector2(x, y), diameter,"Image//Tits//Avatar_Censored.tga");
+			(*Ball) = new Balls(Vector2(x, y), diameter, avatarToload);
 			break;
 		}
 	}
 }
-void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
+void FileReading::loadVariables(std::vector<GameObject*>* GameObjects)
 {
 	std::string token;
 	for (std::vector<std::string>::iterator it = storage.begin(); it < storage.end(); it++)
@@ -120,7 +120,7 @@ void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 			std::getline(splitter, token, ',');
 			scaleY = (float)atoi(token.c_str());
 
-			(*EnviromentObjs).push_back(new Wall(Vector2(x, y), scaleX, scaleY));
+			(*GameObjects).push_back(new Wall(Vector2(x, y), scaleX, scaleY));
 		}
 		else if (it->find("spike") != std::string::npos)
 		{
@@ -147,7 +147,34 @@ void FileReading::loadVariables(std::vector<Enviroment*>* EnviromentObjs)
 			std::getline(splitter, token, ',');
 			scaleY = (float)atoi(token.c_str());
 
-			(*EnviromentObjs).push_back(new Spikes(Vector2(x, y), scaleX, scaleY));
+			(*GameObjects).push_back(new Spikes(Vector2(x, y), scaleX, scaleY));
+		}
+		else if (it->find("exit") != std::string::npos)
+		{
+			float x, y, scaleX, scaleY;
+			std::stringstream splitter(it->c_str());
+
+			//split first part (Type of gameobject)
+			std::getline(splitter, token, ',');
+			std::string temp = token;
+
+			//Split second part, pos.x
+			std::getline(splitter, token, ',');
+			x = (float)atoi(token.c_str());
+
+			//Split third part, pos.y
+			std::getline(splitter, token, ',');
+			y = (float)atoi(token.c_str());
+
+			//Split fourth part, scaleX
+			std::getline(splitter, token, ',');
+			scaleX = (float)atoi(token.c_str());
+
+			//Split fifth part, scale y
+			std::getline(splitter, token, ',');
+			scaleY = (float)atoi(token.c_str());
+
+			(*GameObjects).push_back(new Exit(Vector2(x, y), scaleX, scaleY));
 		}
 	}
 }

@@ -7,12 +7,15 @@
 class ParticleManager
 {
 public:
+	ParticleManager();
+	~ParticleManager();
 
+	void SpawnParticles(char*, Vector2, Vector2[2], float[2], float[2], float[2], int, int);
+	void Update(float dt);
+	void Render(CSceneManager2D*);
 private:
 	std::vector<Particles*> p_Particles;
-	Vector2 sizeRange[2];
-	Vector2 speedRange[2];
-	Vector2
+	bool disableParticles;
 };
 
 #endif

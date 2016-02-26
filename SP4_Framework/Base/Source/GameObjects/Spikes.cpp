@@ -22,7 +22,6 @@ Spikes::~Spikes()
 
 void Spikes::render(CSceneManager2D* SceneManager2D)
 {
-	SceneManager2D->Render2DMesh(this->mesh, this->rigidBody->GetScale(0) - 10.f, this->rigidBody->GetScale(1) - 10.f, this->pos.x - this->rigidBody->GetScale(0)*0.5f + 5.f, this->pos.y - this->rigidBody->GetScale(1)*0.5f + 5.f);
 	SceneManager2D->Render2DMesh(this->outerMesh, this->rigidBody->GetScale(0), this->rigidBody->GetScale(1), this->pos.x - (this->rigidBody->GetScale(0)*0.5f), this->pos.y - (this->rigidBody->GetScale(1) * 0.5f));
-
+	SceneManager2D->Render2DMesh(this->mesh, this->rigidBody->GetScale(0) - 10.f, this->rigidBody->GetScale(1) - 10.f, this->pos.x - this->rigidBody->GetScale(0)*0.5f + 5.f, this->pos.y - this->rigidBody->GetScale(1)*0.5f + 5.f);
 }
