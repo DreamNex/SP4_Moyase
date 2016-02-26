@@ -49,9 +49,9 @@ CollisionComponent* GUI::GetGUIBound()
 	return gui_Bound;
 }
 
-bool GUI::CheckMO(Vector2 MO)
+bool GUI::CheckMO(Vector2 mousepos)
 {
-	if (pos.x > ((Box*)gui_Bound)->GetMin().x && pos.x < ((Box*)gui_Bound)->GetMax().x && pos.y >((Box*)gui_Bound)->GetMin().y && pos.y < ((Box*)gui_Bound)->GetMax().y)
+	if (mousepos.x > ((Box*)gui_Bound)->GetMin().x && mousepos.x < ((Box*)gui_Bound)->GetMax().x && mousepos.y >((Box*)gui_Bound)->GetMin().y && mousepos.y < ((Box*)gui_Bound)->GetMax().y)
 	{
 		MO = true;
 		return true;
