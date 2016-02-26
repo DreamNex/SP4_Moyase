@@ -22,6 +22,7 @@ class CSceneManager2D : public Scene
 		U_COLOR_TEXTURE,
 		U_TEXT_ENABLED,
 		U_TEXT_COLOR,
+		U_TEXTURE_ALPHA,
 		U_TOTAL,
 	};
 public:
@@ -38,11 +39,15 @@ public:
 	int GetScreenHeight(){ return this->m_window_height; }
 
 	// Low level render tools
-	void RenderText(Mesh* mesh, std::string text, Color color);
+	//void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, float z = 0);
 	void RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX = 1.0f, float sizeY = 1.0f, float x = 0.0f, float y = 0.0f, float z = 0, float rotate = 0, float centerOffsetX = 0, float centerOffsetY = 0);
-	void RenderMesh(Mesh *mesh, bool enableLight);
-	void Render2DMesh(Mesh *mesh, float scaleX = 1.f, float scaleY = 1.f, float x = 0, float y = 0, float rotate = 0, float centerOffsetX = 0, float centerOffsetY = 0);
+	//void RenderMesh(Mesh *mesh, bool enableLight);
+	void Render2DMesh(Mesh *mesh, float scaleX = 1.f, float scaleY = 1.f, float x = 0, float y = 0, float rotate = 0, float centerOffsetX = 0, float centerOffsetY = 0); 
+
+	void RenderTextOnScreenTrans(Mesh* mesh, std::string text, Color color, int transparency, float size, float x, float y, float z = 0);
+	void RenderMeshIn2DTrans(Mesh *mesh, int transparency, float sizeX = 1.0f, float sizeY = 1.0f, float x = 0.0f, float y = 0.0f, float z = 0, float rotate = 0, float centerOffsetX = 0, float centerOffsetY = 0);
+	void Render2DMeshTrams(Mesh *mesh, int transparency, float scaleX = 1.f, float scaleY = 1.f, float x = 0, float y = 0, float rotate = 0, float centerOffsetX = 0, float centerOffsetY = 0);
 
 protected:
 	unsigned m_vertexArrayID;

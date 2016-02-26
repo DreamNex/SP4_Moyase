@@ -108,6 +108,8 @@
     <Filter Include="Source Files\Game State Management\Options">
       <UniqueIdentifier>{f6b16df8-0b60-4bf0-87b5-13bd151d571c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment\Exit">
+      <UniqueIdentifier>{a396df91-71cc-416c-bae7-ac4153982356}</UniqueIdentifier>
     <Filter Include="Source Files\Cursor">
       <UniqueIdentifier>{7255ea2d-a762-4520-8fd9-3e0f599181ed}</UniqueIdentifier>
     </Filter>
@@ -263,23 +265,26 @@
     <ClCompile Include="Source\Controls\Controls.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\UI\Layout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\UI\LevelButton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\UI\SliderUI.cpp">
       <Filter>Source Files\UI\Base</Filter>
     </ClCompile>
     <ClCompile Include="Source\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\UI\SpecialMenuButton.cpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\LevelButton.cpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\Layout.cpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Aesthetics\VectorPathing.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Aesthetics</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameObjects\Exit.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
     </ClCompile>
     <ClCompile Include="Source\Cursor\Cursor.cpp">
       <Filter>Source Files\Cursor</Filter>
@@ -448,23 +453,26 @@
     <ClInclude Include="Source\Controls\Controls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\UI\Layout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\UI\LevelButton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\UI\SliderUI.h">
       <Filter>Source Files\UI\Base</Filter>
     </ClInclude>
     <ClInclude Include="Source\SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\UI\SpecialMenuButton.h">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\LevelButton.h">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\Layout.h">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Aesthetics\VectorPathing.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Aesthetics</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameObjects\Exit.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
     </ClInclude>
     <ClInclude Include="Source\Cursor\Cursor.h">
       <Filter>Source Files\Cursor</Filter>
