@@ -2,7 +2,6 @@
 using namespace std;
 
 #include "GameStateManager.h"
-#include "gamestate.h"
 #include "menustate.h"
 #include "introstate.h"
 

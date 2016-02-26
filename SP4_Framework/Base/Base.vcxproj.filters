@@ -170,9 +170,6 @@
     <ClCompile Include="Source\FileReading.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SoundManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -270,7 +267,11 @@
       <Filter>Source Files\UI\Menus</Filter>
     </ClCompile>
     <ClCompile Include="Source\UI\LevelButton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\SliderUI.cpp">
       <Filter>Source Files\UI\Menus</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameObjects\Exit.cpp">
       <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
@@ -350,9 +351,6 @@
       <Filter>Source Files\Game State Management\Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="Source\FileReading.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Level.h">
@@ -444,6 +442,9 @@
     </ClInclude>
     <ClInclude Include="Source\Controls\Controls.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\SliderUI.h">
+      <Filter>Source Files\UI\Menus</Filter>
     </ClInclude>
     <ClInclude Include="Source\UI\LevelButton.h">
       <Filter>Source Files\UI\Menus</Filter>

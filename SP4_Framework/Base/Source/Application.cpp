@@ -22,6 +22,8 @@ int Application::Button_Left = 0, Application::Button_Middle = 0, Application::B
 bool Application::exitbool = false;
 static bool MouseWithinScreen = false;
 
+ISoundEngine* BGM_Engine = createIrrKlangDevice();
+ISoundEngine* SFX_Engine = createIrrKlangDevice();
 /********************************************************************************
  Define an error callback
  ********************************************************************************/

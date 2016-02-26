@@ -30,7 +30,7 @@ CSceneManager2D_Intro::~CSceneManager2D_Intro()
 void CSceneManager2D_Intro::Init()
 {
 	CSceneManager2D::Init();
-	//SM->Init();
+	
 	SE = createIrrKlangDevice();
 	
 	meshList[GEO_SPLASH] = MeshBuilder::Generate2DMesh("GEO_SPLASH", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
