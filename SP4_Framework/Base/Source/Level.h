@@ -13,12 +13,14 @@ public:
 	Level(std::string level2load, std::string avatar2load);
 	~Level();
 	
-	void update(double dt);
+	int update(double dt);
 	void render(CSceneManager2D* sceneManager2D);
 	
+	Balls* getBall() { return theball; }
+
 	int* getToolsArray() { return tools; }
 
-	std::vector<GameObject*> getGameObjects() { return Allassets; }
+	std::vector<GameObject*>& getGameObjects() { return Allassets; }
 	void addTool(Tools* Tool);
 
 private:

@@ -22,7 +22,7 @@ Level::~Level()
 	}
 }
 
-void Level::update(double dt)
+int Level::update(double dt)
 {
 	for (int i = 0; i < Allassets.size(); ++i)
 	{
@@ -30,11 +30,20 @@ void Level::update(double dt)
 
 		if (Allassets[i] != theball)
 		{
-			if (theball->checkColision(Allassets[i]));
+			if (theball->checkColision(Allassets[i]))
 			{
+				if (dynamic_cast<Exit*>(Allassets[i]))
+				{
+					return 3;
+				}
+				else if (dynamic_cast<Spikes*>(Allassets[i]))
+				{
+					return 0;
+				}
 			}
 		}
 	}
+	return 1;
 }
 
 void Level::render(CSceneManager2D* sceneManager2D)
