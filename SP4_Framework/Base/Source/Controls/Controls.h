@@ -19,15 +19,17 @@ public:
 	Controls(GUIManager * m_GUI);
 	~Controls();
 
-	void Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets, bool m_state, float dt);
+	void Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets, bool ml_state, bool mr_state, float dt, bool guiOnly = false);
 	void Render(CSceneManager2D *SceneManger2D);
 
-	int SetState();
+	void GetSelection(Vector2 mousePos);
 	void GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mousePos);
 	void GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mousePos);
-	void GetRotation(Vector2 mousePos);
+	void DoRotation(Vector2 mousePos);
+	void SetState(int i);
 	int GetState();
 	void ResetState();
+
 private:
 	CONTROLS_STATE c_state;
 	GUIManager *m_GUI;
@@ -41,8 +43,9 @@ private:
 	//Cursor
 	Vector2 cursorPos;
 	Mesh* cursorMesh;
-	bool m_state;
-
+	bool mL_state;
+	bool mR_state;
+	bool onClicked = false;
 	int state;
 	std::vector<GameObject*> g_Obj;
 };

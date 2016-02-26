@@ -23,7 +23,7 @@ public:
 	};
 	enum GameStates
 	{
-		PAUSE,
+		RESET,
 		START,
 		EXIT,
 	};
@@ -39,8 +39,8 @@ public:
 	std::vector<GameObject*> gameObjects;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
-	GUIManager * m_GUI;
-	Controls * ctrs;
-	bool m_state;
+	//GUIManager * m_GUI;
+	//Controls * ctrs;
+	//bool mL_state, mR_state;
 	GameStates G_States;
 };

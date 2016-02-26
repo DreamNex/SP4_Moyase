@@ -29,6 +29,11 @@ GUIManager::GUIManager(int cannon, int boost , int slow)
 	temp = new GUI(startPos, GUI::STARTGUI, new Box(startPos, 180, 100), "Image//startbtn.tga", "Image//slowGUIFaded.tga");
 	gui_Tools.push_back(temp);
 
+	//Reset
+	temp = new GUI(startPos, GUI::RESETGUI, new Box(startPos, 180, 100), "Image//Resetbtn.tga", "Image//slowGUIFaded.tga");
+	gui_Tools.push_back(temp);
+	gui_Tools.back()->SetActive(false);
+
 	//Exit
 	temp = new GUI(ExitPos, GUI::EXIT, new Box(ExitPos, 80, 50), "Image//exitbtn.tga", "Image//slowGUIFaded.tga");
 	gui_Tools.push_back(temp);
@@ -38,6 +43,7 @@ GUIManager::GUIManager(int cannon, int boost , int slow)
 
 GUIManager::~GUIManager()
 {
+	
 }
 
 
