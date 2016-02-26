@@ -50,8 +50,6 @@ void CMenuState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, c
 {
 	for (unsigned int i = 0; i < scene->Buttons.size(); ++i)
 	{
-		scene->Buttons[i]->CheckMouseOver((float)mouse_x, (float)mouse_y);
-
 		if (scene->Buttons[i]->GetText() == "Start" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
 		{
 			theGSM->ChangeState(CLevelSelectState::Instance());

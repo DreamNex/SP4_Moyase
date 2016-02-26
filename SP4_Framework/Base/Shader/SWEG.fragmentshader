@@ -133,9 +133,5 @@ void main(){
 	
 	float temp;
 	temp = alpha;
-	if(alpha == 0)
-	{
-		temp = 100.f;
-	}
-	color = mix(color, vec4(color.r, color.g, color.b, 0), ((100.f - temp)/100.f));
+	color = mix(color, vec4(color.r, color.g, color.b, 0), (temp/100.f));
 }

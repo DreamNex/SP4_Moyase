@@ -268,7 +268,7 @@ void CSceneManager2D::RenderMeshIn2DTrans(Mesh *mesh, int transparency, float si
 	{
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	glUniform1i(m_parameters[U_TEXTURE_ALPHA], 100);
+	glUniform1i(m_parameters[U_TEXTURE_ALPHA], 0);
 	modelStack.PopMatrix();
 	viewStack.PopMatrix();
 	projectionStack.PopMatrix();
@@ -309,7 +309,7 @@ void CSceneManager2D::Render2DMeshTrams(Mesh *mesh, int transparency, float scal
 	{
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-	glUniform1i(m_parameters[U_TEXTURE_ALPHA], 100);
+	glUniform1i(m_parameters[U_TEXTURE_ALPHA], 0);
 	modelStack.PopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
@@ -350,7 +350,7 @@ void CSceneManager2D::RenderTextOnScreenTrans(Mesh* mesh, std::string text, Colo
 	}
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
-	glUniform1i(m_parameters[U_TEXTURE_ALPHA], 100);
+	glUniform1i(m_parameters[U_TEXTURE_ALPHA], 0);
 	modelStack.PopMatrix();
 	viewStack.PopMatrix();
 	projectionStack.PopMatrix();
