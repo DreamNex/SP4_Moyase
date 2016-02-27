@@ -13,7 +13,7 @@ Controls::Controls(GUIManager * m_GUI)
 	SelectedActive = false;
 	SelectedGO = 0;
 	state = 0;
-	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
+	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga","Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
 	
 }
 
