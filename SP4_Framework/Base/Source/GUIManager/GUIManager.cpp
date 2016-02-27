@@ -3,11 +3,11 @@
 
 GUIManager::GUIManager(int cannon, int boost , int slow)
 {
-	Vector2 cannonPos(1180, 200);
-	Vector2 slowPos(1180, 350);
-	Vector2 boostPos(1180, 500);
-	Vector2 startPos(550, 600);
-	Vector2 ExitPos(10, 660);
+	Vector2 cannonPos(1230, 250);
+	Vector2 slowPos(1230, 400);
+	Vector2 boostPos(1230, 550);
+	Vector2 startPos(650, 650);
+	Vector2 ExitPos(50, 680);
 
 	GUI* temp;
 	//Cannon
@@ -61,8 +61,7 @@ void GUIManager::Update(float dt)
 	for (unsigned int i = 0; i < gui_toolCount.size(); i++)
 	{
 		if (gui_toolCount[i] == 0)
-		{
-			gui_Tools[i]->SetActive(false);
+		{	gui_Tools[i]->SetActive(false);
 		}
 	}
 

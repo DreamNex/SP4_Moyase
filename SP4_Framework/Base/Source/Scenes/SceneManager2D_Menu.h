@@ -2,6 +2,7 @@
 #include "SceneManager2D.h"
 #include "../UI/SpecialMenuButton.h"
 #include <vector>
+#include "../Cursor/Cursor.h"
 
 class CSceneManager2D_Menu: public CSceneManager2D
 {
@@ -26,4 +27,5 @@ public:
 	std::vector<SpecialMenuButton*> Buttons;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
+	Cursor * cursor;
 };

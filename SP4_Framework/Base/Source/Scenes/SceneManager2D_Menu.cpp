@@ -47,11 +47,18 @@ void CSceneManager2D_Menu::Init()
 	//Buttons.push_back(new SpecialMenuButton("How 2 Play", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2 - 80, 0.35, true));
 	//Buttons.push_back(new SpecialMenuButton("Options", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2 - 160, 0.5, true));
 	//Buttons.push_back(new SpecialMenuButton("Exit", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2 - 240, 0.6, true));
+	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga", "Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
 }
 
 void CSceneManager2D_Menu::Update(double dt)
 {
 	CSceneManager2D::Update(dt);
+	bool m_state = false;
+	if (Application::Button_Left)
+		m_state = true;
+
+	cursor->Update(dt,m_state);
+
 	for (unsigned int i = 0; i < Buttons.size(); ++i)
 	{
 		if (Buttons[i]->CheckMouseOver((float)Application::mouse_current_x, (float)Application::mouse_current_y, dt));
@@ -70,6 +77,7 @@ void CSceneManager2D_Menu::Render()
 	{
 		Buttons[i]->render(this, meshList[GEO_TEXT]);
 	}
+	cursor->Render(this);
 
 }
 

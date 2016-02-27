@@ -12,7 +12,7 @@
 class Cursor
 {
 public:
-	Cursor( char * d_cursorMesh, char * clickedMesh, float mouseSens, float cursSize_x, float cursSize_y);
+	Cursor( char * d_cursorMesh, char * clickedMesh, char * tailmesh, float mouseSens, float cursSize_x, float cursSize_y);
 	~Cursor();
 
 	void Update(float dt, bool m_state);
@@ -41,7 +41,9 @@ private:
 	bool m_state;
 	Mesh* d_cursorMesh;
 	Mesh* clickedMesh;
+	Mesh* TailMesh;
+	float tspeed;
 
-
+	std::vector<Vector2*>tailpos;
 };
 

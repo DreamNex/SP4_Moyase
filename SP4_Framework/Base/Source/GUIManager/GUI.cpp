@@ -92,7 +92,7 @@ bool GUI::OnClick(Vector2 mousePos)
 void GUI::render(CSceneManager2D* SceneManager2D)
 {
 	if (MO)
-		SceneManager2D->RenderMeshIn2D(hoverMesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x, pos.y);
+		SceneManager2D->RenderMeshIn2D(hoverMesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x - ((Box*)gui_Bound)->GetWidth() / 2, pos.y - ((Box*)gui_Bound)->GetHeight()/2);
 	else
-		SceneManager2D->RenderMeshIn2D(Mesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x, pos.y);
+		SceneManager2D->RenderMeshIn2D(Mesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x - ((Box*)gui_Bound)->GetWidth() / 2, pos.y - ((Box*)gui_Bound)->GetHeight() / 2);
 }
