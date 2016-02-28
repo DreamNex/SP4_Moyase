@@ -200,6 +200,9 @@ Application::~Application()
 		delete GSM;
 		GSM = NULL;
 	}
+
+	BGM->Exit();
+	SFX->Exit();
 }
 
 /********************************************************************************
@@ -280,6 +283,10 @@ void Application::Init()
 	GSM = new CGameStateManager();
 	GSM->Init("da GSM", m_window_width, m_window_height);
 	GSM->ChangeState(CIntroState::Instance());
+
+	//Sounds
+	BGM = new SoundManager();
+	SFX = new SoundManager();
 }
 
 /********************************************************************************

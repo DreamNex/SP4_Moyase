@@ -109,7 +109,7 @@
       <UniqueIdentifier>{f6b16df8-0b60-4bf0-87b5-13bd151d571c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\GameObjects\Enviroment\Exit">
-      <UniqueIdentifier>{5be9a2fa-0fe5-420c-b7e0-ff2a9e7c4525}</UniqueIdentifier>
+      <UniqueIdentifier>{d686a994-9ac8-4769-9963-eb9c14789756}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -273,11 +273,11 @@
       <Filter>Source Files\UI\Menus</Filter>
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\Exit.cpp">
-      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Aesthetics\VectorPathing.cpp">
       <Filter>Source Files\Aesthetics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Exit.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -457,6 +457,18 @@
     </ClInclude>
     <ClInclude Include="Source\Aesthetics\VectorPathing.h">
       <Filter>Source Files\Aesthetics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\LevelButton.h">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\Layout.h">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Aesthetics\VectorPathing.h">
+      <Filter>Source Files\Aesthetics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Exit.h">
+      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

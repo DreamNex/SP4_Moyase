@@ -14,6 +14,7 @@ public:
 
 	void Init();
 	void Update();
+	void Exit();
 
 	//Play a 2D sound
 	void Play(std::string filepath, bool loopit = false);

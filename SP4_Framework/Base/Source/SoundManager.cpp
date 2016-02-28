@@ -1,5 +1,4 @@
 #include "SoundManager.h"
-#include "irrKlang.h"
 
 using namespace irrklang;
 
@@ -13,16 +12,12 @@ SoundManager::SoundManager()
 //Sound manager destructor
 SoundManager::~SoundManager()
 {
-	if (SE != NULL)
-	{
-		SE->drop();
-	}
 }
 
 //Sound manager init
 void SoundManager::Init()
 {
-	//SE = createIrrKlangDevice();
+	SE = createIrrKlangDevice(ESOD_AUTO_DETECT, ESEO_MULTI_THREADED | ESEO_LOAD_PLUGINS | ESEO_USE_3D_BUFFERS);
 }
 
 //to update sound manager.
@@ -33,5 +28,10 @@ void SoundManager::Update()
 
 void SoundManager::Play(std::string filepath, bool loopit)
 {
-	//SE->play2D(filepath.c_str(), loopit, true);
+	SE->play2D(filepath.c_str(), loopit, false);
+}
+
+void SoundManager::Exit()
+{
+	SE->drop();
 }
