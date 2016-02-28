@@ -20,7 +20,7 @@ CSceneManager2D(m_window_width, m_window_height)
 
 CSceneManager2D_Intro::~CSceneManager2D_Intro()
 {
-	SM->Exit();
+	//Application::BGM.Exit();
 }
 
 void CSceneManager2D_Intro::Init()
@@ -28,15 +28,14 @@ void CSceneManager2D_Intro::Init()
 	CSceneManager2D::Init();
 	
 	//SE = createIrrKlangDevice();
-	SM = new SoundManager();
-	SM->Init();
+	Application::BGM.Init();
 
 	meshList[GEO_SPLASH] = MeshBuilder::Generate2DMesh("GEO_SPLASH", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
 	meshList[GEO_SPLASH]->textureID = LoadTGA("Image//blaze.tga");
 	
 	//SE->setSoundVolume(0.1f);
 	//SE->play2D("SoundTracks//SplashScreen.mp3", false, false);
-	SM->Play("SoundTracks//SplashScreen.mp3", false);
+	Application::BGM.Play("SoundTracks//SplashScreen.mp3", false);
 }
 
 void CSceneManager2D_Intro::Update(double dt)

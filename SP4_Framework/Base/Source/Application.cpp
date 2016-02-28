@@ -22,8 +22,9 @@ int Application::Button_Left = 0, Application::Button_Middle = 0, Application::B
 bool Application::exitbool = false;
 static bool MouseWithinScreen = false;
 
-ISoundEngine* BGM_Engine = createIrrKlangDevice();
-ISoundEngine* SFX_Engine = createIrrKlangDevice();
+SoundManager Application::SFX;
+SoundManager Application::BGM;
+
 /********************************************************************************
  Define an error callback
  ********************************************************************************/
@@ -201,8 +202,6 @@ Application::~Application()
 		GSM = NULL;
 	}
 
-	BGM->Exit();
-	SFX->Exit();
 }
 
 /********************************************************************************
@@ -285,8 +284,8 @@ void Application::Init()
 	GSM->ChangeState(CIntroState::Instance());
 
 	//Sounds
-	BGM = new SoundManager();
-	SFX = new SoundManager();
+	BGM.Init();
+	SFX.Init();
 }
 
 /********************************************************************************
@@ -329,6 +328,9 @@ void Application::Run()
  ********************************************************************************/
 void Application::Exit()
 {
+	BGM.Exit();
+	//
+
 	//Close OpenGL window and terminate GLFW
 	glfwDestroyWindow(m_window);
 	//Finalize and clean up GLFW

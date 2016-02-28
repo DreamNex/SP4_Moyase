@@ -33,5 +33,6 @@ void SoundManager::Play(std::string filepath, bool loopit)
 
 void SoundManager::Exit()
 {
-	SE->drop();
+	if (SE)
+		SE->drop();
 }
