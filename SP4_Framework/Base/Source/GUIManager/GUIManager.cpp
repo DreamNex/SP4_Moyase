@@ -68,8 +68,7 @@ void GUIManager::Update(float dt)
 	for (unsigned int i = 0; i < gui_toolCount.size(); i++)
 	{
 		if (gui_toolCount[i] == 0)
-		{
-			gui_Tools[i]->SetActive(false);
+		{	gui_Tools[i]->SetActive(false);
 		}
 	}
 
@@ -106,7 +105,7 @@ void GUIManager::SetToolCount(int index, int val)
 
 bool GUIManager::CheckPointer()
 {
-	Vector2 mousePos(Application::mouse_current_x, 720 - Application::mouse_current_y);
+	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
 	if (slidePointer->GetPos().y >= mousePos.y)
 		slide = true;
 	else

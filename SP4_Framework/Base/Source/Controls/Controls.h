@@ -1,11 +1,9 @@
 #pragma once
-#include "../GUIManager/GUIManager.h"
-#include "../GameObjects/GameObject.h"
 #include "../GameObjects/Cannon.h"
 #include "../GameObjects/Boost.h"
 #include "../GameObjects/Slow.h"
 #include"../Timer/Timer.h"
-
+#include"../Cursor/Cursor.h"
 class Controls
 {
 public:
@@ -48,5 +46,8 @@ private:
 	bool onClicked = false;
 	int state;
 	std::vector<GameObject*> g_Obj;
+
+	//Cursor Class
+	Cursor * cursor;
 };
 

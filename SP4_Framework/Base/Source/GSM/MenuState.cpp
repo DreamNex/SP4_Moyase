@@ -5,13 +5,16 @@ using namespace std;
 #include "GameStateManager.h"
 #include "LevelSelectState.h"
 #include "TutorialState.h"
+#include "OptionsState.h"
 #include "../Application.h"
+
 
 CMenuState CMenuState::theMenuState;
 
 void CMenuState::Init()
 {
 	scene = new CSceneManager2D_Menu(800, 600);
+	
 	scene->Init();
 }
 
@@ -49,8 +52,6 @@ void CMenuState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, c
 {
 	for (unsigned int i = 0; i < scene->Buttons.size(); ++i)
 	{
-		scene->Buttons[i]->CheckMouseOver((float)mouse_x, (float)mouse_y);
-
 		if (scene->Buttons[i]->GetText() == "Start" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
 		{
 			theGSM->ChangeState(CLevelSelectState::Instance());
@@ -59,6 +60,11 @@ void CMenuState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, c
 		else if (scene->Buttons[i]->GetText() == "How 2 Play" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
 		{
 			theGSM->ChangeState(CTutorialState::Instance());
+			break;
+		}
+		else if (scene->Buttons[i]->GetText() == "Options" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
+		{
+			theGSM->ChangeState(OptionsState::Instance());
 			break;
 		}
 		else if (scene->Buttons[i]->GetText() == "Exit" && scene->Buttons[i]->GetMouseover() && button_Left == 1)

@@ -43,7 +43,7 @@ void CSceneManager2D::Init()
 	glGenVertexArrays(1, &m_vertexArrayID);
 	glBindVertexArray(m_vertexArrayID);
 
-	m_programID = LoadShaders( "Shader//Texture.vertexshader", "Shader//Text.fragmentshader" );
+	m_programID = LoadShaders( "Shader//SWEG.vertexshader", "Shader//SWEG.fragmentshader" );
 	
 	// Get a handle for our uniform
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
@@ -58,7 +58,8 @@ void CSceneManager2D::Init()
 	// Get a handle for our "textColor" uniform
 	m_parameters[U_TEXT_ENABLED] = glGetUniformLocation(m_programID, "textEnabled");
 	m_parameters[U_TEXT_COLOR] = glGetUniformLocation(m_programID, "textColor");
-	
+	m_parameters[U_TEXTURE_ALPHA] = glGetUniformLocation(m_programID, "alpha");
+
 	// Use our shader
 	glUseProgram(m_programID);
 
@@ -93,50 +94,6 @@ void CSceneManager2D::Update(double dt)
 }
 
 /********************************************************************************
- Render text onto the screen
- ********************************************************************************/
-void CSceneManager2D::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, float z)
-{
-		if(!mesh || mesh->textureID <= 0)
-		return;
-	
-	glDisable(GL_DEPTH_TEST);
-	Mtx44 ortho;
-	//ortho.SetToOrtho(0, m_window_width, 0, m_window_height, -10, 10);
-	ortho.SetToOrtho(0, m_window_width, 0, m_window_height, -10, 10);
-	projectionStack.PushMatrix();
-		projectionStack.LoadMatrix(ortho);
-		viewStack.PushMatrix();
-			viewStack.LoadIdentity();
-			modelStack.PushMatrix();
-				modelStack.LoadIdentity();
-				modelStack.Translate(x, y, z);
-				modelStack.Scale(size, size, size);
-				glUniform1i(m_parameters[U_TEXT_ENABLED], 1);
-				glUniform3fv(m_parameters[U_TEXT_COLOR], 1, &color.r);
-				glUniform1i(m_parameters[U_LIGHTENABLED], 0);
-				glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
-				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-				glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
-				for(unsigned i = 0; i < text.length(); ++i)
-				{
-					Mtx44 characterSpacing;
-					characterSpacing.SetToTranslation( (i*0.5f) + 0.5f, 0.5f, 0); //1.0f is the spacing of each character, you may change this value
-					Mtx44 MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top() * characterSpacing;
-					glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
-	
-					mesh->Render((unsigned)text[i] * 6, 6);
-				}
-				glBindTexture(GL_TEXTURE_2D, 0);
-				glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
-			modelStack.PopMatrix();
-		viewStack.PopMatrix();
-	projectionStack.PopMatrix();
-	glEnable(GL_DEPTH_TEST);
-}
-
-/********************************************************************************
  Render a mesh in 2D
  ********************************************************************************/
 void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, float sizeY, float x, float y, float z, float rotate, float centerOffsetX, float centerOffsetY)
@@ -161,7 +118,8 @@ void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, 
 				Mtx44 MVP, modelView, modelView_inverse_transpose;
 	
 				MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
-				glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+				//glUniform1i(m_parameters[U_TEXTURE_ALPHA], 50);
+				glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]); 
 				if(mesh->textureID > 0)
 				{
 					glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
@@ -178,7 +136,7 @@ void CSceneManager2D::RenderMeshIn2D(Mesh *mesh, bool enableLight, float sizeX, 
 				{
 					glBindTexture(GL_TEXTURE_2D, 0);
 				}
-       
+				//glUniform1i(m_parameters[U_TEXTURE_ALPHA], 100);
 			modelStack.PopMatrix();
 		viewStack.PopMatrix();
 	projectionStack.PopMatrix();
@@ -201,6 +159,7 @@ void CSceneManager2D::Render2DMesh(Mesh *mesh, float scaleX, float scaleY, float
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
+	//glUniform1i(m_parameters[U_TEXTURE_ALPHA], 0);
 	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
 	if (mesh->textureID > 0)
 	{
@@ -218,9 +177,186 @@ void CSceneManager2D::Render2DMesh(Mesh *mesh, float scaleX, float scaleY, float
 	{
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+	//glUniform1i(m_parameters[U_TEXTURE_ALPHA], 100);
 	modelStack.PopMatrix();
 	glEnable(GL_DEPTH_TEST);
 }
+
+void CSceneManager2D::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y, float z)
+{
+	if (!mesh || mesh->textureID <= 0)
+		return;
+
+	glDisable(GL_DEPTH_TEST);
+	Mtx44 ortho;
+	//ortho.SetToOrtho(0, m_window_width, 0, m_window_height, -10, 10);
+	ortho.SetToOrtho(0, m_window_width, 0, m_window_height, -10, 10);
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity();
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity();
+	modelStack.Translate(x, y, z);
+	modelStack.Scale(size, size, size);
+	glUniform1i(m_parameters[U_TEXT_ENABLED], 1);
+	//glUniform1i(m_parameters[U_TEXTURE_ALPHA], 50);
+	glUniform3fv(m_parameters[U_TEXT_COLOR], 1, &color.r);
+	glUniform1i(m_parameters[U_LIGHTENABLED], 0);
+	glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+	glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
+	for (unsigned i = 0; i < text.length(); ++i)
+	{
+		Mtx44 characterSpacing;
+		characterSpacing.SetToTranslation((i*0.5f) + 0.5f, 0.5f, 0); //1.0f is the spacing of each character, you may change this value
+		Mtx44 MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top() * characterSpacing;
+		glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+
+		mesh->Render((unsigned)text[i] * 6, 6);
+	}
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
+	//glUniform1i(m_parameters[U_TEXTURE_ALPHA], 100);
+	modelStack.PopMatrix();
+	viewStack.PopMatrix();
+	projectionStack.PopMatrix();
+	glEnable(GL_DEPTH_TEST);
+}
+
+/********************************************************************************
+Render a mesh in 2D W/Transparent
+********************************************************************************/
+void CSceneManager2D::RenderMeshIn2DTrans(Mesh *mesh, int transparency, float sizeX, float sizeY, float x, float y, float z, float rotate, float centerOffsetX, float centerOffsetY)
+{
+	Mtx44 ortho;
+	ortho.SetToOrtho(0, m_window_width, 0, m_window_height, -10, 10);
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity();
+	modelStack.PushMatrix();
+	//modelStack.LoadIdentity();
+	modelStack.Translate((float)x, (float)y, (float)z);
+	if (rotate)
+	{
+		modelStack.Rotate(rotate, 0, 0, 1);
+	}
+	modelStack.Scale((float)sizeX, (float)sizeY, 1);
+	if (centerOffsetX || centerOffsetY)
+		modelStack.Translate(centerOffsetX, centerOffsetY, 0);
+
+	Mtx44 MVP, modelView, modelView_inverse_transpose;
+
+	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
+	glUniform1i(m_parameters[U_TEXTURE_ALPHA], transparency);
+	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+	if (mesh->textureID > 0)
+	{
+		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+		glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
+	}
+	else
+	{
+		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 0);
+	}
+	mesh->Render();
+	if (mesh->textureID > 0)
+	{
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	glUniform1i(m_parameters[U_TEXTURE_ALPHA], 0);
+	modelStack.PopMatrix();
+	viewStack.PopMatrix();
+	projectionStack.PopMatrix();
+
+}
+
+void CSceneManager2D::Render2DMeshTrams(Mesh *mesh, int transparency, float scaleX, float scaleY, float x, float y, float rotate, float centerOffsetX, float centerOffsetY)
+{
+	glDisable(GL_DEPTH_TEST);
+	modelStack.PushMatrix();
+	//modelStack.LoadIdentity();
+	modelStack.Translate(x, y, 0);
+	if (rotate)
+		modelStack.Rotate(rotate, 0, 0, 1);
+	if (centerOffsetX || centerOffsetY)
+		modelStack.Translate(centerOffsetX, centerOffsetY, 0);
+	modelStack.Scale(scaleX, scaleY, 1);
+
+
+	Mtx44 MVP, modelView, modelView_inverse_transpose;
+
+	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
+	glUniform1i(m_parameters[U_TEXTURE_ALPHA], transparency);
+	glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+	if (mesh->textureID > 0)
+	{
+		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+		glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
+	}
+	else
+	{
+		glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 0);
+	}
+	mesh->Render();
+	if (mesh->textureID > 0)
+	{
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	glUniform1i(m_parameters[U_TEXTURE_ALPHA], 0);
+	modelStack.PopMatrix();
+	glEnable(GL_DEPTH_TEST);
+}
+
+void CSceneManager2D::RenderTextOnScreenTrans(Mesh* mesh, std::string text, Color color, int transparency, float size, float x, float y, float z)
+{
+	if (!mesh || mesh->textureID <= 0)
+		return;
+
+	glDisable(GL_DEPTH_TEST);
+	Mtx44 ortho;
+	//ortho.SetToOrtho(0, m_window_width, 0, m_window_height, -10, 10);
+	ortho.SetToOrtho(0, m_window_width, 0, m_window_height, -10, 10);
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity();
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity();
+	modelStack.Translate(x, y, z);
+	modelStack.Scale(size, size, size);
+	glUniform1i(m_parameters[U_TEXT_ENABLED], 1);
+	glUniform1i(m_parameters[U_TEXTURE_ALPHA], transparency);
+	glUniform3fv(m_parameters[U_TEXT_COLOR], 1, &color.r);
+	glUniform1i(m_parameters[U_LIGHTENABLED], 0);
+	glUniform1i(m_parameters[U_COLOR_TEXTURE_ENABLED], 1);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+	glUniform1i(m_parameters[U_COLOR_TEXTURE], 0);
+	for (unsigned i = 0; i < text.length(); ++i)
+	{
+		Mtx44 characterSpacing;
+		characterSpacing.SetToTranslation((i*0.5f) + 0.5f, 0.5f, 0); //1.0f is the spacing of each character, you may change this value
+		Mtx44 MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top() * characterSpacing;
+		glUniformMatrix4fv(m_parameters[U_MVP], 1, GL_FALSE, &MVP.a[0]);
+
+		mesh->Render((unsigned)text[i] * 6, 6);
+	}
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
+	glUniform1i(m_parameters[U_TEXTURE_ALPHA], 0);
+	modelStack.PopMatrix();
+	viewStack.PopMatrix();
+	projectionStack.PopMatrix();
+	glEnable(GL_DEPTH_TEST);
+}
+
 
 /********************************************************************************
  Render this scene

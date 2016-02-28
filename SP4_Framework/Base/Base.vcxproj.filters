@@ -109,7 +109,10 @@
       <UniqueIdentifier>{f6b16df8-0b60-4bf0-87b5-13bd151d571c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\GameObjects\Enviroment\Exit">
-      <UniqueIdentifier>{5be9a2fa-0fe5-420c-b7e0-ff2a9e7c4525}</UniqueIdentifier>
+      <UniqueIdentifier>{a396df91-71cc-416c-bae7-ac4153982356}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controls">
+      <UniqueIdentifier>{52224c3a-1e47-4837-951d-0aab00b1d3e2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -168,9 +171,6 @@
       <Filter>Source Files\Game State Management\Gameplay</Filter>
     </ClCompile>
     <ClCompile Include="Source\FileReading.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Level.cpp">
@@ -263,20 +263,32 @@
     <ClCompile Include="Source\GSM\OptionsState.cpp">
       <Filter>Source Files\Game State Management\Options</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Controls\Controls.cpp">
+    <ClCompile Include="Source\UI\SliderUI.cpp">
+      <Filter>Source Files\UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\UI\Layout.cpp">
+    <ClCompile Include="Source\UI\SpecialMenuButton.cpp">
       <Filter>Source Files\UI\Menus</Filter>
     </ClCompile>
     <ClCompile Include="Source\UI\LevelButton.cpp">
       <Filter>Source Files\UI\Menus</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\Exit.cpp">
-      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
+    <ClCompile Include="Source\UI\Layout.cpp">
+      <Filter>Source Files\UI\Menus</Filter>
     </ClCompile>
     <ClCompile Include="Source\Aesthetics\VectorPathing.cpp">
       <Filter>Source Files\Aesthetics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjects\Exit.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Cursor\Cursor.cpp">
+      <Filter>Source Files\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Controls\Controls.cpp">
+      <Filter>Source Files\Controls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -350,9 +362,6 @@
       <Filter>Source Files\Game State Management\Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="Source\FileReading.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Level.h">
@@ -442,8 +451,14 @@
     <ClInclude Include="Source\GSM\OptionsState.h">
       <Filter>Source Files\Game State Management\Options</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Controls\Controls.h">
+    <ClInclude Include="Source\UI\SliderUI.h">
+      <Filter>Source Files\UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SoundManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\SpecialMenuButton.h">
+      <Filter>Source Files\UI\Menus</Filter>
     </ClInclude>
     <ClInclude Include="Source\UI\LevelButton.h">
       <Filter>Source Files\UI\Menus</Filter>
@@ -451,11 +466,17 @@
     <ClInclude Include="Source\UI\Layout.h">
       <Filter>Source Files\UI\Menus</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Aesthetics\VectorPathing.h">
+      <Filter>Source Files\Aesthetics</Filter>
+    </ClInclude>
     <ClInclude Include="Source\GameObjects\Exit.h">
       <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Aesthetics\VectorPathing.h">
-      <Filter>Source Files\Aesthetics</Filter>
+    <ClInclude Include="Source\Controls\Controls.h">
+      <Filter>Source Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Cursor\Cursor.h">
+      <Filter>Source Files\Controls</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,7 +9,8 @@ in vec2 texCoord;
 // Ouput data
 out vec4 color;
 
-struct Light {
+struct Light
+{
 	int type;
 	vec3 position_cameraspace;
 	vec3 color;
@@ -60,6 +61,7 @@ uniform bool colorTextureEnabled;
 uniform sampler2D colorTexture;
 uniform bool textEnabled;
 uniform vec3 textColor;
+uniform int alpha;
 
 void main(){
 	if(lightEnabled == true)
@@ -128,4 +130,8 @@ void main(){
 		else
 			color = vec4( fragmentColor, 1 );
 	}
+	
+	float temp;
+	temp = alpha;
+	color = mix(color, vec4(color.r, color.g, color.b, 0), (temp/100.f));
 }

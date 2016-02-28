@@ -52,7 +52,7 @@ CollisionComponent* GUI::GetGUIBound()
 
 bool GUI::CheckMO()
 {
-	Vector2 MO = Vector2(Application::mouse_current_x, 720 - Application::mouse_current_y);
+	Vector2 MO = Vector2(Application::mouse_current_x, Application::mouse_current_y);
 	CollisionHandler cH;
 	if (dynamic_cast<Box*>(gui_Bound))
 	{ 
@@ -108,7 +108,7 @@ void GUI::Update()
 void GUI::render(CSceneManager2D* SceneManager2D)
 {
 	if (MO)
-		SceneManager2D->RenderMeshIn2D(hoverMesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x, pos.y);
+		SceneManager2D->RenderMeshIn2D(hoverMesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x - ((Box*)gui_Bound)->GetWidth() / 2, pos.y - ((Box*)gui_Bound)->GetHeight()/2);
 	else
-		SceneManager2D->RenderMeshIn2D(Mesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x, pos.y);
+		SceneManager2D->RenderMeshIn2D(Mesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x - ((Box*)gui_Bound)->GetWidth() / 2, pos.y - ((Box*)gui_Bound)->GetHeight() / 2);
 }
