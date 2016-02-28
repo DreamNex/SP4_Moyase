@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneManager2D.h"
+#include "../UI/Layout.h"
 #include "irrKlang.h"
 using namespace irrklang;
 
@@ -22,10 +23,11 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
+	Layout *transition;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 	ISoundEngine* SE;
 	ISound* splash;
-	
+
 };
 

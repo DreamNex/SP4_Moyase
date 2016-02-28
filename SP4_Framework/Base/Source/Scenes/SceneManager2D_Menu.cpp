@@ -27,6 +27,9 @@ CSceneManager2D_Menu::~CSceneManager2D_Menu()
 		if (Buttons[i])
 			delete Buttons[i];
 	}
+
+	if (transition)
+		delete transition;
 }
 
 void CSceneManager2D_Menu::Init()
@@ -44,14 +47,14 @@ void CSceneManager2D_Menu::Init()
 	Buttons.push_back(new SpecialMenuButton("How 2 Play", temp * 0.5f, 300, temp + temp - temp*0.33f, 300 * 0.5f, 0.2f));
 	Buttons.push_back(new SpecialMenuButton("Options", temp * 0.5f, 250, temp + temp + temp*0.33f, 250 * 0.5f, 0.2f));
 	Buttons.push_back(new SpecialMenuButton("Exit", temp * 0.5f, 150, temp + temp + temp, 150 * 0.5f, 0.2f));
-	//Buttons.push_back(new SpecialMenuButton("How 2 Play", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2 - 80, 0.35, true));
-	//Buttons.push_back(new SpecialMenuButton("Options", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2 - 160, 0.5, true));
-	//Buttons.push_back(new SpecialMenuButton("Exit", "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 150, 75, m_window_width / 2, m_window_height / 2 - 240, 0.6, true));
+
+	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
 }
 
 void CSceneManager2D_Menu::Update(double dt)
 {
 	CSceneManager2D::Update(dt);
+
 	for (unsigned int i = 0; i < Buttons.size(); ++i)
 	{
 		if (Buttons[i]->CheckMouseOver((float)Application::mouse_current_x, (float)Application::mouse_current_y, dt));
@@ -71,6 +74,7 @@ void CSceneManager2D_Menu::Render()
 		Buttons[i]->render(this, meshList[GEO_TEXT]);
 	}
 
+	transition->render(this, 1);
 }
 
 void CSceneManager2D_Menu::Exit()

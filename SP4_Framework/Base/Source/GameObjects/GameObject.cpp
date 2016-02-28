@@ -14,14 +14,21 @@ GameObject::GameObject(Vector2 pos)
 
 GameObject::~GameObject()
 {
+	onDestory();
 }
 
 void GameObject::onDestory()
 {
 	if (rigidBody)
+	{
 		delete rigidBody;
+		rigidBody = NULL;
+	}
 	if (mesh)
+	{
 		delete mesh;
+		mesh = NULL;
+	}
 }
 
 bool GameObject::checkColision(GameObject *GO2)

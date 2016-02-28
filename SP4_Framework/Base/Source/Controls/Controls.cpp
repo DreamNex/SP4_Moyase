@@ -170,41 +170,60 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 		if (SelectedGO)
 			c_state = PLACEMENT;
 	}
-	else if (!mL_state && onClicked)
+	else if (!mL_state && !mR_state)
 	{
-		//for start and exit
-		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
+		//switch hovermesh
+		CollisionHandler cH;
+		CollisionComponent *mouseBound = new Circle(mousePos, 0.1f);
+		for (unsigned int i = 1; i < levelAssets.size(); ++i)
 		{
-			cursor->CheckCO(m_GUI->GetTools());
-
-			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
+			if (dynamic_cast<Tools*>(levelAssets[i]))
 			{
-				switch (m_GUI->GetTools()[i]->GetType())
+				if (cH.CheckCollision(mouseBound, levelAssets[i]->getRigidBody()->GetCollisionCompt()))
 				{
-				case GUI::STARTGUI:
-					state = 1;
-					m_GUI->GetTools()[i]->SetActive(false);
-					if (m_GUI->GetTools()[i]->GetActive() == false)
-					{
-						m_GUI->GetTools()[GUI::RESETGUI]->SetActive(true);
-					}
-					break;
-				case GUI::EXIT:
-					//SelectedGO = new Boost(mousePos, 50, 50);
-					state = 2;
-					break;
-				case GUI::RESETGUI:
-					state = 0;
-					m_GUI->GetTools()[i]->SetActive(false);
-					m_GUI->GetTools()[GUI::STARTGUI]->SetActive(true);
-					break;
-				default:
-					break;
+					dynamic_cast<Tools*>(levelAssets[i])->setHovering(true);
 				}
-				break;
+				else
+					dynamic_cast<Tools*>(levelAssets[i])->setHovering(false);
 			}
 		}
-		onClicked = false;
+
+		if (onClicked)
+		{
+			//for start and exit
+			for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
+			{
+				cursor->CheckCO(m_GUI->GetTools());
+
+				if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
+				{
+					switch (m_GUI->GetTools()[i]->GetType())
+					{
+					case GUI::STARTGUI:
+						state = 1;
+						m_GUI->GetTools()[i]->SetActive(false);
+						if (m_GUI->GetTools()[i]->GetActive() == false)
+						{
+							m_GUI->GetTools()[GUI::RESETGUI]->SetActive(true);
+						}
+						break;
+					case GUI::EXIT:
+						//SelectedGO = new Boost(mousePos, 50, 50);
+						state = 2;
+						break;
+					case GUI::RESETGUI:
+						state = 0;
+						m_GUI->GetTools()[i]->SetActive(false);
+						m_GUI->GetTools()[GUI::STARTGUI]->SetActive(true);
+						break;
+					default:
+						break;
+					}
+					break;
+				}
+			}
+			onClicked = false;
+		}
 	}
 	else if (mR_state)
 	{

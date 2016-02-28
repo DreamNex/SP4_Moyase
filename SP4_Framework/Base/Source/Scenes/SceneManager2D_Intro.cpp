@@ -25,6 +25,9 @@ CSceneManager2D_Intro::~CSceneManager2D_Intro()
 	{
 		SE->drop();
 	}
+
+	if (transition)
+		delete transition;
 }
 
 void CSceneManager2D_Intro::Init()
@@ -37,13 +40,33 @@ void CSceneManager2D_Intro::Init()
 	meshList[GEO_SPLASH]->textureID = LoadTGA("Image//blaze.tga");
 	
 	//SE->setSoundVolume(0.1f);
-	SE->play2D("SoundTracks//SplashScreen.mp3", false, false);
 	
+	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
 }
+
+bool a = true;
 
 void CSceneManager2D_Intro::Update(double dt)
 {
 	CSceneManager2D::Update(dt);
+
+	if (Application::IsKeyPressed(VK_ESCAPE))
+	{
+		transition->setTransparent(0);
+		a = false;
+	}
+		
+	if (a)
+	{
+		transition->goTransparent(dt, 60);
+		if (transition->getTransparent() == 100)
+		{
+			SE->play2D("SoundTracks//SplashScreen.mp3", false, false);
+			a = false;
+		}
+	}
+	else
+		transition->goOpaque(dt, 35);
 }
 
 void CSceneManager2D_Intro::Render()
@@ -53,6 +76,8 @@ void CSceneManager2D_Intro::Render()
 	modelStack.PushMatrix();
 	RenderMeshIn2D(meshList[GEO_SPLASH], false);
 	modelStack.PopMatrix();
+
+	transition->render(this, 1);
 
 	//On screen text
 	//RenderTextOnScreen(CSceneManager2D::meshList[GEO_TEXT], "hello", Color(0, 1, 0), 10, 6, 6);

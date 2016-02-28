@@ -50,27 +50,35 @@ void CMenuState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, c
 {
 	for (unsigned int i = 0; i < scene->Buttons.size(); ++i)
 	{
-		if (scene->Buttons[i]->GetText() == "Start" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
+		if (mousePress && button_Left == 0)
 		{
-			theGSM->ChangeState(CLevelSelectState::Instance());
-			break;
-		}
-		else if (scene->Buttons[i]->GetText() == "How 2 Play" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
-		{
-			theGSM->ChangeState(CTutorialState::Instance());
-			break;
-		}
-		else if (scene->Buttons[i]->GetText() == "Options" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
-		{
-			theGSM->ChangeState(OptionsState::Instance());
-			break;
-		}
-		else if (scene->Buttons[i]->GetText() == "Exit" && scene->Buttons[i]->GetMouseover() && button_Left == 1)
-		{
-			Application::exitbool = true;
-			break;
+			if (scene->Buttons[i]->GetText() == "Start" && scene->Buttons[i]->GetMouseover())
+			{
+				mode = 1;
+				break;
+			}
+			else if (scene->Buttons[i]->GetText() == "How 2 Play" && scene->Buttons[i]->GetMouseover())
+			{
+				mode = 2;
+				break;
+			}
+			else if (scene->Buttons[i]->GetText() == "Options" && scene->Buttons[i]->GetMouseover())
+			{
+				mode = 3;
+				break;
+			}
+			else if (scene->Buttons[i]->GetText() == "Exit" && scene->Buttons[i]->GetMouseover())
+			{
+				Application::exitbool = true;
+				break;
+			}
 		}
 	}
+
+	if (button_Left == 1)
+		mousePress = true;
+	else
+		mousePress = false;
 }
 
 void CMenuState::Update(CGameStateManager* theGSM) 
@@ -81,6 +89,30 @@ void CMenuState::Update(CGameStateManager* theGSM)
 void CMenuState::Update(CGameStateManager* theGSM, const double m_dElapsedTime)
 {
 	scene->Update(m_dElapsedTime);
+
+	if (mode != -1)
+		scene->transition->goOpaque(m_dElapsedTime, 140);
+	else if (scene->transition->getTransparent() < 100)
+	{
+		scene->transition->goTransparent(m_dElapsedTime, 140);
+	}
+
+	if (scene->transition->getTransparent() == 0)
+	{
+		switch (mode)
+		{
+		case 1:
+			theGSM->ChangeState(CLevelSelectState::Instance());
+			break;
+		case 2:
+			theGSM->ChangeState(CTutorialState::Instance());
+			break;
+		case 3:
+			theGSM->ChangeState(OptionsState::Instance());
+			break;
+		}
+		mode = -1;
+	}
 }
 
 void CMenuState::Draw(CGameStateManager* theGSM) 

@@ -12,6 +12,9 @@ Cannon::Cannon(Vector2& pos, float width, float height)
 
 	this->mesh = MeshBuilder::Generate2DMesh("Mesh", Color(0.741, 0, 0.470), 0, 0, 1, 1);
 	this->mesh->textureID = LoadTGA("Image//Cannon.tga");
+
+	this->hoverMesh = MeshBuilder::Generate2DMesh("Mesh", Color(0.741, 0, 0.470), 0, 0, 1, 1);
+	this->hoverMesh->textureID = LoadTGA("Image//Cannon_hover.tga");
 }
 
 Cannon::~Cannon()
@@ -21,5 +24,8 @@ Cannon::~Cannon()
 
 void Cannon::render(CSceneManager2D* SceneManager2D)
 {
-	SceneManager2D->Render2DMesh(this->mesh, this->rigidBody->GetScale(0), this->rigidBody->GetScale(1), this->pos.x, this->pos.y, this->angle, -this->rigidBody->GetScale(0) / 2, -this->rigidBody->GetScale(1) / 2);
+	if (hovering)
+		SceneManager2D->Render2DMesh(this->hoverMesh, this->rigidBody->GetScale(0), this->rigidBody->GetScale(1), this->pos.x, this->pos.y, this->angle, -this->rigidBody->GetScale(0) / 2, -this->rigidBody->GetScale(1) / 2);
+	else
+		SceneManager2D->Render2DMesh(this->mesh, this->rigidBody->GetScale(0), this->rigidBody->GetScale(1), this->pos.x, this->pos.y, this->angle, -this->rigidBody->GetScale(0) / 2, -this->rigidBody->GetScale(1) / 2);
 }

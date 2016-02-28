@@ -12,7 +12,12 @@ public:
 	bool getColided() { return collided; }
 
 	virtual void reset() { collided = false; };
+	virtual void render(CSceneManager2D* SceneManager2D);
 
+	void setHovering(bool b) { hovering = b; }
 protected:
 	bool collided;
+
+	Mesh* hoverMesh;
+	bool hovering;
 };

@@ -35,11 +35,11 @@ bool SpecialMenuButton::CheckMouseOver(float x, float y, double dt)
 {
 	if (x > min.x && x < max.x && y > min.y && y < max.y)
 	{
-		if (transparent > 93)
+		if (transparent > 95)
 		{
 			increasing = false;
 		}
-		else if (transparent < 83)
+		else if (transparent < 85)
 		{
 			increasing = true;
 		}
@@ -62,7 +62,7 @@ bool SpecialMenuButton::CheckMouseOver(float x, float y, double dt)
 
 		if (transparent < 100)
 		{
-			transparent += dt * 7;
+			transparent += dt * 8;
 			if (transparent > 100)
 				transparent = 100;
 		}
