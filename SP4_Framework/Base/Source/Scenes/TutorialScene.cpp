@@ -51,7 +51,7 @@ void CTutorialScene::Init()
 	gameObjects.push_back(new Boost(Vector2(300.f, 500.f), 50.f, 50.f));
 	gameObjects.push_back(new Slow(Vector2(300.f, 700.f), 50.f, 50.f));
 
-	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
+	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga","Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
 
 	//m_GUI = new GUIManager(5, 5, 5);
 	

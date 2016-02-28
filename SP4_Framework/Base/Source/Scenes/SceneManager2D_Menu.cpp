@@ -49,11 +49,20 @@ void CSceneManager2D_Menu::Init()
 	Buttons.push_back(new SpecialMenuButton("Exit", temp * 0.5f, 150, temp + temp + temp, 150 * 0.5f, 0.2f));
 
 	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
+
+	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga", "Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
 }
 
 void CSceneManager2D_Menu::Update(double dt)
 {
 	CSceneManager2D::Update(dt);
+
+	bool m_state = false;
+	
+	if (Application::Button_Left)
+		m_state = true;
+
+	cursor->Update(dt,m_state);
 
 	for (unsigned int i = 0; i < Buttons.size(); ++i)
 	{
@@ -73,6 +82,7 @@ void CSceneManager2D_Menu::Render()
 	{
 		Buttons[i]->render(this, meshList[GEO_TEXT]);
 	}
+	cursor->Render(this);
 
 	transition->render(this, 1);
 }

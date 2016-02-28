@@ -3,6 +3,7 @@
 #include "../UI/SpecialMenuButton.h"
 #include "../UI/Layout.h"
 #include <vector>
+#include "../Cursor/Cursor.h"
 
 class CSceneManager2D_Menu: public CSceneManager2D
 {
@@ -29,4 +30,5 @@ public:
 	Layout *transition;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
+	Cursor * cursor;
 };

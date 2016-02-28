@@ -8,11 +8,13 @@ using namespace std;
 #include "OptionsState.h"
 #include "../Application.h"
 
+
 CMenuState CMenuState::theMenuState;
 
 void CMenuState::Init()
 {
 	scene = new CSceneManager2D_Menu(800, 600);
+	
 	scene->Init();
 }
 
