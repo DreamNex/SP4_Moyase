@@ -47,6 +47,36 @@ bool CollisionHandler::CheckCollision(CollisionComponent* c1, CollisionComponent
 	return false;
 }
 
+
+bool CollisionHandler::POINT_CIRCLE(Vector2 v1, Circle* c1)
+{
+	//Total Radius of the Circles
+	float totalRadius = c1->GetRadius();
+
+	//Length In Between
+	float xDiff = c1->GetOrigin().x - v1.x;
+	float yDiff = c1->GetOrigin().y - v1.y;
+	float lengthBetween = (xDiff * xDiff) + (yDiff * yDiff);
+
+	//True if Total Radius^2 >= Length Between
+	if ((totalRadius * totalRadius) >= lengthBetween)
+	{
+		c1->SetCollideNormal((Vector2(xDiff, yDiff)).Normalized());
+	}
+	return false;
+}
+bool CollisionHandler::POINT_BOX(Vector2 v1, Box* b1)
+{
+	Vector2 max = b1->GetOrigin() + Vector2(b1->GetWidth() / 2, b1->GetHeight() / 2);
+	Vector2 min = b1->GetOrigin() - Vector2(b1->GetWidth() / 2, b1->GetHeight() / 2);
+	if (v1.x <= max.x && v1.x >= min.x)//Within X Range of Box
+	{
+		if (v1.y <= max.y && v1.x >= min.y)//Within Y Range of Box
+			return true;
+	}
+	return false;
+}
+
 bool CollisionHandler::CIRCLE_CIRCLE(Circle* c1, Circle* c2)
 {
 	//Total Radius of the Circles

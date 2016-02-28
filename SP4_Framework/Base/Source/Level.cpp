@@ -12,6 +12,11 @@ Level::Level(std::string level2load, std::string avatar2load)
 	fr.loadVariables(tools);
 
 	fr.loadVariables(&Allassets);
+
+	//Init Score Variables
+	HighScore = 0;
+	Score = 0;
+	Mode = 0;
 }
 
 Level::~Level()
@@ -32,7 +37,19 @@ int Level::update(double dt)
 		{
 			if (theball->checkColision(Allassets[i]))
 			{
-				if (dynamic_cast<Exit*>(Allassets[i]))
+				if (dynamic_cast<Cannon*>(Allassets[i]))
+				{
+					this->Score += 3;
+				}
+				else if (dynamic_cast<Slow*>(Allassets[i]) || dynamic_cast<Boost*>(Allassets[i]))
+				{
+					this->Score += 2;
+				}
+				else if (dynamic_cast<Wall*>(Allassets[i]))
+				{
+					this->Score += 1;
+				}
+				else if (dynamic_cast<Exit*>(Allassets[i]))
 				{
 					return 3;
 				}
@@ -43,6 +60,7 @@ int Level::update(double dt)
 			}
 		}
 	}
+	UpdateMode();
 	return 1;
 }
 
@@ -60,4 +78,32 @@ void Level::addTool(Tools* Tool)
 	{
 		Allassets.push_back(Tool);
 	}
+}
+
+//SCORE SYSTEM
+int Level::GetScore(void)const
+{
+	return this->Score;
+}
+void Level::SetScore(int score)
+{
+	this->Score = score;
+}
+
+int Level::GetMode(void)const //Score Level depends on your Score, eg. Score of 5 = Mode 1
+{
+	return this->Mode;
+}
+void Level::UpdateMode()
+{
+	if (Score >= 5 && Score < 10)
+		Mode = 1;
+	else if (Score >= 10 && Score < 15)
+		Mode = 2;
+	else if (Score >= 15 && Score < 20)
+		Mode = 3;
+	else if (Score >= MAX_SCORE)
+		Mode = 4;
+	else
+		Mode = 0;
 }

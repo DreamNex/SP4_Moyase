@@ -18,14 +18,16 @@ public:
 	Timer* GetLife();
 	Mesh* GetMesh();
 	Vector2 GetSize();
-	Vector2 GetPos();
+	Vector2 GetStart();
+	Vector2 GetEnd();
 	float GetSpeed();
 
 	//MUTATOR(S)
 	void SetLife(Timer*);
 	void SetMesh(Mesh*);
 	void SetSize(Vector2);
-	void SetPos(Vector2);
+	void SetStart(Vector2);
+	void SetEnd(Vector2);
 	void SetSpeed(float);
 
 	void Render(CSceneManager2D*);
@@ -35,7 +37,9 @@ private:
 	Timer* life;
 	Mesh* particleMesh;
 	Vector2 size; //Scale X, Scale Y
-	Vector2 pos;
+	Vector2 start;
+	Vector2 end;
+	Vector2 prevEnd;
 	float speed;
 };
 

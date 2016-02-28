@@ -7,6 +7,7 @@ private:
 	float duration;
 	float dur_Copy;
 	bool active;
+	bool loop;
 public:
 	Timer(float duration);
 	Timer();

@@ -1,7 +1,8 @@
 #include "GUI.h"
 #include "GL\glew.h"
 #include "../LoadTGA.h"
-#include "../RigidBody/Box.h"
+#include "../Application.h"
+#include "../RigidBody/CollisionHandler.h"
 
 GUI::GUI(Vector2 pos, int g_typeID, CollisionComponent * gui_Bound, char *Mesh, char * hoverMesh)
 	: BtnIsActive(true)
@@ -49,18 +50,27 @@ CollisionComponent* GUI::GetGUIBound()
 	return gui_Bound;
 }
 
-bool GUI::CheckMO(Vector2 MO)
+bool GUI::CheckMO()
 {
-	if (pos.x > ((Box*)gui_Bound)->GetMin().x && pos.x < ((Box*)gui_Bound)->GetMax().x && pos.y >((Box*)gui_Bound)->GetMin().y && pos.y < ((Box*)gui_Bound)->GetMax().y)
-	{
-		MO = true;
-		return true;
+	Vector2 MO = Vector2(Application::mouse_current_x, 720 - Application::mouse_current_y);
+	CollisionHandler cH;
+	if (dynamic_cast<Box*>(gui_Bound))
+	{ 
+		Box* temp = (Box*)gui_Bound;
+		if (cH.POINT_BOX(MO, temp))
+			this->MO = true;
+		else
+			this->MO = false;
 	}
-	else
+	else if (dynamic_cast<Circle*>(gui_Bound))
 	{
-		MO = false;
-		return false;
+		Circle* temp = (Circle*)gui_Bound;
+		if (cH.POINT_CIRCLE(MO, temp))
+			this->MO = true;
+		else
+			this->MO = false;
 	}
+	return this->MO;
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MUTATORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -82,11 +92,17 @@ void GUI::SetGUIBound(CollisionComponent * gui_Bound)
 	this->gui_Bound = gui_Bound;
 }
 
-bool GUI::OnClick(Vector2 mousePos)
+bool GUI::OnClick()
+{
+	return MO;
+}
+
+void GUI::Update()
 {
 	Box* temp = (Box*)gui_Bound;
-	return (mousePos.x <= temp->GetMax().x && mousePos.x >= temp->GetMin().x
-			&& mousePos.y <= temp->GetMax().y && mousePos.y >= temp->GetMin().y);
+
+	temp->SetMax(temp->GetOrigin() + Vector2(temp->GetWidth() / 2, temp->GetHeight() / 2));
+	temp->SetMin(temp->GetOrigin() - Vector2(temp->GetWidth() / 2, temp->GetHeight() / 2));
 }
 
 void GUI::render(CSceneManager2D* SceneManager2D)

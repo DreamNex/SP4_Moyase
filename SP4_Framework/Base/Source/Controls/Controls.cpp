@@ -26,7 +26,7 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 	this->mR_state = mr_state;
 	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
 	mousePos.y = (float)sm->GetScreenHeight() - mousePos.y;
-
+	m_GUI->Update(dt);
 	if (!guiOnly)
 	{
 		//States
@@ -55,7 +55,7 @@ void Controls::GetSelection(Vector2 mousePos)
 	{
 		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
 		{
-			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
+			if (m_GUI->GetTools()[i]->OnClick() && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
 			{
 				onClicked = true;
 				break;
@@ -67,7 +67,7 @@ void Controls::GetSelection(Vector2 mousePos)
 		//for start and exit
 		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
 		{
-			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
+			if (m_GUI->GetTools()[i]->OnClick() && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
 			{
 				switch (m_GUI->GetTools()[i]->GetType())
 				{
@@ -104,7 +104,7 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 		//for tools
 		for (unsigned int i = 0; i < m_GUI->GetToolCount().size(); ++i)//Only 3
 		{
-			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetToolCount()[i] > 0)//click on gui
+			if (m_GUI->GetTools()[i]->OnClick() && m_GUI->GetToolCount()[i] > 0)//click on gui
 			{
 				switch (m_GUI->GetTools()[i]->GetType())
 				{
@@ -134,7 +134,7 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 
 		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
 		{
-			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
+			if (m_GUI->GetTools()[i]->OnClick() && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
 			{
 				onClicked = true;
 				break;
@@ -157,14 +157,17 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 			}
 		}
 		if (SelectedGO)
+		{
 			c_state = PLACEMENT;
+
+		}
 	}
 	else if (!mL_state && onClicked)
 	{
 		//for start and exit
 		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
 		{
-			if (m_GUI->GetTools()[i]->OnClick(mousePos) && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
+			if (m_GUI->GetTools()[i]->OnClick() && m_GUI->GetTools()[i]->GetActive() == true)//click on gui
 			{
 				switch (m_GUI->GetTools()[i]->GetType())
 				{
@@ -217,6 +220,21 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 
 void Controls::GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mousePos)
 {
+	if (mR_state)
+	{
+		if (SelectedActive)
+		{ 
+			if (dynamic_cast<Cannon*>(levelAssets[SelectedIndex]))
+				m_GUI->SetToolCount(0, m_GUI->GetToolCount()[0] + 1);
+			else if (dynamic_cast<Boost*>(levelAssets[SelectedIndex]))
+				m_GUI->SetToolCount(1, m_GUI->GetToolCount()[1] + 1);
+			else if (dynamic_cast<Slow*>(levelAssets[SelectedIndex]))
+				m_GUI->SetToolCount(2, m_GUI->GetToolCount()[2] + 1);
+			levelAssets.erase(levelAssets.begin() + SelectedIndex);
+		}
+		ResetState();
+		return;
+	}
 	CollisionHandler cH;
 	CollisionComponent *mouseBound = new Circle(mousePos, 50.f);
 
@@ -282,7 +300,12 @@ void Controls::DoRotation(Vector2 mousePos)
 	{
 		if (dynamic_cast<Cannon*>(SelectedGO))
 		{
-			dynamic_cast<Cannon*>(SelectedGO)->getAngleByReference() += (mousePos.x - oldPos.x);
+			Vector2 toolToMouse = mousePos - SelectedGO->getPos();
+			Vector2 up(0, 1);
+
+			float angleBetween = toolToMouse.AngleBetween(up);
+
+			dynamic_cast<Cannon*>(SelectedGO)->getAngleByReference() = (-angleBetween);
 			oldPos = mousePos;
 		}
 	}
