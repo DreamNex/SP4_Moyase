@@ -90,7 +90,6 @@ void Controls::GetSelection(Vector2 mousePos)
 
 						break;
 					case GUI::EXIT:
-						//SelectedGO = new Boost(mousePos, 50, 50);
 						state = 2;
 					case GUI::RESETGUI:
 						state = 0;
