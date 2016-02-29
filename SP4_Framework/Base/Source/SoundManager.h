@@ -23,5 +23,8 @@ public:
 	//Overloaded sound
 	//Pause is to be able to edit the sound using irrklang functions
 	void Play(std::string filepath, bool loopit = false, bool pause = false);
+
+	//Sound Engine
+	ISoundEngine* SE;
 };
 #endif
