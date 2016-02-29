@@ -31,6 +31,11 @@ void SoundManager::Play(std::string filepath, bool loopit)
 	SE->play2D(filepath.c_str(), loopit, false);
 }
 
+void SoundManager::Play(std::string filepath, bool loopit, bool Startpause)
+{
+	SE->play2D(filepath.c_str(), loopit, Startpause);
+}
+
 void SoundManager::Exit()
 {
 	if (SE)

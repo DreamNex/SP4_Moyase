@@ -50,7 +50,7 @@ void OptionsScene::Update(double dt)
 
 	for (unsigned int i = 0; i < Sliders.size(); i++)
 	{
-		Sliders[i]->Update((float)Application::mouse_current_x, m_window_height - (float)Application::mouse_current_y, Application::Button_Left, dt);
+		Sliders[i]->Update((float)Application::mouse_current_x,(float)Application::mouse_current_y, Application::Button_Left, dt);
 	}
 }
 
