@@ -211,6 +211,31 @@ void FileReading::changeUnlock(std::string filename)
 	}
 }
 
+float *FileReading::GetVolumes(std::string filename, float Volumes[])
+{
+	std::ifstream ifile;
+	std::string line;
+	
+	ifile.open(filename);
+	if (ifile.is_open())
+	{
+		std::getline(ifile, line);
+		Volumes[0] = std::stof(line);
+
+		std::getline(ifile, line);
+		Volumes[1] = std::stof(line);
+	}
+
+	ifile.close();
+
+	return Volumes;
+}
+
+void FileReading::SetVolume()
+{
+
+}
+
 std::vector<std::string>  FileReading::SearchFolder(std::string directory, std::string fileExtemtion)
 {
 	std::vector<std::string> storageFN;
