@@ -37,6 +37,10 @@ private:
 	int SelectedIndex;
 	GameObject *SelectedGO;
 	Vector2 oldPos;
+	
+	//Feedback
+	Mesh* feedback;
+	bool correct;
 
 	//Cursor
 	Vector2 cursorPos;

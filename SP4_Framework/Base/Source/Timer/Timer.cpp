@@ -49,15 +49,16 @@ void Timer::Stop()
 
 bool Timer::Update(float dt)
 {
-	if (loop)
-		return false;
 	if (active)
 	{
 		duration -= dt;
 		if (duration <= 0)
 		{
 			duration = dur_Copy;
-			active = false;
+			if (loop)
+				active = true;
+			else
+				active = false;
 			return true;
 		}
 	}

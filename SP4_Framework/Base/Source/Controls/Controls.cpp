@@ -14,7 +14,9 @@ Controls::Controls(GUIManager * m_GUI)
 	SelectedGO = 0;
 	state = 0;
 	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga","Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
-	
+	feedback = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, 1, 1);
+	feedback->textureID = LoadTGA("Image//feedback_wrong.tga");
+	correct = true;
 }
 
 Controls::~Controls()
@@ -316,12 +318,26 @@ void Controls::GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mouse
 				m_GUI->SetToolCount(SelectedIndex - 1, m_GUI->GetToolCount()[SelectedIndex - 1] - 1);
 				SelectedGO->setPosition(mousePos);
 				levelAssets.push_back(SelectedGO);
+				correct = true;
 				ResetState();
 			}
 		}
 	}
 	else
+	{
+		correct = true;
 		SelectedGO->setPosition(mousePos);
+		for (unsigned int i = 1; i < levelAssets.size(); ++i)// check all the obj is level
+		{
+			if (SelectedIndex == i)
+				continue;
+			if (cH.CheckCollision(mouseBound, levelAssets[i]->getRigidBody()->GetCollisionCompt()))//Check if Collide with anything
+			{
+				correct = false;
+				break;
+			}
+		}
+	}
 }
 
 void Controls::DoRotation(Vector2 mousePos)
@@ -357,6 +373,11 @@ void Controls::Render(CSceneManager2D *SceneManger2D)
 	if (SelectedGO && !SelectedActive)
 	{
 		SelectedGO->render(SceneManger2D);
+	}
+	if (SelectedGO && correct == false)
+	{ 
+		Box* temp = (Box*)SelectedGO->getRigidBody()->GetCollisionCompt();
+		SceneManger2D->RenderMeshIn2D(feedback, false, temp->GetWidth(), temp->GetHeight(), temp->GetOrigin().x - 23, temp->GetOrigin().y - 23);
 	}
 	cursor->Render(SceneManger2D);
 }

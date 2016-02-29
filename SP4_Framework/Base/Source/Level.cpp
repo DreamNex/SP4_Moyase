@@ -17,6 +17,8 @@ Level::Level(std::string level2load, std::string avatar2load)
 	HighScore = 0;
 	Score = 0;
 	Mode = 0;
+
+	pm_Particles = new ParticleManager("Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga");
 }
 
 Level::~Level()
@@ -40,14 +42,17 @@ int Level::update(double dt)
 				if (dynamic_cast<Cannon*>(Allassets[i]))
 				{
 					this->Score += 3;
+					pm_Particles->SpawnParticles(ParticleManager::PARTICLE_CANNON, theball->getPos(), Vector2(20, 20), 5, 15, 2, 3);
 				}
 				else if (dynamic_cast<Slow*>(Allassets[i]) || dynamic_cast<Boost*>(Allassets[i]))
 				{
 					this->Score += 2;
+					pm_Particles->SpawnParticles(ParticleManager::PARTICLE_SLOW, theball->getPos(), Vector2(20, 20), 5, 15, 3, 2);
 				}
 				else if (dynamic_cast<Wall*>(Allassets[i]))
 				{
 					this->Score += 1;
+					pm_Particles->SpawnParticles(ParticleManager::PARTICLE_WALL, theball->getPos(), Vector2(20, 20), 3, 10, 3, 1);
 				}
 				else if (dynamic_cast<Exit*>(Allassets[i]))
 				{
@@ -60,6 +65,7 @@ int Level::update(double dt)
 			}
 		}
 	}
+	pm_Particles->Update(dt);
 	UpdateMode();
 	return 1;
 }
@@ -70,6 +76,7 @@ void Level::render(CSceneManager2D* sceneManager2D)
 	{
 		Allassets[i]->render(sceneManager2D);
 	}
+	pm_Particles->Render(sceneManager2D);
 }
 
 void Level::addTool(Tools* Tool)
