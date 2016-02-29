@@ -14,11 +14,14 @@ public:
 
 	void Init();
 	void Update();
+	void Exit();
 
 	//Play a 2D sound
+	//Loopit makes it loop thru the sound file
 	void Play(std::string filepath, bool loopit = false);
 
-	//sound engine
-	ISoundEngine* SE;
+	//Overloaded sound
+	//Pause is to be able to edit the sound using irrklang functions
+	void Play(std::string filepath, bool loopit = false, bool pause = false);
 };
 #endif

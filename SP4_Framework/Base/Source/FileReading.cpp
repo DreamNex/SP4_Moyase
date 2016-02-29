@@ -49,14 +49,11 @@ void FileReading::loadVariables(int(&tool)[3])
 {
 	std::stringstream splitter(storage.at(1));
 	std::string token;
-
+	int i = 0;
 	while (std::getline(splitter, token, ','))
 	{
-
-		for (int i = 0; i != 3; i++)
-		{
-			tool[i] = atoi(token.c_str());
-		}
+		tool[i] = atoi(token.c_str());
+		i++;
 	}
 }
 void FileReading::loadVariables(Balls** Ball, const char* avatarToload)
