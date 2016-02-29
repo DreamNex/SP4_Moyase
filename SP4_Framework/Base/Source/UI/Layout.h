@@ -8,7 +8,7 @@
 class Layout
 {
 public:
-	Layout(char* Mesh, float sizeX, float sizeY, float x, float y);
+	Layout(char* Mesh, float sizeX, float sizeY, float x, float y, bool alphaMode = false, float transparent = 0, Color c = Color(0, 0, 0));
 	~Layout();
 	
 	Mesh* getMesh();
@@ -19,10 +19,22 @@ public:
 	float GetX();
 	float GetY();
 
+	void setAlphaMode(bool b) { alphaMode = b; }
+	bool getAlphaMode() { return alphaMode; }
+
+	void setTransparent(int i) { transparent = i; }
+	float getTransparent() { return transparent; }
+
+	void goTransparent(double dt, float multiplier);
+	void goOpaque(double dt, float multiplier);
+
 	void render(CSceneManager2D* SceneManager2D, float z = 0);
 
 private:
 	Mesh *Mesh;
 	float sizeX, sizeY;
 	Vector2 pos;
+
+	bool alphaMode;
+	float transparent;
 };

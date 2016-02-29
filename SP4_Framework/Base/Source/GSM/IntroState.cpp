@@ -11,16 +11,12 @@ void CIntroState::Init()
 {
 	scene = new CSceneManager2D_Intro(800, 600);
 	scene->Init();
-
-	timepass = 0;
 }
 
 void CIntroState::Init(const int width, const int height)
 {
 	scene = new CSceneManager2D_Intro(width, height);
 	scene->Init();
-
-	timepass = 0;
 }
 
 void CIntroState::Cleanup()
@@ -60,8 +56,7 @@ void CIntroState::Update(CGameStateManager* theGSM, const double m_dElapsedTime)
 {
 	scene->Update(m_dElapsedTime);
 
-	timepass += (float)m_dElapsedTime;
-	if (timepass > 2)
+	if (scene->transition->getTransparent() == 0)
 	{
 		theGSM->ChangeState(CMenuState::Instance());
 	}

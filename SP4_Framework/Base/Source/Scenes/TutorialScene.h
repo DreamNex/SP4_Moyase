@@ -10,6 +10,7 @@
 #include"../GameObjects/Slow.h"
 #include"../Controls/Controls.h"
 #include"../Timer/Timer.h"
+#include"../Aesthetics/ParticleManager.h"
 
 class CTutorialScene: public CSceneManager2D
 {
@@ -18,6 +19,7 @@ public:
 	{
 		GEO_TEXT,
 		GEO_BG,
+		GEO_TEST,
 		NUM_GEOMETRY,
 	};
 	enum GameStates
@@ -43,4 +45,6 @@ private:
 	//bool mL_state, mR_state;
 	GameStates G_States;
 	Cursor *cursor;
+
+	Timer* trail;
 };

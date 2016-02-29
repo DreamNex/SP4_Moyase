@@ -290,6 +290,9 @@
     <ClCompile Include="Source\Controls\Controls.cpp">
       <Filter>Source Files\Controls</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameObjects\Exit.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -477,6 +480,18 @@
     </ClInclude>
     <ClInclude Include="Source\Cursor\Cursor.h">
       <Filter>Source Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\LevelButton.h">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\Layout.h">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Aesthetics\VectorPathing.h">
+      <Filter>Source Files\Aesthetics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjects\Exit.h">
+      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

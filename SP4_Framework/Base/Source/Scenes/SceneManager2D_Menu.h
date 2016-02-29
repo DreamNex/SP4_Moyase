@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneManager2D.h"
 #include "../UI/SpecialMenuButton.h"
+#include "../UI/Layout.h"
 #include <vector>
 #include "../Cursor/Cursor.h"
 
@@ -25,6 +26,8 @@ public:
 	virtual void Exit();
 	
 	std::vector<SpecialMenuButton*> Buttons;
+
+	Layout *transition;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 	Cursor * cursor;

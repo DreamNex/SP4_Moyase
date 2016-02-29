@@ -49,14 +49,11 @@ void FileReading::loadVariables(int(&tool)[3])
 {
 	std::stringstream splitter(storage.at(1));
 	std::string token;
-
+	int i = 0;
 	while (std::getline(splitter, token, ','))
 	{
-
-		for (int i = 0; i != 3; i++)
-		{
-			tool[i] = atoi(token.c_str());
-		}
+		tool[i] = atoi(token.c_str());
+		i++;
 	}
 }
 void FileReading::loadVariables(Balls** Ball, const char* avatarToload)
@@ -212,6 +209,31 @@ void FileReading::changeUnlock(std::string filename)
 	{
 		ofile << line << '\n';
 	}
+}
+
+float *FileReading::GetVolumes(std::string filename, float Volumes[])
+{
+	std::ifstream ifile;
+	std::string line;
+	
+	ifile.open(filename);
+	if (ifile.is_open())
+	{
+		std::getline(ifile, line);
+		Volumes[0] = std::stof(line);
+
+		std::getline(ifile, line);
+		Volumes[1] = std::stof(line);
+	}
+
+	ifile.close();
+
+	return Volumes;
+}
+
+void FileReading::SetVolume()
+{
+
 }
 
 std::vector<std::string>  FileReading::SearchFolder(std::string directory, std::string fileExtemtion)

@@ -1,6 +1,9 @@
 #pragma once
 #include "SceneManager2D.h"
+#include "../UI/Layout.h"
 #include "irrKlang.h"
+
+#include "../SoundManager.h"
 using namespace irrklang;
 
 class CSceneManager2D_Intro : public CSceneManager2D
@@ -22,10 +25,9 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
+	Layout *transition;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
-	ISoundEngine* SE;
-	ISound* splash;
-	
+
 };
 

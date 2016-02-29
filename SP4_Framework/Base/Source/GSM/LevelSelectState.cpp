@@ -44,8 +44,6 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const unsigned c
 {
 }
 
-bool mousePress = false;
-
 void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, const double mouse_y,
 							  const int button_Left, const int button_Middle, const int button_Right)
 {
@@ -104,7 +102,7 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 						}
 						else if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "Back")
 						{
-							theGSM->ChangeState(CMenuState::Instance());
+							mode = 2;
 						}
 					}
 					break;
@@ -123,7 +121,7 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 					{
 						if (scene->getButtons()[CLevelSelectScene::S_Selected][i]->GetText() == "Yes")
 						{
-							theGSM->ChangeState(CGameplayState::Instance());
+							mode = 1;
 						}
 						else if (scene->getButtons()[CLevelSelectScene::S_Selected][i]->GetText() == "No")
 						{
@@ -151,6 +149,27 @@ void CLevelSelectState::Update(CGameStateManager* theGSM)
 void CLevelSelectState::Update(CGameStateManager* theGSM, const double m_dElapsedTime)
 {
 	scene->Update(m_dElapsedTime);
+
+	if (mode != -1)
+		scene->transition->goOpaque(m_dElapsedTime, 140);
+	else if (scene->transition->getTransparent() < 100)
+	{
+		scene->transition->goTransparent(m_dElapsedTime, 140);
+	}
+
+	if (scene->transition->getTransparent() == 0)
+	{
+		switch (mode)
+		{
+		case 1:
+			theGSM->ChangeState(CGameplayState::Instance());
+			break;
+		case 2:
+			theGSM->ChangeState(CMenuState::Instance());
+			break;
+		}
+		mode = -1;
+	}
 }
 
 void CLevelSelectState::Draw(CGameStateManager* theGSM)

@@ -10,7 +10,6 @@ public:
 
 	bool checkColision(GameObject *GO2);
 	void reset();
-
 private:
 	Vector2 originalPos;
 	void SpecialcolisionResponce(GameObject *GO2);

@@ -1,5 +1,5 @@
 #include "Cursor.h"
-
+#include "../RigidBody/CollisionHandler.h"
 
 Cursor::Cursor(char * d_cursorMesh, char * clickedMesh, char * tailmesh, float mouseSens, float cursSize_x, float cursSize_y)
 {

@@ -40,6 +40,10 @@ void CGameplayScene::Init()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
+	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("GameBG", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
+	meshList[GEO_BG]->textureID = LoadTGA("Image//Tits//GameBG.tga");
+
+
 	m_GUI = new GUIManager(gameLevel.getToolsArray()[0], gameLevel.getToolsArray()[1], gameLevel.getToolsArray()[2]);
 	ctrs = new Controls(m_GUI);
 }
@@ -83,6 +87,8 @@ void CGameplayScene::Update(double dt)
 void CGameplayScene::Render()
 {
 	CSceneManager2D::Render();
+
+	RenderMeshIn2D(meshList[GEO_BG], false, 1, 1, 0, 0, -1);
 
 	gameLevel.render(this);
 

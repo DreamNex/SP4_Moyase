@@ -39,8 +39,11 @@ void CTutorialScene::Init()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
-	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("Game_bg", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
+	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("Game_bg", Color(1, 1, 1), 0, 0, 1, 1);
 	meshList[GEO_BG]->textureID = LoadTGA("Image//g_bg.tga");
+
+	meshList[GEO_TEST] = MeshBuilder::Generate2DMesh("Game_bg", Color(1, 1, 1), 0, 0, 1, 1);
+	meshList[GEO_TEST]->textureID = LoadTGA("Image//Avatars//Avatar_Censored.tga");
 
 	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Avatars//Avatar_Censored.tga"));
 	gameObjects.push_back(new Wall(Vector2(((float)m_window_width *0.5f), 100.f), (float)m_window_width - 100.f, 100.f));
@@ -52,7 +55,6 @@ void CTutorialScene::Init()
 	gameObjects.push_back(new Slow(Vector2(300.f, 700.f), 50.f, 50.f));
 
 	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga","Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
-
 	//m_GUI = new GUIManager(5, 5, 5);
 	
 	//ctrs = new Controls(m_GUI);
@@ -102,10 +104,9 @@ void CTutorialScene::Update(double dt)
 
 	gameObjects[0]->checkColision(gameObjects[1]);
 	gameObjects[0]->checkColision(gameObjects[3]);
-	gameObjects[0]->checkColision(gameObjects[4]);
+	//gameObjects[0]->checkColision(gameObjects[4]);
 	//gameObjects[0]->checkColision(gameObjects[5]);
 	//gameObjects[0]->checkColision(gameObjects[6]);
-
 
 	//m_GUI->Update(dt);
 
@@ -134,7 +135,6 @@ void CTutorialScene::Render()
 		gameObjects[i]->render(this);
 	}
 	//m_GUI->Render(this);
-
 	//ctrs->Render(this);
 	cursor->Render(this);
 }

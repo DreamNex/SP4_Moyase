@@ -58,7 +58,7 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 				this->getRigidBody()->GetPhysicsCompt()->SetAcceleration(Vector2(0, 0));
 				this->pos = GO2->getPos();
 
-				Vector2 dir(0, 2000);
+				Vector2 dir(0, 1000);
 				dir.rotateVector(dynamic_cast<Cannon*>(GO2)->getAngleByReference());
 
 				this->getRigidBody()->GetPhysicsCompt()->Push(dir);
@@ -91,4 +91,5 @@ void Balls::reset()
 	this->getRigidBody()->GetPhysicsCompt()->SetForce(Vector2(0, 0));
 	this->getRigidBody()->GetPhysicsCompt()->SetVelocity(Vector2(0, 0));
 	this->getRigidBody()->GetPhysicsCompt()->SetAcceleration(Vector2(0, 0));
+	this->getRigidBody()->GetPhysicsCompt()->SetActive(true);
 }

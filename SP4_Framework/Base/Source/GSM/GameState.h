@@ -27,5 +27,8 @@ public:
 	}
 
 protected:
-	CGameState() { }
+	CGameState() :mousePress(false), mode(-1) { }
+
+	bool mousePress;
+	int mode;
 };

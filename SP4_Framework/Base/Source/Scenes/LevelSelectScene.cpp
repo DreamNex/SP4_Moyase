@@ -65,6 +65,9 @@ CLevelSelectScene::~CLevelSelectScene()
 		if (AvatarImages[i])
 			delete AvatarImages[i];
 	}
+
+	if (transition)
+		delete transition;
 }
 
 void CLevelSelectScene::Init()
@@ -204,6 +207,8 @@ void CLevelSelectScene::Init()
 		, selectedLayout->GetX() + selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetY() - selectedLayout->GetSizeY() * 0.2f
 		, 0.6, true));
 	/************************************************************************************************************************************/
+
+	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
 }
 
 void CLevelSelectScene::Update(double dt)
@@ -263,6 +268,8 @@ void CLevelSelectScene::Render()
 
 		break;
 	}
+
+	transition->render(this, 6);
 }
 
 void CLevelSelectScene::Exit()

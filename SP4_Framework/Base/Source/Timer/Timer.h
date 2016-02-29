@@ -7,10 +7,14 @@ private:
 	float duration;
 	float dur_Copy;
 	bool active;
+	bool loop;
 public:
 	Timer(float duration);
 	Timer();
 	~Timer();
+
+	bool GetLoop();
+	void SetLoop();
 
 	float GetDuration();
 	void SetDuration(float duration);
