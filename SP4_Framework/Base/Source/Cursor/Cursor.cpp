@@ -73,6 +73,7 @@ void Cursor::Update(float dt, bool m_state)
 		this->m_state = m_state;
 	}
 	oldPos = mousePos;	
+	cursorPos = Vector2(Application::mouse_current_x, Application::mouse_current_y);
 }
 
 void Cursor::Render(CSceneManager2D* SceneManager2D)
