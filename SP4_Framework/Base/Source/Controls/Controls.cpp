@@ -13,7 +13,7 @@ Controls::Controls(GUIManager * m_GUI)
 	SelectedActive = false;
 	SelectedGO = 0;
 	state = 0;
-	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga","Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
+	cursor = new Cursor("Image//curshead.tga", "Image//curshead2.tga","Image//curstail.tga", 1.5f, 20, 20);
 	
 }
 
@@ -27,7 +27,7 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 	this->mL_state = ml_state;
 	this->mR_state = mr_state;
 
-	cursor->Update(dt, mL_state); //
+	cursor->Update(dt, mL_state || mR_state); //MouseLeft
 	Vector2 mousePos(cursor->GetCursPos().x, cursor->GetCursPos().y );
 
 
