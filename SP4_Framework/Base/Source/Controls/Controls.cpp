@@ -13,10 +13,12 @@ Controls::Controls(GUIManager * m_GUI)
 	SelectedActive = false;
 	SelectedGO = 0;
 	state = 0;
-	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga","Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
+
 	feedback = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, 1, 1);
 	feedback->textureID = LoadTGA("Image//feedback_wrong.tga");
 	correct = true;
+
+	cursor = new Cursor("Image//curshead.tga", "Image//curshead2.tga","Image//curstail.tga", 1.5f, 20, 20);
 }
 
 Controls::~Controls()
@@ -29,11 +31,9 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 	this->mL_state = ml_state;
 	this->mR_state = mr_state;
 
-	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
-	m_GUI->Update(dt);
 
-	cursor->Update(dt, mL_state);
-	mousePos = cursor->GetCursPos();
+	cursor->Update(dt, mL_state || mR_state); //MouseLeft
+	Vector2 mousePos(cursor->GetCursPos().x, cursor->GetCursPos().y );
 
 	if (!guiOnly)
 	{
