@@ -13,6 +13,7 @@ public:
 	enum GEOMETRY_TYPE
 	{
 		GEO_TEXT,
+		GEO_BG,
 		NUM_GEOMETRY,
 	};
 

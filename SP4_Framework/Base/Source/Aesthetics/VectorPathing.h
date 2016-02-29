@@ -12,16 +12,14 @@ class VectorPathing
 		ORBIT
 	};
 public:
-	VectorPathing(int path, Vector2 start, Vector2 end);
+	VectorPathing(int path);
 	VectorPathing();
 	~VectorPathing();
 
-	void SetPath(int path, Vector2 start, Vector2 end);
-	Vector2 GetPath();
+	void SetPath(int path);
+	Vector2 GetPath(Vector2 start, Vector2 end);
 private:
 	VECTOR_PATH path;
-	Vector2 end;
-	Vector2 start;
 };
 
 #endif

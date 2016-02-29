@@ -9,8 +9,8 @@ PhysicsComponent::PhysicsComponent(Vector2 &v, float mass, bool active)
 	v_Force = Vector2(0, 0);
 
 	this->mass = mass;
-	this->gravitationalForce = 10.f;
-	this->co_Restitution = 0.3f;
+	this->gravitationalForce = 7.f;
+	this->co_Restitution = 0.5f;
 	this->co_SE = 0.45f;
 	this->co_KE = 0.35f;
 	this->co_Drag = 1.1f;
@@ -59,6 +59,20 @@ void PhysicsComponent::Update(float dt)
 	float co_StaticFriction = 0.55;
 	float co_KineticFriction = 0.50;
 
+	this->v_Acceleration = this->v_Force / mass;
+	this->v_Velocity = v_Velocity + v_Acceleration;
+
+	//Limit
+	if (v_Velocity.x >= MAX_VELOCITY)
+		v_Velocity.x = MAX_VELOCITY;
+	if (v_Velocity.y >= MAX_VELOCITY)
+		v_Velocity.y = MAX_VELOCITY;
+
+	if (v_Acceleration.x >= MAX_ACCELERATION)
+		v_Acceleration.x = MAX_ACCELERATION;
+	if (v_Acceleration.y >= MAX_ACCELERATION)
+		v_Acceleration.y = MAX_ACCELERATION;
+
 	/***************************************************************************************************************************
 	Horizontal Force
 	****************************************************************************************************************************/
@@ -68,23 +82,18 @@ void PhysicsComponent::Update(float dt)
 	Vertical Force
 	****************************************************************************************************************************/
 	ApplyGravity();
-	v_Acceleration.y += v_Force.y / mass;
 
 	//Update Velocity and Position
 	v_Force.SetZero();
 	v_Velocity = v_Velocity + v_Acceleration;
 
-	if (v_Velocity.x >= MAX_VELOCITY)
-		v_Velocity.x = MAX_VELOCITY;
-	if (v_Velocity.y >= MAX_VELOCITY)
-		v_Velocity.y = MAX_VELOCITY;
 
 	*v_Pos = (*v_Pos) + v_Velocity * dt;
 }
 
 void PhysicsComponent::ApplyFriction()
 {
-	if (v_Velocity.y == 0 && v_Acceleration.y == 0)
+	if (v_Velocity.y == 0 && v_Acceleration.y == 0)//If Not Airborne
 	{
 		if (v_Velocity.x != 0)//Moving
 		{
@@ -135,7 +144,12 @@ void PhysicsComponent::ApplyDrag()
 void PhysicsComponent::ApplyGravity()
 {
 	if (hasGravity)
-		this->v_Acceleration.y = -gravitationalForce;
+	{
+		if (v_Acceleration.y == 0)//Apply Gravity
+			v_Acceleration.y = -gravitationalForce;
+		else
+			v_Acceleration.y -= -gravitationalForce;
+	}
 }
 
 void PhysicsComponent::toBounce(Vector2 collideNormal)

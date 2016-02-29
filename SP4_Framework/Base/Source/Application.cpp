@@ -65,7 +65,7 @@ bool Application::IsKeyPressed(unsigned short key)
 bool Application::GetMouseUpdate()
 {
 	glfwGetCursorPos(m_window, &mouse_current_x, &mouse_current_y);
-
+	mouse_current_y = m_window_height - mouse_current_y;
 	if (MouseWithinScreen)
 	{
 		// Calculate the difference in positions
@@ -99,7 +99,7 @@ bool Application::GetMouseUpdate()
 	Button_Right = glfwGetMouseButton(m_window, GLFW_MOUSE_BUTTON_RIGHT);
 
 	// Update the GSM
-	GSM->HandleEvents(mouse_current_x, m_window_height - mouse_current_y, Button_Left, Button_Middle, Button_Right);
+	GSM->HandleEvents(mouse_current_x, mouse_current_y, Button_Left, Button_Middle, Button_Right);
   
 	return false;
 }

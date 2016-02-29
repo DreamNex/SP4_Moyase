@@ -49,6 +49,8 @@ public:
 	std::vector<Mesh*>& getAvatarImages() { return AvatarImages; };
 
 	void setSelectedLevelName(std::string s) { selectedLevelName = s; }
+
+	Layout *transition;
 private:
 	States curentState;
 

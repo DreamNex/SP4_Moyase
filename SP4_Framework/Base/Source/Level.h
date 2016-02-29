@@ -23,10 +23,21 @@ public:
 	std::vector<GameObject*>& getGameObjects() { return Allassets; }
 	void addTool(Tools* Tool);
 
+	int GetScore(void)const;
+	void SetScore(int);
+
+	int GetMode(void)const; //Score Level depends on your Score, eg. Score of 5 = Mode 1
+	void UpdateMode();
 private:
 	Balls* theball;
 	int tools[3];
 	std::vector<GameObject*> Allassets;
+
+	//Level's Score(Depends on the Amount Of Collision Made)
+	const int MAX_SCORE = 20;
+	int HighScore;
+	int Score;
+	int Mode; //Depends on Score
 };
 
 #endif

@@ -32,6 +32,4 @@ private:
 	static CIntroState theIntroState;
 
 	CSceneManager2D_Intro *scene;
-
-	float timepass;
 };

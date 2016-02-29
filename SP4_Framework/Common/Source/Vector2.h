@@ -18,6 +18,7 @@ struct Vector2
 	bool operator!=(const Vector2& rhs)const;
 	float Length( void ) const; //Get magnitude
 	float LengthSquared(void)const;//Get Magnitude Squared
+	float Determinant(const Vector2& rhs)const;
 	float Dot( const Vector2& rhs ) const; //Dot product
 	float AngleBetween(const Vector2& rhs) const; //Angle Between
 	Vector2 Normalized(void)const; //Return a copy of this vector, normalized

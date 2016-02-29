@@ -8,6 +8,7 @@
 #include "../LoadTGA.h"
 #include <sstream>
 
+
 CTutorialScene::CTutorialScene()
 {
 }
@@ -50,6 +51,7 @@ void CTutorialScene::Init()
 	gameObjects.push_back(new Boost(Vector2(300.f, 500.f), 50.f, 50.f));
 	gameObjects.push_back(new Slow(Vector2(300.f, 700.f), 50.f, 50.f));
 
+	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga","Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
 
 	//m_GUI = new GUIManager(5, 5, 5);
 	
@@ -63,6 +65,7 @@ void CTutorialScene::Update(double dt)
 
 	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
 	//mL_state = mR_state = false;
+	bool m_state = false;
 
 	std::cout << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetVelocity().y << std::endl;
 	std::cout << "~~" << std::endl;
@@ -89,6 +92,8 @@ void CTutorialScene::Update(double dt)
 	if (Application::Button_Left)
 	{
 	//	mL_state = true;
+		m_state = true;
+
 	}
 	if (Application::Button_Right)
 	{
@@ -111,6 +116,7 @@ void CTutorialScene::Update(double dt)
 		gameObjects[i]->update(dt);
 	}
 
+	cursor->Update(dt, m_state);
 
 	
 }
@@ -130,6 +136,7 @@ void CTutorialScene::Render()
 	//m_GUI->Render(this);
 
 	//ctrs->Render(this);
+	cursor->Render(this);
 }
 
 void CTutorialScene::Exit()

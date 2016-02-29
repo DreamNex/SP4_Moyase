@@ -16,19 +16,22 @@ public:
 		SLOWGUI,
 		STARTGUI,
 		RESETGUI,
+		PANEL,
+		POINTER,
 		EXIT
 	};
 
 	GUI(Vector2 pos, int g_typeID, CollisionComponent * gui_Bound, char *Mesh, char * hoverMesh);
 	~GUI();
 
+	void Update();
 	void render(CSceneManager2D* SceneManager2D);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ACCESSORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	bool GetActive();
 	int GetType();
 	Vector2 GetPos();
 	CollisionComponent* GetGUIBound();
-	bool CheckMO(Vector2);
+	bool CheckMO();
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MUTATORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	void SetActive(bool Active);
@@ -36,7 +39,7 @@ public:
 	void SetPos(Vector2 pos);
 	void SetGUIBound(CollisionComponent * gui_Bound);
 
-	bool OnClick(Vector2 mousePos);
+	bool OnClick();
 
 private:
 	bool BtnIsActive;

@@ -88,10 +88,18 @@ float Vector2::Dot( const Vector2& rhs ) const
 	return x * rhs.x + y * rhs.y;
 }
 
+float Vector2::Determinant(const Vector2& rhs)const
+{
+	return x * rhs.y - y * rhs.x;
+}
+
 float Vector2::AngleBetween(const Vector2& rhs)const
 {
-	float dp = this->Dot(rhs);
-	return Math::RadianToDegree(acos(dp / (this->Length() * rhs.Length())));
+	float dot = this->Dot(rhs);
+	float det = this->Determinant(rhs);
+	float angle =  atan2f(det, dot);
+	return Math::RadianToDegree(angle);
+	//std::cout << n << '\n';
 }
 
 Vector2 Vector2::Normalized(void)const
