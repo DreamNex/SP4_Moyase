@@ -28,7 +28,7 @@ void CSceneManager2D_Intro::Init()
 	CSceneManager2D::Init();
 	
 	//SE = createIrrKlangDevice();
-	Application::BGM.Init();
+	//Application::BGM.Init();
 
 	meshList[GEO_SPLASH] = MeshBuilder::Generate2DMesh("GEO_SPLASH", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
 	meshList[GEO_SPLASH]->textureID = LoadTGA("Image//blaze.tga");

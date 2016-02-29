@@ -329,6 +329,7 @@ void Application::Run()
 void Application::Exit()
 {
 	BGM.Exit();
+	SFX.Exit();
 	//
 
 	//Close OpenGL window and terminate GLFW

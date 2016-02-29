@@ -26,6 +26,5 @@ public:
 
 private:
 	Mesh* meshList[NUM_GEOMETRY];
-	SoundManager* SM;
 };
 
