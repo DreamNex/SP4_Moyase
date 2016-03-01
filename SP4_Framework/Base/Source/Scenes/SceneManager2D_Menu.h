@@ -31,4 +31,5 @@ public:
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 	Cursor * cursor;
+	bool playOnce;
 };

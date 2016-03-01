@@ -23,6 +23,7 @@ public:
 	int getInt(string text);
 	string getString(string text);
 	bool getBool(string text);
+	float getFloat(string text);
 
 	lua_State* getLuaState() { return LS; }
 };

@@ -4,6 +4,7 @@
 #include "../MeshBuilder.h"
 #include "../Scenes/SceneManager2D.h"
 #include "Vector2.h"
+#include <vector>
 
 class SliderUI
 {
@@ -19,14 +20,20 @@ public:
 
 	Vector2 GetPos();
 
+	float CalculateNumeral();
+	Vector2 CalculatePosX(float numeral);
+
 	bool CheckMouseOver(float x, float y);
 	void DragKnob(float x);
-	void Update(float x, float y, bool clicked, double dt);
+	bool Update(float x, float y, bool clicked, double dt);
 
 	virtual void render(CSceneManager2D* SceneManager2D, float z = 0);
 
 protected:
 
+	float currentfilled;
+	float total;
+	float result;
 	Mesh* SMesh, *KMesh;
 	float sizeX, sizeY;
 	Vector2 pos, knobPos,  min, max, knobMin, knobMax;

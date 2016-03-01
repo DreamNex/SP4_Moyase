@@ -43,13 +43,18 @@ void CSceneManager2D_Menu::Init()
 	meshList[GEO_BG]->textureID = LoadTGA("Image//Tits//MainMenuBG.tga");
 
 	int temp = m_window_width / 4;
+	
 	Buttons.push_back(new SpecialMenuButton("Start", temp * 0.5f, 200, temp, 200 * 0.5f, 0.2f));
 	Buttons.push_back(new SpecialMenuButton("How 2 Play", temp * 0.5f, 300, temp + temp - temp*0.33f, 300 * 0.5f, 0.2f));
 	Buttons.push_back(new SpecialMenuButton("Options", temp * 0.5f, 250, temp + temp + temp*0.33f, 250 * 0.5f, 0.2f));
 	Buttons.push_back(new SpecialMenuButton("Exit", temp * 0.5f, 150, temp + temp + temp, 150 * 0.5f, 0.2f));
-
+	
+	playOnce = false;
+	
 	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
-
+	
+	Application::BGM.Play("SoundTracks//MenuTrack.mp3", true, false);
+	
 	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga", "Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
 }
 
@@ -66,7 +71,21 @@ void CSceneManager2D_Menu::Update(double dt)
 
 	for (unsigned int i = 0; i < Buttons.size(); ++i)
 	{
-		if (Buttons[i]->CheckMouseOver((float)Application::mouse_current_x, (float)Application::mouse_current_y, dt));
+		//
+		if (Buttons[i]->CheckMouseOver((float)Application::mouse_current_x, (float)Application::mouse_current_y, dt))
+		{
+			if (!playOnce)
+			{
+				Application::SFX.Play("SoundTracks//HoverTrack.mp3", false, false);
+				playOnce = true;
+			}
+			break;
+		}
+		if(i+1 == Buttons.size())
+		{
+			playOnce = false;
+		}
+
 	}
 }
 

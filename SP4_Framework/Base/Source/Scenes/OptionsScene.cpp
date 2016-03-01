@@ -27,6 +27,11 @@ OptionsScene::~OptionsScene()
 			delete Sliders[i];
 		}
 	}
+
+	if (Fr)
+	{
+		delete Fr;
+	}
 }
 
 void OptionsScene::Init()
@@ -39,9 +44,16 @@ void OptionsScene::Init()
 	
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("BGM", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
+	
+	Fr = new FileReading();
+	soundPlaying = false;
 
-	Sliders.push_back(new SliderUI("Image//Tits//btn.tga", "Image//Tits//btn_faded.tga",400, 40, Vector2(m_window_width * 0.5f, m_window_height * 0.5f), 0.5));
-	Sliders.push_back(new SliderUI("Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 400, 40, Vector2(m_window_width * 0.5f, m_window_height * 0.5f - 60), 0.5));
+	Luala la("Playerpref.lua");
+	volume1 = la.getFloat("BGM");
+	volume2 = la.getFloat("SFX");
+	
+	Sliders.push_back(new SliderUI("Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 400, 40, Vector2(m_window_width * 0.5f, m_window_height * 0.5f), volume1));
+	Sliders.push_back(new SliderUI("Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 400, 40, Vector2(m_window_width * 0.5f, m_window_height * 0.5f - 100), volume2));
 }
 
 void OptionsScene::Update(double dt)
@@ -50,7 +62,38 @@ void OptionsScene::Update(double dt)
 
 	for (unsigned int i = 0; i < Sliders.size(); i++)
 	{
-		Sliders[i]->Update((float)Application::mouse_current_x,(float)Application::mouse_current_y, Application::Button_Left, dt);
+		bool tempb = Sliders[i]->Update((float)Application::mouse_current_x, (float)Application::mouse_current_y, Application::Button_Left, dt);
+
+		if (i == 0)
+		{
+			volume1 = Sliders[i]->CalculateNumeral();
+			if (tempb && !soundPlaying)
+			{
+				//play sound on loop
+				soundPlaying = true;
+			}
+
+			else
+				soundPlaying = false;
+
+
+			Fr->SetFloatVal("Playerpref.lua", "BGM", (volume1 / 100));
+		}
+
+		else if (i == 1)
+		{
+			volume2 = Sliders[i]->CalculateNumeral();
+			if (tempb && !soundPlaying)
+			{
+				//Play sound
+				soundPlaying = true;
+			}
+
+			else
+				soundPlaying = false;
+
+			Fr->SetFloatVal("Playerpref.lua", "SFX", (volume2 / 100));
+		}
 	}
 }
 
@@ -69,7 +112,15 @@ void OptionsScene::Render()
 
 	//On screen text
 	RenderTextOnScreen(meshList[GEO_TEXT], "BGM ", Color(0, 0, 0), 50, m_window_width * 0.5 - 300, m_window_height * 0.5f - 25);
-	RenderTextOnScreen(meshList[GEO_TEXT], "SFX ", Color(0, 0, 0), 50, m_window_width * 0.5 - 300, m_window_height * 0.5f - 75);
+	RenderTextOnScreen(meshList[GEO_TEXT], "SFX ", Color(0, 0, 0), 50, m_window_width * 0.5 - 300, m_window_height * 0.5f - 130);
+
+	std::stringstream ss;
+	ss << volume1;
+	RenderTextOnScreen(meshList[GEO_TEXT], ss.str(), Color(0, 0, 0), 50, m_window_width * 0.5 - 20, m_window_height * 0.5f + 30);
+
+	std::stringstream ss2;
+	ss2 << volume2;
+	RenderTextOnScreen(meshList[GEO_TEXT], ss2.str(), Color(0, 0, 0), 50, m_window_width * 0.5 - 20, m_window_height * 0.5f - 80);
 }
 
 void OptionsScene::Exit()
