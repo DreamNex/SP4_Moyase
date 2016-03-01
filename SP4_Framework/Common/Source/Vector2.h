@@ -26,5 +26,7 @@ struct Vector2
 	float component(Vector2 v, Vector2 dV);
 	void componentVector(Vector2 v, Vector2 dV);
 	void rotateVector(float angle);
+	void RotateClockwise();
+	void RotateAntiClockwise();
 };
 #endif

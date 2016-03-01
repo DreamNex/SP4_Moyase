@@ -18,8 +18,9 @@ public:
 	void render(CSceneManager2D* sceneManager2D);
 	
 	Balls* getBall() { return theball; }
-
 	int* getToolsArray() { return tools; }
+
+	ParticleManager* GetParticleManager(){ return this->pm_Particles; }
 
 	std::vector<GameObject*>& getGameObjects() { return Allassets; }
 	void addTool(Tools* Tool);
@@ -31,8 +32,10 @@ public:
 	void UpdateMode();
 private:
 	Balls* theball;
+	bool collide;
 	int tools[3];
 	std::vector<GameObject*> Allassets;
+	std::vector<GameObject*> currentCollision;
 
 	//Level's Score(Depends on the Amount Of Collision Made)
 	const int MAX_SCORE = 20;

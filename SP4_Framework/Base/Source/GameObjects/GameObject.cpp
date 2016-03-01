@@ -4,12 +4,14 @@ GameObject::GameObject()
 : rigidBody(NULL)
 , mesh(NULL)
 , pos(0, 0)
+, applyEffect(false)
 {
 }
 
 GameObject::GameObject(Vector2 pos)
 {
 	this->pos = pos;
+	this->applyEffect = false;
 }
 
 GameObject::~GameObject()

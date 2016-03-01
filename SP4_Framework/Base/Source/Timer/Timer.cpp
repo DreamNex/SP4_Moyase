@@ -12,6 +12,7 @@ Timer::Timer()
 
 Timer::Timer(float countdown)
 {
+	active = true;
 	this->duration = countdown;
 
 	dur_Copy = countdown;

@@ -137,3 +137,14 @@ void Vector2::rotateVector(float angle)
 	this->x = tempx * cos(angle) - tempy * sin(angle);
 	this->y = tempx * sin(angle) + tempy * cos(angle);
 }
+
+void Vector2::RotateClockwise()
+{
+	Vector2 temp(y, -x);
+	*this = temp;
+}
+void Vector2::RotateAntiClockwise()
+{
+	Vector2 temp(-y, x);
+	*this = temp;
+}

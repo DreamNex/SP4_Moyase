@@ -12,6 +12,7 @@ class CGameplayScene: public CSceneManager2D
 public:
 	enum GEOMETRY_TYPE
 	{
+		GEO_TEST,
 		GEO_TEXT,
 		GEO_BG,
 		NUM_GEOMETRY,
@@ -42,7 +43,7 @@ private:
 
 	GUIManager * m_GUI;
 	Controls * ctrs;
-	bool mL_state, mR_state;
+	bool mL_state, mR_state, play_state;
 
 	GameStates curentState;
 

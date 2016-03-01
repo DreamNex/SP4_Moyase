@@ -46,15 +46,27 @@ void CGameplayScene::Init()
 
 	m_GUI = new GUIManager(gameLevel.getToolsArray()[0], gameLevel.getToolsArray()[1], gameLevel.getToolsArray()[2]);
 	ctrs = new Controls(m_GUI);
+	play_state = false;
+
 }
 
 void CGameplayScene::Update(double dt)
 {
+	if (Application::IsKeyPressed(VK_SPACE))
+	{
+		if (play_state)
+		{ 
+			ctrs->PlayPause();
+			play_state = false;
+		}
+	}
+	else
+		play_state = true;
 	if (curentState != S_WIN)
 		curentState = static_cast<GameStates>(ctrs->GetState());
 
 	mL_state = mR_state = false;
-	
+	bool playPause = false;
 	if (Application::Button_Left)
 		mL_state = true;
 	if (Application::Button_Right)
@@ -63,16 +75,20 @@ void CGameplayScene::Update(double dt)
 	switch (curentState)
 	{
 	case S_RESET:
+		gameLevel.SetScore(0);
+		gameLevel.GetParticleManager()->Clear();
 		gameLevel.getBall()->reset();
 		m_GUI->Update(dt);
+		m_GUI->UpdateScore(gameLevel.GetScore());
 		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, dt);
 		break;
 
 	case S_STARTED:
 		m_GUI->Update(dt);
+		m_GUI->UpdateScore(gameLevel.GetScore());
 		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, dt, true);
 		curentState = static_cast<GameStates>(gameLevel.update(dt));
-		if (curentState == S_RESET)
+		if (curentState == S_RESET || playPause)
 		{
 			ctrs->SetState(0);
 		}
@@ -89,7 +105,6 @@ void CGameplayScene::Render()
 	CSceneManager2D::Render();
 
 	RenderMeshIn2D(meshList[GEO_BG], false, 1, 1, 0, 0, -1);
-
 	gameLevel.render(this);
 
 	m_GUI->Render(this);

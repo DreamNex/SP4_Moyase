@@ -19,6 +19,7 @@ Controls::Controls(GUIManager * m_GUI)
 	correct = true;
 
 	cursor = new Cursor("Image//curshead.tga", "Image//curshead2.tga","Image//curstail.tga", 1.5f, 20, 20);
+	key = "";
 }
 
 Controls::~Controls()
@@ -31,6 +32,16 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 	this->mL_state = ml_state;
 	this->mR_state = mr_state;
 
+	key = "";
+	if (Application::IsKeyPressed('1'))
+		key = "1";
+	else if (Application::IsKeyPressed('2'))
+		key = "2";
+	else if (Application::IsKeyPressed('3'))
+		key = "3";
+
+	if (key != "")
+		mL_state = true;
 
 	cursor->Update(dt, mL_state || mR_state); //MouseLeft
 	Vector2 mousePos(cursor->GetCursPos().x, cursor->GetCursPos().y );
@@ -59,6 +70,7 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 
 void Controls::GetSelection(Vector2 mousePos)
 {
+	m_GUI->DisablePanel(false);
 	if (mL_state)//mouse click
 	{
 		for (unsigned int i = 3; i < m_GUI->GetTools().size(); ++i)
@@ -110,6 +122,29 @@ void Controls::GetSelection(Vector2 mousePos)
 
 void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mousePos)
 {
+	m_GUI->DisablePanel(false);
+	if (key != "")
+	{
+		if (key == "1")
+		{
+			SelectedGO = new Cannon(mousePos, 50, 50);
+			SelectedIndex = 1;
+		}
+		if (key == "2")
+		{
+			SelectedGO = new Boost(mousePos, 50, 50);
+			SelectedIndex = 2;
+		}
+		if (key == "3")
+		{
+			SelectedGO = new Slow(mousePos, 50, 50);
+			SelectedIndex = 3;
+		}
+		c_state = PLACEMENT;
+		m_GUI->DisablePanel(true);
+		return;
+	}
+
 	if (mL_state)//mouse click
 	{
 		//for tools
@@ -170,7 +205,7 @@ void Controls::GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mouse
 		if (SelectedGO)
 		{
 			c_state = PLACEMENT;
-
+			m_GUI->DisablePanel(true);
 		}
 	}
 	else if (!mL_state && !mR_state)
@@ -342,6 +377,7 @@ void Controls::GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mouse
 
 void Controls::DoRotation(Vector2 mousePos)
 {
+	m_GUI->DisablePanel(true);
 	if (mR_state)
 	{
 		if (dynamic_cast<Cannon*>(SelectedGO))
@@ -402,6 +438,14 @@ void Controls::SetState(int i)
 		m_GUI->GetTools()[GUI::RESETGUI]->SetActive(false);
 		break;
 	}
+}
+
+void Controls::PlayPause()
+{
+	if (state == 0)
+		state = 1;
+	else
+		state = 0;
 }
 
 int Controls::GetState()

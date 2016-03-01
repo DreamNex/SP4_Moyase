@@ -35,26 +35,27 @@ float RandomFloat(float min, float max)
 
 void ParticleManager::Clear()
 {
-	for (unsigned int i = 0; i < p_Particles.size(); ++i)
-	{
-		delete p_Particles[i];
-	}
 	p_Particles.clear();
 }
 
-void ParticleManager::SpawnParticles(PARTICLE_TYPE p_Type, Vector2 end, Vector2 size, float speed, float dist, float life, int amount)
+void ParticleManager::SpawnParticles(PARTICLE_TYPE p_Type, Vector2& end, Vector2 size, float speed, float dist, float life, int amount)
 {
-	srand(time(NULL));
 	Vector2 up(0, 1);
+	int vPath = 0;
+
+	if (p_Type == PARTICLE_PLAYER_ORBIT)
+		vPath = 2;
+	else if (p_Type != PARTICLE_WALL)
+		vPath = 1;
+
+	srand(time(NULL));
+
 	for (unsigned int i = 0; i < amount; ++i)
 	{
-		int vPath = 0;
 		float p_angle = RandomFloat(1, 359);
 		Vector2 start = up;
 		start.rotateVector(-p_angle);
 		start = end + (start * dist);
-		if (p_Type == PARTICLE_PLAYER_ORBIT)
-			vPath = 2;
 		p_Particles.push_back(new Particles(vPath, start, end, size, speed, mesh[p_Type], new Timer(life)));
 	}
 }

@@ -10,7 +10,7 @@
 class Particles
 {
 public:
-	Particles(int vPath, Vector2 start, Vector2 end, Vector2 size, float speed, Mesh* mesh, Timer* life);
+	Particles(int vPath, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life);
 	Particles();
 	~Particles();
 
@@ -23,12 +23,12 @@ public:
 	float GetSpeed();
 
 	//MUTATOR(S)
-	void SetParticle(int vPath, Vector2 start, Vector2 end, Vector2 size, float speed, Mesh* mesh, Timer* life);
+	void SetParticle(int vPath, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life);
 	void SetLife(Timer*);
 	void SetMesh(Mesh*);
 	void SetSize(Vector2);
 	void SetStart(Vector2);
-	void SetEnd(Vector2);
+	void SetEnd(Vector2&);
 	void SetSpeed(float);
 
 	void Render(CSceneManager2D*);
@@ -39,7 +39,7 @@ private:
 	Mesh* particleMesh;
 	Vector2 size; //Scale X, Scale Y
 	Vector2 start;
-	Vector2 end;
+	Vector2* end;
 	Vector2 prevEnd;
 	float speed;
 };
