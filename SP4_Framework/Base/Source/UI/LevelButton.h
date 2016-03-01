@@ -5,7 +5,7 @@
 class LevelButton : public ButtonUI
 {
 public:
-	LevelButton(std::string levelName, bool unlock, std::string text, char* normalMesh, char* hoverMesh, float sizeX, float sizeY, float x, float y, float textScaling, bool showText);
+	LevelButton(std::string levelName, bool unlock, std::string text, char* normalMesh, char* hoverMesh, float sizeX, float sizeY, float x, float y, float textScaling, bool showText, int socre);
 	~LevelButton();
 
 	std::string getLevelName() { return levelName; }
@@ -18,4 +18,9 @@ private:
 	bool unlock;
 
 	Mesh *lockMesh;
+
+
+	Mesh *HSMesh1, *HSMesh2;
+	float hsScaleX, hsScaleY;
+	int score;
 };

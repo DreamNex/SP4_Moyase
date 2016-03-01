@@ -8,6 +8,7 @@
 #include "Cannon.h"
 #include "Boost.h"
 #include "Slow.h"
+#include "Rebound.h"
 
 Balls::Balls(Vector2 pos, float diameter, const char* texturePath)
 : GameObject(pos)
@@ -45,6 +46,17 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 		if (dynamic_cast<Spikes*>(GO2))
 		{
 			this->pos = originalPos;
+		}
+		else if (dynamic_cast<Rebound*>(GO2))
+		{
+			dynamic_cast<Rebound*>(GO2)->activateWave();
+
+			Vector2 dir = (this->pos - GO2->getPos()).Normalized();
+
+			if (this->getRigidBody()->GetPhysicsCompt()->GetVelocity().Length()*0.2 < 50)
+				this->getRigidBody()->GetPhysicsCompt()->Push(dir * 50);
+			else
+				this->getRigidBody()->GetPhysicsCompt()->Push(dir * (this->getRigidBody()->GetPhysicsCompt()->GetVelocity().Length()*0.2));
 		}
 	}
 	else if (dynamic_cast<Tools*>(GO2))

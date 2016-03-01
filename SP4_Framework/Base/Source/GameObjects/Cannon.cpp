@@ -6,7 +6,7 @@
 
 Cannon::Cannon(Vector2& pos, float width, float height)
 : Tools(pos)
-, angle(-270)
+, angle(0)
 {
 	this->rigidBody = new RigidBody(new Box(this->pos, width, height), new PhysicsComponent(this->pos, 1, false), false);
 

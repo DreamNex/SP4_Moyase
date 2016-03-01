@@ -30,7 +30,7 @@ void CGameplayScene::Init()
 {
 	CSceneManager2D::Init();
 
-	curentState = S_RESET;
+	curentState = S_WIN;
 
 	for (int i = 0; i < NUM_GEOMETRY; ++i)
 	{
@@ -45,6 +45,16 @@ void CGameplayScene::Init()
 
 	m_GUI = new GUIManager(gameLevel.getToolsArray()[0], gameLevel.getToolsArray()[1], gameLevel.getToolsArray()[2]);
 	ctrs = new Controls(m_GUI);
+	
+	//win state stuff
+	winStateOpacity = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true, 100);
+	resultLayout = new Layout("Image//i_pod.tga", m_window_width * 0.35f, m_window_height * 0.66f, m_window_width * 0.5f, 0);
+
+	Buttons.push_back(new ButtonUI("back"
+		, "Image//back.tga", "Image//back_hover.tga"
+		, resultLayout->GetSizeX() * 0.1, resultLayout->GetSizeX() * 0.1
+		, resultLayout->GetPos().x - resultLayout->GetSizeX() / 5.7, resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24
+		, 0.6, false));
 }
 
 void CGameplayScene::Update(double dt)
@@ -63,6 +73,7 @@ void CGameplayScene::Update(double dt)
 	{
 	case S_RESET:
 		gameLevel.getBall()->reset();
+		gameLevel.update(dt, true);
 		m_GUI->Update(dt);
 		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, dt);
 		break;
@@ -79,6 +90,18 @@ void CGameplayScene::Update(double dt)
 
 	case S_WIN:
 		gameLevel.update(dt);
+		
+		if (winStateOpacity->getTransparent() > 20)
+			winStateOpacity->goOpaque(dt, 70);
+		if (resultLayout->GetPos().y < m_window_height * 0.5f)
+		{
+			resultLayout->SetPos(resultLayout->GetPos().x, resultLayout->GetPos().y + dt * m_window_height * 0.4f);
+			Buttons[0]->SetPos(resultLayout->GetPos().x - resultLayout->GetSizeX() / 5.7, resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24);
+		}
+		for (unsigned int i = 0; i < Buttons.size(); ++i)
+		{
+			if (Buttons[i]->CheckMouseOver((float)Application::mouse_current_x, (float)Application::mouse_current_y));
+		}
 		break;
 	}
 }
@@ -98,7 +121,12 @@ void CGameplayScene::Render()
 	switch (curentState)
 	{
 	case S_WIN:
-		RenderTextOnScreen(meshList[GEO_TEXT], "Win", Color(0, 1, 0), 50, 0, 0);
+		winStateOpacity->render(this, 3);
+		resultLayout->render(this, 4);
+		for (unsigned int i = 0; i < Buttons.size(); ++i)
+		{
+			Buttons[i]->render(this, meshList[GEO_TEXT], Color(0,0,0), 5);
+		}
 		break;
 	}
 }

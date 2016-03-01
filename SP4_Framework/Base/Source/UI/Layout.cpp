@@ -36,14 +36,15 @@ float Layout::GetSizeY()
 	return sizeY;
 }
 
-float Layout::GetX()
+Vector2 Layout::GetPos()
 {
-	return pos.x;
+	return pos;
 }
 
-float Layout::GetY()
+void Layout::SetPos(float x, float y)
 {
-	return pos.y;
+	pos.x = x; 
+	pos.y = y;
 }
 
 void Layout::goTransparent(double dt, float multiplier)

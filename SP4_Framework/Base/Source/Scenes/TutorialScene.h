@@ -8,6 +8,8 @@
 #include"../GameObjects/Cannon.h"
 #include"../GameObjects/Boost.h"
 #include"../GameObjects/Slow.h"
+#include"../GameObjects/Rebound.h"
+
 #include"../Controls/Controls.h"
 #include"../Timer/Timer.h"
 

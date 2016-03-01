@@ -6,6 +6,7 @@
 #include"../GUIManager/GUIManager.h"
 #include"../Controls/Controls.h"
 #include"../Timer/Timer.h"
+#include "../UI/ButtonUI.h"
 
 class CGameplayScene: public CSceneManager2D
 {
@@ -37,6 +38,8 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
+	Layout *transition;
+
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 
@@ -47,4 +50,8 @@ private:
 	GameStates curentState;
 
 	Level gameLevel;
+
+	//win state stuff
+	Layout* winStateOpacity, *resultLayout;
+	std::vector<ButtonUI*> Buttons;
 };

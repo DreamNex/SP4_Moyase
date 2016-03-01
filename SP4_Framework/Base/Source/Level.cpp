@@ -27,37 +27,44 @@ Level::~Level()
 	}
 }
 
-int Level::update(double dt)
+int Level::update(double dt, bool onlyUpdateGraphic)
 {
 	for (int i = 0; i < Allassets.size(); ++i)
 	{
-		Allassets[i]->update(dt);
-
-		if (Allassets[i] != theball)
+		if (!onlyUpdateGraphic)
 		{
-			if (theball->checkColision(Allassets[i]))
+			Allassets[i]->update(dt);
+
+			if (Allassets[i] != theball)
 			{
-				if (dynamic_cast<Cannon*>(Allassets[i]))
+				if (theball->checkColision(Allassets[i]))
 				{
-					this->Score += 3;
-				}
-				else if (dynamic_cast<Slow*>(Allassets[i]) || dynamic_cast<Boost*>(Allassets[i]))
-				{
-					this->Score += 2;
-				}
-				else if (dynamic_cast<Wall*>(Allassets[i]))
-				{
-					this->Score += 1;
-				}
-				else if (dynamic_cast<Exit*>(Allassets[i]))
-				{
-					return 3;
-				}
-				else if (dynamic_cast<Spikes*>(Allassets[i]))
-				{
-					return 0;
+					if (dynamic_cast<Cannon*>(Allassets[i]))
+					{
+						this->Score += 3;
+					}
+					else if (dynamic_cast<Slow*>(Allassets[i]) || dynamic_cast<Boost*>(Allassets[i]))
+					{
+						this->Score += 2;
+					}
+					else if (dynamic_cast<Wall*>(Allassets[i]))
+					{
+						this->Score += 1;
+					}
+					else if (dynamic_cast<Exit*>(Allassets[i]))
+					{
+						return 3;
+					}
+					else if (dynamic_cast<Spikes*>(Allassets[i]))
+					{
+						return 0;
+					}
 				}
 			}
+		}
+		if (dynamic_cast<Exit*>(Allassets[i]))
+		{
+			dynamic_cast<Exit*>(Allassets[i])->updateGraphics(dt);
 		}
 	}
 	UpdateMode();

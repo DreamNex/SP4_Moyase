@@ -92,6 +92,7 @@ bool CollisionHandler::CIRCLE_CIRCLE(Circle* c1, Circle* c2)
 	{
 		c1->SetCollideNormal( (c2->GetOrigin() - c1->GetOrigin()).Normalized() );
 		c2->SetCollideNormal((c1->GetOrigin() - c2->GetOrigin()).Normalized());
+		return true;
 	}
 	return false;
 }

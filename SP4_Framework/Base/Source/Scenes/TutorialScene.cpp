@@ -43,13 +43,19 @@ void CTutorialScene::Init()
 	meshList[GEO_BG]->textureID = LoadTGA("Image//g_bg.tga");
 
 	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Avatars//Avatar_Censored.tga"));
-	gameObjects.push_back(new Wall(Vector2(((float)m_window_width *0.5f), 100.f), (float)m_window_width - 100.f, 100.f));
-	gameObjects.push_back(new Spikes(Vector2((float)m_window_width *0.5f, 100.f), (float)m_window_width, 100.f));
-	gameObjects.push_back(new Wall(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.5f), 100.f, (float)m_window_height - 100.f));
+	gameObjects.push_back(new Wall(Vector2(((float)m_window_width * 0.5f), 0.f), (float)m_window_width, 100.f));
+	//gameObjects.push_back(new Wall(Vector2(((float)m_window_width * 0.5f), 720.f), (float)m_window_width, 100.f));
+	gameObjects.push_back(new Wall(Vector2(((float)0), 360.f), (float)100.f, m_window_height));
+	gameObjects.push_back(new Wall(Vector2(((float)1280), 360.f), (float)100.f, m_window_height));
+	//gameObjects.push_back(new Spikes(Vector2((float)m_window_width *0.5f, 100.f), (float)m_window_width, 100.f));
+	//gameObjects.push_back(new Wall(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.5f), 100.f, (float)m_window_height - 100.f));
 
-	gameObjects.push_back(new Cannon(Vector2(300.f, 350.f), 50.f, 50.f));
-	gameObjects.push_back(new Boost(Vector2(300.f, 500.f), 50.f, 50.f));
-	gameObjects.push_back(new Slow(Vector2(300.f, 700.f), 50.f, 50.f));
+	//gameObjects.push_back(new Cannon(Vector2(300.f, 100.f), 50.f, 50.f));
+	//gameObjects.push_back(new Boost(Vector2(300.f, 300.f), 50.f, 50.f));
+	//gameObjects.push_back(new Boost(Vector2(300.f, 300.f), 50.f, 50.f));
+	//gameObjects.push_back(new Slow(Vector2(300.f, 700.f), 50.f, 50.f));
+
+	gameObjects.push_back(new Rebound(Vector2(340, 200.f), 150.f));
 
 	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga","Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
 
@@ -101,10 +107,13 @@ void CTutorialScene::Update(double dt)
 	}
 
 	gameObjects[0]->checkColision(gameObjects[1]);
+	gameObjects[0]->checkColision(gameObjects[2]);
 	gameObjects[0]->checkColision(gameObjects[3]);
 	gameObjects[0]->checkColision(gameObjects[4]);
 	//gameObjects[0]->checkColision(gameObjects[5]);
 	//gameObjects[0]->checkColision(gameObjects[6]);
+	//gameObjects[0]->checkColision(gameObjects[7]);
+	//gameObjects[0]->checkColision(gameObjects[8]);
 
 
 	//m_GUI->Update(dt);

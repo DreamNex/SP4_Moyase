@@ -81,17 +81,17 @@ void CLevelSelectScene::Init()
 	meshList[GEO_BG]->textureID = LoadTGA("Image//Tits//MainMenuBG.tga");
 
 	//layout planes
-	levelLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.38f, m_window_height * 0.48f, m_window_width * 0.35f, m_window_height * 0.5f);
-	AvatarLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.28f, m_window_height * 0.48f, m_window_width * 0.7f, m_window_height * 0.5f);
-	selectedLayout = new Layout("Image//Tits//btn.tga", m_window_width * 0.4f, m_window_height * 0.5f, m_window_width * 0.5f, m_window_height * 0.5f);
+	levelLayout = new Layout("Image//Untitled-4.tga", m_window_width * 0.48f, m_window_height * 0.48f, m_window_width * 0.36f, m_window_height * 0.5f, true, 10);
+	AvatarLayout = new Layout("Image//i_pod.tga", m_window_width * 0.24f, m_window_height * 0.48f, m_window_width * 0.76f, m_window_height * 0.5f);
+	selectedLayout = new Layout("", m_window_width * 0.4f, m_window_height * 0.5f, m_window_width * 0.5f, m_window_height * 0.5f, true, 40, Color(1, 1, 1));
 
 	FileReader = new FileReading();
 
 	/***********************************************Search folder and load buttons******************************************************/
 	std::vector<string> levelNames = FileReader->SearchFolder("Levels//", "*.txt");
 
-	numOfPage = levelNames.size()/6 + 1;
-	if (levelNames.size() % 6 == 0)
+	numOfPage = levelNames.size()/3 + 1;
+	if (levelNames.size() % 3 == 0)
 		numOfPage--;
 	
 	LevelButtons.resize(numOfPage);
@@ -105,48 +105,33 @@ void CLevelSelectScene::Init()
 		FileReader->loadFile("Levels//" + levelNames[i]);
 		FileReader->loadVariables(unlock);
 
-		switch (i % 6)
+		switch (i % 3)
 		{
 		case 0:
 			{
 				  if (i != 0)
 					  curPage++;
-				  pos.Set(levelLayout->GetX() - levelLayout->GetSizeX()/4, levelLayout->GetY() + levelLayout->GetSizeY()/6);
+				  pos.Set(levelLayout->GetPos().x - levelLayout->GetSizeX() / 3.5, levelLayout->GetPos().y);
 				  break;
 			}
 		case 1:
 			{
-				  pos.Set(levelLayout->GetX(), levelLayout->GetY() + levelLayout->GetSizeY() / 6);
+				  pos.Set(levelLayout->GetPos().x, levelLayout->GetPos().y);
 				  break;
 			}
 		case 2:
 			{
-				  pos.Set(levelLayout->GetX() + levelLayout->GetSizeX() / 4, levelLayout->GetY() + levelLayout->GetSizeY() / 6);
-				  break;
-			}
-		case 3:
-			{
-				  pos.Set(levelLayout->GetX() - levelLayout->GetSizeX() / 4, levelLayout->GetY() - levelLayout->GetSizeY() / 6);
-				  break;
-			}
-		case 4:
-			{
-				  pos.Set(levelLayout->GetX(), levelLayout->GetY() - levelLayout->GetSizeY() / 6);
-				  break;
-			}
-		case 5:
-			{
-				  pos.Set(levelLayout->GetX() + levelLayout->GetSizeX() / 4, levelLayout->GetY() - levelLayout->GetSizeY() / 6);
+				  pos.Set(levelLayout->GetPos().x + levelLayout->GetSizeX() / 3.5, levelLayout->GetPos().y);
 				  break;
 			}
 		}
 		LevelButtons[curPage].push_back(new LevelButton(levelNames[i]
 			, unlock
 			, std::to_string(i + 1)
-			, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
-			, levelLayout->GetSizeX() * 0.15, levelLayout->GetSizeX() * 0.15
+			, "Image//disc.tga", "Image//disc_hover.tga"
+			, levelLayout->GetSizeX() * 0.21, levelLayout->GetSizeX() * 0.21
 			, pos.x, pos.y
-			, 0.6, true));
+			, 0.6, true, 4));
 	}
 	/************************************************************************************************************************************/
 
@@ -165,28 +150,28 @@ void CLevelSelectScene::Init()
 	/********************************************Other buttons like back and arrows******************************************************/
 	Buttons[S_Selecting].push_back(new ButtonUI("LevelLeft"
 		, "Image//arrow.tga", "Image//arrow_hover.tga"
-		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
-		, levelLayout->GetX() - levelLayout->GetSizeX() / 2.5, levelLayout->GetY()
+		, levelLayout->GetSizeX() * 0.07, levelLayout->GetSizeX() * 0.07
+		, levelLayout->GetPos().x - levelLayout->GetSizeX() / 2.2, levelLayout->GetPos().y
 		, 0.6, false
 		, 180));
 
 	Buttons[S_Selecting].push_back(new ButtonUI("LevelRight"
 		, "Image//arrow.tga", "Image//arrow_hover.tga"
-		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
-		, levelLayout->GetX() + levelLayout->GetSizeX() / 2.5, levelLayout->GetY()
+		, levelLayout->GetSizeX() * 0.07, levelLayout->GetSizeX() * 0.07
+		, levelLayout->GetPos().x + levelLayout->GetSizeX() / 2.2, levelLayout->GetPos().y
 		, 0.6, false));
 
 	Buttons[S_Selecting].push_back(new ButtonUI("AvatarLeft"
 		, "Image//arrow.tga", "Image//arrow_hover.tga"
-		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
-		, AvatarLayout->GetX() - AvatarLayout->GetSizeX() / 2.7, AvatarLayout->GetY()
+		, AvatarLayout->GetSizeX() * 0.1, AvatarLayout->GetSizeX() * 0.1
+		, AvatarLayout->GetPos().x - AvatarLayout->GetSizeX() / 5.7, AvatarLayout->GetPos().y - AvatarLayout->GetSizeY() * 0.24
 		, 0.6, false
 		, 180));
 
 	Buttons[S_Selecting].push_back(new ButtonUI("AvatarRight"
 		, "Image//arrow.tga", "Image//arrow_hover.tga"
-		, levelLayout->GetSizeX() * 0.1, levelLayout->GetSizeX() * 0.1
-		, AvatarLayout->GetX() + AvatarLayout->GetSizeX() / 2.7, AvatarLayout->GetY()
+		, AvatarLayout->GetSizeX() * 0.1, AvatarLayout->GetSizeX() * 0.1
+		, AvatarLayout->GetPos().x + AvatarLayout->GetSizeX() / 5.7, AvatarLayout->GetPos().y - AvatarLayout->GetSizeY() * 0.24
 		, 0.6, false));
 
 	Buttons[S_Selecting].push_back(new ButtonUI("Back"
@@ -198,13 +183,13 @@ void CLevelSelectScene::Init()
 	Buttons[S_Selected].push_back(new ButtonUI("Yes"
 		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
 		, selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetSizeY() * 0.2f
-		, selectedLayout->GetX() - selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetY() - selectedLayout->GetSizeY() * 0.2f
+		, selectedLayout->GetPos().x - selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetPos().y - selectedLayout->GetSizeY() * 0.2f
 		, 0.6, true));
 
 	Buttons[S_Selected].push_back(new ButtonUI("No"
 		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
 		, selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetSizeY() * 0.2f
-		, selectedLayout->GetX() + selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetY() - selectedLayout->GetSizeY() * 0.2f
+		, selectedLayout->GetPos().x + selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetPos().y - selectedLayout->GetSizeY() * 0.2f
 		, 0.6, true));
 	/************************************************************************************************************************************/
 
@@ -235,11 +220,11 @@ void CLevelSelectScene::Render()
 
 		texts = "Select Stage";
 		textsSize = levelLayout->GetSizeY() * 0.13f;
-		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(0, 0, 0), textsSize, levelLayout->GetX() - (textsSize * 0.5 * texts.size() * 0.5), levelLayout->GetY() - textsSize * 0.5 + levelLayout->GetSizeY() * 0.39f, 3);
+		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(1, 1, 1), textsSize, levelLayout->GetPos().x - (textsSize * 0.5 * texts.size() * 0.5), levelLayout->GetPos().y - textsSize * 0.5 + levelLayout->GetSizeY() * 0.39f, 3);
 
 		texts = "Select Avatar";
-		textsSize = AvatarLayout->GetSizeY() * 0.13f;
-		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(0, 0, 0), textsSize, AvatarLayout->GetX() - (textsSize * 0.5 * texts.size() * 0.5), AvatarLayout->GetY() - textsSize * 0.5 + AvatarLayout->GetSizeY() * 0.39f, 3);
+		textsSize = AvatarLayout->GetSizeY() * 0.09f;
+		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(0, 0, 0), textsSize, AvatarLayout->GetPos().x - (textsSize * 0.5 * texts.size() * 0.5), AvatarLayout->GetPos().y - textsSize * 0.5 + AvatarLayout->GetSizeY() * 0.39f, 3);
 
 		for (unsigned int i = 0; i < Buttons[S_Selecting].size(); i++)
 		{
@@ -248,10 +233,10 @@ void CLevelSelectScene::Render()
 
 		for (unsigned int i = 0; i < LevelButtons[currentPage].size(); i++)
 		{
-			LevelButtons[currentPage][i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 3);
+			LevelButtons[currentPage][i]->render(this, meshList[GEO_TEXT], Color(1, 1, 1), 3);
 		}
 
-		RenderMeshIn2D(AvatarImages[currentAvatarImage], false, 1, 1, AvatarLayout->GetX(), AvatarLayout->GetY(), 3, 0, -AvatarLayout->GetSizeX() * 0.4f * 0.5f, -AvatarLayout->GetSizeY() * 0.4f * 0.5f);
+		RenderMeshIn2D(AvatarImages[currentAvatarImage], false, 1, 1, AvatarLayout->GetPos().x, AvatarLayout->GetPos().y, 3, 0, -AvatarLayout->GetSizeX() * 0.4f * 0.5f);
 		break;
 
 	case S_Selected:
@@ -259,7 +244,7 @@ void CLevelSelectScene::Render()
 
 		texts = "Start stage " + selectedLevelName + "?";
 		textsSize = selectedLayout->GetSizeY() * 0.15f;
-		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(0, 0, 0), textsSize, selectedLayout->GetX() - (textsSize * 0.5 * texts.size() * 0.5), selectedLayout->GetY() - textsSize * 0.5 + selectedLayout->GetSizeY() * 0.2f, 5);
+		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(0, 0, 0), textsSize, selectedLayout->GetPos().x - (textsSize * 0.5 * texts.size() * 0.5), selectedLayout->GetPos().y - textsSize * 0.5 + selectedLayout->GetSizeY() * 0.2f, 5);
 
 		for (unsigned int i = 0; i < Buttons[S_Selected].size(); i++)
 		{
