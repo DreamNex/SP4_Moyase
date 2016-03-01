@@ -8,6 +8,7 @@ struct Vector2
 	Vector2( const Vector2 &rhs ); //copy constructor
 	void Set( float a, float b ); //Set all data
 	void SetZero(void);
+	Vector2 unary(void)const;
 	bool IsZero(void)const;
 	Vector2 operator+( const Vector2& rhs ) const; //Vector addition
 	Vector2 operator-( const Vector2& rhs ) const; //Vector subtraction

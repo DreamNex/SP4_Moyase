@@ -22,6 +22,8 @@ public:
 	float GetX();
 	float GetY();
 
+	void SetPos(float x, float y);
+
 	bool GetShowText();
 	float GetTextScale();
 	Vector2 GetTextPos();

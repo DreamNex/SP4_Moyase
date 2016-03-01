@@ -90,6 +90,13 @@ float ButtonUI::GetY()
 	return pos.y;
 }
 
+void ButtonUI::SetPos(float x, float y)
+{
+	pos.Set(x, y);
+	min.Set(x - sizeX / 2, y - sizeY / 2);
+	max.Set(x + sizeX / 2, y + sizeY / 2);
+}
+
 bool ButtonUI::GetShowText()
 {
 	return showText;
