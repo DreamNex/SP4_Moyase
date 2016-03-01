@@ -25,6 +25,10 @@ public:
 	//It will check the type of gameobject and get variables[FORMATT: pos.x, pos.y, scale x, scale y ]
 	void loadVariables(Balls** Ball, const char* avatarToload);
 	void loadVariables(std::vector<GameObject*>* GameObjects);
+	
+	// Get Volume
+	float *GetVolumes(std::string filename, float Volumes[]);
+	void SetVolume();
 
 	//Change the level bool to true
 	void changeUnlock(std::string filename);

@@ -25,7 +25,7 @@ public:
 
 private:
 	//Panel where all the GUI are placed on
-	GUI* slidePointer;
+	GUI* scoreBar;
 	GUI* panel;
 	Vector2 slideLength;
 	Vector2 sL_copy;

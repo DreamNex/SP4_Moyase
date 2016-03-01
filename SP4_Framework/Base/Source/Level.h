@@ -6,6 +6,7 @@
 #include "GameObjects\Cannon.h"
 #include "GameObjects\Boost.h"
 #include "GameObjects\Slow.h"
+#include "Aesthetics\ParticleManager.h"
 
 class Level
 {
@@ -38,6 +39,9 @@ private:
 	int HighScore;
 	int Score;
 	int Mode; //Depends on Score
+
+	//Aesthetics
+	ParticleManager* pm_Particles;
 };
 
 #endif

@@ -105,10 +105,10 @@ void GUI::Update()
 	temp->SetMin(temp->GetOrigin() - Vector2(temp->GetWidth() / 2, temp->GetHeight() / 2));
 }
 
-void GUI::render(CSceneManager2D* SceneManager2D)
+void GUI::render(CSceneManager2D* SceneManager2D, float z)
 {
 	if (MO)
-		SceneManager2D->RenderMeshIn2D(hoverMesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x - ((Box*)gui_Bound)->GetWidth() / 2, pos.y - ((Box*)gui_Bound)->GetHeight()/2);
+		SceneManager2D->RenderMeshIn2D(hoverMesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x - ((Box*)gui_Bound)->GetWidth() / 2, pos.y - ((Box*)gui_Bound)->GetHeight()/2, z);
 	else
-		SceneManager2D->RenderMeshIn2D(Mesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x - ((Box*)gui_Bound)->GetWidth() / 2, pos.y - ((Box*)gui_Bound)->GetHeight() / 2);
+		SceneManager2D->RenderMeshIn2D(Mesh, false, ((Box*)gui_Bound)->GetWidth(), ((Box*)gui_Bound)->GetHeight(), pos.x - ((Box*)gui_Bound)->GetWidth() / 2, pos.y - ((Box*)gui_Bound)->GetHeight() / 2, z);
 }

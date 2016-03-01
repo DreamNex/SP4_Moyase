@@ -73,18 +73,19 @@ void Cursor::Update(float dt, bool m_state)
 		this->m_state = m_state;
 	}
 	oldPos = mousePos;	
+	cursorPos = Vector2(Application::mouse_current_x, Application::mouse_current_y);
 }
 
 void Cursor::Render(CSceneManager2D* SceneManager2D)
 {
 	for (unsigned int i = 0; i < tailpos.size(); ++i)
 	{
-		SceneManager2D->RenderMeshIn2D(TailMesh, false, cursSize_x, cursSize_y, (*tailpos[i]).x - cursSize_x / 2, (*tailpos[i]).y - cursSize_y / 2, 1);
+		SceneManager2D->RenderMeshIn2D(TailMesh, false, cursSize_x*0.8f, cursSize_y*0.8f, (*tailpos[i]).x - cursSize_x / 5.f, (*tailpos[i]).y - cursSize_y *1.3f, 1.f);
 	}
 	if (m_state)
-		SceneManager2D->RenderMeshIn2D(clickedMesh, false, cursSize_x, cursSize_y, cursorPos.x - cursSize_x/2 , cursorPos.y-cursSize_y/2, 2);
+		SceneManager2D->RenderMeshIn2D(clickedMesh, false, cursSize_x *1.5f, cursSize_y*1.5f, cursorPos.x - cursSize_x/2.5f , cursorPos.y - cursSize_y *1.5f , 2.f);
 	else
-		SceneManager2D->RenderMeshIn2D(d_cursorMesh, false, cursSize_x, cursSize_y, cursorPos.x - cursSize_x / 2, cursorPos.y - cursSize_y / 2, 2);
+		SceneManager2D->RenderMeshIn2D(d_cursorMesh, false, cursSize_x*1.5f, cursSize_y*1.5f, cursorPos.x - cursSize_x/2.5f , cursorPos.y - cursSize_y *1.5f, 2.f);
 
 }
 

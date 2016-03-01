@@ -25,7 +25,7 @@ public:
 	~GUI();
 
 	void Update();
-	void render(CSceneManager2D* SceneManager2D);
+	void render(CSceneManager2D* SceneManager2D, float z = 0);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ACCESSORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	bool GetActive();
 	int GetType();

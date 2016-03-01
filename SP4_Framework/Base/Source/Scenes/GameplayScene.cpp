@@ -43,6 +43,7 @@ void CGameplayScene::Init()
 	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("GameBG", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
 	meshList[GEO_BG]->textureID = LoadTGA("Image//Tits//GameBG.tga");
 
+
 	m_GUI = new GUIManager(gameLevel.getToolsArray()[0], gameLevel.getToolsArray()[1], gameLevel.getToolsArray()[2]);
 	ctrs = new Controls(m_GUI);
 	

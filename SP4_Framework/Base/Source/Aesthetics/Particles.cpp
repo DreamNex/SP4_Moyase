@@ -2,7 +2,7 @@
 #include "GL\glew.h"
 #include "../LoadTGA.h"
 
-Particles::Particles(int vPath, Vector2 start, Vector2 end, Vector2 size, float speed, char* mesh, Timer* life)
+Particles::Particles(int vPath, Vector2 start, Vector2 end, Vector2 size, float speed, Mesh* mesh, Timer* life)
 {
 	this->start = start;
 	this->end = end;
@@ -11,8 +11,7 @@ Particles::Particles(int vPath, Vector2 start, Vector2 end, Vector2 size, float 
 	this->life = life;
 	this->particlePath = new VectorPathing(vPath);
 
-	this->particleMesh = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, size.x, size.y);
-	this->particleMesh->textureID = LoadTGA(mesh);
+	this->particleMesh = mesh;
 }
 Particles::Particles()
 	: life(new Timer(5.0f))

@@ -13,6 +13,9 @@ public:
 	Timer();
 	~Timer();
 
+	bool GetLoop();
+	void SetLoop();
+
 	float GetDuration();
 	void SetDuration(float duration);
 

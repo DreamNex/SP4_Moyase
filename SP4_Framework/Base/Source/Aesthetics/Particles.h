@@ -10,7 +10,7 @@
 class Particles
 {
 public:
-	Particles(int vPath, Vector2 start, Vector2 end, Vector2 size, float speed, char* mesh, Timer* life);
+	Particles(int vPath, Vector2 start, Vector2 end, Vector2 size, float speed, Mesh* mesh, Timer* life);
 	Particles();
 	~Particles();
 
@@ -23,6 +23,7 @@ public:
 	float GetSpeed();
 
 	//MUTATOR(S)
+	void SetParticle(int vPath, Vector2 start, Vector2 end, Vector2 size, float speed, Mesh* mesh, Timer* life);
 	void SetLife(Timer*);
 	void SetMesh(Mesh*);
 	void SetSize(Vector2);
