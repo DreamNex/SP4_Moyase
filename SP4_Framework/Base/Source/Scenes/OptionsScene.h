@@ -1,6 +1,7 @@
 #include "SceneManager2D.h"
 #include "../UI/SliderUI.h"
-#include <vector>
+#include "../FileReading.h"
+#include "../Luala.h"
 
 class OptionsScene : public CSceneManager2D
 {
@@ -26,4 +27,8 @@ public:
 
 private:
 	Mesh* meshList[NUM_GEOMETRY];
+	FileReading* Fr;
+	float volume1;
+	float volume2;
+	bool soundPlaying;
 };

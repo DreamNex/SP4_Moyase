@@ -32,7 +32,6 @@ void FileReading::loadFile(std::string filename)
 
 	myfile.close();
 }
-
 void FileReading::loadVariables(bool &unlock)
 {	
 	if (storage.at(0) == "true")
@@ -72,11 +71,11 @@ void FileReading::loadVariables(Balls** Ball, const char* avatarToload)
 
 			//Split second part, pos.x
 			std::getline(splitter, token, ',');
-			x = (float)atoi(token.c_str());
+			x = std::stof(token.c_str());
 			
 			//Split third part, pos.y
 			std::getline(splitter, token, ',');
-			y = (float)atoi(token.c_str());
+			y = std::stof(token.c_str());
 
 			//Split fourth part, diameter
 			std::getline(splitter, token, ',');
@@ -103,19 +102,19 @@ void FileReading::loadVariables(std::vector<GameObject*>* GameObjects)
 
 			//Split second part, pos.x
 			std::getline(splitter, token, ',');
-			x = (float)atoi(token.c_str());
+			x = std::stof(token.c_str());
 
 			//Split third part, pos.y
 			std::getline(splitter, token, ',');
-			y = (float)atoi(token.c_str());
+			y = std::stof(token.c_str());
 
 			//Split fourth part, scaleX
 			std::getline(splitter, token, ',');
-			scaleX = (float)atoi(token.c_str());
+			scaleX = std::stof(token.c_str());
 
 			//Split fifth part, scale y
 			std::getline(splitter, token, ',');
-			scaleY = (float)atoi(token.c_str());
+			scaleY = std::stof(token.c_str());
 
 			(*GameObjects).push_back(new Wall(Vector2(x, y), scaleX, scaleY));
 		}
@@ -130,19 +129,19 @@ void FileReading::loadVariables(std::vector<GameObject*>* GameObjects)
 
 			//Split second part, pos.x
 			std::getline(splitter, token, ',');
-			x = (float)atoi(token.c_str());
+			x = std::stof(token.c_str());
 
 			//Split third part, pos.y
 			std::getline(splitter, token, ',');
-			y = (float)atoi(token.c_str());
+			y = std::stof(token.c_str());
 
 			//Split fourth part, scaleX
 			std::getline(splitter, token, ',');
-			scaleX = (float)atoi(token.c_str());
+			scaleX = std::stof(token.c_str());
 
 			//Split fifth part, scale y
 			std::getline(splitter, token, ',');
-			scaleY = (float)atoi(token.c_str());
+			scaleY = std::stof(token.c_str());
 
 			(*GameObjects).push_back(new Spikes(Vector2(x, y), scaleX, scaleY));
 		}
@@ -157,19 +156,19 @@ void FileReading::loadVariables(std::vector<GameObject*>* GameObjects)
 
 			//Split second part, pos.x
 			std::getline(splitter, token, ',');
-			x = (float)atoi(token.c_str());
+			x = std::stof(token.c_str());
 
 			//Split third part, pos.y
 			std::getline(splitter, token, ',');
-			y = (float)atoi(token.c_str());
+			y = std::stof(token.c_str());
 
 			//Split fourth part, scaleX
 			std::getline(splitter, token, ',');
-			scaleX = (float)atoi(token.c_str());
+			scaleX = std::stof(token.c_str());
 
 			//Split fifth part, scale y
 			std::getline(splitter, token, ',');
-			scaleY = (float)atoi(token.c_str());
+			scaleY = std::stof(token.c_str());
 
 			(*GameObjects).push_back(new Exit(Vector2(x, y), scaleX, scaleY));
 		}
@@ -186,6 +185,7 @@ void FileReading::changeUnlock(std::string filename)
 	std::ifstream ifile;
 	std::string Checker = "false";
 	std::string line;
+	storage.clear();
 
 	ifile.open(filename);
 	if (ifile.is_open())
@@ -211,28 +211,94 @@ void FileReading::changeUnlock(std::string filename)
 	}
 }
 
-float *FileReading::GetVolumes(std::string filename, float Volumes[])
+float FileReading::GetFloatVal(std::string filename, std::string searchFor)
+{
+	std::ifstream ifile;
+	std::string line;
+	float returnVal;
+	storage3.clear();
+
+	ifile.open(filename);
+	if (ifile.is_open())
+	{
+		while (std::getline(ifile, line))
+		{
+			std::istringstream ss(line);
+			storage3.push_back(line);
+		}
+	}
+
+	for (std::vector<std::string>::iterator it = storage3.begin(); it < storage3.end(); it++)
+	{
+		if (it->find(searchFor) != std::string::npos)
+		{
+			
+			std::stringstream splitter(it->c_str());
+			std::string token;
+
+			std::getline(splitter, token, ' ');
+			std::string temp = token;
+
+
+			std::getline(splitter, token, ' ');
+			temp = token;
+
+			std::getline(splitter, token, ' ');
+			returnVal = std::stof(token.c_str());
+
+		}
+
+	}
+
+	return returnVal;
+}
+
+void FileReading::SetFloatVal(std::string filename, std::string searchFor, float value)
 {
 	std::ifstream ifile;
 	std::string line;
 	
+	storage3.clear();
+	
 	ifile.open(filename);
 	if (ifile.is_open())
 	{
-		std::getline(ifile, line);
-		Volumes[0] = std::stof(line);
-
-		std::getline(ifile, line);
-		Volumes[1] = std::stof(line);
+		while (std::getline(ifile, line))
+		{
+			std::istringstream ss(line);
+			storage3.push_back(line);
+		}
 	}
 
 	ifile.close();
 
-	return Volumes;
-}
+	for (int i = 0; i < storage3.size(); i++)
+	{
+		if (storage3[i].find(searchFor) != std::string::npos)
+		{
+			if (searchFor == "BGM")
+			{
+				std::ostringstream buff;
+				buff << value;
+				std::string BGM_s = "BGM = ";
+				 storage3[i] =  BGM_s + buff.str();
+			}
 
-void FileReading::SetVolume()
-{
+			else if (searchFor == "SFX")
+			{
+				std::ostringstream buff;
+				buff << value;
+				std::string SFX_s = "SFX = ";
+				storage3[i] = SFX_s + buff.str();
+			}
+		}
+	}
+
+	std::ofstream ofile(filename);
+	for (auto const& line : storage3)
+	{
+		ofile << line << '\n';
+	}
 
 }
 
@@ -289,4 +355,46 @@ std::vector<std::string>  FileReading::SearchFolder(std::string directory, std::
 		std::cout << "Something went wrong during searching \n" << std::endl;
 	}
 	return storageFN;
+}
+
+std::string FileReading::GetVariable(std::string filename, std::string searchFor)
+{
+	std::ifstream ifile;
+	std::string line;
+	std::string temp;
+	storage3.clear();
+
+	ifile.open(filename);
+	if (ifile.is_open())
+	{
+		while (std::getline(ifile, line))
+		{
+			std::istringstream ss(line);
+			storage3.push_back(line);
+		}
+	}
+
+	for (std::vector<std::string>::iterator it = storage3.begin(); it < storage3.end(); it++)
+	{
+		if (it->find(searchFor) != std::string::npos)
+		{
+
+			std::stringstream splitter(it->c_str());
+			std::string token;
+
+			std::getline(splitter, token, ' ');
+			temp = token;
+
+
+			std::getline(splitter, token, ' ');
+			temp = token;
+
+			std::getline(splitter, token, ' ');
+			temp = token;
+
+		}
+
+	}
+
+	return temp;
 }

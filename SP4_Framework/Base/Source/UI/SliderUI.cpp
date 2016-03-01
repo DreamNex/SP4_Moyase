@@ -27,6 +27,9 @@ SliderUI::SliderUI(char* SMesh, char* KMesh, float sizeX, float sizeY, Vector2 p
 	knobMax.Set(knobPos.x + ((sizeY + 10) * 0.5f), knobPos.y + ((sizeY + 10) * 0.5f));
 	//Application::BGM_Engine->getSoundVolume();
 	hoverover = false;
+	currentfilled = 0.f;
+	total = 0.f;
+	result = 0.f;
 }
 
 SliderUI::~SliderUI()
@@ -46,22 +49,28 @@ bool SliderUI::CheckMouseOver(float x, float y)
 	}
 }
 
-void SliderUI::Update(float x, float y, bool clicked, double dt)
+bool SliderUI::Update(float x, float y, bool clicked, double dt)
 {
 	if (CheckMouseOver(x, y) && !clicked)
 	{
 		hoverover = true;
+		return false;
 	}
 
 	else if (!CheckMouseOver(x, y) && !clicked && hoverover)
 	{
 		hoverover = false;
+		return false;
 	}
 
 	if (hoverover && clicked)
 	{
 		DragKnob(x);
+		return true;
 	}
+
+	
+
 }
 
 void SliderUI::DragKnob(float x)
@@ -83,7 +92,6 @@ void SliderUI::DragKnob(float x)
 		knobMax.x = knobPos.x + sizeY*0.75;
 	}
 }
-
 //Get mesh
 Mesh* SliderUI::GetSMesh()
 {
@@ -104,8 +112,28 @@ Vector2 SliderUI::GetPos()
 {
 	return pos;
 }
+
 void SliderUI::render(CSceneManager2D* SceneManager2D, float z)
 {
 	SceneManager2D->RenderMeshIn2D(SMesh, false, 1, 1, pos.x, pos.y, z, 0, -sizeX * 0.5f, -sizeY * 0.5f);
 	SceneManager2D->RenderMeshIn2D(KMesh, false, 1, 1, knobPos.x, knobPos.y, z+1, 0, -sizeY * 0.5f, -sizeY * 0.5f);
+}
+
+float SliderUI::CalculateNumeral()
+{
+	currentfilled = knobPos.x - min.x;
+	total = max.x - min.x;
+
+	result = (currentfilled / total) * 100;
+
+	return result;
+}
+
+Vector2 SliderUI::CalculatePosX(float numeral)
+{
+	total = max.x - min.x;
+	currentfilled = numeral * total;
+	knobPos.x = currentfilled + min.x;
+
+	return knobPos;
 }

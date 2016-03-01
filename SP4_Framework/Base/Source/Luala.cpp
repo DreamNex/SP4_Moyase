@@ -29,3 +29,11 @@ bool Luala::getBool(string text)
 	lua_getglobal(LS, text.c_str());
 	return lua_toboolean(LS, -1);
 }
+
+float Luala::getFloat(string text)
+{
+
+	lua_getglobal(LS, text.c_str());
+	string temp = lua_tostring(LS, -1);
+	return std::stof(temp);
+}

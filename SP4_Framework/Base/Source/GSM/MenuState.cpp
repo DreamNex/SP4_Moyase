@@ -57,20 +57,24 @@ void CMenuState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, c
 			if (scene->Buttons[i]->GetText() == "Start" && scene->Buttons[i]->GetMouseover())
 			{
 				mode = 1;
+				Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
 				break;
 			}
 			else if (scene->Buttons[i]->GetText() == "How 2 Play" && scene->Buttons[i]->GetMouseover())
 			{
 				mode = 2;
+				Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
 				break;
 			}
 			else if (scene->Buttons[i]->GetText() == "Options" && scene->Buttons[i]->GetMouseover())
 			{
 				mode = 3;
+				Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
 				break;
 			}
 			else if (scene->Buttons[i]->GetText() == "Exit" && scene->Buttons[i]->GetMouseover())
 			{
+				Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
 				Application::exitbool = true;
 				break;
 			}

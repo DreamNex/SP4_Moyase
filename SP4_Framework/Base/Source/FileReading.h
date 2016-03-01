@@ -27,8 +27,8 @@ public:
 	void loadVariables(std::vector<GameObject*>* GameObjects);
 	
 	// Get Volume
-	float *GetVolumes(std::string filename, float Volumes[]);
-	void SetVolume();
+	float GetFloatVal(std::string filename, std::string searchFor);
+	void SetFloatVal(std::string filename, std::string searchFor, float value);
 
 	//Change the level bool to true
 	void changeUnlock(std::string filename);
@@ -39,10 +39,13 @@ public:
 	//Clear vector storage
 	void ClearStorage();
 
+	//Get Variables
+	std::string GetVariable(std::string filename, std::string searchFor);
+
 private:
 	
 	std::vector<std::string> storage;  // to store the things from the text file;
 	std::vector<std::string> storage2; // to replace the first line
-
+	std::vector<std::string> storage3;
 };
 #endif
