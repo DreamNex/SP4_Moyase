@@ -8,6 +8,7 @@ struct Vector2
 	Vector2( const Vector2 &rhs ); //copy constructor
 	void Set( float a, float b ); //Set all data
 	void SetZero(void);
+	Vector2 unary(void)const;
 	bool IsZero(void)const;
 	Vector2 operator+( const Vector2& rhs ) const; //Vector addition
 	Vector2 operator-( const Vector2& rhs ) const; //Vector subtraction
@@ -26,5 +27,7 @@ struct Vector2
 	float component(Vector2 v, Vector2 dV);
 	void componentVector(Vector2 v, Vector2 dV);
 	void rotateVector(float angle);
+	void RotateClockwise();
+	void RotateAntiClockwise();
 };
 #endif

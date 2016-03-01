@@ -6,12 +6,14 @@
 #include"../GUIManager/GUIManager.h"
 #include"../Controls/Controls.h"
 #include"../Timer/Timer.h"
+#include "../UI/ButtonUI.h"
 
 class CGameplayScene: public CSceneManager2D
 {
 public:
 	enum GEOMETRY_TYPE
 	{
+		GEO_TEST,
 		GEO_TEXT,
 		GEO_BG,
 		NUM_GEOMETRY,
@@ -37,14 +39,21 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
+	std::vector<ButtonUI*>* getButtons() { return &Buttons; }
+	Layout *transition;
+
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 
 	GUIManager * m_GUI;
 	Controls * ctrs;
-	bool mL_state, mR_state;
+	bool mL_state, mR_state, play_state;
 
 	GameStates curentState;
 
 	Level gameLevel;
+
+	//win state stuff
+	Layout* winStateOpacity, *resultLayout;
+	std::vector<ButtonUI*> Buttons;
 };

@@ -23,18 +23,22 @@ Vector2 VectorPathing::GetPath(Vector2 start, Vector2 end)
 	{
 		case ATTRACT:
 		{
+			if ((end - start).IsZero())
+				return Vector2(0, 0);
 			return (end - start).Normalized();
 		}
 		break;
 		case REPEL:
 		{
+			if ((start - end).IsZero())
+				return Vector2(0, 0);
 			return (start - end).Normalized();
 		}
 		break;
 		case ORBIT:
 		{
 			Vector2 norm = (end - start).Normalized();
-			norm.rotateVector(90);
+			norm.RotateClockwise();
 			return norm;
 		}
 		break;

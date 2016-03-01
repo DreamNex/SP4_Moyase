@@ -16,8 +16,8 @@ public:
 	float GetSizeX();
 	float GetSizeY();
 	
-	float GetX();
-	float GetY();
+	Vector2 GetPos();
+	void SetPos(float x, float y);
 
 	void setAlphaMode(bool b) { alphaMode = b; }
 	bool getAlphaMode() { return alphaMode; }

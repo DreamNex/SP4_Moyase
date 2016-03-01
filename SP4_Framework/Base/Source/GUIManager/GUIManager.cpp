@@ -5,10 +5,10 @@ GUIManager::GUIManager(int cannon, int boost , int slow)
 {
 	Vector2 panelPos(640, -40);
 	Vector2 cannonPos = panelPos + Vector2(250, 0);
-	Vector2 slowPos = panelPos + Vector2(350, 0);
-	Vector2 boostPos = panelPos + Vector2(450, 0);
+	Vector2 slowPos = panelPos + Vector2(550, 0);
+	Vector2 boostPos = panelPos + Vector2(400, 0);
 	Vector2 startPos = panelPos + Vector2(0, 2);
-	Vector2 ExitPos = panelPos + Vector2(-400, 0);
+	Vector2 ExitPos = panelPos + Vector2(-550, 0);
 	Vector2 pointerPos = panelPos + Vector2(0, 52);
 
 	slideLength = Vector2(0, 80);
@@ -18,6 +18,8 @@ GUIManager::GUIManager(int cannon, int boost , int slow)
 
 	panel = new GUI(panelPos, GUI::PANEL, new Box(panelPos, 1280, 80), "Image//panel.tga", "Image//panel.tga");
 	scoreBar = new GUI(pointerPos, GUI::POINTER, new Box(pointerPos, 1280, 25), "Image//scoreBar.tga", "Image//scoreBar.tga");
+	score = new GUI(pointerPos, GUI::POINTER, new Box(pointerPos, 1, 18), "Image//score.tga", "Image//score.tga");
+	toolBar = new GUI(cannonPos + Vector2(0, 20), GUI::POINTER, new Box(cannonPos + Vector2(0, 20), 60, 35), "Image//toolBar.tga", "Image//toolBar.tga");
 
 	GUI* temp;
 	//Cannon
@@ -36,16 +38,16 @@ GUIManager::GUIManager(int cannon, int boost , int slow)
 	gui_toolCount.push_back(slow);
 
 	//Start
-	temp = new GUI(startPos, GUI::STARTGUI, new Box(startPos, 70, 70), "Image//startbtn.tga", "Image//startbtn.tga");
+	temp = new GUI(startPos, GUI::STARTGUI, new Box(startPos, 100, 60), "Image//startbtn.tga", "Image//startbtnFaded.tga");
 	gui_Tools.push_back(temp);
 
 	//Reset
-	temp = new GUI(startPos, GUI::RESETGUI, new Box(startPos, 70, 70), "Image//Resetbtn.tga", "Image//Resetbtn.tga");
+	temp = new GUI(startPos, GUI::RESETGUI, new Box(startPos, 100, 60), "Image//Resetbtn.tga", "Image//ResetbtnFaded.tga");
 	gui_Tools.push_back(temp);
 	gui_Tools.back()->SetActive(false);
 
 	//Exit
-	temp = new GUI(ExitPos, GUI::EXIT, new Box(ExitPos, 60, 60), "Image//exitbtn.tga", "Image//slowGUIFaded.tga");
+	temp = new GUI(ExitPos, GUI::EXIT, new Box(ExitPos, 140, 60), "Image//exitbtn.tga", "Image//exitbtnFaded.tga");
 	gui_Tools.push_back(temp);
 }
 
@@ -79,12 +81,15 @@ void GUIManager::Update(float dt)
 		CheckPointer();
 	}
 
-	slide_GUI.push_back(panel);
+
 	slide_GUI.push_back(scoreBar);
-	
+	slide_GUI.push_back(panel);
+	slide_GUI.push_back(score);
+	slide_GUI.push_back(toolBar);
 
 	panel->Update();
 	scoreBar->Update();
+	toolBar->Update();
 
 	for (unsigned int i = 0; i < gui_Tools.size(); i++)
 	{
@@ -117,6 +122,7 @@ void GUIManager::Render(CSceneManager2D* SceneManager2D)
 {
 	panel->render(SceneManager2D);
 	scoreBar->render(SceneManager2D);
+	score->render(SceneManager2D, 3);
 	for (unsigned int i = 0; i < gui_Tools.size(); ++i)
 	{
 		if (gui_Tools[i]->GetActive())
@@ -124,6 +130,35 @@ void GUIManager::Render(CSceneManager2D* SceneManager2D)
 			gui_Tools[i]->render(SceneManager2D, 1);
 		}
 	}
+	
+
+	//ToolBar
+	Vector2 originPos = toolBar->GetPos();
+	for (unsigned int i = 0; i < gui_toolCount.size(); ++i)
+	{
+		if (gui_Tools[i]->CheckMO())
+		{ 
+			 Box* temp = ((Box*)(toolBar));
+			 Vector2 moveBy(150 * i, 30);
+
+			for (unsigned int k = 0; k < gui_toolCount[i]; ++k)
+			{
+
+				if (gui_toolCount[i] == 5)
+					Vector2 aijdsoifj;
+				toolBar->SetPos(toolBar->GetPos() + moveBy);
+				toolBar->render(SceneManager2D, 2);
+				moveBy.y += temp->GetHeight();
+			}
+			toolBar->SetPos(originPos);
+		}
+	}
+}
+
+void GUIManager::UpdateScore(int Score)
+{
+	float scoreLength = (((float)Score) / 20.f) * 1280;
+	((Box*)score->GetGUIBound())->SetWidth(scoreLength);
 }
 
 void GUIManager::Slide(std::vector<GUI*> gui, float slideScalar)
@@ -156,12 +191,10 @@ void GUIManager::Slide(std::vector<GUI*> gui, float slideScalar)
 			if (slideLength.LengthSquared() <= slideDist.LengthSquared())
 			{
 				Vector2 slideOffset = slideDist - slideLength;
-				if (slideOffset.y < 0)
-					Vector2 temp;
 				slideBy = slideOffset;
 				slideLength = Vector2(0, 0);
 			}
-			else //if (slideLength.LengthSquared() > slideDist.LengthSquared())
+			else if (slideLength.LengthSquared() > slideDist.LengthSquared())
 			{
 				slideBy = slideDist;
 				slideLength = slideLength - slideDist;
@@ -175,4 +208,9 @@ void GUIManager::Slide(std::vector<GUI*> gui, float slideScalar)
 void GUIManager::SetSlide(bool slide)
 {
 	this->slide = slide;
+}
+
+void GUIManager::DisablePanel(bool dp)
+{
+	this->disablePanel = dp;
 }

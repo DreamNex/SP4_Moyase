@@ -2,10 +2,10 @@
 #include "GL\glew.h"
 #include "../LoadTGA.h"
 
-Particles::Particles(int vPath, Vector2 start, Vector2 end, Vector2 size, float speed, Mesh* mesh, Timer* life)
+Particles::Particles(int vPath, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life)
 {
 	this->start = start;
-	this->end = end;
+	this->end = &end;
 	this->size = size;
 	this->speed = speed;
 	this->life = life;
@@ -17,7 +17,7 @@ Particles::Particles()
 	: life(new Timer(5.0f))
 	, size(Vector2(1, 1))
 	, start(Vector2(1, 1))
-	, end(Vector2(1, 1))
+	, end(NULL)
 	, speed(1)
 	, particlePath(new VectorPathing(1))
 {
@@ -51,7 +51,7 @@ Vector2 Particles::GetStart()
 }
 Vector2 Particles::GetEnd()
 {
-	return this->end;
+	return *(this->end);
 }
 float Particles::GetSpeed()
 {
@@ -78,9 +78,9 @@ void Particles::SetStart(Vector2 start)
 {
 	this->start = start;
 }
-void Particles::SetEnd(Vector2 end)
+void Particles::SetEnd(Vector2& end)
 {
-	this->end = end;
+	this->end = &end;
 }
 void Particles::SetSpeed(float sp)
 {
@@ -89,9 +89,19 @@ void Particles::SetSpeed(float sp)
 
 bool Particles::Update(float dt)
 {
-	if (life->Update(dt))
+	if (prevEnd != 0)
+	{
+		if (prevEnd != *end)
+		{
+			Vector2 offset = *end - prevEnd;
+			start = start + offset;
+		}
+	}
+	Vector2 path = particlePath->GetPath(start, *end) * speed;
+	if (life->Update(dt))//|| path.IsZero())
 		return true;
-	start = start + (particlePath->GetPath(start, end) * speed);
+	start = start + path;
+	prevEnd = *end;
 	return false;
 }
 void Particles::Render(CSceneManager2D* scene)

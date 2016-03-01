@@ -27,6 +27,7 @@ public:
 	void SetState(int i);
 	int GetState();
 	void ResetState();
+	void PlayPause();
 
 private:
 	CONTROLS_STATE c_state;
@@ -37,6 +38,7 @@ private:
 	int SelectedIndex;
 	GameObject *SelectedGO;
 	Vector2 oldPos;
+	char* key;
 	
 	//Feedback
 	Mesh* feedback;

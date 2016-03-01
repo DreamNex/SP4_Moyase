@@ -57,8 +57,6 @@ private:
 	Mesh* meshList[NUM_GEOMETRY];
 
 	Layout *levelLayout, *AvatarLayout, *selectedLayout;
-
-	FileReading* FileReader;
 	
 	//vector of vector of Buttons, 1st vector to detemine the state of game
 	std::vector<std::vector<ButtonUI*>> Buttons;

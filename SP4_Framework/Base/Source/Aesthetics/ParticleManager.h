@@ -23,7 +23,7 @@ public:
 	~ParticleManager();
 
 	void Clear();
-	void SpawnParticles(PARTICLE_TYPE p_Type, Vector2 end, Vector2 size, float speed, float dist, float life, int amount);
+	void SpawnParticles(PARTICLE_TYPE p_Type, Vector2& end, Vector2 size, float speed, float dist, float life, int amount);
 	void Update(float dt);
 	void Render(CSceneManager2D*);
 private:

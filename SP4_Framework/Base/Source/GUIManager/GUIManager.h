@@ -20,13 +20,18 @@ public:
 	void SetToolCount(int index, int val);
 	void Slide(std::vector<GUI*> gui, float slideScalar);
 	void SetSlide(bool);
+	void DisablePanel(bool);
 
 	bool CheckPointer();
 
+	void UpdateScore(int Score);
+
 private:
 	//Panel where all the GUI are placed on
+	GUI* score;
 	GUI* scoreBar;
 	GUI* panel;
+	GUI* toolBar;
 	Vector2 slideLength;
 	Vector2 sL_copy;
 

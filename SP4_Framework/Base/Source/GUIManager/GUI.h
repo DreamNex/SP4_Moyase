@@ -32,6 +32,7 @@ public:
 	Vector2 GetPos();
 	CollisionComponent* GetGUIBound();
 	bool CheckMO();
+	Mesh* GetMesh();
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MUTATORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	void SetActive(bool Active);

@@ -97,6 +97,11 @@ bool GUI::OnClick()
 	return MO;
 }
 
+Mesh* GUI::GetMesh()
+{
+	return this->Mesh;
+}
+
 void GUI::Update()
 {
 	Box* temp = (Box*)gui_Bound;

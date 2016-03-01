@@ -105,14 +105,17 @@
     <Filter Include="Source Files\Scenes\Options">
       <UniqueIdentifier>{536fe169-9a49-46b4-a912-bc0f9ba3764a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game State Management\Options">
-      <UniqueIdentifier>{f6b16df8-0b60-4bf0-87b5-13bd151d571c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GameObjects\Enviroment\Exit">
       <UniqueIdentifier>{a396df91-71cc-416c-bae7-ac4153982356}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Controls">
       <UniqueIdentifier>{52224c3a-1e47-4837-951d-0aab00b1d3e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Enviroment\Rebound">
+      <UniqueIdentifier>{b4f7029e-e6c9-43be-a93f-04c457b81946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game State Management\Options">
+      <UniqueIdentifier>{f6b16df8-0b60-4bf0-87b5-13bd151d571c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -290,8 +293,8 @@
     <ClCompile Include="Source\Controls\Controls.cpp">
       <Filter>Source Files\Controls</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObjects\Exit.cpp">
-      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
+    <ClCompile Include="Source\GameObjects\Rebound.cpp">
+      <Filter>Source Files\GameObjects\Enviroment\Rebound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -481,17 +484,8 @@
     <ClInclude Include="Source\Cursor\Cursor.h">
       <Filter>Source Files\Controls</Filter>
     </ClInclude>
-    <ClInclude Include="Source\UI\LevelButton.h">
-      <Filter>Source Files\UI\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\UI\Layout.h">
-      <Filter>Source Files\UI\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Aesthetics\VectorPathing.h">
-      <Filter>Source Files\Aesthetics</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameObjects\Exit.h">
-      <Filter>Source Files\GameObjects\Enviroment\Exit</Filter>
+    <ClInclude Include="Source\GameObjects\Rebound.h">
+      <Filter>Source Files\GameObjects\Enviroment\Rebound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
