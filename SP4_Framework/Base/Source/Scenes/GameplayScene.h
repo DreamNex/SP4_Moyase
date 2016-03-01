@@ -38,6 +38,7 @@ public:
 	virtual void Render();
 	virtual void Exit();
 
+	std::vector<ButtonUI*>* getButtons() { return &Buttons; }
 	Layout *transition;
 
 private:

@@ -65,16 +65,18 @@ int Level::update(double dt, bool onlyUpdateGraphic)
 						return 0;
 					}
 				}
-			}
-			if (dynamic_cast<Exit*>(Allassets[i]))
-			{
-				dynamic_cast<Exit*>(Allassets[i])->updateGraphics(dt);
-			}
+			}	
 		}
-		pm_Particles->Update(dt);
-		UpdateMode();
-		return 1;
+		if (dynamic_cast<Exit*>(Allassets[i]))
+		{
+			dynamic_cast<Exit*>(Allassets[i])->updateGraphics(dt);
+		}
 	}
+
+	pm_Particles->Update(dt);
+	UpdateMode();
+	return 1;
+
 }
 void Level::render(CSceneManager2D* sceneManager2D)
 {

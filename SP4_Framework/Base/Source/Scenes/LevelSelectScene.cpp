@@ -39,9 +39,6 @@ CLevelSelectScene::~CLevelSelectScene()
 	if (selectedLayout)
 		delete selectedLayout;
 
-	if (FileReader)
-		delete FileReader;
-
 	for (unsigned int i = 0; i < Buttons.size(); ++i)
 	{
 		for (unsigned int j = 0; j < Buttons[i].size(); ++j)
@@ -85,10 +82,10 @@ void CLevelSelectScene::Init()
 	AvatarLayout = new Layout("Image//i_pod.tga", m_window_width * 0.24f, m_window_height * 0.48f, m_window_width * 0.76f, m_window_height * 0.5f);
 	selectedLayout = new Layout("", m_window_width * 0.4f, m_window_height * 0.5f, m_window_width * 0.5f, m_window_height * 0.5f, true, 40, Color(1, 1, 1));
 
-	FileReader = new FileReading();
+	FileReading FileReader;
 
 	/***********************************************Search folder and load buttons******************************************************/
-	std::vector<string> levelNames = FileReader->SearchFolder("Levels//", "*.txt");
+	std::vector<string> levelNames = FileReader.SearchFolder("Levels//", "*.txt");
 
 	numOfPage = levelNames.size()/3 + 1;
 	if (levelNames.size() % 3 == 0)
@@ -102,8 +99,8 @@ void CLevelSelectScene::Init()
 
 	for (unsigned int i = 0; i < levelNames.size(); ++i)
 	{
-		FileReader->loadFile("Levels//" + levelNames[i]);
-		FileReader->loadVariables(unlock);
+		FileReader.loadFile("Levels//" + levelNames[i]);
+		FileReader.loadVariables(unlock);
 
 		switch (i % 3)
 		{
@@ -136,7 +133,7 @@ void CLevelSelectScene::Init()
 	/************************************************************************************************************************************/
 
 	/******************************************Search folder and load avatar images******************************************************/
-	std::vector<string> Images = FileReader->SearchFolder("Image//Avatars//", "*.tga");
+	std::vector<string> Images = FileReader.SearchFolder("Image//Avatars//", "*.tga");
 	totalAvatarImages = Images.size();
 
 	for (unsigned int i = 0; i < Images.size(); ++i)
