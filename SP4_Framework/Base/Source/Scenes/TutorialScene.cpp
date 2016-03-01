@@ -39,94 +39,241 @@ void CTutorialScene::Init()
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	meshList[GEO_TEXT]->material.kAmbient.Set(1, 0, 0);
 
-	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("Game_bg", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
-	meshList[GEO_BG]->textureID = LoadTGA("Image//g_bg.tga");
+	meshList[GEO_BG] = MeshBuilder::Generate2DMesh("GameBG", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
+	meshList[GEO_BG]->textureID = LoadTGA("Image//Tits//GameBG.tga");
 
-	gameObjects.push_back(new Balls(Vector2(300, 700), 50, "Image//Avatars//Avatar_Censored.tga"));
-	gameObjects.push_back(new Wall(Vector2(((float)m_window_width * 0.5f), 0.f), (float)m_window_width, 100.f));
-	//gameObjects.push_back(new Wall(Vector2(((float)m_window_width * 0.5f), 720.f), (float)m_window_width, 100.f));
-	gameObjects.push_back(new Wall(Vector2(((float)0), 360.f), (float)100.f, m_window_height));
-	gameObjects.push_back(new Wall(Vector2(((float)1280), 360.f), (float)100.f, m_window_height));
-	//gameObjects.push_back(new Spikes(Vector2((float)m_window_width *0.5f, 100.f), (float)m_window_width, 100.f));
-	//gameObjects.push_back(new Wall(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.5f), 100.f, (float)m_window_height - 100.f));
+	meshList[GEO_MO] = MeshBuilder::Generate2DMesh("MO Tut", Color(1, 1, 1), 0, 0, 500, 200);
+	meshList[GEO_MO]->textureID = LoadTGA("Image//MO.tga");
 
-	//gameObjects.push_back(new Cannon(Vector2(300.f, 100.f), 50.f, 50.f));
-	//gameObjects.push_back(new Boost(Vector2(300.f, 300.f), 50.f, 50.f));
-	//gameObjects.push_back(new Boost(Vector2(300.f, 300.f), 50.f, 50.f));
-	//gameObjects.push_back(new Slow(Vector2(300.f, 700.f), 50.f, 50.f));
+	meshList[GEO_PLAY] = MeshBuilder::Generate2DMesh("play Tut", Color(1, 1, 1), 0, 0, 500, 200);
+	meshList[GEO_PLAY]->textureID = LoadTGA("Image//Play.tga");
 
-	gameObjects.push_back(new Rebound(Vector2(340, 200.f), 150.f));
+	meshList[GEO_RESET] = MeshBuilder::Generate2DMesh("reset Tut", Color(1, 1, 1), 0, 0, 500, 200);
+	meshList[GEO_RESET]->textureID = LoadTGA("Image//Reset.tga");
 
-	cursor = new Cursor("Image//Avatars//Avatar_Censored.tga", "Image//Avatars//Avatar_5.tga","Image//Avatars//Avatar_5.tga", 1.5f, 20, 20);
+	meshList[GEO_GUI1] = MeshBuilder::Generate2DMesh("gui1 Tut", Color(1, 1, 1), 0, 0, 500, 200);
+	meshList[GEO_GUI1]->textureID = LoadTGA("Image//gui1.tga");
 
-	//m_GUI = new GUIManager(5, 5, 5);
-	
-	//ctrs = new Controls(m_GUI);
+	meshList[GEO_DRAG] = MeshBuilder::Generate2DMesh("drag Tut", Color(1, 1, 1), 0, 0, 500, 200);
+	meshList[GEO_DRAG]->textureID = LoadTGA("Image//drag.tga");
+
+	meshList[GEO_ROT] = MeshBuilder::Generate2DMesh("rotate Tut", Color(1, 1, 1), 0, 0, 500, 200);
+	meshList[GEO_ROT]->textureID = LoadTGA("Image//rotate.tga");
+
+	meshList[GEO_WIN] = MeshBuilder::Generate2DMesh("clr Tut", Color(1, 1, 1), 0, 0, 500, 200);
+	meshList[GEO_WIN]->textureID = LoadTGA("Image//Clear.tga");
+
+	gameObjects.push_back(new Spikes(Vector2((float)m_window_width *0.5f, 100.f), (float)m_window_width, 100.f));
+	gameObjects.push_back(new Wall(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.5f), 100.f, (float)m_window_height - 100.f));
+	//gameObjects.push_back(new Exit(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.5f), 100.f,100.f));
+
+	getBall = new Balls(Vector2(300, 700), 50, "Image//Avatars//Avatar_5.tga");
+
+	cursor = new Cursor("Image//curshead.tga", "Image//curshead2.tga","Image//curstail.tga", 1.5f, 20, 20);
+	m_GUI = new GUIManager(9,9,9);
+	ctrs = new Controls(m_GUI);
+	G_States = RESET;
+
+	MO = false;
+	play = false;
+	rplay = false;
+	vreset = false;
+	gui = false;
+	drag = false;
+	rotate = false;
+	win = false;
+	onClick = false;
+
+	T_States = MOver;
 }
 
 void CTutorialScene::Update(double dt)
 {
 	//Check which state
-	//G_States = static_cast<GameStates>(ctrs->GetState());
+	G_States = static_cast<GameStates>(ctrs->GetState());
 
 	Vector2 mousePos(Application::mouse_current_x, Application::mouse_current_y);
-	//mL_state = mR_state = false;
-	bool m_state = false;
+	bool mL_state = false;
+	bool mR_state = false;
 
-	std::cout << gameObjects[0]->getRigidBody()->GetPhysicsCompt()->GetVelocity().y << std::endl;
-	std::cout << "~~" << std::endl;
-	if (Application::IsKeyPressed('W'))
-	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0, 20.f));
-	}
-	if (Application::IsKeyPressed('S'))
-	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0, -1.f));
-	}
-	if (Application::IsKeyPressed('A'))
-	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(-35.f, 0));
-	}
-	if (Application::IsKeyPressed('D'))
-	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(35.f, 0));
-	}
-	if (Application::IsKeyPressed('L'))
-	{
-		gameObjects[0]->getRigidBody()->GetPhysicsCompt()->Push(Vector2(0.f, 1400));
-	}
 	if (Application::Button_Left)
 	{
-	//	mL_state = true;
-		m_state = true;
+		mL_state = true;
 
 	}
 	if (Application::Button_Right)
 	{
-	//	mR_state = true;
+		mR_state = true;
 	}
-
-	gameObjects[0]->checkColision(gameObjects[1]);
-	gameObjects[0]->checkColision(gameObjects[2]);
-	gameObjects[0]->checkColision(gameObjects[3]);
-	gameObjects[0]->checkColision(gameObjects[4]);
-	//gameObjects[0]->checkColision(gameObjects[5]);
-	//gameObjects[0]->checkColision(gameObjects[6]);
-	//gameObjects[0]->checkColision(gameObjects[7]);
-	//gameObjects[0]->checkColision(gameObjects[8]);
-
-
-	//m_GUI->Update(dt);
-
-	//ctrs->Update(this, gameObjects, mL_state, mR_state, dt);
-
-	for (int i = 0; i < gameObjects.size(); i++)
+	
+	switch (G_States)
 	{
-		gameObjects[i]->update(dt);
+	case RESET:
+	{
+		getBall->reset();
+		m_GUI->Update(dt);
+		ctrs->Update(this, gameObjects, mL_state, mR_state, dt);
+		break;
+	}
+	case START:
+	{
+		m_GUI->Update(dt);
+
+		ctrs->Update(this, gameObjects, mL_state, mR_state, dt, true);
+
+		getBall->update(dt);
+		for (unsigned int i = 0; i < gameObjects.size();++i)
+		{
+			getBall->checkColision(gameObjects[i]);
+		}
+		
+		for (int i = 0; i < gameObjects.size(); i++)
+		{
+			gameObjects[i]->update(dt);
+		}
+
+		if (G_States == RESET)
+		{
+			ctrs->SetState(0);
+		}
+		break;
+	}
+	case EXIT:
+	{
+		getBall->reset();
+		break;
+	}
+	default:
+		break;
 	}
 
-	cursor->Update(dt, m_state);
+	if (getBall->checkColision(gameObjects[0]))
+	{
+		G_States = RESET;
+	}
 
+	switch (T_States)
+	{
+	case MOver:
+	{
+		MO = true;
+		if (Application::mouse_current_y <= m_window_height*0.03)
+		{
+			MO = false;
+			T_States = PLAY;
+		}
+		break;
+	}
+	case PLAY:
+	{
+		play = true;
+		if (Application::mouse_current_y <= m_window_height*0.1 && mL_state == true)
+		{
+			play = false;
+			T_States = TRESET;
+		}
+		break;
+	}
+	case TRESET:
+	{
+		if (!mL_state)
+		{
+			onClick = true;
+		}
+		if (onClick)
+		{
+			vreset = true;
+			if (Application::mouse_current_y <= m_window_height*0.1 && mL_state == true)
+			{
+				vreset = false;
+				onClick = false;
+				T_States = GUI;
+			}
+		}
+		break;
+	}
+	case GUI:
+	{
+		gui = true;
+		if (Application::mouse_current_y <= m_window_height*0.1 && (Application::mouse_current_x >= m_window_width-430 && Application::mouse_current_x <= m_window_width-360) && mL_state == true)
+		{
+			gui = false;
+			T_States = DRAGHERE;
+		}
+		break;
+	}
+	case DRAGHERE:
+	{
+		drag = true;
+		if ((Application::mouse_current_y <= m_window_height-200 && Application::mouse_current_y >= m_window_height-350) && (Application::mouse_current_x >= m_window_width/5 && Application::mouse_current_x <= m_window_width/3) && !mL_state)
+		{
+			drag = false;
+			T_States = RPLAY;
+		}
+		break;
+	}
+	case RPLAY:
+	{
+		play = true;
+		if (Application::mouse_current_y <= m_window_height*0.1 && mL_state == true)
+		{
+			play = false;
+			T_States = RPLAY2;
+		}
+		break;
+	}
+	case RPLAY2:
+	{
+		if (!mL_state)
+		{
+			onClick = true;
+		}
+		if (onClick)
+		{
+			vreset = true;
+			if (Application::mouse_current_y <= m_window_height*0.1 && mL_state == true)
+			{
+				vreset = false;
+				onClick = false;
+				T_States = ROTATE;
+			}
+		}
+		break;
+	}
+	case ROTATE:
+	{
+		rotate = true;
+		if ((Application::mouse_current_y <= m_window_height - 200 && Application::mouse_current_y >= m_window_height - 350) && (Application::mouse_current_x >= m_window_width / 5 && Application::mouse_current_x <= m_window_width / 3) && mR_state)
+		{
+			rotate = false;
+			T_States = RPLAY3;
+		}
+		break;
+	}
+	case RPLAY3:
+	{
+		play = true;
+		if (Application::mouse_current_y <= m_window_height*0.1 && mL_state == true)
+		{
+			play = false;
+			T_States = CLEAR;
+		}
+		break;
+	}
+	case CLEAR:
+	{
+		win = true;
+		if ((Application::mouse_current_y <= m_window_height && Application::mouse_current_y >= 0) && (Application::mouse_current_x >= 0 && Application::mouse_current_x <= m_window_width) && mL_state)
+		{
+			win = false;
+			//Go back to Main Menu
+		}
+		break;
+	}
+
+	default:
+		break;
+	}
 	
 }
 
@@ -134,21 +281,51 @@ void CTutorialScene::Render()
 {
 	CSceneManager2D::Render();
 
-	modelStack.PushMatrix();
-	//RenderMeshIn2D(meshList[GEO_BG], false);
-	modelStack.PopMatrix();
+
+
+	RenderMeshIn2D(meshList[GEO_BG], false, 1.f, 1.f, 0.f, 0.f, -1.f);
+
+	getBall->render(this);
 
 	for (int i = 0; i < gameObjects.size(); i++)
 	{
 		gameObjects[i]->render(this);
 	}
-	//m_GUI->Render(this);
+	m_GUI->Render(this);
+	ctrs->Render(this);
 
-	//ctrs->Render(this);
-	cursor->Render(this);
+	if (MO)
+	{
+		RenderMeshIn2D(meshList[GEO_MO], false, 1.f, 1.f, m_window_width*0.3f, m_window_height*0.05f, 0.f);
+	}
+	else if (play)
+	{
+		RenderMeshIn2D(meshList[GEO_PLAY], false, 1.f, 1.f, m_window_width*0.3f, m_window_height*0.13f, 0.f);
+	}
+	else if (vreset)
+	{
+		RenderMeshIn2D(meshList[GEO_RESET], false, 1.f, 1.f, m_window_width*0.3f, m_window_height*0.13f, 0.f);
+	}
+	else if (gui)
+	{
+		RenderMeshIn2D(meshList[GEO_GUI1], false, 1.f, 1.f, m_window_width*0.36f, m_window_height*0.13f, 0.f);
+	}
+	else if (drag)
+	{
+		RenderMeshIn2D(meshList[GEO_DRAG], false, 1.f, 1.f, m_window_width*0.18f, m_window_height*0.5f, 0.f);
+	}
+	else if (rotate)
+	{
+		RenderMeshIn2D(meshList[GEO_ROT], false, 1.f, 1.f, m_window_width*0.18f, m_window_height*0.5f, 0.f);
+	}
+	else if (win)
+	{
+		RenderMeshIn2D(meshList[GEO_WIN], false, 1.f, 1.f, m_window_width*0.3, m_window_height/2, 0.f);
+	}
+
 }
 
-void CTutorialScene::Exit()
+void CTutorialScene::vExit()
 {
 	for (int i = 0; i < NUM_GEOMETRY; ++i)
 	{
