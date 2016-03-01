@@ -39,6 +39,9 @@ public:
 	//Clear vector storage
 	void ClearStorage();
 
+	//Get Variables
+	std::string GetVariable(std::string filename, std::string searchFor);
+
 private:
 	
 	std::vector<std::string> storage;  // to store the things from the text file;

@@ -356,3 +356,45 @@ std::vector<std::string>  FileReading::SearchFolder(std::string directory, std::
 	}
 	return storageFN;
 }
+
+std::string FileReading::GetVariable(std::string filename, std::string searchFor)
+{
+	std::ifstream ifile;
+	std::string line;
+	std::string temp;
+	storage3.clear();
+
+	ifile.open(filename);
+	if (ifile.is_open())
+	{
+		while (std::getline(ifile, line))
+		{
+			std::istringstream ss(line);
+			storage3.push_back(line);
+		}
+	}
+
+	for (std::vector<std::string>::iterator it = storage3.begin(); it < storage3.end(); it++)
+	{
+		if (it->find(searchFor) != std::string::npos)
+		{
+
+			std::stringstream splitter(it->c_str());
+			std::string token;
+
+			std::getline(splitter, token, ' ');
+			temp = token;
+
+
+			std::getline(splitter, token, ' ');
+			temp = token;
+
+			std::getline(splitter, token, ' ');
+			temp = token;
+
+		}
+
+	}
+
+	return temp;
+}
