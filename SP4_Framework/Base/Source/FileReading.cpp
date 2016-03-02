@@ -170,7 +170,7 @@ void FileReading::loadVariables(std::vector<GameObject*>* GameObjects)
 			std::getline(splitter, token, ',');
 			scaleY = std::stof(token.c_str());
 
-			(*GameObjects).push_back(new Exit(Vector2(x, y), scaleX, scaleY));
+			(*GameObjects).push_back(new Exito(Vector2(x, y), scaleX, scaleY));
 		}
 	}
 }

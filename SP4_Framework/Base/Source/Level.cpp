@@ -74,7 +74,7 @@ int Level::update(double dt, bool onlyUpdateGraphic)
 							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_WALL, *temp, Vector2(20, 20), 1, 10, 1, 3);
 							Allassets[i]->SetApplyEffect(true);
 						}
-						else if (dynamic_cast<Exit*>(Allassets[i]))
+						else if (dynamic_cast<Exito*>(Allassets[i]))
 						{
 							return 3;
 						}
@@ -88,9 +88,9 @@ int Level::update(double dt, bool onlyUpdateGraphic)
 					Allassets[i]->SetApplyEffect(false);
 			}
 		}
-		if (dynamic_cast<Exit*>(Allassets[i]))
+		if (dynamic_cast<Exito*>(Allassets[i]))
 		{
-			dynamic_cast<Exit*>(Allassets[i])->updateGraphics(dt);
+			dynamic_cast<Exito*>(Allassets[i])->updateGraphics(dt);
 		}
 	}
 
