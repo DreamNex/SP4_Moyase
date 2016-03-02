@@ -4,7 +4,7 @@
 #include "GL\glew.h"
 #include "../LoadTGA.h"
 
-Exit::Exit(Vector2 pos, float width, float height)
+Exito::Exito(Vector2 pos, float width, float height)
 : Enviroment(pos)
 {
 	this->rigidBody = new RigidBody(new Box(this->pos, width, height), new PhysicsComponent(this->pos, 1, false), false);
@@ -15,12 +15,12 @@ Exit::Exit(Vector2 pos, float width, float height)
 	goingup = true;
 }
 
-Exit::~Exit()
+Exito::~Exito()
 {
 	onDestory();
 }
 
-void Exit::updateGraphics(double dt)
+void Exito::updateGraphics(double dt)
 {
 	if (trans < 20)
 		goingup = true;
@@ -33,7 +33,7 @@ void Exit::updateGraphics(double dt)
 		trans -= dt * 40;
 }
 
-void Exit::render(CSceneManager2D* SceneManager2D)
+void Exito::render(CSceneManager2D* SceneManager2D)
 {
 	SceneManager2D->Render2DMeshTrams(this->mesh, (int)trans, this->rigidBody->GetScale(0), this->rigidBody->GetScale(1), this->pos.x - this->rigidBody->GetScale(0)*0.5f, this->pos.y - this->rigidBody->GetScale(1)*0.5f);
 }

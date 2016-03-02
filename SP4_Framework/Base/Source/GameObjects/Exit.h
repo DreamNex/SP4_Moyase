@@ -2,11 +2,11 @@
 
 #include "Enviroment.h"
 
-class Exit : public Enviroment
+class Exito : public Enviroment
 {
 public:
-	Exit(Vector2 pos, float width, float height);
-	~Exit();
+	Exito(Vector2 pos, float width, float height);
+	~Exito();
 
 	void updateGraphics(double dt);
 	void render(CSceneManager2D* SceneManager2D);

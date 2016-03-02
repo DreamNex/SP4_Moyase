@@ -197,7 +197,7 @@ void CGameplayScene::Update(double dt)
 		break;
 
 	case S_WIN:
-		gameLevel.update(dt);
+		gameLevel.update(dt, true);
 		winScreenUpdae(dt);
 		break;
 	}
@@ -258,12 +258,20 @@ void CGameplayScene::winScreenUpdae(double dt)
 		if (textAlpha > 0)
 			textAlpha -= dt * 50;
 
+		float a = (float)gameLevel.GetScore();
+		float b = (float)gameLevel.GetMaxScore();
+		float c = (float)gameLevel.GetScore() / (float)gameLevel.GetMaxScore();
+
 		float barLength = ((float)gameLevel.GetScore()) / ((float)gameLevel.GetMaxScore()) * baseScoreBar->GetSizeX();
 		if (progressScoreBar->GetSizeX() < barLength && progressScoreBar->GetSizeX() <= baseScoreBar->GetSizeX())
 		{
 			progressScoreBar->setScale(progressScoreBar->GetSizeX() + resultLayout->GetSizeX() * 0.3 * dt, progressScoreBar->GetSizeY());
 			if (progressScoreBar->GetSizeX() > barLength)
 				progressScoreBar->setScale(barLength, progressScoreBar->GetSizeY());
+		}
+		else
+		{
+			int i = 1;
 		}
 	}
 
