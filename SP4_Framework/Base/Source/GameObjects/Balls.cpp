@@ -47,7 +47,7 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 	{
 		if (dynamic_cast<Wall*>(GO2))
 		{
-			Application::SFX.Play("SoundTracks//rebound.wav", false, false);
+			Application::SFX.Play("SoundTracks//bounce.mp3", false, false);
 		}
 		else if (dynamic_cast<Spikes*>(GO2))
 		{
@@ -76,6 +76,8 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 				this->getRigidBody()->GetPhysicsCompt()->SetAcceleration(Vector2(0, 0));
 				this->pos = GO2->getPos();
 
+				Application::SFX.Play("SoundTracks//CannonFiring.mp3", false, false);
+
 				Vector2 dir(0, ((Cannon*)(GO2))->GetPower());
 				dir.rotateVector(dynamic_cast<Cannon*>(GO2)->getAngleByReference());
 
@@ -88,6 +90,7 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 		{
 			if (!dynamic_cast<Boost*>(GO2)->getColided())
 			{
+				Application::SFX.Play("SoundTracks//BoostTrack.mp3", false, false);
 				this->getRigidBody()->GetPhysicsCompt()->SetVelocity(this->getRigidBody()->GetPhysicsCompt()->GetVelocity() * 2);
 				dynamic_cast<Boost*>(GO2)->setColided(true);
 			}
@@ -96,6 +99,7 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 		{
 			if (!dynamic_cast<Slow*>(GO2)->getColided())
 			{
+				Application::SFX.Play("SoundTracks//SlowTrack.mp3", false, false);
 				this->getRigidBody()->GetPhysicsCompt()->SetVelocity(this->getRigidBody()->GetPhysicsCompt()->GetVelocity() * 0.3);
 				dynamic_cast<Slow*>(GO2)->setColided(true);
 			}
