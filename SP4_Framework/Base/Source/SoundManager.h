@@ -24,6 +24,15 @@ public:
 	//Pause is to be able to edit the sound using irrklang functions
 	void Play(std::string filepath, bool loopit = false, bool pause = false);
 
+	//Set the sound's volume.
+	void SetSoundVol(float value);
+	
+	//Get Sound volume
+	float GetSoundVol();
+
+	//Stop all sounds
+	void StopSounds();
+
 	//Sound Engine
 	ISoundEngine* SE;
 };

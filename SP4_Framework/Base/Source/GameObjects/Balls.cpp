@@ -45,7 +45,7 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 	{
 		if (dynamic_cast<Spikes*>(GO2))
 		{
-			this->pos = originalPos;
+			//this->pos = originalPos;
 		}
 		else if (dynamic_cast<Rebound*>(GO2))
 		{

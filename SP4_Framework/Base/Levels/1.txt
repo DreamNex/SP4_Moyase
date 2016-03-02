@@ -1,5 +1,7 @@
 true
 2,1,5
+max_score = 15
+highscore = 4
 ball,150,600,50
 wall,0,360,50,800//Left Wall
 wall,640,40,1280,130//Bottom Wall

@@ -15,7 +15,8 @@ public:
 	
 	float GetSizeX();
 	float GetSizeY();
-	
+	void setScale(float x, float y);
+
 	Vector2 GetPos();
 	void SetPos(float x, float y);
 

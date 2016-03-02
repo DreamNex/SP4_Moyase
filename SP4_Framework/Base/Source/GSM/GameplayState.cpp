@@ -52,6 +52,8 @@ void CGameplayState::HandleEvents(CGameStateManager* theGSM, const double mouse_
 		{
 			if (mousePress && button_Left == 0)
 			{
+				FileReading fr;
+
 				if ((*scene->getButtons())[i]->GetText() == "back" && (*scene->getButtons())[i]->GetMouseover())
 				{
 					mode = 1;
@@ -65,7 +67,6 @@ void CGameplayState::HandleEvents(CGameStateManager* theGSM, const double mouse_
 				else if ((*scene->getButtons())[i]->GetText() == "nextLv" && (*scene->getButtons())[i]->GetMouseover())
 				{
 					mode = 2;
-					FileReading fr;
 					std::vector<string> levelNames = fr.SearchFolder("Levels//", "*.txt");
 					for (int i = 0; i < levelNames.size(); ++i)
 					{

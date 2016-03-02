@@ -95,13 +95,18 @@ void CLevelSelectScene::Init()
 
 	int curPage = 0;
 	bool unlock;
+	string score4lv;
 	Vector2 pos;
 
 	for (unsigned int i = 0; i < levelNames.size(); ++i)
 	{
 		FileReader.loadFile("Levels//" + levelNames[i]);
 		FileReader.loadVariables(unlock);
-
+		score4lv = FileReader.GetVariable("Levels//" + levelNames[i], "highscore");
+		if (score4lv == "")
+			score4lv = "0";
+		else if (stoi(score4lv) < 0 || stoi(score4lv) > 5)
+			score4lv = "0";
 		switch (i % 3)
 		{
 		case 0:
@@ -124,11 +129,11 @@ void CLevelSelectScene::Init()
 		}
 		LevelButtons[curPage].push_back(new LevelButton(levelNames[i]
 			, unlock
-			, std::to_string(i + 1)
+			, levelNames[i].substr(0, levelNames[i].length() - 4)
 			, "Image//disc.tga", "Image//disc_hover.tga"
 			, levelLayout->GetSizeX() * 0.21, levelLayout->GetSizeX() * 0.21
 			, pos.x, pos.y
-			, 0.6, true, 4));
+			, 0.6, true, stoi(score4lv)));
 	}
 	/************************************************************************************************************************************/
 
@@ -172,22 +177,22 @@ void CLevelSelectScene::Init()
 		, 0.6, false));
 
 	Buttons[S_Selecting].push_back(new ButtonUI("Back"
-		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
-		, m_window_width * 0.1, m_window_height* 0.1
-		, m_window_width * 0.5f, m_window_height * 0.15f
-		, 0.6, true));
+		, "Image//back.tga", "Image//back_hover.tga"
+		, m_window_width * 0.05, m_window_width* 0.05
+		, m_window_width * 0.035, m_window_width * 0.035
+		, 0.6, false));
 
 	Buttons[S_Selected].push_back(new ButtonUI("Yes"
-		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
-		, selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetSizeY() * 0.2f
+		, "Image//go.tga", "Image//go_hover.tga"
+		, selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetSizeX() * 0.2f
 		, selectedLayout->GetPos().x - selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetPos().y - selectedLayout->GetSizeY() * 0.2f
-		, 0.6, true));
+		, 0.6, false));
 
 	Buttons[S_Selected].push_back(new ButtonUI("No"
-		, "Image//Tits//btn.tga", "Image//Tits//btn_faded.tga"
-		, selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetSizeY() * 0.2f
+		, "Image//stop.tga", "Image//stop_hover.tga"
+		, selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetSizeX() * 0.2f
 		, selectedLayout->GetPos().x + selectedLayout->GetSizeX() * 0.2f, selectedLayout->GetPos().y - selectedLayout->GetSizeY() * 0.2f
-		, 0.6, true));
+		, 0.6, false));
 	/************************************************************************************************************************************/
 
 	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
@@ -215,7 +220,7 @@ void CLevelSelectScene::Render()
 		levelLayout->render(this, 2);
 		AvatarLayout->render(this, 2);
 
-		texts = "Select Stage";
+		texts = "Select Level";
 		textsSize = levelLayout->GetSizeY() * 0.13f;
 		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(1, 1, 1), textsSize, levelLayout->GetPos().x - (textsSize * 0.5 * texts.size() * 0.5), levelLayout->GetPos().y - textsSize * 0.5 + levelLayout->GetSizeY() * 0.39f, 3);
 
@@ -239,7 +244,7 @@ void CLevelSelectScene::Render()
 	case S_Selected:
 		selectedLayout->render(this, 4);
 
-		texts = "Start stage " + selectedLevelName + "?";
+		texts = "Start Level " + selectedLevelName + "?";
 		textsSize = selectedLayout->GetSizeY() * 0.15f;
 		RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(0, 0, 0), textsSize, selectedLayout->GetPos().x - (textsSize * 0.5 * texts.size() * 0.5), selectedLayout->GetPos().y - textsSize * 0.5 + selectedLayout->GetSizeY() * 0.2f, 5);
 

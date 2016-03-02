@@ -1,5 +1,6 @@
 #include "GUIManager.h"
 #include "../RigidBody/Box.h"
+#include "../Level.h"
 
 GUIManager::GUIManager(int cannon, int boost , int slow)
 {
@@ -156,7 +157,7 @@ void GUIManager::Render(CSceneManager2D* SceneManager2D)
 
 void GUIManager::UpdateScore(int Score)
 {
-	float scoreLength = (((float)Score) / 20.f) * 1280;
+	float scoreLength = (((float)Score) / Level::GetMaxScore()) * 1280;
 	((Box*)score->GetGUIBound())->SetWidth(scoreLength);
 }
 

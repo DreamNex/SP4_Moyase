@@ -36,6 +36,21 @@ void SoundManager::Play(std::string filepath, bool loopit, bool Startpause)
 	SE->play2D(filepath.c_str(), loopit, Startpause);
 }
 
+void SoundManager::SetSoundVol(float value)
+{
+	SE->setSoundVolume(value);
+}
+
+float SoundManager::GetSoundVol()
+{
+	return SE->getSoundVolume();
+}
+
+void SoundManager::StopSounds()
+{
+	SE->stopAllSounds();
+}
+
 void SoundManager::Exit()
 {
 	if (SE)

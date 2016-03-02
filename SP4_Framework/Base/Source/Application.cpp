@@ -21,6 +21,7 @@ double Application::camera_yaw = 0.0, Application::camera_pitch = 0.0;
 int Application::Button_Left = 0, Application::Button_Middle = 0, Application::Button_Right = 0;
 bool Application::exitbool = false;
 static bool MouseWithinScreen = false;
+bool Application::isPlaying = false;
 
 SoundManager Application::SFX;
 SoundManager Application::BGM;

@@ -51,7 +51,6 @@ void LevelButton::render(CSceneManager2D* SceneManager2D, Mesh* textMesh, Color 
 				SceneManager2D->RenderMeshIn2D(HSMesh2, false, 1, 1, this->min.x + dist * 0.5f + dist * i, min.y - hsScaleY, z, 0, -hsScaleX / 2, -hsScaleY / 2);
 			else
 				SceneManager2D->RenderMeshIn2D(HSMesh1, false, 1, 1, this->min.x + dist * 0.5f + dist * i, min.y - hsScaleY, z, 0, -hsScaleX / 2, -hsScaleY / 2);
-
 		}
 	}
 	else
