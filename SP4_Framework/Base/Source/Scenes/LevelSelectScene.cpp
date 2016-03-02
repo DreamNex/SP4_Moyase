@@ -95,13 +95,18 @@ void CLevelSelectScene::Init()
 
 	int curPage = 0;
 	bool unlock;
+	string score4lv;
 	Vector2 pos;
 
 	for (unsigned int i = 0; i < levelNames.size(); ++i)
 	{
 		FileReader.loadFile("Levels//" + levelNames[i]);
 		FileReader.loadVariables(unlock);
-
+		score4lv = FileReader.GetVariable("Levels//" + levelNames[i], "highscore");
+		if (score4lv == "")
+			score4lv = "0";
+		else if (stoi(score4lv) < 0 || stoi(score4lv) > 5)
+			score4lv = "0";
 		switch (i % 3)
 		{
 		case 0:
@@ -128,7 +133,7 @@ void CLevelSelectScene::Init()
 			, "Image//disc.tga", "Image//disc_hover.tga"
 			, levelLayout->GetSizeX() * 0.21, levelLayout->GetSizeX() * 0.21
 			, pos.x, pos.y
-			, 0.6, true, 4));
+			, 0.6, true, stoi(score4lv)));
 	}
 	/************************************************************************************************************************************/
 

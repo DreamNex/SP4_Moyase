@@ -276,21 +276,10 @@ void FileReading::SetFloatVal(std::string filename, std::string searchFor, float
 	{
 		if (storage3[i].find(searchFor) != std::string::npos)
 		{
-			if (searchFor == "BGM")
-			{
-				std::ostringstream buff;
-				buff << value;
-				std::string BGM_s = "BGM = ";
-				 storage3[i] =  BGM_s + buff.str();
-			}
-
-			else if (searchFor == "SFX")
-			{
-				std::ostringstream buff;
-				buff << value;
-				std::string SFX_s = "SFX = ";
-				storage3[i] = SFX_s + buff.str();
-			}
+			std::ostringstream buff;
+			buff << value;
+			std::string line2 = searchFor + " = " + buff.str();
+			storage3[i] = line2;
 		}
 	}
 

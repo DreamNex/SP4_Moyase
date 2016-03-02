@@ -28,7 +28,7 @@ public:
 	int GetScore(void)const;
 	void SetScore(int);
 
-	int GetMaxScore() { return MAX_SCORE; }
+	static int GetMaxScore() { return MAX_SCORE; }
 
 	int GetMode(void)const; //Score Level depends on your Score, eg. Score of 5 = Mode 1
 	void UpdateMode();
@@ -40,7 +40,7 @@ private:
 	std::vector<GameObject*> currentCollision;
 
 	//Level's Score(Depends on the Amount Of Collision Made)
-	int MAX_SCORE;
+	static int MAX_SCORE;
 	int HighScore;
 	int Score;
 	int Mode; //Depends on Score

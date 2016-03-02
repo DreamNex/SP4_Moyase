@@ -19,7 +19,7 @@ CGameplayScene::CGameplayScene(int m_window_width, int m_window_height, std::str
 CSceneManager2D(m_window_width, m_window_height)
 , gameLevel(level, avatar)
 {
-	levelName = level.substr(0, level.length() - 4);
+	levelName = level;
 }
 
 CGameplayScene::~CGameplayScene()
@@ -53,7 +53,7 @@ void CGameplayScene::Init()
 {
 	CSceneManager2D::Init();
 
-	curentState = S_WIN;
+	curentState = S_RESET;
 
 	for (int i = 0; i < NUM_GEOMETRY; ++i)
 	{
@@ -147,6 +147,38 @@ void CGameplayScene::Update(double dt)
 		{
 			ctrs->SetState(0);
 		}
+		else if (curentState == S_WIN)
+		{
+			FileReading FileReader;
+
+			string score4lv;
+
+			/////////////////////////set highscore///////////////////////////////////////
+			score4lv = FileReader.GetVariable("Levels//" + levelName, "highscore");
+			if (score4lv == "")
+				score4lv = "0";
+			else if (stoi(score4lv) < 0 || stoi(score4lv) > 5)
+				score4lv = "0";
+			if (gameLevel.GetMode() > stoi(score4lv))
+				FileReader.SetFloatVal("Levels//" + levelName, "highscore", gameLevel.GetMode());
+			/////////////////////////////////////////////////////////////////////////////
+			
+			/////////////////////////////unlock next level///////////////////////////////
+			std::vector<string> levelNames = FileReader.SearchFolder("Levels//", "*.txt");
+			
+			for (int i = 0; i < levelNames.size(); ++i)
+			{
+				if (levelNames[i] == CGameStateManager::selectedLevel)
+				{
+					if (i + 1 != levelNames.size())
+					{
+						FileReader.changeUnlock("Levels//" + levelNames[i + 1]);
+					}
+					break;
+				}
+			}
+			////////////////////////////////////////////////////////////////////////////
+		}
 		break;
 
 	case S_WIN:
@@ -209,7 +241,7 @@ void CGameplayScene::winScreenUpdae(double dt)
 			textAlpha -= dt * 50;
 
 		float barLength = ((float)gameLevel.GetScore()) / ((float)gameLevel.GetMaxScore()) * baseScoreBar->GetSizeX();
-		if (progressScoreBar->GetSizeX() < barLength)
+		if (progressScoreBar->GetSizeX() < barLength && progressScoreBar->GetSizeX() <= baseScoreBar->GetSizeX())
 		{
 			progressScoreBar->setScale(progressScoreBar->GetSizeX() + resultLayout->GetSizeX() * 0.3 * dt, progressScoreBar->GetSizeY());
 			if (progressScoreBar->GetSizeX() > barLength)
@@ -254,7 +286,7 @@ void CGameplayScene::winScreenRender()
 		std::string texts;
 		float textsSize;
 
-		texts = "Level " + levelName;
+		texts = "Level " + levelName.substr(0, levelName.length() - 4);
 		textsSize = resultLayout->GetSizeX() * 0.1f;
 		RenderTextOnScreenTrans(meshList[GEO_TEXT], texts, Color(0, 0, 0), (int)textAlpha, textsSize, resultLayout->GetPos().x - (textsSize * 0.5 * texts.size() * 0.5), resultLayout->GetPos().y - textsSize * 0.5 + resultLayout->GetSizeY() * 0.38f);
 
