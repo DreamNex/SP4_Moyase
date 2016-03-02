@@ -3,7 +3,9 @@
 #include "../MeshBuilder.h"
 #include "GL\glew.h"
 #include "../LoadTGA.h"
+#include "../Application.h"
 
+#include "Wall.h"
 #include "Spikes.h"
 #include "Cannon.h"
 #include "Boost.h"
@@ -43,7 +45,11 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 {
 	if (dynamic_cast<Enviroment*>(GO2))
 	{
-		if (dynamic_cast<Spikes*>(GO2))
+		if (dynamic_cast<Wall*>(GO2))
+		{
+			Application::SFX.Play("SoundTracks//rebound.wav", false, false);
+		}
+		else if (dynamic_cast<Spikes*>(GO2))
 		{
 			//this->pos = originalPos;
 		}

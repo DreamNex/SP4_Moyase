@@ -6,6 +6,7 @@
 #include "../Application.h"
 #include "../Utility.h"
 #include "../LoadTGA.h"
+#include "../Luala.h"
 #include <sstream>
 
 CGameplayScene::CGameplayScene()
@@ -77,6 +78,19 @@ void CGameplayScene::Init()
 	play_state = false;
 	
 	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
+
+	Luala la("Playerpref.lua");
+	volume1 = la.getFloat("BGM");
+	volume2 = la.getFloat("SFX");
+
+	Application::BGM.StopSounds();
+	Application::isPlaying = false;
+
+	Application::BGM.SetSoundVol(volume1);
+	Application::SFX.SetSoundVol(volume2);
+
+
+	Application::BGM.Play("SoundTracks//GameplayTrack.mp3", true, false);
 
 	//win state stuff
 	winStateOpacity = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true, 100);
@@ -212,6 +226,9 @@ void CGameplayScene::Render()
 
 void CGameplayScene::Exit()
 {
+	Application::BGM.StopSounds();
+	Application::SFX.StopSounds();
+
 	for (int i = 0; i < NUM_GEOMETRY; ++i)
 	{
 		if (meshList[i])

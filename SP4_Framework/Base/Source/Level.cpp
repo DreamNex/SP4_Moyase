@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "Application.h"
 int Level::MAX_SCORE = 20;
 
 Level::Level(std::string level2load, std::string avatar2load)

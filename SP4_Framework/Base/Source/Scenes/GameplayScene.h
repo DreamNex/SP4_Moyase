@@ -65,4 +65,7 @@ private:
 
 	void winScreenUpdae(double dt);
 	void winScreenRender();
+
+	float volume1;
+	float volume2;
 };
