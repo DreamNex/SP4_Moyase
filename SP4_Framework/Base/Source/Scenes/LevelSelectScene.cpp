@@ -6,6 +6,7 @@
 #include "../Application.h"
 #include "../Utility.h"
 #include "../LoadTGA.h"
+#include "../Luala.h"
 #include <sstream>
 
 CLevelSelectScene::CLevelSelectScene()
@@ -83,6 +84,19 @@ void CLevelSelectScene::Init()
 	selectedLayout = new Layout("", m_window_width * 0.4f, m_window_height * 0.5f, m_window_width * 0.5f, m_window_height * 0.5f, true, 40, Color(1, 1, 1));
 
 	FileReading FileReader;
+
+	Luala la("Playerpref.lua");
+	volume1 = la.getFloat("BGM");
+	volume2 = la.getFloat("SFX");
+
+	Application::BGM.SetSoundVol(volume1);
+	Application::SFX.SetSoundVol(volume2);
+
+	if (!Application::isPlaying)
+	{
+		Application::BGM.Play("SoundTracks//MenuTrack.mp3", true, false);
+		Application::isPlaying = true;
+	}
 
 	/***********************************************Search folder and load buttons******************************************************/
 	std::vector<string> levelNames = FileReader.SearchFolder("Levels//", "*.txt");

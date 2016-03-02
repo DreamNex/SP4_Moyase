@@ -71,4 +71,7 @@ private:
 	std::vector<Mesh*> AvatarImages;
 
 	std::string selectedLevelName;
+
+	float volume1;
+	float volume2;
 };

@@ -19,6 +19,7 @@ CGameplayScene::CGameplayScene(int m_window_width, int m_window_height, std::str
 :
 CSceneManager2D(m_window_width, m_window_height)
 , gameLevel(level, avatar)
+
 {
 	levelName = level;
 }

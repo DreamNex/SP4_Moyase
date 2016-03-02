@@ -12,12 +12,18 @@ CLevelSelectState CLevelSelectState::theLevelSelectState;
 void CLevelSelectState::Init()
 {
 	scene = new CLevelSelectScene(800, 600);
+	playonce = false;
+	playonce2 = false;
+	playonce3 = false;
 	scene->Init();
 }
 
 void CLevelSelectState::Init(const int width, const int height)
 {
 	scene = new CLevelSelectScene(width, height);
+	playonce = false;
+	playonce2 = false;
+	playonce3 = false;
 	scene->Init();
 }
 
@@ -55,8 +61,17 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 			{
 				if (scene->getLevelButtons()[scene->getCurrentPage()][i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
 				{
+					//hover
+					if (!playonce)
+					{
+						Application::SFX.Play("SoundTracks//HoverTrack.mp3", false, false);
+						playonce = true;
+					}
 					if (mousePress && button_Left == 0)
 					{
+						//click
+						Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
+
 						CGameStateManager::selectedLevel = scene->getLevelButtons()[scene->getCurrentPage()][i]->getLevelName();
 						CGameStateManager::selectedAvatar = scene->getAvatarImages()[scene->getCurrentAvatarImage()]->name;
 						scene->setSelectedLevelName(scene->getLevelButtons()[scene->getCurrentPage()][i]->GetText());
@@ -64,16 +79,30 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 					}
 					break;
 				}
+
+				if (i + 1 == scene->getLevelButtons()[scene->getCurrentPage()].size())
+				{
+					playonce = false;
+				}
 			}
 
 			for (unsigned int i = 0; i < scene->getButtons()[CLevelSelectScene::S_Selecting].size(); ++i)
 			{
 				if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
 				{
+					//hover
+					if (!playonce2)
+					{
+
+						Application::SFX.Play("SoundTracks//HoverTrack.mp3", false, false);
+						playonce2 = true;
+					}
 					if (mousePress && button_Left == 0)
 					{
 						if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "LevelLeft")
 						{
+							//click
+							Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
 							if (scene->getCurrentPage() == 0)
 								scene->setCurrentPage(scene->getnumOfPage() - 1);
 							else
@@ -81,13 +110,17 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 						}
 						else if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "LevelRight")
 						{
+							//click
+							Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
 							if (scene->getCurrentPage() == scene->getnumOfPage() - 1)
 								scene->setCurrentPage(0);
 							else
 								scene->setCurrentPage(scene->getCurrentPage() + 1);
 						}
-						if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "AvatarLeft")
+						else if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "AvatarLeft")
 						{
+							//click
+							Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
 							if (scene->getCurrentAvatarImage() == 0)
 								scene->setCurrentAvatarImage(scene->getTotalAvatarImages() - 1);
 							else
@@ -95,6 +128,8 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 						}
 						else if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "AvatarRight")
 						{
+							//click
+							Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
 							if (scene->getCurrentAvatarImage() == scene->getTotalAvatarImages() - 1)
 								scene->setCurrentAvatarImage(0);
 							else
@@ -102,10 +137,18 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 						}
 						else if (scene->getButtons()[CLevelSelectScene::S_Selecting][i]->GetText() == "Back")
 						{
+							//click
+							Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
 							mode = 2;
 						}
 					}
-					break;
+					
+				break;
+				}
+
+				if (i + 1 == scene->getButtons()[CLevelSelectScene::S_Selecting].size())
+				{
+					playonce2 = false;
 				}
 			}
 		}
@@ -117,19 +160,36 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 			{
 				if (scene->getButtons()[CLevelSelectScene::S_Selected][i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
 				{
-					if (mousePress && button_Left == 0)
+					//hover
+					if (!playonce3)
 					{
-						if (scene->getButtons()[CLevelSelectScene::S_Selected][i]->GetText() == "Yes")
-						{
-							mode = 1;
-						}
-						else if (scene->getButtons()[CLevelSelectScene::S_Selected][i]->GetText() == "No")
-						{
-							scene->setCurrentState(CLevelSelectScene::S_Selecting);
-						}
+						Application::SFX.Play("SoundTracks//HoverTrack.mp3", false, false);
+
+						playonce3 = true;
 					}
+						if (mousePress && button_Left == 0)
+						{
+							if (scene->getButtons()[CLevelSelectScene::S_Selected][i]->GetText() == "Yes")
+							{
+								//click
+								Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
+								mode = 1;
+							}
+							else if (scene->getButtons()[CLevelSelectScene::S_Selected][i]->GetText() == "No")
+							{
+								//click
+								Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
+								scene->setCurrentState(CLevelSelectScene::S_Selecting);
+							}
+						}
 					break;
 				}
+
+				if (i + 1 == scene->getButtons()[CLevelSelectScene::S_Selected].size())
+				{
+					playonce3 = false;
+				}
+			
 			}
 		}
 		break;
