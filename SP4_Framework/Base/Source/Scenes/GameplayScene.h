@@ -16,6 +16,8 @@ public:
 		GEO_TEST,
 		GEO_TEXT,
 		GEO_BG,
+		GEO_SCORE_INDICATOR1,
+		GEO_SCORE_INDICATOR2,
 		NUM_GEOMETRY,
 	};
 
@@ -45,6 +47,8 @@ public:
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 
+	string levelName;
+
 	GUIManager * m_GUI;
 	Controls * ctrs;
 	bool mL_state, mR_state, play_state;
@@ -54,6 +58,11 @@ private:
 	Level gameLevel;
 
 	//win state stuff
-	Layout* winStateOpacity, *resultLayout;
+	Layout* winStateOpacity, *resultLayout, *baseScoreBar, *progressScoreBar;
 	std::vector<ButtonUI*> Buttons;
+
+	float textAlpha;
+
+	void winScreenUpdae(double dt);
+	void winScreenRender();
 };

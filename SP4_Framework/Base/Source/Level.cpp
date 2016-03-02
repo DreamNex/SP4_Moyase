@@ -19,6 +19,8 @@ Level::Level(std::string level2load, std::string avatar2load)
 	Mode = 0;
 	collide = false;
 	pm_Particles = new ParticleManager("Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga");
+
+	MAX_SCORE = 25; // temp will read from file
 }
 
 Level::~Level()
