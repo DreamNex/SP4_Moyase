@@ -1,2 +1,2 @@
-BGM = 0
-SFX = 0
+BGM = 1
+SFX = 1

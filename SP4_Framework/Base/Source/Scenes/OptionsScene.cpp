@@ -55,8 +55,8 @@ void OptionsScene::Init()
 	Application::BGM.SetSoundVol(volume1);
 	Application::SFX.SetSoundVol(volume2);
 
-	Sliders.push_back(new SliderUI("Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 400, 40, Vector2(m_window_width * 0.5f, m_window_height * 0.5f), volume1));
-	Sliders.push_back(new SliderUI("Image//Tits//btn.tga", "Image//Tits//btn_faded.tga", 400, 40, Vector2(m_window_width * 0.5f, m_window_height * 0.5f - 100), volume2));
+	Sliders.push_back(new SliderUI("Image//Tits//bgmSlider.tga", "Image//Tits//sliderbtn.tga", 400, 40, Vector2(m_window_width * 0.5f, m_window_height * 0.5f), volume1));
+	Sliders.push_back(new SliderUI("Image//Tits//sfxSlider.tga", "Image//Tits//sliderbtn.tga", 400, 40, Vector2(m_window_width * 0.5f, m_window_height * 0.5f - 100), volume2));
 }
 
 void OptionsScene::Update(double dt)
