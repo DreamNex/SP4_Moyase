@@ -12,13 +12,14 @@ Level::Level(std::string level2load, std::string avatar2load)
 	fr.loadVariables(tools);
 
 	fr.loadVariables(&Allassets);
+	std::string orbit = ("Image//Particles//" + avatar2load);
 
 	//Init Score Variables
 	HighScore = 0;
 	Score = 0;
 	Mode = 0;
 	collide = false;
-	pm_Particles = new ParticleManager("Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga");
+	pm_Particles = new ParticleManager("Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga", orbit.c_str(), "Image//trail.tga");
 }
 
 Level::~Level()
@@ -47,22 +48,21 @@ int Level::update(double dt, bool onlyUpdateGraphic)
 						if (dynamic_cast<Cannon*>(Allassets[i]))
 						{
 							this->Score += 3;
-							Vector2 tempTest = Allassets[i]->getPos();
-							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_SLOW, *theball->getPointerPos(), Vector2(20, 20), 6, 100, 3, 50);
+							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_CANNON, *Allassets[i]->getPointerPos(), Vector2(30, 30), 6, 50, 0.15f, 50);
 							Allassets[i]->SetApplyEffect(true);
 						}
 						else if (dynamic_cast<Slow*>(Allassets[i]) || dynamic_cast<Boost*>(Allassets[i]))
 						{
 							this->Score += 2;
-							Vector2 temp = Allassets[i]->getPos();
-							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_SLOW, *Allassets[i]->getPointerPos(), Vector2(20, 20), 4, 10, 2, 7);
+							Vector2 *temp = theball->getPointerPos();
+							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_SLOW, *temp, Vector2(20, 20), 4, 10, 0.2f, 9);
 							Allassets[i]->SetApplyEffect(true);
 						}
 						else if (dynamic_cast<Wall*>(Allassets[i]))
 						{
 							this->Score += 1;
-							Vector2 temp = theball->getPos();
-							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_WALL, *Allassets[i]->getPointerPos(), Vector2(20, 20), 3, 10, 3, 1);
+							Vector2 *temp = theball->getPointerPos();
+							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_WALL, *temp, Vector2(20, 20), 1, 10, 1, 3);
 							Allassets[i]->SetApplyEffect(true);
 						}
 						else if (dynamic_cast<Exit*>(Allassets[i]))
@@ -126,6 +126,7 @@ void Level::UpdateMode()
 {
 	int eachbar = MAX_SCORE / 5;
 
+	prevMode = Mode;
 	if (Score >= eachbar && Score < eachbar*2)
 		Mode = 1;
 	else if (Score >= eachbar * 2 && Score < eachbar * 3)
@@ -138,4 +139,9 @@ void Level::UpdateMode()
 		Mode = 5;
 	else
 		Mode = 0;
+	while (Mode > prevMode)
+	{
+		pm_Particles->SpawnParticles(ParticleManager::PARTICLE_PLAYER_ORBIT, *theball->getPointerPos(), Vector2(35, 35), 3, 20, 15.f, 1);
+		prevMode++;
+	}
 }

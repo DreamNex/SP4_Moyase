@@ -42,6 +42,7 @@ private:
 	int HighScore;
 	int Score;
 	int Mode; //Depends on Score
+	int prevMode;
 
 	//Aesthetics
 	ParticleManager* pm_Particles;

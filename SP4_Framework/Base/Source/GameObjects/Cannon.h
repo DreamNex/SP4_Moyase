@@ -9,9 +9,12 @@ public:
 	~Cannon();
 
 	void render(CSceneManager2D* SceneManager2D);
+	float GetPower(void)const{ return power; }
+	void SetPower(float);
 
 	float& getAngleByReference(){ return angle; }
 
 private:
 	float angle;
+	float power;
 };

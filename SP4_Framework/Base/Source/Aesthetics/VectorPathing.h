@@ -5,13 +5,13 @@
 
 class VectorPathing
 {
+public:
 	enum VECTOR_PATH
 	{
 		REPEL = 0,
 		ATTRACT,
 		ORBIT
 	};
-public:
 	VectorPathing(int path);
 	VectorPathing();
 	~VectorPathing();

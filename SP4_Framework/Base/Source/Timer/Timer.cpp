@@ -38,6 +38,10 @@ bool Timer::GetActive()
 {
 	return active;
 }
+bool Timer::GetLoop()
+{
+	return loop;
+}
 void Timer::Start()
 {
 	active = true;

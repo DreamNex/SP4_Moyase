@@ -10,7 +10,40 @@ PhysicsComponent::PhysicsComponent(Vector2 &v, float mass, bool active)
 
 	this->mass = mass;
 	this->gravitationalForce = 7.f;
-	this->co_Restitution = 0.5f;
+	this->co_Restitution = 0.7f;
+	this->co_SE = 0.45f;
+	this->co_KE = 0.35f;
+	this->co_Drag = 1.1f;
+
+	this->isActive = active;
+	if (isActive)
+	{
+		hasGravity = true;
+		hasBounce = true;
+		hasFriction = true;
+		hasDrag = true;
+		hasPush = true;
+	}
+	else
+	{
+		hasGravity = false;
+		hasBounce = false;
+		hasFriction = false;
+		hasDrag = false;
+		hasPush = false;
+	}
+}
+
+PhysicsComponent::PhysicsComponent(Vector2 &v, float mass, bool active, Vector2 force, Vector2 acc, Vector2 velo)
+{
+	v_Pos = &v;
+	v_Velocity = velo;
+	v_Acceleration = acc;
+	v_Force = force;
+
+	this->mass = mass;
+	this->gravitationalForce = 7.f;
+	this->co_Restitution = 0.7f;
 	this->co_SE = 0.45f;
 	this->co_KE = 0.35f;
 	this->co_Drag = 1.1f;
@@ -54,11 +87,7 @@ void PhysicsComponent::Update(float dt)
 	if (!isActive)
 		return;
 
-	//Temporary
-	float gravityForce = 9.8f;
-	float co_StaticFriction = 0.55;
-	float co_KineticFriction = 0.50;
-
+	//Calculate New Acceleration/Velocity
 	this->v_Acceleration = this->v_Force / mass;
 	this->v_Velocity = v_Velocity + v_Acceleration;
 
@@ -76,12 +105,14 @@ void PhysicsComponent::Update(float dt)
 	/***************************************************************************************************************************
 	Horizontal Force
 	****************************************************************************************************************************/
-	ApplyFriction();
+	if (hasFriction)
+		ApplyFriction();
 
 	/***************************************************************************************************************************
 	Vertical Force
 	****************************************************************************************************************************/
-	ApplyGravity();
+	if (hasGravity)
+		ApplyGravity();
 
 	//Update Velocity and Position
 	v_Force.SetZero();
@@ -91,6 +122,12 @@ void PhysicsComponent::Update(float dt)
 	*v_Pos = (*v_Pos) + v_Velocity * dt;
 }
 
+
+
+
+/*************************************************************************************************************
+ VARYING COMPONENT KINETMATIC(S): Velocity, Acceleration, Force
+*************************************************************************************************************/
 void PhysicsComponent::ApplyFriction()
 {
 	if (v_Velocity.y == 0 && v_Acceleration.y == 0)//If Not Airborne
@@ -185,27 +222,53 @@ void PhysicsComponent::Push(Vector2 pushForce)
 /*************************************************************************************************************
 	ACCESOR(S)
 *************************************************************************************************************/
-float PhysicsComponent::GetMass(){ return this->mass; }
-float PhysicsComponent::GetGravitationalForce(){ return this->gravitationalForce; }
+float PhysicsComponent::GetMass(void)const{ return this->mass; }
+float PhysicsComponent::GetGravitationalForce(void)const{ return this->gravitationalForce; }
 
-float PhysicsComponent::GetCoRestitution(){ return this->co_Restitution; }
-float PhysicsComponent::GetCoKinetic(){ return this->co_KE; }
-float PhysicsComponent::GetCoStatic(){ return this->co_SE; }
-float PhysicsComponent::GetCoDrag(){ return this->co_Drag; }
+float PhysicsComponent::GetCoRestitution(void)const{ return this->co_Restitution; }
+float PhysicsComponent::GetCoKinetic(void)const{ return this->co_KE; }
+float PhysicsComponent::GetCoStatic(void)const{ return this->co_SE; }
+float PhysicsComponent::GetCoDrag(void)const{ return this->co_Drag; }
 
-Vector2 PhysicsComponent::GetVelocity(){ return this->v_Velocity; }
-Vector2 PhysicsComponent::GetAcceleration(){ return this->v_Acceleration; }
-Vector2 PhysicsComponent::GetForce(){ return this->v_Force; }
+Vector2 PhysicsComponent::GetVelocity(void)const{ return this->v_Velocity; }
+Vector2 PhysicsComponent::GetAcceleration(void)const{ return this->v_Acceleration; }
+Vector2 PhysicsComponent::GetForce(void)const{ return this->v_Force; }
 
-bool PhysicsComponent::GetActive(){ return this->isActive; }
-bool PhysicsComponent::GetFriction(){ return this->hasFriction; }
-bool PhysicsComponent::GetDrag(){ return this->hasDrag; }
-bool PhysicsComponent::GetGravity(){ return this->hasGravity; }
+bool PhysicsComponent::GetActive(void)const{ return this->isActive; }
+bool PhysicsComponent::GetFriction(void)const{ return this->hasFriction; }
+bool PhysicsComponent::GetDrag(void)const{ return this->hasDrag; }
+bool PhysicsComponent::GetGravity(void)const{ return this->hasGravity; }
 
-bool PhysicsComponent::GetBounce(){ return this->hasBounce; }
-bool PhysicsComponent::GetPush(){ return this->hasPush; }
+bool PhysicsComponent::GetBounce(void)const{ return this->hasBounce; }
+bool PhysicsComponent::GetPush(void)const{ return this->hasPush; }
 
+std::vector<Vector2> PhysicsComponent::GetTrajectory(Vector2 start, Vector2 force, float dt, float frequency, float lifeTime)const
+{
+	/*
+	1st Para: start = Start Of Trajectory
+	2nd Para: force = Force of Trajectory
+	3rd Para: dt = timestep
+	4th Para: frequency = Time between each Point Stored
+	5th Para: timeStep = Time of Trajectory
+	*/
+	std::vector<Vector2> TrajectoryPosition;
+	PhysicsComponent temp(start, mass, isActive, v_Force, v_Acceleration, v_Velocity);
+	float frequency_Copy = frequency;
+	temp.Push(force);
 
+	while (lifeTime > 0)
+	{
+		temp.Update(dt);
+		if (frequency <= 0)
+		{ 
+			frequency = frequency_Copy;
+			TrajectoryPosition.push_back(*temp.v_Pos);
+		}
+		lifeTime -= dt;
+		frequency -= dt;
+	}
+	return TrajectoryPosition;
+}
 
 /*************************************************************************************************************
 MUTATOR(S)

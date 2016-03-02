@@ -5,6 +5,7 @@
 #include"../GameObjects/Wall.h"
 #include"../GameObjects/Tools.h"
 #include"../Application.h"
+#include"../GameObjects/Balls.h"
 
 Controls::Controls(GUIManager * m_GUI)
 {
@@ -18,8 +19,12 @@ Controls::Controls(GUIManager * m_GUI)
 	feedback->textureID = LoadTGA("Image//feedback_wrong.tga");
 	correct = true;
 
+	trajPoint = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, 1, 1);
+	trajPoint->textureID = LoadTGA("Image//trajectory.tga");
+
 	cursor = new Cursor("Image//curshead.tga", "Image//curshead2.tga","Image//curstail.tga", 1.5f, 20, 20);
 	key = "";
+	anglePrev = 0;
 }
 
 Controls::~Controls()
@@ -31,6 +36,8 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 {
 	this->mL_state = ml_state;
 	this->mR_state = mr_state;
+
+	ball = levelAssets[0];
 
 	key = "";
 	if (Application::IsKeyPressed('1'))
@@ -58,7 +65,7 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 			GetPlacement(levelAssets, mousePos);
 			break;
 		case ROTATION:
-			DoRotation(mousePos);
+			DoRotation(mousePos, dt);
 			break;
 		}
 	}
@@ -374,7 +381,7 @@ void Controls::GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mouse
 	}
 }
 
-void Controls::DoRotation(Vector2 mousePos)
+void Controls::DoRotation(Vector2 mousePos, float dt)
 {
 	m_GUI->DisablePanel(true);
 	if (mR_state)
@@ -388,6 +395,16 @@ void Controls::DoRotation(Vector2 mousePos)
 
 			dynamic_cast<Cannon*>(SelectedGO)->getAngleByReference() = (-angleBetween);
 			oldPos = mousePos;
+
+			if (anglePrev != angleBetween)
+			{
+
+				float cannonPower = ((Cannon*)(SelectedGO))->GetPower();
+				Vector2 cannonForce = Vector2(0, 1) * cannonPower;
+				cannonForce.rotateVector(-angleBetween);
+				trajectoryFeedback = ((Balls*)(ball))->getRigidBody()->GetPhysicsCompt()->GetTrajectory(SelectedGO->getPos(), cannonForce, dt, 0.05, 1.0f);
+			}
+			anglePrev = angleBetween;
 		}
 	}
 	else
@@ -395,7 +412,7 @@ void Controls::DoRotation(Vector2 mousePos)
 }
 
 void Controls::ResetState()
-{
+{	
 	SelectedIndex = 0;
 	SelectedActive = false;
 	oldPos.SetZero();
@@ -403,18 +420,26 @@ void Controls::ResetState()
 	c_state = SELECTION;
 }
 
-void Controls::Render(CSceneManager2D *SceneManger2D)
+void Controls::Render(CSceneManager2D *SceneManager2D)
 {
+	if (c_state == ROTATION)
+	{
+		for (unsigned int i = 0; i < trajectoryFeedback.size(); ++i)
+		{
+			SceneManager2D->RenderMeshIn2D(trajPoint, false, 5, 5, trajectoryFeedback[i].x, trajectoryFeedback[i].y);
+		}
+	}
+
 	if (SelectedGO && !SelectedActive)
 	{
-		SelectedGO->render(SceneManger2D);
+		SelectedGO->render(SceneManager2D);
 	}
 	if (SelectedGO && correct == false)
 	{ 
 		Box* temp = (Box*)SelectedGO->getRigidBody()->GetCollisionCompt();
-		SceneManger2D->RenderMeshIn2D(feedback, false, temp->GetWidth(), temp->GetHeight(), temp->GetOrigin().x - 23, temp->GetOrigin().y - 23);
+		SceneManager2D->RenderMeshIn2D(feedback, false, temp->GetWidth(), temp->GetHeight(), temp->GetOrigin().x - 23, temp->GetOrigin().y - 23);
 	}
-	cursor->Render(SceneManger2D);
+	cursor->Render(SceneManager2D);
 }
 
 void Controls::SetState(int i)

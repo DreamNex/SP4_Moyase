@@ -21,6 +21,7 @@ public:
 	Vector2 GetStart();
 	Vector2 GetEnd();
 	float GetSpeed();
+	VectorPathing* GetParticlePath();
 
 	//MUTATOR(S)
 	void SetParticle(int vPath, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life);

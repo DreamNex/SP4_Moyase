@@ -70,7 +70,8 @@ void GUIManager::Update(float dt)
 	for (unsigned int i = 0; i < gui_toolCount.size(); i++)
 	{
 		if (gui_toolCount[i] == 0)
-		{	gui_Tools[i]->SetActive(false);
+		{	
+			gui_Tools[i]->SetActive(true);
 		}
 	}
 
@@ -143,9 +144,7 @@ void GUIManager::Render(CSceneManager2D* SceneManager2D)
 
 			for (unsigned int k = 0; k < gui_toolCount[i]; ++k)
 			{
-
-				if (gui_toolCount[i] == 5)
-					Vector2 aijdsoifj;
+				int tempHaha = gui_toolCount[2];
 				toolBar->SetPos(toolBar->GetPos() + moveBy);
 				toolBar->render(SceneManager2D, 2);
 				moveBy.y += temp->GetHeight();

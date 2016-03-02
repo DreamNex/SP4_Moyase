@@ -15,11 +15,17 @@ Cannon::Cannon(Vector2& pos, float width, float height)
 
 	this->hoverMesh = MeshBuilder::Generate2DMesh("Mesh", Color(0.741, 0, 0.470), 0, 0, 1, 1);
 	this->hoverMesh->textureID = LoadTGA("Image//Cannon_hover.tga");
+	power = 1000;
 }
 
 Cannon::~Cannon()
 {
 	onDestory();
+}
+
+void Cannon::SetPower(float power)
+{
+	this->power = power;
 }
 
 void Cannon::render(CSceneManager2D* SceneManager2D)
