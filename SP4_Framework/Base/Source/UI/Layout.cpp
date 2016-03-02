@@ -4,7 +4,7 @@
 
 Layout::Layout(char* mesh, float sizeX, float sizeY, float x, float y, bool alphaMode, float transparent, Color c)
 {
-	this->Mesh = MeshBuilder::Generate2DMesh("", c, 0, 0, (int)sizeX, (int)sizeY);
+	this->Mesh = MeshBuilder::Generate2DMesh("", c, 0, 0, (int)1, (int)1);
 	if (mesh != "")
 		this->Mesh->textureID = LoadTGA(mesh);
 
@@ -34,6 +34,12 @@ float Layout::GetSizeX()
 float Layout::GetSizeY()
 {
 	return sizeY;
+}
+
+void Layout::setScale(float x, float y)
+{
+	sizeX = x;
+	sizeY = y;
 }
 
 Vector2 Layout::GetPos()
@@ -70,7 +76,7 @@ void Layout::goOpaque(double dt, float multiplier)
 void Layout::render(CSceneManager2D* SceneManager2D, float z)
 {
 	if (alphaMode)
-		SceneManager2D->RenderMeshIn2DTrans(Mesh, (int)(transparent), 1, 1, pos.x - sizeX / 2, pos.y - sizeY / 2, z);
+		SceneManager2D->RenderMeshIn2DTrans(Mesh, (int)(transparent), sizeX, sizeY, pos.x - sizeX / 2, pos.y - sizeY / 2, z);
 	else
-		SceneManager2D->RenderMeshIn2D(Mesh, false, 1, 1, pos.x - sizeX / 2, pos.y - sizeY / 2, z);
+		SceneManager2D->RenderMeshIn2D(Mesh, false, sizeX, sizeY, pos.x - sizeX / 2, pos.y - sizeY / 2, z);
 }

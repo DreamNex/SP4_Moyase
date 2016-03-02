@@ -1,5 +1,7 @@
 true
 2,1,5
+max_score = 5
+highscore = 5
 ball,500,500,50
 wall,640,50,1200,100
 spike,640,100,1200,50

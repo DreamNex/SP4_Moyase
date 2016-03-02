@@ -1,4 +1,5 @@
 #include "Level.h"
+int Level::MAX_SCORE = 20;
 
 Level::Level(std::string level2load, std::string avatar2load)
 {
@@ -19,6 +20,12 @@ Level::Level(std::string level2load, std::string avatar2load)
 	Mode = 0;
 	collide = false;
 	pm_Particles = new ParticleManager("Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga", "Image//trail.tga");
+	
+	std::string temp = fr.GetVariable("Levels//" + level2load, "max_score");
+	if (temp == "")
+		MAX_SCORE = 25;
+	else
+		MAX_SCORE = stoi(temp);
 }
 
 Level::~Level()
