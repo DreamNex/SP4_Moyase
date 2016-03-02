@@ -2,37 +2,44 @@
 #define PHYSICS_COMPONENT_H
 
 #include "Vector2.h"
+#include <vector>
 
 //By the Legendary Quen
 
 class PhysicsComponent
 {
 public:
+	//*************************************************************************************
+	//CONSTRUCTOR(S) && DESTRUCTOR
 	PhysicsComponent(Vector2 &v, float mass, bool active);
+	PhysicsComponent(Vector2 &v, float mass, bool active, Vector2 force, Vector2 acc, Vector2 velo);
 	PhysicsComponent();
 	~PhysicsComponent();
 
 	//*************************************************************************************
 	//ACCESSOR(S)
-	float GetMass();
-	float GetGravitationalForce();
+	float GetMass(void)const;
+	float GetGravitationalForce(void)const;
 
-	float GetCoRestitution();
-	float GetCoKinetic();
-	float GetCoStatic();
-	float GetCoDrag();
+	float GetCoRestitution(void)const;
+	float GetCoKinetic(void)const;
+	float GetCoStatic(void)const;
+	float GetCoDrag(void)const;
 
-	Vector2 GetVelocity();
-	Vector2 GetAcceleration();
-	Vector2 GetForce();
+	Vector2 GetVelocity(void)const;
+	Vector2 GetAcceleration(void)const;
+	Vector2 GetForce(void)const;
 
-	bool GetActive();
-	bool GetFriction();
-	bool GetDrag();
-	bool GetGravity();
+	bool GetActive(void)const;
+	bool GetFriction(void)const;
+	bool GetDrag(void)const;
+	bool GetGravity(void)const;
 
-	bool GetBounce();
-	bool GetPush();
+	bool GetBounce(void)const;
+	bool GetPush(void)const;
+
+	//Get the Trajectory of Object
+	std::vector<Vector2> GetTrajectory(Vector2, Vector2, float, float, float)const;
 
 	//*************************************************************************************
 	//MUTATOR(S)
@@ -62,7 +69,6 @@ public:
 	void Update(float dt);
 
 private:
-
 	//Auto Apply Functions during Update(): Changes the Vector2/Kinematics
 	void ApplyGravity();
 	void ApplyFriction();

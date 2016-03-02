@@ -173,6 +173,7 @@ void CGameplayScene::Update(double dt)
 				score4lv = "0";
 			else if (stoi(score4lv) < 0 || stoi(score4lv) > 5)
 				score4lv = "0";
+			int i = gameLevel.GetMode();
 			if (gameLevel.GetMode() > stoi(score4lv))
 				FileReader.SetFloatVal("Levels//" + levelName, "highscore", gameLevel.GetMode());
 			/////////////////////////////////////////////////////////////////////////////

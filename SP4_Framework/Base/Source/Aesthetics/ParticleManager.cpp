@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 
-ParticleManager::ParticleManager(char *wall, char *cannon, char *boost, char *slow, char *orbit, char * trail)
+ParticleManager::ParticleManager(char *wall, char *cannon, char *boost, char *slow, const char *orbit, char * trail)
 {
 	mesh[PARTICLE_WALL] = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, 1, 1);
 	mesh[PARTICLE_WALL]->textureID = LoadTGA(wall);
@@ -66,6 +66,11 @@ void ParticleManager::Update(float dt)
 	{
 		if (p_Particles[i]->Update(dt))
 		{ 
+			if (p_Particles[i]->GetLife()->GetLoop())
+			{ 
+				p_Particles[i]->GetLife()->Start();
+				continue;
+			}
 			p_Particles.erase(p_Particles.begin() + i);
 		}
 	}

@@ -51,7 +51,7 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 		}
 		else if (dynamic_cast<Spikes*>(GO2))
 		{
-			this->pos = originalPos;
+			//this->pos = originalPos;
 		}
 		else if (dynamic_cast<Rebound*>(GO2))
 		{
@@ -76,7 +76,7 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 				this->getRigidBody()->GetPhysicsCompt()->SetAcceleration(Vector2(0, 0));
 				this->pos = GO2->getPos();
 
-				Vector2 dir(0, 1000);
+				Vector2 dir(0, ((Cannon*)(GO2))->GetPower());
 				dir.rotateVector(dynamic_cast<Cannon*>(GO2)->getAngleByReference());
 
 				this->getRigidBody()->GetPhysicsCompt()->Push(dir);

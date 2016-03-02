@@ -159,6 +159,7 @@ bool CollisionHandler::FindCollideNormal(Box* b1, Vector2 origin)
 	Vector2 left(-1, 0);
 	Vector2 dir = (origin - b1->GetOrigin()).Normalized();
 	Vector2 max = b1->GetOrigin() + Vector2(b1->GetWidth()/2, b1->GetHeight()/2);
+
 	float horizontalDotLimit = right.Dot((max - b1->GetOrigin()).Normalized());
 	float verticalDotLimit = up.Dot((max - b1->GetOrigin()).Normalized());
 
@@ -170,48 +171,8 @@ bool CollisionHandler::FindCollideNormal(Box* b1, Vector2 origin)
 		b1->SetCollideNormal(right);
 	else if (left.Dot(dir) > horizontalDotLimit && left.Dot(dir) < 1)//Left
 		b1->SetCollideNormal(left);
-	if (b1->GetCollideNormal().IsZero())
-		b1->SetCollideNormal(Vector2(0, 1));
-	return (!(b1->GetCollideNormal().IsZero()));
-	/*
-	if ((closest.y > b1->GetOrigin().y && closest.y <= b1->GetMax().y)
-	&& (origin.y >= b1->GetMax().y))//Up
-	b1->SetCollideNormal(Vector2(0, 1));
-	else if ((closest.y < b1->GetOrigin().y && closest.y >= b1->GetMin().y)
-	&& (origin.y <= b1->GetMin().y))//Down
-	b1->SetCollideNormal(Vector2(0, -1));
+	else //Corner
+		b1->SetCollideNormal((dir.unary()));
 
-	if ((closest.x > b1->GetOrigin().x && closest.x <= b1->GetMax().x)
-	&& (origin.x >= b1->GetMax().x))//Right
-	b1->SetCollideNormal(Vector2(1, 0));
-	else if ((closest.x < b1->GetOrigin().x && closest.x >= b1->GetMin().x)
-	&& (origin.x <= b1->GetMin().x))//Left
-	b1->SetCollideNormal(Vector2(-1, 0));
-	*/
-
-	/*
-	float dotProducts[4];
-
-	Vector2 up(0, 1);
-	Vector2 down(0, -1);
-	Vector2 left(-1, 0);
-	Vector2 right(1, 0);
-
-	dotProducts[0] = up.Dot(direction);
-	dotProducts[1] = down.Dot(direction);
-	dotProducts[2] = left.Dot(direction);
-	dotProducts[3] = right.Dot(direction);
-
-	int indexLowest = 0;
-
-	for (unsigned int i = 0; i < 4; ++i)
-	{
-		if (dotProducts[i] > 0)
-		{
-			if (dotProducts[i] >= dotProducts[indexLowest])
-				indexLowest = i;
-		}
-	}
-	return indexLowest;
-	*/
+	return true;
 }

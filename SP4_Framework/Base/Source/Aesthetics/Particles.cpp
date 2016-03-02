@@ -57,6 +57,10 @@ float Particles::GetSpeed()
 {
 	return this->speed;
 }
+VectorPathing* Particles::GetParticlePath()
+{
+	return this->particlePath;
+}
 
 
 /*************************************************************************************************************
@@ -98,7 +102,7 @@ bool Particles::Update(float dt)
 		}
 	}
 	Vector2 path = particlePath->GetPath(start, *end) * speed;
-	if (life->Update(dt))//|| path.IsZero())
+	if (life->Update(dt) || path.IsZero())
 		return true;
 	start = start + path;
 	prevEnd = *end;

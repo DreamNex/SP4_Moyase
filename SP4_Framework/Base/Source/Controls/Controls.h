@@ -18,12 +18,12 @@ public:
 	~Controls();
 
 	void Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets, bool ml_state, bool mr_state, float dt, bool guiOnly = false);
-	void Render(CSceneManager2D *SceneManger2D);
+	void Render(CSceneManager2D *SceneManager2D);
 
 	void GetSelection(Vector2 mousePos);
 	void GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mousePos);
 	void GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mousePos);
-	void DoRotation(Vector2 mousePos);
+	void DoRotation(Vector2 mousePos, float dt);
 	void SetState(int i);
 	int GetState();
 	void ResetState();
@@ -41,7 +41,11 @@ private:
 	char* key;
 	
 	//Feedback
+	std::vector<Vector2> trajectoryFeedback;
+	float anglePrev;
+	Mesh* trajPoint;
 	Mesh* feedback;
+	GameObject* ball;
 	bool correct;
 
 	//Cursor

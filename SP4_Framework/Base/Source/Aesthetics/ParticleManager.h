@@ -18,7 +18,7 @@ public:
 		PARTICLE_PLAYER_TRAIL,
 		PARTICLE_SIZE,
 	};
-	ParticleManager(char *wall, char *cannon, char *boost, char *slow, char *orbit, char * trail);
+	ParticleManager(char *wall, char *cannon, char *boost, char *slow, const char *orbit, char * trail);
 	ParticleManager();
 	~ParticleManager();
 
