@@ -32,7 +32,7 @@ public:
 	static int Button_Left, Button_Middle, Button_Right;
 	
 	static bool exitbool;
-
+	static bool isPlaying;
 	static void mouseMode(bool show);
 	static SoundManager BGM;
 	static SoundManager SFX;
