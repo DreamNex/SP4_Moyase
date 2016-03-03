@@ -6,6 +6,7 @@
 #include"../GameObjects/Tools.h"
 #include"../Application.h"
 #include"../GameObjects/Balls.h"
+#include<math.h>
 
 Controls::Controls(GUIManager * m_GUI)
 {
@@ -398,7 +399,7 @@ void Controls::DoRotation(std::vector<GameObject*> &levelAssets, Vector2 mousePo
 			dynamic_cast<Cannon*>(SelectedGO)->getAngleByReference() = (-angleBetween);
 			oldPos = mousePos;
 
-			if (anglePrev != angleBetween)
+			if ((fabs)((fabs)(anglePrev) - (fabs)(angleBetween)) >= 1.f)
 			{
 
 				float cannonPower = ((Cannon*)(SelectedGO))->GetPower();
@@ -428,7 +429,7 @@ void Controls::Render(CSceneManager2D *SceneManager2D)
 	{
 		for (unsigned int i = 0; i < trajectoryFeedback.size(); ++i)
 		{
-			SceneManager2D->RenderMeshIn2D(trajPoint, false, 5, 5, trajectoryFeedback[i].x, trajectoryFeedback[i].y);
+			SceneManager2D->RenderMeshIn2D(trajPoint, false, 5, 5, trajectoryFeedback[i].x, trajectoryFeedback[i].y, 0, 0, -2.5f, -2.5f);
 		}
 	}
 
