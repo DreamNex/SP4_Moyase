@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+#include "../Application.h"
 #include "GameStateManager.h"
 #include "OptionsState.h"
 #include "MenuState.h"
@@ -9,12 +10,14 @@ OptionsState OptionsState::theOptionsState;
 
 void OptionsState::Init()
 {
+	playonce = false;
 	scene = new OptionsScene(800, 600);
 	scene->Init();
 }
 
 void OptionsState::Init(const int width, const int height)
 {
+	playonce = false;
 	scene = new OptionsScene(width, height);
 	scene->Init();
 }
@@ -49,11 +52,22 @@ void OptionsState::HandleEvents(CGameStateManager* theGSM, const double mouse_x,
 	{
 		if (scene->getButtons()[i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
 		{
+			if (!playonce)
+			{
+				Application::SFX.Play("SoundTracks//HoverTrack.mp3", false, false);
+				playonce = true;
+			}
 			if (mousePress && button_Left == 0)
 			{
+				Application::SFX.Play("SoundTracks//ClickTrack.mp3", false, false);
 				mode = 1;
-				break;
 			}
+			break;
+		}
+
+		if (i + 1 == scene->getButtons().size())
+		{
+			playonce = false;
 		}
 	}
 
