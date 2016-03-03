@@ -200,6 +200,7 @@ void CGameplayScene::Update(double dt)
 	case S_WIN:
 		gameLevel.update(dt, false, false);
 		winScreenUpdae(dt);
+		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, dt, true);
 		break;
 	}
 

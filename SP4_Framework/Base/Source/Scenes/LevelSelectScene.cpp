@@ -66,6 +66,10 @@ CLevelSelectScene::~CLevelSelectScene()
 
 	if (transition)
 		delete transition;
+
+
+	if (cursor)
+		delete cursor;
 }
 
 void CLevelSelectScene::Init()
@@ -84,13 +88,6 @@ void CLevelSelectScene::Init()
 	selectedLayout = new Layout("", m_window_width * 0.4f, m_window_height * 0.5f, m_window_width * 0.5f, m_window_height * 0.5f, true, 40, Color(1, 1, 1));
 
 	FileReading FileReader;
-
-	Luala la("Playerpref.lua");
-	volume1 = la.getFloat("BGM");
-	volume2 = la.getFloat("SFX");
-
-	Application::BGM.SetSoundVol(volume1);
-	Application::SFX.SetSoundVol(volume2);
 
 	if (!Application::isPlaying)
 	{
@@ -210,11 +207,19 @@ void CLevelSelectScene::Init()
 	/************************************************************************************************************************************/
 
 	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
+	cursor = new Cursor("Image//curshead.tga", "Image//curshead2.tga", "Image//curstail.tga", 1.5f, 20, 20);
+
 }
 
 void CLevelSelectScene::Update(double dt)
 {
 	CSceneManager2D::Update(dt);
+	bool m_state = false;
+
+	if (Application::Button_Left)
+		m_state = true;
+
+	cursor->Update(dt, m_state);
 }
 
 void CLevelSelectScene::Render()
@@ -271,6 +276,7 @@ void CLevelSelectScene::Render()
 	}
 
 	transition->render(this, 6);
+	cursor->Render(this);
 }
 
 void CLevelSelectScene::Exit()

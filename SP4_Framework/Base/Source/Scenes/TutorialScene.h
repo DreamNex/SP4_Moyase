@@ -28,6 +28,8 @@ public:
 		GEO_DRAG,
 		GEO_ROT,
 		GEO_WIN,
+		GEO_CLR,
+		GEO_MM,
 		NUM_GEOMETRY,
 	};
 	enum GameStates
@@ -50,6 +52,8 @@ public:
 		DRAGHERE,
 		ROTATE,
 		CLEAR,
+		END,
+		TPLAY,
 		NUM_TSTATES,
 	};
 	CTutorialScene();
@@ -61,15 +65,16 @@ public:
 	virtual void Render();
 	virtual void vExit();
 
-	std::vector<GameObject*> gameObjects;
-
-	GameStates getGameState() { return G_States; }
-	TutStates getTutState() { return T_States; }
-	bool getWin() { return win; }
+	GameStates getGameState(){ return G_States; }
+	TutStates getTutState(){ return T_States; }
+	bool getmm(){ return mm; }
 
 	Layout *transition;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
+
+	std::vector<GameObject*> gameObjects;
+
 	GUIManager * m_GUI;
 	Controls * ctrs;
 	//bool mL_state, mR_state;
@@ -90,4 +95,7 @@ private:
 	bool rotate;
 	bool win;
 	bool onClick;
+	bool clear;
+	bool mm;
+	bool temp;
 };
