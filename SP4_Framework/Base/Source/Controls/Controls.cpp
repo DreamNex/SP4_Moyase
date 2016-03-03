@@ -404,7 +404,7 @@ void Controls::DoRotation(std::vector<GameObject*> &levelAssets, Vector2 mousePo
 				float cannonPower = ((Cannon*)(SelectedGO))->GetPower();
 				Vector2 cannonForce = Vector2(0, 1) * cannonPower;
 				cannonForce.rotateVector(-angleBetween);
-				trajectoryFeedback = ((Balls*)(ball))->GetPath(levelAssets, SelectedGO->getPos(), cannonForce, dt, 0.1, 2.0f);
+				trajectoryFeedback = ((Balls*)(ball))->GetPath(levelAssets, SelectedGO->getPos(), cannonForce, dt, 0.2, 1.4f);
 			}
 			anglePrev = angleBetween;
 		}

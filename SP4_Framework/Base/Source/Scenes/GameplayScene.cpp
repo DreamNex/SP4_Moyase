@@ -193,7 +193,10 @@ void CGameplayScene::Update(double dt)
 					break;
 				}
 			}
-			////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////
+			Application::BGM.StopSounds();
+			Application::SFX.StopSounds();
+			Application::BGM.Play("SoundTracks//endgame.wav", false, false);
 		}
 		break;
 

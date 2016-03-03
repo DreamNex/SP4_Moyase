@@ -45,6 +45,8 @@ void ParticleManager::SpawnParticles(PARTICLE_TYPE p_Type, Vector2& end, Vector2
 
 	if (p_Type == PARTICLE_PLAYER_ORBIT)
 		vPath = 2;
+	else if(p_Type == PARTICLE_CANNON)
+		vPath = 0;
 	else if (p_Type != PARTICLE_WALL)
 		vPath = 1;
 

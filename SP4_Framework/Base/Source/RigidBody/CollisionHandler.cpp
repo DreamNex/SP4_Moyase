@@ -157,23 +157,24 @@ bool CollisionHandler::FindCollideNormal(Box* b1, Vector2 origin)
 	Vector2 down(0, -1);
 	Vector2 right(1, 0);
 	Vector2 left(-1, 0);
+	Vector2 dir = (origin - b1->GetOrigin()).Normalized();
+
 	if ((origin - b1->GetOrigin()).IsZero())
 	{
-		b1->SetCollideNormal(Vector2(0, 1));
+		b1->SetCollideNormal((dir.unary()));
 		return true;
 	}
-	Vector2 dir = (origin - b1->GetOrigin()).Normalized();
 	Vector2 max = b1->GetOrigin() + Vector2(b1->GetWidth()/2, b1->GetHeight()/2);
 
 	if ((max - b1->GetOrigin()).IsZero())
 	{
-		b1->SetCollideNormal(Vector2(0, 1));
+		b1->SetCollideNormal((dir.unary()));
 		return true;
 	}
 	float horizontalDotLimit = right.Dot((max - b1->GetOrigin()).Normalized());
 	float verticalDotLimit = up.Dot((max - b1->GetOrigin()).Normalized());
 
-	if (up.Dot(dir) > verticalDotLimit && up.Dot(dir) < 1)//Up
+	if (up.Dot(dir) >= verticalDotLimit && up.Dot(dir) < 1)//Up
 		b1->SetCollideNormal(up);
 	else if (down.Dot(dir) > verticalDotLimit && down.Dot(dir) < 1)//Down
 		b1->SetCollideNormal(down);

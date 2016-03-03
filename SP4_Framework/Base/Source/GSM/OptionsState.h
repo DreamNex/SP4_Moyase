@@ -30,6 +30,6 @@ protected:
 
 private:
 	static OptionsState theOptionsState;
-
+	bool playonce;
 	OptionsScene *scene;
 };

@@ -1,3 +1,13 @@
 true
-1,0,0
-ball,500,500,50
+2,1,5
+max_score = 15
+highscore = 5
+ball,150,600,50
+wall,0,360,50,800//Left Wall
+wall,640,40,1280,130//Bottom Wall
+wall,640,720,1280,130//Upper Wall
+wall,1050,200,80,500//Near Exit
+wall,510,170,80,220//Bottom Near Player
+wall,510,580,80,300//Up Near Player
+spike,1280,360,50,800
+exit,1170,275,140,315
