@@ -204,7 +204,7 @@ void PhysicsComponent::toBounce(Vector2 collideNormal)
 	v_Acceleration.SetZero();
 	v_Force.SetZero();
 
-	if (hasGravity && collideNormal == Vector2(0, 1))
+	if (collideNormal == Vector2(0, 1) || collideNormal == Vector2(0, 0))
 	{
 		if (fabs(v_Velocity.x) <= 25 && fabs(v_Velocity.y) <= 25)
 		{

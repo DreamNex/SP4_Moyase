@@ -422,7 +422,7 @@ void Controls::ResetState()
 
 void Controls::Render(CSceneManager2D *SceneManager2D)
 {
-	if (c_state == ROTATION)
+	if (c_state == ROTATION && Application::Button_Right)
 	{
 		for (unsigned int i = 0; i < trajectoryFeedback.size(); ++i)
 		{

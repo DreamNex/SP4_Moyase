@@ -48,7 +48,8 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 	{
 		if (dynamic_cast<Wall*>(GO2))
 		{
-			Application::SFX.Play("SoundTracks//bounce.mp3", false, false);
+			if (Application::Button_Right == false)
+				Application::SFX.Play("SoundTracks//bounce.mp3", false, false);
 		}
 		else if (dynamic_cast<Spikes*>(GO2))
 		{
