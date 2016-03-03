@@ -1,12 +1,13 @@
 true
-3,1,1
-ball,150,600,50
-wall,0,360,50,800
-wall,1260,600,50,400
-wall,1260,100,50,400
-wall,640,720,1280,40
-spike,640,40,1280,40
-spike,500,560,400,70
-spike,500,300,400,70
-spike,900,420,70,380
-exit,1260,349,80,105
+1,2,0
+max_score = 10
+highscore = 5
+ball,570,400,50
+wall,640,0,1280,100//wall bottom
+spike,640,720,1280,100//spike top
+wall,0,360,100,720//wall left
+wall,1280,360,100,720//wall right
+
+wall,1115,300,230,500//wall beside wall right
+spike,840,500,320,100
+exit,1150,610,150,100
