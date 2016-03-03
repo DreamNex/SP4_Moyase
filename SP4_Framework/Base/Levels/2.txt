@@ -1,3 +1,13 @@
 true
-1,0,0
+1,2,1
+max_score = 10
+highscore = 5
 ball,500,500,50
+wall,640,0,1280,100//wall bottom
+wall,0,360,100,720//wall left
+wall,1280,360,100,720//wall right
+wall,640,750,1280,100//wall top
+
+wall,650,360,100,400//wall centre
+wall,950,200,100,400//wall centre
+exit,1150,100,150,100

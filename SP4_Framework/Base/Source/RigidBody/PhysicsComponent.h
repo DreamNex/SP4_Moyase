@@ -90,8 +90,8 @@ private:
 	Vector2 v_Force;
 
 	//Max Magnitude of Kinematics/Vector Values
-	const float MAX_VELOCITY = 400;
-	const float MAX_ACCELERATION = 30;
+	const float MAX_VELOCITY = 500;
+	const float MAX_ACCELERATION = 100;
 	const float MAX_FORCE = 2000;
 
 	//True = Enable Apply Functions
