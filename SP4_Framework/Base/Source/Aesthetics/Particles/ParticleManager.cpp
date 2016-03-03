@@ -1,6 +1,6 @@
 #include "ParticleManager.h"
 #include "GL\glew.h"
-#include "../LoadTGA.h"
+#include "../Base/Source/LoadTGA.h"
 #include <stdlib.h>
 
 

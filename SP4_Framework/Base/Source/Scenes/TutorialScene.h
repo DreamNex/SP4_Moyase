@@ -10,7 +10,7 @@
 #include"../GameObjects/Slow.h"
 #include"../Controls/Controls.h"
 #include"../Timer/Timer.h"
-#include"../Aesthetics/ParticleManager.h"
+#include"../Aesthetics/Particles/ParticleManager.h"
 #include"../GameObjects/Exit.h"
 
 class CTutorialScene: public CSceneManager2D

@@ -6,18 +6,19 @@
 class Circle : public CollisionComponent 
 {
 public:
-	Circle(Vector2 &origin, float radius) : CollisionComponent(origin)
-	{
-		this->radius = radius;
-	}
+	//*************************************************************************************
+	//CONSTRUCTOR(S) && DESTRUCTOR
+	Circle(Vector2 &origin, float radius);
 	Circle();
 	~Circle();
 
-	//Accessor(s)
-	float GetRadius(void)const{ return this->radius; }
+	//*************************************************************************************
+	//ACCESSOR(S)
+	float GetRadius(void)const;
 
-	//Mutator(s)
-	void SetRadius(float radius){ this->radius = radius; }
+	//*************************************************************************************
+	//MUTATOR(S)
+	void SetRadius(float radius);
 private:
 	float radius;
 };

@@ -1,6 +1,11 @@
 #include "PhysicsComponent.h"
 #include <math.h>
 
+
+
+/*************************************************************************************************************
+	CONSTRUCTOR(S) && DESTRUCTOR
+*************************************************************************************************************/
 PhysicsComponent::PhysicsComponent(Vector2 &v, float mass, bool active)
 {
 	v_Pos = &v;
@@ -82,51 +87,9 @@ PhysicsComponent::~PhysicsComponent()
 	//delete v_Pos;
 }
 
-void PhysicsComponent::Update(float dt)
-{
-	if (!isActive)
-		return;
-
-	//Calculate New Acceleration/Velocity
-	this->v_Acceleration = this->v_Force / mass;
-	this->v_Velocity = v_Velocity + v_Acceleration;
-
-	//Limit
-	if (v_Velocity.x >= MAX_VELOCITY)
-		v_Velocity.x = MAX_VELOCITY;
-	if (v_Velocity.y >= MAX_VELOCITY)
-		v_Velocity.y = MAX_VELOCITY;
-
-	if (v_Acceleration.x >= MAX_ACCELERATION)
-		v_Acceleration.x = MAX_ACCELERATION;
-	if (v_Acceleration.y >= MAX_ACCELERATION)
-		v_Acceleration.y = MAX_ACCELERATION;
-
-	/***************************************************************************************************************************
-	Horizontal Force
-	****************************************************************************************************************************/
-	if (hasFriction)
-		ApplyFriction();
-
-	/***************************************************************************************************************************
-	Vertical Force
-	****************************************************************************************************************************/
-	if (hasGravity)
-		ApplyGravity();
-
-	//Update Velocity and Position
-	v_Force.SetZero();
-	v_Velocity = v_Velocity + v_Acceleration;
-
-
-	*v_Pos = (*v_Pos) + v_Velocity * dt;
-}
-
-
-
 
 /*************************************************************************************************************
- VARYING COMPONENT KINETMATIC(S): Velocity, Acceleration, Force
+	VARYING COMPONENT KINETMATIC(S): Velocity, Acceleration, Force
 *************************************************************************************************************/
 void PhysicsComponent::ApplyFriction()
 {
@@ -212,7 +175,6 @@ void PhysicsComponent::toBounce(Vector2 collideNormal)
 			isActive = false;
 		}
 	}
-	hasGravity = true;
 }
 
 void PhysicsComponent::Push(Vector2 pushForce)
@@ -274,10 +236,10 @@ std::vector<Vector2> PhysicsComponent::GetTrajectory(Vector2 start, Vector2 forc
 	return TrajectoryPosition;
 }
 
-/*************************************************************************************************************
-MUTATOR(S)
-*************************************************************************************************************/
 
+/*************************************************************************************************************
+	MUTATOR(S)
+*************************************************************************************************************/
 void PhysicsComponent::SetMass(float m){ this->mass = m; }
 void PhysicsComponent::SetGravitationalForce(float gF){ this->gravitationalForce = gF; }
 
@@ -297,3 +259,47 @@ void PhysicsComponent::SetGravity(bool g){ this->hasGravity = g; }
 
 void PhysicsComponent::SetBounce(bool b){ this->hasBounce = b; }
 void PhysicsComponent::SetPush(bool p){ this->hasPush = p; }
+
+
+/*************************************************************************************************************
+UPDATES KINETMATICS/POSITION: Velocity, Acceleration, Force, Position
+*************************************************************************************************************/
+void PhysicsComponent::Update(float dt)
+{
+	if (!isActive)
+		return;
+
+	//Calculate New Acceleration/Velocity
+	this->v_Acceleration = this->v_Force / mass;
+	this->v_Velocity = v_Velocity + v_Acceleration;
+
+	//Limit
+	if (v_Velocity.x >= MAX_VELOCITY)
+		v_Velocity.x = MAX_VELOCITY;
+	if (v_Velocity.y >= MAX_VELOCITY)
+		v_Velocity.y = MAX_VELOCITY;
+
+	if (v_Acceleration.x >= MAX_ACCELERATION)
+		v_Acceleration.x = MAX_ACCELERATION;
+	if (v_Acceleration.y >= MAX_ACCELERATION)
+		v_Acceleration.y = MAX_ACCELERATION;
+
+	/***************************************************************************************************************************
+	Horizontal Force
+	****************************************************************************************************************************/
+	if (hasFriction)
+		ApplyFriction();
+
+	/***************************************************************************************************************************
+	Vertical Force
+	****************************************************************************************************************************/
+	if (hasGravity)
+		ApplyGravity();
+
+	//Update Velocity and Position
+	v_Force.SetZero();
+	v_Velocity = v_Velocity + v_Acceleration;
+
+
+	*v_Pos = (*v_Pos) + v_Velocity * dt;
+}

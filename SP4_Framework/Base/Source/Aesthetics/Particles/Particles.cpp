@@ -1,7 +1,10 @@
-#include "Particles\Particles.h"
+#include "Particles.h"
 #include "GL\glew.h"
-#include "../LoadTGA.h"
+#include "../Base/Source/LoadTGA.h"
 
+/*************************************************************************************************************
+	CONSTRUCTOR(S) && DESTRUCTOR
+*************************************************************************************************************/
 Particles::Particles(int vPath, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life)
 {
 	this->start = start;
@@ -31,7 +34,7 @@ Particles::~Particles()
 
 
 /*************************************************************************************************************
-ACCESOR(S)
+	ACCESOR(S)
 *************************************************************************************************************/
 Timer* Particles::GetLife()
 {
@@ -64,7 +67,7 @@ VectorPathing* Particles::GetParticlePath()
 
 
 /*************************************************************************************************************
-MUTATOR(S)
+	MUTATOR(S)
 *************************************************************************************************************/
 void Particles::SetLife(Timer* life)
 {

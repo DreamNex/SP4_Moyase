@@ -2,8 +2,8 @@
 #define PARTICLE_MANAGER_H
 
 #include "Particles.h"
+#include "../Base/Source/Scenes/SceneManager2D.h"
 #include <vector>
-#include "VectorPathing.h"
 
 class ParticleManager
 {

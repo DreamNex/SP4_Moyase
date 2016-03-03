@@ -1,19 +1,23 @@
 #ifndef PARTICLES_H
 #define PARTICLES_H
 
-#include "../MeshBuilder.h"
-#include "../Scenes\SceneManager2D.h"
-#include "../Timer/Timer.h"
+#include "../Base/Source/MeshBuilder.h"
+#include "../Base/Source/Scenes/SceneManager2D.h"
+#include "../Base/Source/MeshBuilder.h"
+#include "../Base/Source/Timer/Timer.h"
+#include "../VectorPaths/VectorPathing.h"
 #include "Vector2.h"
-#include "VectorPathing.h"
 
 class Particles
 {
 public:
+	//*************************************************************************************
+	//CONSTRUCTOR(S) && DESTRUCTOR
 	Particles(int vPath, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life);
 	Particles();
 	~Particles();
 
+	//*************************************************************************************
 	//ACCESSOR(S)
 	Timer* GetLife();
 	Mesh* GetMesh();
@@ -23,6 +27,7 @@ public:
 	float GetSpeed();
 	VectorPathing* GetParticlePath();
 
+	//*************************************************************************************
 	//MUTATOR(S)
 	void SetParticle(int vPath, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life);
 	void SetLife(Timer*);

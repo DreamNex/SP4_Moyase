@@ -104,7 +104,6 @@ float Vector2::AngleBetween(const Vector2& rhs)const
 	float det = this->Determinant(rhs);
 	float angle =  atan2f(det, dot);
 	return Math::RadianToDegree(angle);
-	//std::cout << n << '\n';
 }
 
 Vector2 Vector2::Normalized(void)const

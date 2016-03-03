@@ -1,6 +1,27 @@
 #include "RigidBody.h"
 #include "CollisionHandler.h"
 
+/*************************************************************************************************************
+	CONSTRUCTOR(S) && DESTRUCTOR
+*************************************************************************************************************/
+RigidBody::RigidBody(CollisionComponent* cC_Compt, PhysicsComponent* pC_Compt, bool response)
+{
+	this->cC_Compt = cC_Compt;
+	this->pC_Compt = pC_Compt;
+	this->pos = (cC_Compt)->GetPointerOrigin();
+	this->response = response;
+	if (dynamic_cast<Circle*>(cC_Compt))
+	{
+		scale[0] = (dynamic_cast<Circle*>(cC_Compt))->GetRadius() * 2;
+		scale[1] = (dynamic_cast<Circle*>(cC_Compt))->GetRadius() * 2;
+	}
+	else if (dynamic_cast<Box*>(cC_Compt))
+	{
+		scale[0] = (dynamic_cast<Box*>(cC_Compt))->GetWidth();
+		scale[1] = (dynamic_cast<Box*>(cC_Compt))->GetHeight();
+	}
+}
+
 RigidBody::RigidBody()
 {
 	pC_Compt = new PhysicsComponent(Vector2(0, 0), 1, false);
@@ -13,30 +34,39 @@ RigidBody::~RigidBody()
 	delete cC_Compt;
 }
 
-void RigidBody::CollisionResolve_Bounce(RigidBody *rb1, RigidBody *rb2)
-{
-	CollisionHandler cH;
-	cH.FindCollideNormal((Box*)rb2->cC_Compt, rb1->cC_Compt->GetOrigin());
-	rb1->pC_Compt->toBounce(rb2->cC_Compt->GetCollideNormal());
-}
 
-void RigidBody::CollisionResolve_PushOut(RigidBody *rb1, RigidBody *rb2)
-{
-	CollisionHandler cH;
-	Vector2 pushOut = (rb1->pC_Compt->GetVelocity()).Normalized();
-	while (cH.CheckCollision(rb1->cC_Compt, rb2->cC_Compt))
-	{
-		*(rb1->pos) = *(rb1->pos) - (pushOut);
-	}
-}
+/*************************************************************************************************************
+	ACCESSOR(S)
+*************************************************************************************************************/
+float RigidBody::GetScale(int axis)const{ return this->scale[axis]; }
+bool RigidBody::GetResponse(void)const{ return this->response; }
+PhysicsComponent* RigidBody::GetPhysicsCompt(void)const{ return this->pC_Compt; }
+CollisionComponent* RigidBody::GetCollisionCompt(void)const{ return this->cC_Compt; }
 
+
+/*************************************************************************************************************
+	MUTATOR(S)
+*************************************************************************************************************/
+void RigidBody::SetScale(float x, float y)
+{
+	scale[0] = x;
+	scale[1] = y;
+}
+void RigidBody::SetResponse(bool response){ this->response = response; }
+void RigidBody::SetPhysicsComponent(PhysicsComponent& pC_Compt){ this->pC_Compt = &pC_Compt; }
+void RigidBody::SetCollisionComponent(CollisionComponent& cC_Compt){ this->cC_Compt = &cC_Compt; }
+
+
+/*************************************************************************************************************
+//COLLISION CHECK(S)
+*************************************************************************************************************/
 bool RigidBody::CollideWith(RigidBody *otherObject)
 {
-	CollisionHandler cH;
-
+	//Temporary Variables to store which is Active/Inactive
 	RigidBody *resolve;
 	RigidBody *toCollide;
 
+	//Finds Which RigidBody is Active (Affected by Physics Kinematics)
 	if (this->pC_Compt->GetActive())
 	{
 		resolve = this;
@@ -50,14 +80,13 @@ bool RigidBody::CollideWith(RigidBody *otherObject)
 	else
 		return false;
 
-
+	//Check For Collision
+	CollisionHandler cH;
 	if (cH.CheckCollision(cC_Compt, otherObject->cC_Compt))
 	{
-		if (toCollide->response)
+		if (toCollide->response) //Check if Response Enabled
 		{
-			if (dynamic_cast<Ray*>(toCollide->cC_Compt) == false)
-				resolve->pC_Compt->SetGravity(false);
-			
+			//Apply Collision Resolves
 			CollisionResolve_PushOut(resolve, toCollide);
 			CollisionResolve_Bounce(resolve, toCollide);
 		}
@@ -66,6 +95,29 @@ bool RigidBody::CollideWith(RigidBody *otherObject)
 	return false;
 }
 
+
+/*************************************************************************************************************
+	COLLISION RESOLVE(S)
+*************************************************************************************************************/
+void RigidBody::CollisionResolve_Bounce(RigidBody *rb1, RigidBody *rb2)
+{
+	rb1->pC_Compt->toBounce(rb2->cC_Compt->GetCollideNormal());
+}
+void RigidBody::CollisionResolve_PushOut(RigidBody *rb1, RigidBody *rb2)
+{
+	CollisionHandler cH;
+	cH.FindCollideNormal((Box*)rb2->cC_Compt, *rb1->pos);
+	Vector2 pushOut = (rb2->GetCollisionCompt()->GetCollideNormal());
+	while (cH.CheckCollision(rb1->cC_Compt, rb2->cC_Compt))
+	{
+		*(rb1->pos) = *(rb1->pos) + (pushOut);
+	}
+}
+
+
+/*************************************************************************************************************
+	UPDATE: Changes to Latest Variables
+*************************************************************************************************************/
 void RigidBody::Update(float dt)
 {
 	pC_Compt->Update(dt);

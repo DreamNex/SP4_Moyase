@@ -122,13 +122,15 @@ void Balls::reset()
 std::vector<Vector2> Balls::GetPath(std::vector<GameObject*> levelAssets, Vector2 start, Vector2 force, float dt, float frequency, float life)
 {
 	std::vector<Vector2> pathPoints;
-
-	if (this->rigidBody->GetPhysicsCompt()->GetActive() == false)
-		return pathPoints;
+	Vector2 currentPoint;
 
 	GameObject* temp_GO = new Balls(start, ((Circle*)this->getRigidBody()->GetCollisionCompt())->GetRadius(), "Image//Avatar//Avatar_1");
+	temp_GO->getRigidBody()->GetPhysicsCompt()->SetForce(Vector2(0, 0));
+	temp_GO->getRigidBody()->GetPhysicsCompt()->SetVelocity(Vector2(0, 0));
+	temp_GO->getRigidBody()->GetPhysicsCompt()->SetAcceleration(Vector2(0, 0));
 	temp_GO->getRigidBody()->GetPhysicsCompt()->Push(force);
-	Vector2 currentPoint;
+
+
 	float frequency_Copy = frequency;
 	while (life > 0)
 	{
@@ -136,10 +138,17 @@ std::vector<Vector2> Balls::GetPath(std::vector<GameObject*> levelAssets, Vector
 		for (unsigned int i = 0; i < levelAssets.size(); ++i)
 		{ 
 			if (dynamic_cast<Wall*>(levelAssets[i]))
-				temp_GO->checkColision(levelAssets[i]);
+			{ 
+				if (temp_GO->checkColision(levelAssets[i]))
+				{
+					if (temp_GO->getRigidBody()->GetPhysicsCompt()->GetActive() == false)
+						return pathPoints;
+				}
+			}
 		}
-		if (temp_GO->getRigidBody()->GetPhysicsCompt()->GetActive() == false)
-			return pathPoints;
+
+		pathPoints.push_back(currentPoint);
+
 		if (frequency <= 0)
 		{
 			frequency = frequency_Copy;
@@ -147,7 +156,6 @@ std::vector<Vector2> Balls::GetPath(std::vector<GameObject*> levelAssets, Vector
 		}
 		frequency -= dt;
 		life -= dt;
-		pathPoints.push_back(currentPoint);
 	}
 	return pathPoints;
 }

@@ -4,8 +4,6 @@
 #include "Vector2.h"
 #include <vector>
 
-//By the Legendary Quen
-
 class PhysicsComponent
 {
 public:
@@ -64,23 +62,25 @@ public:
 	void SetBounce(bool);
 	void SetPush(bool);
 
-	//Manual Apply Functions: Changes the Vector2/Kinematics
+	//*************************************************************************************
+	//MANUAL APPLY FUNCTIONS: Changes the Vector2/Kinematics outside Update
 	void Push(Vector2);
 	void toBounce(Vector2);
 	void Update(float dt);
 
 private:
-	//Auto Apply Functions during Update(): Changes the Vector2/Kinematics
+	//*************************************************************************************
+	//AUTO APPLY FUNCTIONS: Changes the Vector2/Kinematics inside Update
 	void ApplyGravity();
 	void ApplyFriction();
 	void ApplyDrag();
 
 	float mass;									// Mass of Object
-	float gravitationalForce;					// Strength of Gravitational Force
+	float gravitationalForce;					// Strength of Gravitational Force (Vertical Movement)
 
 	//CoEfficients
-	float co_Restitution;						// CoEfficient of Restitution(For Bounce)
-	float co_KE, co_SE;							// CoEfficient of Static/Kinetic Friction
+	float co_Restitution;						// CoEfficient of Restitution (For Bounce)
+	float co_KE, co_SE;							// CoEfficient of Static/Kinetic Friction (Horizontal Movement)
 	float co_Drag;								// CoEfficient of Drag
 	
 	//Kinematics (Vector Values)
@@ -90,8 +90,8 @@ private:
 	Vector2 v_Force;
 
 	//Max Magnitude of Kinematics/Vector Values
-	const float MAX_VELOCITY = 700;
-	const float MAX_ACCELERATION = 200;
+	const float MAX_VELOCITY = 400;
+	const float MAX_ACCELERATION = 30;
 	const float MAX_FORCE = 2000;
 
 	//True = Enable Apply Functions

@@ -391,7 +391,7 @@ void Controls::DoRotation(std::vector<GameObject*> &levelAssets, Vector2 mousePo
 			Vector2 toolToMouse = mousePos - SelectedGO->getPos();
 			Vector2 up(0, 1);
 
-			float angleBetween = toolToMouse.AngleBetween(up);
+			float angleBetween = (toolToMouse).AngleBetween(up);
 
 			dynamic_cast<Cannon*>(SelectedGO)->getAngleByReference() = (-angleBetween);
 			oldPos = mousePos;
