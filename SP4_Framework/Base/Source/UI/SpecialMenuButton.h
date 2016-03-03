@@ -16,6 +16,8 @@ public:
 	bool GetMouseover();
 	bool CheckMouseOver(float x, float y, double dt);
 
+	void Update(double dt);
+
 	void render(CSceneManager2D* SceneManager2D, Mesh* textMesh, Color textCol = Color(0, 0, 0), float z = 0);
 	
 protected:

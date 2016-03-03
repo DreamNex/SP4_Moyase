@@ -66,6 +66,10 @@ CLevelSelectScene::~CLevelSelectScene()
 
 	if (transition)
 		delete transition;
+
+
+	if (cursor)
+		delete cursor;
 }
 
 void CLevelSelectScene::Init()
@@ -85,13 +89,6 @@ void CLevelSelectScene::Init()
 
 	FileReading FileReader;
 
-	Luala la("Playerpref.lua");
-	volume1 = la.getFloat("BGM");
-	volume2 = la.getFloat("SFX");
-
-	Application::BGM.SetSoundVol(volume1);
-	Application::SFX.SetSoundVol(volume2);
-
 	if (!Application::isPlaying)
 	{
 		Application::BGM.Play("SoundTracks//MenuTrack.mp3", true, false);
@@ -100,6 +97,7 @@ void CLevelSelectScene::Init()
 
 	/***********************************************Search folder and load buttons******************************************************/
 	std::vector<string> levelNames = FileReader.SearchFolder("Levels//", "*.txt");
+	sortLevelNames(&levelNames);
 
 	numOfPage = levelNames.size()/3 + 1;
 	if (levelNames.size() % 3 == 0)
@@ -210,11 +208,19 @@ void CLevelSelectScene::Init()
 	/************************************************************************************************************************************/
 
 	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
+	cursor = new Cursor("Image//curshead.tga", "Image//curshead2.tga", "Image//curstail.tga", 1.5f, 20, 20);
+
 }
 
 void CLevelSelectScene::Update(double dt)
 {
 	CSceneManager2D::Update(dt);
+	bool m_state = false;
+
+	if (Application::Button_Left)
+		m_state = true;
+
+	cursor->Update(dt, m_state);
 }
 
 void CLevelSelectScene::Render()
@@ -271,6 +277,7 @@ void CLevelSelectScene::Render()
 	}
 
 	transition->render(this, 6);
+	cursor->Render(this);
 }
 
 void CLevelSelectScene::Exit()
@@ -281,4 +288,35 @@ void CLevelSelectScene::Exit()
 			delete meshList[i];
 	}
 	CSceneManager2D::Exit();
+}
+
+void CLevelSelectScene::sortLevelNames(vector<string>* s)
+{
+	vector<int> tempVec;
+
+	for (int i = 0; i < s->size(); ++i)
+	{
+		(*s)[i].substr(0, (*s)[i].length() - 4);
+		tempVec.push_back(stoi((*s)[i]));
+	}
+
+	for (int i = 0; i < tempVec.size(); ++i)
+	{
+		for (int j = i + 1; j < tempVec.size(); ++j)
+		{
+			if (tempVec[i] > tempVec[j])
+			{
+				int abc = tempVec[j];
+				tempVec[j] = tempVec[i];
+				tempVec[i] = abc;
+			}
+		}
+	}
+
+	s->clear();
+	
+	for (int i = 0; i < tempVec.size(); ++i)
+	{
+		s->push_back(std::to_string(tempVec[i]) + ".txt");
+	}
 }

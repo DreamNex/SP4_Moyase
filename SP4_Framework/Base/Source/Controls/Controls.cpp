@@ -29,7 +29,8 @@ Controls::Controls(GUIManager * m_GUI)
 
 Controls::~Controls()
 {
-
+	if (cursor)
+		delete cursor;
 }
 
 void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets, bool ml_state, bool mr_state, float dt, bool guiOnly)
@@ -110,6 +111,7 @@ void Controls::GetSelection(Vector2 mousePos)
 						break;
 					case GUI::EXIT:
 						state = 2;
+						break;
 					case GUI::RESETGUI:
 						state = 0;
 						m_GUI->GetTools()[i]->SetActive(false);

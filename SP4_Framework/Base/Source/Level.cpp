@@ -89,9 +89,20 @@ int Level::update(double dt, bool onlyUpdateGraphic, bool increaseScores)
 					Allassets[i]->SetApplyEffect(false);
 			}
 		}
-		if (dynamic_cast<Exito*>(Allassets[i]))
+		if (dynamic_cast<Enviroment*>(Allassets[i]))
 		{
-			dynamic_cast<Exito*>(Allassets[i])->updateGraphics(dt);
+			if (dynamic_cast<Spikes*>(Allassets[i]))
+			{
+				dynamic_cast<Spikes*>(Allassets[i])->updateGraphics(dt);
+			}
+			else if (dynamic_cast<Rebound*>(Allassets[i]))
+			{
+				dynamic_cast<Rebound*>(Allassets[i])->updateGraphics(dt);
+			}
+			else if (dynamic_cast<Exito*>(Allassets[i]))
+			{
+				dynamic_cast<Exito*>(Allassets[i])->updateGraphics(dt);
+			}
 		}
 	}
 

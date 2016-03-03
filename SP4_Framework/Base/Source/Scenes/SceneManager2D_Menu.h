@@ -32,6 +32,4 @@ private:
 	Mesh* meshList[NUM_GEOMETRY];
 	Cursor * cursor;
 	bool playOnce;
-	float volume1;
-	float volume2;
 };

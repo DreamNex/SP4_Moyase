@@ -4,6 +4,7 @@
 #include "../UI/Layout.h"
 #include "../FileReading.h"
 #include <vector>
+#include "../Cursor/Cursor.h"
 
 class CLevelSelectScene: public CSceneManager2D
 {
@@ -72,6 +73,7 @@ private:
 
 	std::string selectedLevelName;
 
-	float volume1;
-	float volume2;
+	Cursor * cursor;
+
+	void sortLevelNames(vector<string>* s);
 };

@@ -25,6 +25,8 @@ CTutorialScene::~CTutorialScene()
 	{
 		delete gameObjects[i];
 	}
+	if (cursor)
+		delete cursor;
 }
 
 void CTutorialScene::Init()
@@ -60,15 +62,21 @@ void CTutorialScene::Init()
 	meshList[GEO_ROT] = MeshBuilder::Generate2DMesh("rotate Tut", Color(1, 1, 1), 0, 0, 500, 200);
 	meshList[GEO_ROT]->textureID = LoadTGA("Image//rotate.tga");
 
-	meshList[GEO_WIN] = MeshBuilder::Generate2DMesh("clr Tut", Color(1, 1, 1), 0, 0, 500, 200);
-	meshList[GEO_WIN]->textureID = LoadTGA("Image//Clear.tga");
+	meshList[GEO_WIN] = MeshBuilder::Generate2DMesh("dyk Tut", Color(1, 1, 1), 0, 0, 400, 500);
+	meshList[GEO_WIN]->textureID = LoadTGA("Image//dyk.tga");
 
-	gameObjects.push_back(new Spikes(Vector2((float)m_window_width *0.5f, 100.f), (float)m_window_width, 100.f));
-	gameObjects.push_back(new Wall(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.5f), 100.f, (float)m_window_height - 100.f));
-	//gameObjects.push_back(new Exit(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.5f), 100.f,100.f));
+	meshList[GEO_CLR] = MeshBuilder::Generate2DMesh("clr Tut", Color(1, 1, 1), 0, 0, 800, 320);
+	meshList[GEO_CLR]->textureID = LoadTGA("Image//Clear.tga");
+
+	meshList[GEO_MM] = MeshBuilder::Generate2DMesh("mm Tut", Color(1, 1, 1), 0, 0, 800, 320);
+	meshList[GEO_MM]->textureID = LoadTGA("Image//MM.tga");
+
+	gameObjects.push_back(new Wall(Vector2((float)m_window_width *0.5f, 100.f), (float)m_window_width, 100.f));
+	gameObjects.push_back(new Wall(Vector2((float)m_window_width * 0.5f, (float)m_window_height * 0.2f), 100.f, (float)m_window_height - 100.f));
+	gameObjects.push_back(new Exito(Vector2((float)m_window_width * 0.95, (float)m_window_height * 0.3f), 100.f,100.f));
 
 	getBall = new Balls(Vector2(300, 700), 50, "Image//Avatars//Avatar_5.tga");
-
+	 
 	cursor = new Cursor("Image//curshead.tga", "Image//curshead2.tga","Image//curstail.tga", 1.5f, 20, 20);
 	m_GUI = new GUIManager(9,9,9);
 	ctrs = new Controls(m_GUI);
@@ -83,7 +91,9 @@ void CTutorialScene::Init()
 	rotate = false;
 	win = false;
 	onClick = false;
-
+	clear = false;
+	mm = false;
+	temp = false;
 	T_States = MOver;
 
 	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
@@ -264,11 +274,50 @@ void CTutorialScene::Update(double dt)
 	}
 	case CLEAR:
 	{
-		win = true;
-		if ((Application::mouse_current_y <= m_window_height && Application::mouse_current_y >= 0) && (Application::mouse_current_x >= 0 && Application::mouse_current_x <= m_window_width) && mL_state)
+		if (!mL_state)
 		{
-			win = false;
-			//Go back to Main Menu
+			onClick = true;
+		}
+		if (onClick)
+		{
+			win = true;
+			if (mL_state)
+			{
+				win = false;
+				onClick = false;
+				T_States = END;
+			}
+		}
+		break;
+	}
+	case END:
+	{
+		if (!mL_state)
+		{
+			onClick = true;
+		}
+		if (onClick)
+		{
+			clear = true;
+			if (mL_state)
+			{
+				clear = false;
+				T_States = TPLAY;
+			}
+		}
+		break;
+	}
+	case TPLAY:
+	{
+		if (getBall->checkColision(gameObjects[2]))
+		{
+			mm = true;	
+			temp = true;
+		}
+		if(mL_state && temp)
+		{
+			mm = false;
+			//go back main menu
 		}
 		break;
 	}
@@ -322,10 +371,18 @@ void CTutorialScene::Render()
 	}
 	else if (win)
 	{
-		RenderMeshIn2D(meshList[GEO_WIN], false, 1.f, 1.f, m_window_width*0.3, m_window_height/2, 0.f);
+		RenderMeshIn2D(meshList[GEO_WIN], false, 1.f, 1.f, m_window_width*0.35, m_window_height*0.2, 0.f);
+	}
+	else if (clear)
+	{
+		RenderMeshIn2D(meshList[GEO_CLR], false, 1.f, 1.f, m_window_width*0.2, m_window_height/2, 0.f);
+	}
+	else if (mm)
+	{
+		RenderMeshIn2D(meshList[GEO_MM], false, 1.f, 1.f, m_window_width*0.2, m_window_height / 2, 0.f);
 	}
 
-	transition->render(this, 6);
+	transition->render(this, 5);
 }
 
 void CTutorialScene::vExit()

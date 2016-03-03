@@ -26,7 +26,7 @@ Rebound::~Rebound()
 	onDestory();
 }
 
-void Rebound::update(double dt)
+void Rebound::updateGraphics(double dt)
 {
 	this->rigidBody->Update((float)dt);
 

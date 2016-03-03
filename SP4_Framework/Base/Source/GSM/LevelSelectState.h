@@ -33,9 +33,6 @@ private:
 
 	CLevelSelectScene *scene;
 
-	float volume1;
-	float volume2;
-
 	bool playonce;
 	bool playonce2;
 	bool playonce3;

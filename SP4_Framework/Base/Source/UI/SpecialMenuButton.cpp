@@ -35,6 +35,21 @@ bool SpecialMenuButton::CheckMouseOver(float x, float y, double dt)
 {
 	if (x > min.x && x < max.x && y > min.y && y < max.y)
 	{
+		
+		mouseover = true;
+		return true;
+	}
+	else
+	{
+		mouseover = false;
+		return false;
+	}
+}
+
+void SpecialMenuButton::Update(double dt)
+{
+	if (mouseover)
+	{
 		if (transparent > 95)
 		{
 			increasing = false;
@@ -52,9 +67,6 @@ bool SpecialMenuButton::CheckMouseOver(float x, float y, double dt)
 		{
 			transparent -= dt * 60;
 		}
-
-		mouseover = true;
-		return true;
 	}
 	else
 	{
@@ -66,8 +78,6 @@ bool SpecialMenuButton::CheckMouseOver(float x, float y, double dt)
 			if (transparent > 100)
 				transparent = 100;
 		}
-		mouseover = false;
-		return false;
 	}
 }
 

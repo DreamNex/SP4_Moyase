@@ -45,6 +45,11 @@ void CTutorialState::HandleEvents(CGameStateManager* theGSM, const unsigned char
 void CTutorialState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, const double mouse_y,
 							  const int button_Left, const int button_Middle, const int button_Right)
 {
+	if (button_Left)
+	{
+		if (scene->getTutState() == scene->TutStates::TPLAY && scene->getmm())
+			mode = 1;
+	}
 }
 
 void CTutorialState::Update(CGameStateManager* theGSM)
@@ -58,8 +63,6 @@ void CTutorialState::Update(CGameStateManager* theGSM, const double m_dElapsedTi
 
 	if (scene->getGameState() == scene->GameStates::EXIT)
 		mode = 1;
-	//if (scene->getTutState() == scene->TutStates::CLEAR && !scene->getWin())
-		//mode = 1;
 	
 	if (mode != -1)
 		scene->transition->goOpaque(m_dElapsedTime, 140);
