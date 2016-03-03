@@ -23,6 +23,8 @@ ParticleManager::ParticleManager(char *wall, char *cannon, char *boost, char *sl
 
 	mesh[PARTICLE_PLAYER_TRAIL] = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, 1, 1);
 	mesh[PARTICLE_PLAYER_TRAIL]->textureID = LoadTGA(trail);
+
+	srand(time(NULL));
 }
 ParticleManager::~ParticleManager()
 {
@@ -49,8 +51,6 @@ void ParticleManager::SpawnParticles(PARTICLE_TYPE p_Type, Vector2& end, Vector2
 		vPath = 0;
 	else if (p_Type != PARTICLE_WALL)
 		vPath = 1;
-
-	srand(time(NULL));
 
 	for (unsigned int i = 0; i < amount; ++i)
 	{

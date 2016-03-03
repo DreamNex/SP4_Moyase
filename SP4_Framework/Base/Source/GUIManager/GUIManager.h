@@ -2,6 +2,7 @@
 #include "../GUIManager/GUI.h"
 #include <vector>
 #include "../Application.h"
+#include "../Timer/Timer.h"
 
 
 class GUIManager
@@ -26,10 +27,15 @@ public:
 
 	void UpdateScore(int Score);
 
+	Vector2 GetScoreEnds(bool right);
+	bool Gain();
+	bool Complete();
+
 private:
 	//Panel where all the GUI are placed on
 	GUI* score;
 	GUI* scoreBar;
+	GUI* scoreMilestone;
 	GUI* panel;
 	GUI* toolBar;
 	Vector2 slideLength;
@@ -44,5 +50,7 @@ private:
 	float scoreLength;
 	float scoreAlpha;
 	bool alphaIncrease;
+	bool scoreGain;
+	bool scoreComplete;
+	Timer* scoreParticleSpawn;
 };
-

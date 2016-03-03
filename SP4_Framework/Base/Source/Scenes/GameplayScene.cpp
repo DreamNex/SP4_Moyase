@@ -119,6 +119,15 @@ void CGameplayScene::Init()
 	scrollingBGpos[1].Set(m_window_width, 0);
 }
 
+void CGameplayScene::UpdateScoreParticle()
+{
+	if (m_GUI->Gain())
+	{
+		gameLevel.GetParticleManager()->SpawnParticles(ParticleManager::PARTICLE_CANNON, m_GUI->GetScoreEnds(left), Vector2(15, 15), 5, 5, 0.15f, 10);
+		gameLevel.GetParticleManager()->SpawnParticles(ParticleManager::PARTICLE_CANNON, m_GUI->GetScoreEnds(right), Vector2(15, 15), 5, 5, 0.15f, 10);
+	}
+}
+
 void CGameplayScene::Update(double dt)
 {
 	if (Application::IsKeyPressed(VK_SPACE))
@@ -156,6 +165,7 @@ void CGameplayScene::Update(double dt)
 	case S_STARTED:
 		m_GUI->Update(dt);
 		m_GUI->UpdateScore(gameLevel.GetScore());
+		UpdateScoreParticle();
 		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, dt, true);
 		curentState = static_cast<GameStates>(gameLevel.update(dt));
 		if (curentState == S_RESET || playPause)

@@ -15,7 +15,7 @@ PhysicsComponent::PhysicsComponent(Vector2 &v, float mass, bool active)
 
 	this->mass = mass;
 	this->gravitationalForce = 7.f;
-	this->co_Restitution = 0.7f;
+	this->co_Restitution = 0.75f;
 	this->co_SE = 0.45f;
 	this->co_KE = 0.35f;
 	this->co_Drag = 1.1f;

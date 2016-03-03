@@ -70,6 +70,7 @@ private:
 
 	void winScreenUpdae(double dt);
 	void winScreenRender();
+	void UpdateScoreParticle();
 
 	//scrolling bg stuff
 	Vector2 scrollingBGpos[2];

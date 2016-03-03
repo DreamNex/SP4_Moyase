@@ -21,6 +21,7 @@ GUIManager::GUIManager(int cannon, int boost , int slow)
 	scoreBar = new GUI(pointerPos, GUI::POINTER, new Box(pointerPos, 1280, 25), "Image//scoreBar.tga", "Image//scoreBar.tga");
 	score = new GUI(pointerPos, GUI::POINTER, new Box(pointerPos, 1, 18), "Image//score.tga", "Image//score.tga");
 	toolBar = new GUI(cannonPos + Vector2(0, 20), GUI::POINTER, new Box(cannonPos + Vector2(0, 20), 60, 35), "Image//toolBar.tga", "Image//toolBar.tga");
+	scoreMilestone = new GUI(pointerPos, GUI::POINTER, new Box(pointerPos, 1280, 25), "Image//scoreMilestone.tga", "Image//scoreMilestone.tga");
 
 	GUI* temp;
 	//Cannon
@@ -54,6 +55,7 @@ GUIManager::GUIManager(int cannon, int boost , int slow)
 	scoreLength = 0;
 	scoreAlpha = 0;
 	alphaIncrease = true;
+	this->scoreParticleSpawn = new Timer(0.5f);
 }
 
 GUIManager::~GUIManager()
@@ -70,8 +72,33 @@ std::vector<int> GUIManager::GetToolCount()
 	return this->gui_toolCount;
 }
 
+
+bool GUIManager::Gain(){ return this->scoreGain; }
+bool GUIManager::Complete(){ return this->scoreComplete; }
+Vector2 GUIManager::GetScoreEnds(bool right)
+{
+	Vector2 scoreEnd(0, 0);
+	Box* temp = ((Box*)(score->GetGUIBound()));
+	if (right)
+	{
+		scoreEnd = temp->GetOrigin() + Vector2(temp->GetWidth() / 2, 0);
+		//scoreEnd = temp->GetMax();
+		//scoreEnd.y -= temp->GetHeight() / 2;
+	}
+	else
+	{
+		scoreEnd = temp->GetOrigin() - Vector2(temp->GetWidth() / 2, 0);
+		//scoreEnd = temp->GetMin();
+		//scoreEnd.y += temp->GetHeight() / 2;
+	}
+	return scoreEnd;
+}
+
 void GUIManager::Update(float dt)
 {
+	scoreGain = false;
+	scoreComplete = false;
+
 	for (unsigned int i = 0; i < gui_toolCount.size(); i++)
 	{
 		if (gui_toolCount[i] == 0)
@@ -92,6 +119,7 @@ void GUIManager::Update(float dt)
 	slide_GUI.push_back(panel);
 	slide_GUI.push_back(score);
 	slide_GUI.push_back(toolBar);
+	slide_GUI.push_back(scoreMilestone);
 
 	panel->Update();
 	scoreBar->Update();
@@ -110,7 +138,18 @@ void GUIManager::Update(float dt)
 
 	if (((Box*)score->GetGUIBound())->GetWidth() < scoreLength)
 	{
+		if (scoreParticleSpawn->Update(dt))
+		{ 
+			scoreParticleSpawn->Start();
+			scoreGain = true;
+		}
 		((Box*)score->GetGUIBound())->SetWidth(((Box*)score->GetGUIBound())->GetWidth() + dt * (int)(scoreLength - ((Box*)score->GetGUIBound())->GetWidth()));
+		if (((Box*)score->GetGUIBound())->GetWidth() + 25 >= scoreLength)
+		{
+			((Box*)score->GetGUIBound())->SetWidth(scoreLength);
+			scoreComplete = true;
+			scoreGain = false;
+		}
 	}
 
 	if (scoreAlpha < 0)
@@ -144,7 +183,7 @@ void GUIManager::Render(CSceneManager2D* SceneManager2D)
 	panel->render(SceneManager2D);
 	scoreBar->render(SceneManager2D);
 	SceneManager2D->RenderMeshIn2DTrans(score->GetMesh(), (int)scoreAlpha, (dynamic_cast<Box*>(score->GetGUIBound()))->GetWidth(), (dynamic_cast<Box*>(score->GetGUIBound()))->GetHeight(), score->GetPos().x - (dynamic_cast<Box*>(score->GetGUIBound()))->GetWidth() / 2, score->GetPos().y - (dynamic_cast<Box*>(score->GetGUIBound()))->GetHeight() / 2, 3);
-	//score->render(SceneManager2D, 3);
+	scoreMilestone->render(SceneManager2D, 4);
 	for (unsigned int i = 0; i < gui_Tools.size(); ++i)
 	{
 		if (gui_Tools[i]->GetActive())

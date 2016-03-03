@@ -22,9 +22,9 @@ Level::Level(std::string level2load, std::string avatar2load)
 	Mode = 0;
 	collide = false;
 
-	pm_Particles = new ParticleManager("Image//trail.tga", "Image//trail.tga",
+	pm_Particles = new ParticleManager("Image//Particles//WallParticle.tga", "Image//Particles//CannonParticle.tga",
 										"Image//Particles//BoostParticle.tga", "Image//Particles//SlowParticle.tga",
-										orbit.c_str(), "Image//trail.tga");
+										orbit.c_str(), "Image//Particles//Trail.tga");
 	
 	std::string temp = fr.GetVariable("Levels//" + level2load, "max_score");
 	if (temp == "")
