@@ -41,5 +41,8 @@ private:
 	std::vector<GUI*> gui_Tools;
 	std::vector<int> gui_toolCount;
 
+	float scoreLength;
+	float scoreAlpha;
+	bool alphaIncrease;
 };
 

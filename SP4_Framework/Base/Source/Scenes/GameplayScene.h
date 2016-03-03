@@ -45,6 +45,8 @@ public:
 	std::vector<ButtonUI*>* getButtons() { return &Buttons; }
 	Layout *transition;
 
+	void sortLevelNames(vector<string>* s);
+
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 
@@ -71,4 +73,6 @@ private:
 
 	//scrolling bg stuff
 	Vector2 scrollingBGpos[2];
+
+
 };

@@ -50,6 +50,10 @@ GUIManager::GUIManager(int cannon, int boost , int slow)
 	//Exit
 	temp = new GUI(ExitPos, GUI::EXIT, new Box(ExitPos, 140, 60), "Image//exitbtn.tga", "Image//exitbtnFaded.tga");
 	gui_Tools.push_back(temp);
+
+	scoreLength = 0;
+	scoreAlpha = 0;
+	alphaIncrease = true;
 }
 
 GUIManager::~GUIManager()
@@ -103,6 +107,21 @@ void GUIManager::Update(float dt)
 		gui_Tools[i]->Update();
 	}
 	Slide(slide_GUI, 5);
+
+	if (((Box*)score->GetGUIBound())->GetWidth() < scoreLength)
+	{
+		((Box*)score->GetGUIBound())->SetWidth(((Box*)score->GetGUIBound())->GetWidth() + dt * (int)(scoreLength - ((Box*)score->GetGUIBound())->GetWidth()));
+	}
+
+	if (scoreAlpha < 0)
+		alphaIncrease = true;
+	else if (scoreAlpha > 50)
+		alphaIncrease = false;
+
+	if (alphaIncrease)
+		scoreAlpha += dt * 100;
+	else
+		scoreAlpha -= dt * 100;
 }
 
 void GUIManager::SetToolCount(int index, int val)
@@ -124,7 +143,8 @@ void GUIManager::Render(CSceneManager2D* SceneManager2D)
 {
 	panel->render(SceneManager2D);
 	scoreBar->render(SceneManager2D);
-	score->render(SceneManager2D, 3);
+	SceneManager2D->RenderMeshIn2DTrans(score->GetMesh(), (int)scoreAlpha, (dynamic_cast<Box*>(score->GetGUIBound()))->GetWidth(), (dynamic_cast<Box*>(score->GetGUIBound()))->GetHeight(), score->GetPos().x - (dynamic_cast<Box*>(score->GetGUIBound()))->GetWidth() / 2, score->GetPos().y - (dynamic_cast<Box*>(score->GetGUIBound()))->GetHeight() / 2, 3);
+	//score->render(SceneManager2D, 3);
 	for (unsigned int i = 0; i < gui_Tools.size(); ++i)
 	{
 		if (gui_Tools[i]->GetActive())
@@ -157,8 +177,9 @@ void GUIManager::Render(CSceneManager2D* SceneManager2D)
 
 void GUIManager::UpdateScore(int Score)
 {
-	float scoreLength = (((float)Score) / Level::GetMaxScore()) * 1280;
-	((Box*)score->GetGUIBound())->SetWidth(scoreLength);
+	scoreLength = (((float)Score) / Level::GetMaxScore()) * 1280;
+	if (((Box*)score->GetGUIBound())->GetWidth() > scoreLength)
+		((Box*)score->GetGUIBound())->SetWidth(scoreLength);
 }
 
 void GUIManager::Slide(std::vector<GUI*> gui, float slideScalar)

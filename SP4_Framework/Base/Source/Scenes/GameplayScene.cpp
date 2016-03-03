@@ -181,7 +181,8 @@ void CGameplayScene::Update(double dt)
 			
 			/////////////////////////////unlock next level///////////////////////////////
 			std::vector<string> levelNames = FileReader.SearchFolder("Levels//", "*.txt");
-			
+			sortLevelNames(&levelNames);
+
 			for (int i = 0; i < levelNames.size(); ++i)
 			{
 				if (levelNames[i] == CGameStateManager::selectedLevel)
@@ -355,5 +356,36 @@ void CGameplayScene::winScreenRender()
 		//texts = "Select Avatar";
 		//textsSize = AvatarLayout->GetSizeY() * 0.09f;
 		//RenderTextOnScreen(meshList[GEO_TEXT], texts, Color(0, 0, 0), textsSize, AvatarLayout->GetPos().x - (textsSize * 0.5 * texts.size() * 0.5), AvatarLayout->GetPos().y - textsSize * 0.5 + AvatarLayout->GetSizeY() * 0.39f, 3);
+	}
+}
+
+void CGameplayScene::sortLevelNames(vector<string>* s)
+{
+	vector<int> tempVec;
+
+	for (int i = 0; i < s->size(); ++i)
+	{
+		(*s)[i].substr(0, (*s)[i].length() - 4);
+		tempVec.push_back(stoi((*s)[i]));
+	}
+
+	for (int i = 0; i < tempVec.size(); ++i)
+	{
+		for (int j = i + 1; j < tempVec.size(); ++j)
+		{
+			if (tempVec[i] > tempVec[j])
+			{
+				int abc = tempVec[j];
+				tempVec[j] = tempVec[i];
+				tempVec[i] = abc;
+			}
+		}
+	}
+
+	s->clear();
+
+	for (int i = 0; i < tempVec.size(); ++i)
+	{
+		s->push_back(std::to_string(tempVec[i]) + ".txt");
 	}
 }

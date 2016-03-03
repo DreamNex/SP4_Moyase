@@ -68,6 +68,8 @@ void CGameplayState::HandleEvents(CGameStateManager* theGSM, const double mouse_
 				{
 					mode = 2;
 					std::vector<string> levelNames = fr.SearchFolder("Levels//", "*.txt");
+					scene->sortLevelNames(&levelNames);
+
 					for (int i = 0; i < levelNames.size(); ++i)
 					{
 						if (levelNames[i] == CGameStateManager::selectedLevel)
