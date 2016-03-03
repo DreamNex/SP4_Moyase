@@ -97,6 +97,7 @@ void CLevelSelectScene::Init()
 
 	/***********************************************Search folder and load buttons******************************************************/
 	std::vector<string> levelNames = FileReader.SearchFolder("Levels//", "*.txt");
+	sortLevelNames(&levelNames);
 
 	numOfPage = levelNames.size()/3 + 1;
 	if (levelNames.size() % 3 == 0)
@@ -287,4 +288,35 @@ void CLevelSelectScene::Exit()
 			delete meshList[i];
 	}
 	CSceneManager2D::Exit();
+}
+
+void CLevelSelectScene::sortLevelNames(vector<string>* s)
+{
+	vector<int> tempVec;
+
+	for (int i = 0; i < s->size(); ++i)
+	{
+		(*s)[i].substr(0, (*s)[i].length() - 4);
+		tempVec.push_back(stoi((*s)[i]));
+	}
+
+	for (int i = 0; i < tempVec.size(); ++i)
+	{
+		for (int j = i + 1; j < tempVec.size(); ++j)
+		{
+			if (tempVec[i] > tempVec[j])
+			{
+				int abc = tempVec[j];
+				tempVec[j] = tempVec[i];
+				tempVec[i] = abc;
+			}
+		}
+	}
+
+	s->clear();
+	
+	for (int i = 0; i < tempVec.size(); ++i)
+	{
+		s->push_back(std::to_string(tempVec[i]) + ".txt");
+	}
 }

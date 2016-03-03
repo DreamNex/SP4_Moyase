@@ -74,4 +74,6 @@ private:
 	std::string selectedLevelName;
 
 	Cursor * cursor;
+
+	void sortLevelNames(vector<string>* s);
 };
