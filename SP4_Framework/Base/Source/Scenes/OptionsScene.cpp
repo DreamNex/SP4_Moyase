@@ -95,6 +95,8 @@ void OptionsScene::Update(double dt)
 
 
 			Fr->SetFloatVal("Playerpref.lua", "BGM", (volume1 / 100));
+			Application::BGM.SetSoundVol(volume1/100);
+			
 		}
 
 		else if (i == 1)
@@ -110,6 +112,7 @@ void OptionsScene::Update(double dt)
 				soundPlaying = false;
 
 			Fr->SetFloatVal("Playerpref.lua", "SFX", (volume2 / 100));
+			Application::SFX.SetSoundVol(volume2/100);
 		}
 	}
 }
