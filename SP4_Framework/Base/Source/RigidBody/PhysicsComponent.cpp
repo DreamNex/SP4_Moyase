@@ -274,15 +274,15 @@ void PhysicsComponent::Update(float dt)
 	this->v_Velocity = v_Velocity + v_Acceleration;
 
 	//Limit
-	if (v_Velocity.x >= MAX_VELOCITY)
-		v_Velocity.x = MAX_VELOCITY;
-	if (v_Velocity.y >= MAX_VELOCITY)
-		v_Velocity.y = MAX_VELOCITY;
+	if ((fabs)(v_Velocity.x) >= MAX_VELOCITY)
+		v_Velocity.x = ((fabs)(v_Velocity.x) / v_Velocity.x) * MAX_VELOCITY;
+	if ((fabs)(v_Velocity.y) >= MAX_VELOCITY)
+		v_Velocity.y = ((fabs)(v_Velocity.y) / v_Velocity.y) * MAX_VELOCITY;
 
-	if (v_Acceleration.x >= MAX_ACCELERATION)
-		v_Acceleration.x = MAX_ACCELERATION;
-	if (v_Acceleration.y >= MAX_ACCELERATION)
-		v_Acceleration.y = MAX_ACCELERATION;
+	if ((fabs)(v_Acceleration.x) >= MAX_ACCELERATION)
+		v_Acceleration.x = ((fabs)(v_Acceleration.x) / v_Acceleration.x) * MAX_ACCELERATION;
+	if ((fabs)(v_Acceleration.y) >= MAX_ACCELERATION)
+		v_Acceleration.y = ((fabs)(v_Acceleration.y) / v_Acceleration.y) * MAX_ACCELERATION;
 
 	/***************************************************************************************************************************
 	Horizontal Force
