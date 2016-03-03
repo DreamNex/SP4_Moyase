@@ -2,6 +2,8 @@
 #include "../UI/SliderUI.h"
 #include "../FileReading.h"
 #include "../Luala.h"
+#include "../UI/ButtonUI.h"
+#include"../UI/Layout.h"
 
 class OptionsScene : public CSceneManager2D
 {
@@ -25,10 +27,15 @@ public:
 
 	std::vector<SliderUI*> Sliders;
 
+	std::vector<ButtonUI*>& getButtons() { return Buttons; }
+
+	Layout *transition;
 private:
 	Mesh* meshList[NUM_GEOMETRY];
 	FileReading* Fr;
 	float volume1;
 	float volume2;
 	bool soundPlaying;
+
+	std::vector<ButtonUI*> Buttons;
 };

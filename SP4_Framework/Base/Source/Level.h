@@ -14,7 +14,7 @@ public:
 	Level(std::string level2load, std::string avatar2load);
 	~Level();
 	
-	int update(double dt, bool onlyUpdateGraphic = false);
+	int update(double dt, bool onlyUpdateGraphic = false, bool increaseScore = true);
 	void render(CSceneManager2D* sceneManager2D);
 	
 	Balls* getBall() { return theball; }

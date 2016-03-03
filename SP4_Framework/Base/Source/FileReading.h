@@ -12,6 +12,7 @@
 #include "GameObjects\Spikes.h"
 #include "GameObjects\Wall.h"
 #include "GameObjects\Exit.h"
+#include"GameObjects\Rebound.h"
 
 class FileReading
 {

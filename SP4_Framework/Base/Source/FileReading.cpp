@@ -172,6 +172,29 @@ void FileReading::loadVariables(std::vector<GameObject*>* GameObjects)
 
 			(*GameObjects).push_back(new Exito(Vector2(x, y), scaleX, scaleY));
 		}
+		else if (it->find("rebound") != std::string::npos)
+		{
+			float x, y, radius;
+			std::stringstream splitter(it->c_str());
+
+			//split first part (Type of gameobject)
+			std::getline(splitter, token, ',');
+			std::string temp = token;
+
+			//Split second part, pos.x
+			std::getline(splitter, token, ',');
+			x = std::stof(token.c_str());
+
+			//Split third part, pos.y
+			std::getline(splitter, token, ',');
+			y = std::stof(token.c_str());
+
+			//Split fourth part, scaleX
+			std::getline(splitter, token, ',');
+			radius = std::stof(token.c_str());
+
+			(*GameObjects).push_back(new Rebound(Vector2(x, y), radius));
+		}
 	}
 }
 //Clears the vectors' of strings containing all ur lines frm the test file

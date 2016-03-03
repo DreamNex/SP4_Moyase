@@ -39,7 +39,7 @@ Level::~Level()
 	}
 }
 
-int Level::update(double dt, bool onlyUpdateGraphic)
+int Level::update(double dt, bool onlyUpdateGraphic, bool increaseScores)
 {
 	for (int i = 0; i < Allassets.size(); ++i)
 	{
@@ -51,7 +51,7 @@ int Level::update(double dt, bool onlyUpdateGraphic)
 			{
 				if (theball->checkColision(Allassets[i]))
 				{
-					if (Allassets[i]->GetApplyEffect() == false)
+					if (Allassets[i]->GetApplyEffect() == false && increaseScores)
 					{
 						if (dynamic_cast<Cannon*>(Allassets[i]))
 						{

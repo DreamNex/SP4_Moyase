@@ -73,6 +73,9 @@ void CGameplayScene::Init()
 	meshList[GEO_SCORE_INDICATOR2] = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, 1, 1);
 	meshList[GEO_SCORE_INDICATOR2]->textureID = LoadTGA("Image//highscore_indicator_2.tga");
 
+	meshList[GEO_SCROLLINGBG] = MeshBuilder::Generate2DMesh("GameBG", Color(1, 1, 1), 0, 0, m_window_width, m_window_height);
+	meshList[GEO_SCROLLINGBG]->textureID = LoadTGA("Image//scrolling.tga");
+
 	m_GUI = new GUIManager(gameLevel.getToolsArray()[0], gameLevel.getToolsArray()[1], gameLevel.getToolsArray()[2]);
 	ctrs = new Controls(m_GUI);
 
@@ -80,16 +83,8 @@ void CGameplayScene::Init()
 	
 	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
 
-	Luala la("Playerpref.lua");
-	volume1 = la.getFloat("BGM");
-	volume2 = la.getFloat("SFX");
-
 	Application::BGM.StopSounds();
 	Application::isPlaying = false;
-
-	Application::BGM.SetSoundVol(volume1);
-	Application::SFX.SetSoundVol(volume2);
-
 
 	Application::BGM.Play("SoundTracks//GameplayTrack.mp3", true, false);
 
@@ -116,7 +111,12 @@ void CGameplayScene::Init()
 		, resultLayout->GetPos().x + resultLayout->GetSizeX() / 5.7, resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24
 		, 0.6, false));
 
-	textAlpha = 100;
+	textAlpha = 0;
+
+	showLevel = true;
+
+	scrollingBGpos[0].Set(0, 0);
+	scrollingBGpos[1].Set(m_window_width, 0);
 }
 
 void CGameplayScene::Update(double dt)
@@ -198,9 +198,27 @@ void CGameplayScene::Update(double dt)
 		break;
 
 	case S_WIN:
-		gameLevel.update(dt, true);
+		gameLevel.update(dt, false, false);
 		winScreenUpdae(dt);
 		break;
+	}
+
+	if (showLevel)
+	{
+		if (textAlpha < 100)
+			textAlpha += dt * 20;
+		else
+		{
+			textAlpha = 100;
+			showLevel = false;
+		}
+	}
+
+	for (int i = 0; i < 2; ++i)
+	{
+		scrollingBGpos[i].x -= dt * 50;
+		if (scrollingBGpos[i].x <= -(m_window_width))
+			scrollingBGpos[i].x = m_window_width;
 	}
 }
 
@@ -208,13 +226,22 @@ void CGameplayScene::Render()
 {
 	CSceneManager2D::Render();
 
-	RenderMeshIn2D(meshList[GEO_BG], false, 1, 1, 0, 0, -1);
+	RenderMeshIn2D(meshList[GEO_BG], false, 1, 1, 0, 0, -2);
+	
+	for (int i = 0; i < 2; ++i)
+	{
+		RenderMeshIn2DTrans(meshList[GEO_SCROLLINGBG], 60, 1, 1, scrollingBGpos[i].x, scrollingBGpos[i].y, -1);
+	}
+
 	gameLevel.render(this);
 
 	m_GUI->Render(this);
 
 	ctrs->Render(this);
 
+	if (showLevel)
+		RenderTextOnScreenTrans(meshList[GEO_TEXT], "Level " + levelName.substr(0, levelName.length() - 4), Color(1, 1, 1), (int)textAlpha, m_window_height * 0.1, 20, m_window_height - m_window_height * 0.1);
+	
 	switch (curentState)
 	{
 	case S_WIN:

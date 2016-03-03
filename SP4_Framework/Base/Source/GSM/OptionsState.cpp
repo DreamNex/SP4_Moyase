@@ -45,6 +45,22 @@ void OptionsState::HandleEvents(CGameStateManager* theGSM, const unsigned char k
 void OptionsState::HandleEvents(CGameStateManager* theGSM, const double mouse_x, const double mouse_y,
 	const int button_Left, const int button_Middle, const int button_Right)
 {
+	for (unsigned int i = 0; i < scene->getButtons().size(); ++i)
+	{
+		if (scene->getButtons()[i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
+		{
+			if (mousePress && button_Left == 0)
+			{
+				mode = 1;
+				break;
+			}
+		}
+	}
+
+	if (button_Left == 1)
+		mousePress = true;
+	else
+		mousePress = false;
 }
 
 void OptionsState::Update(CGameStateManager* theGSM)
@@ -55,6 +71,24 @@ void OptionsState::Update(CGameStateManager* theGSM)
 void OptionsState::Update(CGameStateManager* theGSM, const double m_dElaspedTime)
 {
 	scene->Update(m_dElaspedTime);
+
+	if (mode != -1)
+		scene->transition->goOpaque(m_dElaspedTime, 140);
+	else if (scene->transition->getTransparent() < 100)
+	{
+		scene->transition->goTransparent(m_dElaspedTime, 140);
+	}
+
+	if (scene->transition->getTransparent() == 0)
+	{
+		switch (mode)
+		{
+		case 1:
+			theGSM->ChangeState(CMenuState::Instance());
+			break;
+		}
+		mode = -1;
+	}
 }
 
 void OptionsState::Draw(CGameStateManager* theGSM)

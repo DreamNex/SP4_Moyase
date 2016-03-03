@@ -55,6 +55,29 @@ void CTutorialState::Update(CGameStateManager* theGSM)
 void CTutorialState::Update(CGameStateManager* theGSM, const double m_dElapsedTime)
 {
 	scene->Update(m_dElapsedTime);
+
+	if (scene->getGameState() == scene->GameStates::EXIT)
+		mode = 1;
+	//if (scene->getTutState() == scene->TutStates::CLEAR && !scene->getWin())
+		//mode = 1;
+	
+	if (mode != -1)
+		scene->transition->goOpaque(m_dElapsedTime, 140);
+	else if (scene->transition->getTransparent() < 100)
+	{
+		scene->transition->goTransparent(m_dElapsedTime, 140);
+	}
+
+	if (scene->transition->getTransparent() == 0)
+	{
+		switch (mode)
+		{
+		case 1:
+			theGSM->ChangeState(CMenuState::Instance());
+			break;
+		}
+		mode = -1;
+	}
 }
 
 void CTutorialState::Draw(CGameStateManager* theGSM)

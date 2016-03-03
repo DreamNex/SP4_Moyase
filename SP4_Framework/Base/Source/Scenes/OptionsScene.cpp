@@ -32,6 +32,12 @@ OptionsScene::~OptionsScene()
 	{
 		delete Fr;
 	}
+
+	for (unsigned int j = 0; j < Buttons.size(); ++j)
+	{
+		if (Buttons[j])
+			delete Buttons[j];
+	}
 }
 
 void OptionsScene::Init()
@@ -57,6 +63,14 @@ void OptionsScene::Init()
 
 	Sliders.push_back(new SliderUI("Image//Tits//bgmSlider.tga", "Image//Tits//sliderbtn.tga", 400, 40, Vector2(m_window_width * 0.5f, m_window_height * 0.5f), volume1));
 	Sliders.push_back(new SliderUI("Image//Tits//sfxSlider.tga", "Image//Tits//sliderbtn.tga", 400, 40, Vector2(m_window_width * 0.5f, m_window_height * 0.5f - 100), volume2));
+
+	Buttons.push_back(new ButtonUI("Back"
+		, "Image//back.tga", "Image//back_hover.tga"
+		, m_window_width * 0.05, m_window_width* 0.05
+		, m_window_width * 0.035, m_window_width * 0.035
+		, 0.6, false));
+
+	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
 }
 
 void OptionsScene::Update(double dt)
@@ -124,6 +138,14 @@ void OptionsScene::Render()
 	std::stringstream ss2;
 	ss2 << volume2;
 	RenderTextOnScreen(meshList[GEO_TEXT], ss2.str(), Color(0, 0, 0), 50, m_window_width * 0.5 - 20, m_window_height * 0.5f - 80);
+
+
+	for (unsigned int i = 0; i < Buttons.size(); i++)
+	{
+		Buttons[i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 4);
+	}
+
+	transition->render(this, 5);
 }
 
 void OptionsScene::Exit()

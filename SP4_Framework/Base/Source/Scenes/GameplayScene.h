@@ -18,6 +18,7 @@ public:
 		GEO_BG,
 		GEO_SCORE_INDICATOR1,
 		GEO_SCORE_INDICATOR2,
+		GEO_SCROLLINGBG,
 		NUM_GEOMETRY,
 	};
 
@@ -56,6 +57,8 @@ private:
 	GameStates curentState;
 
 	Level gameLevel;
+	
+	bool showLevel;
 
 	//win state stuff
 	Layout* winStateOpacity, *resultLayout, *baseScoreBar, *progressScoreBar;
@@ -66,6 +69,6 @@ private:
 	void winScreenUpdae(double dt);
 	void winScreenRender();
 
-	float volume1;
-	float volume2;
+	//scrolling bg stuff
+	Vector2 scrollingBGpos[2];
 };
