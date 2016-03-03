@@ -29,7 +29,6 @@ public:
 
 	bool GetApplyEffect(){ return this->applyEffect; }
 	void SetApplyEffect(bool appEff){ this->applyEffect = appEff; }
-
 protected:
 	RigidBody* rigidBody;
 	Mesh* mesh;

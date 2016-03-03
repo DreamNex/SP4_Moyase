@@ -204,10 +204,13 @@ void PhysicsComponent::toBounce(Vector2 collideNormal)
 	v_Acceleration.SetZero();
 	v_Force.SetZero();
 
-	if (fabs(v_Velocity.x) <= 25 && fabs(v_Velocity.y) <= 25)
+	if (hasGravity && collideNormal == Vector2(0, 1))
 	{
-		v_Velocity.SetZero();
-		isActive = false;
+		if (fabs(v_Velocity.x) <= 25 && fabs(v_Velocity.y) <= 25)
+		{
+			v_Velocity.SetZero();
+			isActive = false;
+		}
 	}
 	hasGravity = true;
 }
@@ -230,6 +233,7 @@ float PhysicsComponent::GetCoKinetic(void)const{ return this->co_KE; }
 float PhysicsComponent::GetCoStatic(void)const{ return this->co_SE; }
 float PhysicsComponent::GetCoDrag(void)const{ return this->co_Drag; }
 
+Vector2 PhysicsComponent::GetPosition(void)const{ return *this->v_Pos; }
 Vector2 PhysicsComponent::GetVelocity(void)const{ return this->v_Velocity; }
 Vector2 PhysicsComponent::GetAcceleration(void)const{ return this->v_Acceleration; }
 Vector2 PhysicsComponent::GetForce(void)const{ return this->v_Force; }

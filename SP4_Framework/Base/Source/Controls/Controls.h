@@ -23,7 +23,7 @@ public:
 	void GetSelection(Vector2 mousePos);
 	void GetSelection(std::vector<GameObject*> &levelAssets, Vector2 mousePos);
 	void GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mousePos);
-	void DoRotation(Vector2 mousePos, float dt);
+	void DoRotation(std::vector<GameObject*> &levelAssets, Vector2 mousePos, float dt);
 	void SetState(int i);
 	int GetState();
 	void ResetState();

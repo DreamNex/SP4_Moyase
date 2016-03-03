@@ -41,7 +41,6 @@ Level::~Level()
 
 int Level::update(double dt, bool onlyUpdateGraphic)
 {
-	bool collideWith = true;
 	for (int i = 0; i < Allassets.size(); ++i)
 	{
 		if (!onlyUpdateGraphic)

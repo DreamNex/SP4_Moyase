@@ -40,7 +40,8 @@ public:
 		scale[1] = y;
 	}
 	void SetResponse(bool response){ this->response = response; }
-
+	void SetPhysicsComponent(PhysicsComponent& pC_Compt){ this->pC_Compt = &pC_Compt; }
+	void SetCollisionComponent(CollisionComponent& cC_Compt){ this->cC_Compt = &cC_Compt; }
 
 	void CollisionResolve_Bounce(RigidBody *rb1, RigidBody *rb2);
 	void CollisionResolve_PushOut(RigidBody *rb1, RigidBody *rb2);

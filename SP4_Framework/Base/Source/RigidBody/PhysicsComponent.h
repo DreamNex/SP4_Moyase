@@ -26,6 +26,7 @@ public:
 	float GetCoStatic(void)const;
 	float GetCoDrag(void)const;
 
+	Vector2 GetPosition(void)const;
 	Vector2 GetVelocity(void)const;
 	Vector2 GetAcceleration(void)const;
 	Vector2 GetForce(void)const;

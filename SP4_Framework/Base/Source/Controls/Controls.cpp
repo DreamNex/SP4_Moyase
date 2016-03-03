@@ -40,11 +40,11 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 	ball = levelAssets[0];
 
 	key = "";
-	if (Application::IsKeyPressed('1'))
+	if (Application::IsKeyPressed('1') && m_GUI->GetToolCount()[0])
 		key = "1";
-	else if (Application::IsKeyPressed('2'))
+	else if (Application::IsKeyPressed('2') && m_GUI->GetToolCount()[1])
 		key = "2";
-	else if (Application::IsKeyPressed('3'))
+	else if (Application::IsKeyPressed('3') && m_GUI->GetToolCount()[2])
 		key = "3";
 
 	if (key != "")
@@ -65,7 +65,7 @@ void Controls::Update(CSceneManager2D* sm, std::vector<GameObject*> &levelAssets
 			GetPlacement(levelAssets, mousePos);
 			break;
 		case ROTATION:
-			DoRotation(mousePos, dt);
+			DoRotation(levelAssets, mousePos, dt);
 			break;
 		}
 	}
@@ -381,7 +381,7 @@ void Controls::GetPlacement(std::vector<GameObject*> &levelAssets, Vector2 mouse
 	}
 }
 
-void Controls::DoRotation(Vector2 mousePos, float dt)
+void Controls::DoRotation(std::vector<GameObject*> &levelAssets, Vector2 mousePos, float dt)
 {
 	m_GUI->DisablePanel(true);
 	if (mR_state)
@@ -402,7 +402,7 @@ void Controls::DoRotation(Vector2 mousePos, float dt)
 				float cannonPower = ((Cannon*)(SelectedGO))->GetPower();
 				Vector2 cannonForce = Vector2(0, 1) * cannonPower;
 				cannonForce.rotateVector(-angleBetween);
-				trajectoryFeedback = ((Balls*)(ball))->getRigidBody()->GetPhysicsCompt()->GetTrajectory(SelectedGO->getPos(), cannonForce, dt, 0.05, 1.0f);
+				trajectoryFeedback = ((Balls*)(ball))->GetPath(levelAssets, SelectedGO->getPos(), cannonForce, dt, 0.1, 2.0f);
 			}
 			anglePrev = angleBetween;
 		}

@@ -11,6 +11,7 @@
 #include "Boost.h"
 #include "Slow.h"
 #include "Rebound.h"
+#include "Wall.h"
 
 Balls::Balls(Vector2 pos, float diameter, const char* texturePath)
 : GameObject(pos)
@@ -51,7 +52,7 @@ void Balls::SpecialcolisionResponce(GameObject *GO2)
 		}
 		else if (dynamic_cast<Spikes*>(GO2))
 		{
-			//this->pos = originalPos;
+			this->pos = originalPos;
 		}
 		else if (dynamic_cast<Rebound*>(GO2))
 		{
@@ -115,3 +116,38 @@ void Balls::reset()
 	this->getRigidBody()->GetPhysicsCompt()->SetAcceleration(Vector2(0, 0));
 	this->getRigidBody()->GetPhysicsCompt()->SetActive(true);
 }
+
+
+std::vector<Vector2> Balls::GetPath(std::vector<GameObject*> levelAssets, Vector2 start, Vector2 force, float dt, float frequency, float life)
+{
+	std::vector<Vector2> pathPoints;
+
+	if (this->rigidBody->GetPhysicsCompt()->GetActive() == false)
+		return pathPoints;
+
+	GameObject* temp_GO = new Balls(start, ((Circle*)this->getRigidBody()->GetCollisionCompt())->GetRadius(), "Image//Avatar//Avatar_1");
+	temp_GO->getRigidBody()->GetPhysicsCompt()->Push(force);
+	Vector2 currentPoint;
+	float frequency_Copy = frequency;
+	while (life > 0)
+	{
+		temp_GO->update(dt);
+		for (unsigned int i = 0; i < levelAssets.size(); ++i)
+		{ 
+			if (dynamic_cast<Wall*>(levelAssets[i]))
+				temp_GO->checkColision(levelAssets[i]);
+		}
+		if (temp_GO->getRigidBody()->GetPhysicsCompt()->GetActive() == false)
+			return pathPoints;
+		if (frequency <= 0)
+		{
+			frequency = frequency_Copy;
+			currentPoint = temp_GO->getPos();
+		}
+		frequency -= dt;
+		life -= dt;
+		pathPoints.push_back(currentPoint);
+	}
+	return pathPoints;
+}
+
