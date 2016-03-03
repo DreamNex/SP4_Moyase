@@ -15,7 +15,7 @@ PhysicsComponent::PhysicsComponent(Vector2 &v, float mass, bool active)
 
 	this->mass = mass;
 	this->gravitationalForce = 7.f;
-	this->co_Restitution = 0.75f;
+	this->co_Restitution = 0.6f;
 	this->co_SE = 0.45f;
 	this->co_KE = 0.35f;
 	this->co_Drag = 1.1f;
@@ -163,7 +163,7 @@ void PhysicsComponent::toBounce(Vector2 collideNormal)
 	bounceDirection;
 
 	//Apply New Velocity
-	v_Velocity = (currentDirection - bounceDirection * 2) * 0.5f;
+	v_Velocity = (currentDirection - bounceDirection * 2) * co_Restitution;
 	v_Acceleration.SetZero();
 	v_Force.SetZero();
 

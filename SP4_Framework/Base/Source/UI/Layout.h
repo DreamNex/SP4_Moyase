@@ -23,7 +23,7 @@ public:
 	void setAlphaMode(bool b) { alphaMode = b; }
 	bool getAlphaMode() { return alphaMode; }
 
-	void setTransparent(int i) { transparent = i; }
+	void setTransparent(float i) { transparent = i; }
 	float getTransparent() { return transparent; }
 
 	void goTransparent(double dt, float multiplier);

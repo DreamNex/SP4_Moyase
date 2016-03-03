@@ -44,7 +44,7 @@ CGameplayScene::~CGameplayScene()
 	if (progressScoreBar)
 		delete progressScoreBar;
 
-	for (int i = 0; i < Buttons.size(); ++i)
+	for (unsigned int i = 0; i < Buttons.size(); ++i)
 	{
 		if (Buttons[i])
 			delete Buttons[i];
@@ -81,7 +81,7 @@ void CGameplayScene::Init()
 
 	play_state = false;
 	
-	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
+	transition = new Layout("", (float)m_window_width, (float)m_window_height, (float)m_window_width * 0.5f, (float)m_window_height * 0.5f, true);
 
 	Application::BGM.StopSounds();
 	Application::isPlaying = false;
@@ -89,42 +89,42 @@ void CGameplayScene::Init()
 	Application::BGM.Play("SoundTracks//GameplayTrack.mp3", true, false);
 
 	//win state stuff
-	winStateOpacity = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true, 100);
+	winStateOpacity = new Layout("", (float)m_window_width, (float)m_window_height, (float)m_window_width * 0.5f, (float)m_window_height * 0.5f, true, 100.f);
 	resultLayout = new Layout("Image//i_pod.tga", m_window_width * 0.35f, m_window_height * 0.66f, m_window_width * 0.5f, 0);
 	
-	baseScoreBar = new Layout("Image//scorebar.tga", resultLayout->GetSizeX() * 0.77, resultLayout->GetSizeY() * 0.05, resultLayout->GetPos().x, resultLayout->GetPos().y);
-	progressScoreBar = new Layout("Image//score.tga", 0, resultLayout->GetSizeY() * 0.05, resultLayout->GetPos().x, resultLayout->GetPos().y);
+	baseScoreBar = new Layout("Image//scorebar.tga", resultLayout->GetSizeX() * 0.77f, resultLayout->GetSizeY() * 0.05f, resultLayout->GetPos().x, resultLayout->GetPos().y);
+	progressScoreBar = new Layout("Image//score.tga", 0.f, resultLayout->GetSizeY() * 0.05f, resultLayout->GetPos().x, resultLayout->GetPos().y);
 
 	Buttons.push_back(new ButtonUI("back"
 		, "Image//back.tga", "Image//back_hover.tga"
-		, resultLayout->GetSizeX() * 0.1, resultLayout->GetSizeX() * 0.1
-		, resultLayout->GetPos().x - resultLayout->GetSizeX() / 5.7, resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24
-		, 0.6, false));
+		, resultLayout->GetSizeX() * 0.1f, resultLayout->GetSizeX() * 0.1f
+		, resultLayout->GetPos().x - resultLayout->GetSizeX() / 5.7f, resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24f
+		, 0.6f, false));
 	Buttons.push_back(new ButtonUI("replay"
 		, "Image//replay.tga", "Image//replay_hover.tga"
-		, resultLayout->GetSizeX() * 0.1, resultLayout->GetSizeX() * 0.1
-		, resultLayout->GetPos().x, resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24
-		, 0.6, false));
+		, resultLayout->GetSizeX() * 0.1f, resultLayout->GetSizeX() * 0.1f
+		, resultLayout->GetPos().x, resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24f
+		, 0.6f, false));
 	Buttons.push_back(new ButtonUI("nextLv"
 		, "Image//arrow.tga", "Image//arrow_hover.tga"
-		, resultLayout->GetSizeX() * 0.1, resultLayout->GetSizeX() * 0.1
-		, resultLayout->GetPos().x + resultLayout->GetSizeX() / 5.7, resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24
-		, 0.6, false));
+		, resultLayout->GetSizeX() * 0.1f, resultLayout->GetSizeX() * 0.1f
+		, resultLayout->GetPos().x + resultLayout->GetSizeX() / 5.7f, resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24f
+		, 0.6f, false));
 
 	textAlpha = 0;
 
 	showLevel = true;
 
 	scrollingBGpos[0].Set(0, 0);
-	scrollingBGpos[1].Set(m_window_width, 0);
+	scrollingBGpos[1].Set((float)m_window_width, 0.f);
 }
 
 void CGameplayScene::UpdateScoreParticle()
 {
 	if (m_GUI->Gain())
 	{
-		gameLevel.GetParticleManager()->SpawnParticles(ParticleManager::PARTICLE_CANNON, m_GUI->GetScoreEnds(left), Vector2(15, 15), 5, 5, 0.15f, 10);
-		gameLevel.GetParticleManager()->SpawnParticles(ParticleManager::PARTICLE_CANNON, m_GUI->GetScoreEnds(right), Vector2(15, 15), 5, 5, 0.15f, 10);
+		gameLevel.GetParticleManager()->SpawnParticles(ParticleManager::PARTICLE_CANNON, m_GUI->GetScoreEnds(true), Vector2(15, 15), 5, 5, 0.15f, 10);
+		gameLevel.GetParticleManager()->SpawnParticles(ParticleManager::PARTICLE_CANNON, m_GUI->GetScoreEnds(false), Vector2(15, 15), 5, 5, 0.15f, 10);
 	}
 }
 
@@ -156,14 +156,14 @@ void CGameplayScene::Update(double dt)
 		gameLevel.SetScore(0);
 		gameLevel.GetParticleManager()->Clear();
 		gameLevel.getBall()->reset();
-		gameLevel.update(dt, true);
-		m_GUI->Update(dt);
+		gameLevel.update((float)dt, true);
+		m_GUI->Update((float)dt);
 		m_GUI->UpdateScore(gameLevel.GetScore());
-		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, dt);
+		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, (float)dt);
 		break;
 
 	case S_STARTED:
-		m_GUI->Update(dt);
+		m_GUI->Update((float)dt);
 		m_GUI->UpdateScore(gameLevel.GetScore());
 		UpdateScoreParticle();
 		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, dt, true);
@@ -186,14 +186,14 @@ void CGameplayScene::Update(double dt)
 				score4lv = "0";
 			int i = gameLevel.GetMode();
 			if (gameLevel.GetMode() > stoi(score4lv))
-				FileReader.SetFloatVal("Levels//" + levelName, "highscore", gameLevel.GetMode());
+				FileReader.SetFloatVal("Levels//" + levelName, "highscore", (float)gameLevel.GetMode());
 			/////////////////////////////////////////////////////////////////////////////
 			
 			/////////////////////////////unlock next level///////////////////////////////
 			std::vector<string> levelNames = FileReader.SearchFolder("Levels//", "*.txt");
 			sortLevelNames(&levelNames);
 
-			for (int i = 0; i < levelNames.size(); ++i)
+			for (unsigned int i = 0; i < levelNames.size(); ++i)
 			{
 				if (levelNames[i] == CGameStateManager::selectedLevel)
 				{
@@ -212,16 +212,16 @@ void CGameplayScene::Update(double dt)
 		break;
 
 	case S_WIN:
-		gameLevel.update(dt, false, false);
-		winScreenUpdae(dt);
-		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, dt, true);
+		gameLevel.update((float)dt, false, false);
+		winScreenUpdae((float)dt);
+		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, (float)dt, true);
 		break;
 	}
 
 	if (showLevel)
 	{
 		if (textAlpha < 100)
-			textAlpha += dt * 20;
+			textAlpha += (float)dt * 20;
 		else
 		{
 			textAlpha = 100;
@@ -231,9 +231,9 @@ void CGameplayScene::Update(double dt)
 
 	for (int i = 0; i < 2; ++i)
 	{
-		scrollingBGpos[i].x -= dt * 50;
+		scrollingBGpos[i].x -= (float)dt * 50.f;
 		if (scrollingBGpos[i].x <= -(m_window_width))
-			scrollingBGpos[i].x = m_window_width;
+			scrollingBGpos[i].x = (float)m_window_width;
 	}
 }
 
@@ -255,7 +255,7 @@ void CGameplayScene::Render()
 	ctrs->Render(this);
 
 	if (showLevel)
-		RenderTextOnScreenTrans(meshList[GEO_TEXT], "Level " + levelName.substr(0, levelName.length() - 4), Color(1, 1, 1), (int)textAlpha, m_window_height * 0.1, 20, m_window_height - m_window_height * 0.1);
+		RenderTextOnScreenTrans(meshList[GEO_TEXT], "Level " + levelName.substr(0, levelName.length() - 4), Color(1.f, 1.f, 1.f), (int)textAlpha, (float)m_window_height * 0.1f, 20.f, (float)m_window_height - (float)m_window_height * 0.1f);
 	
 	switch (curentState)
 	{
@@ -287,19 +287,19 @@ void CGameplayScene::winScreenUpdae(double dt)
 	
 	if (resultLayout->GetPos().y < m_window_height * 0.5f)
 	{
-		resultLayout->SetPos(resultLayout->GetPos().x, resultLayout->GetPos().y + dt * m_window_height * 0.4f);
+		resultLayout->SetPos(resultLayout->GetPos().x, resultLayout->GetPos().y + (float)dt * m_window_height * 0.4f);
 		for (unsigned int i = 0; i < Buttons.size(); ++i)
 		{
-			Buttons[i]->SetPos(Buttons[i]->GetX(), resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24);
+			Buttons[i]->SetPos(Buttons[i]->GetX(), resultLayout->GetPos().y - resultLayout->GetSizeY() * 0.24f);
 		}
-		baseScoreBar->SetPos(baseScoreBar->GetPos().x, resultLayout->GetPos().y + resultLayout->GetSizeY() * 0.015);
-		progressScoreBar->SetPos(baseScoreBar->GetPos().x, resultLayout->GetPos().y + resultLayout->GetSizeY() * 0.015);
+		baseScoreBar->SetPos(baseScoreBar->GetPos().x, resultLayout->GetPos().y + resultLayout->GetSizeY() * 0.015f);
+		progressScoreBar->SetPos(baseScoreBar->GetPos().x, resultLayout->GetPos().y + resultLayout->GetSizeY() * 0.015f);
 
 	}
 	else
 	{
 		if (textAlpha > 0)
-			textAlpha -= dt * 50;
+			textAlpha -= (float)dt * 50.f;
 
 		float a = (float)gameLevel.GetScore();
 		float b = (float)gameLevel.GetMaxScore();
@@ -308,7 +308,7 @@ void CGameplayScene::winScreenUpdae(double dt)
 		float barLength = ((float)gameLevel.GetScore()) / ((float)gameLevel.GetMaxScore()) * baseScoreBar->GetSizeX();
 		if (progressScoreBar->GetSizeX() < barLength && progressScoreBar->GetSizeX() <= baseScoreBar->GetSizeX())
 		{
-			progressScoreBar->setScale(progressScoreBar->GetSizeX() + resultLayout->GetSizeX() * 0.3 * dt, progressScoreBar->GetSizeY());
+			progressScoreBar->setScale(progressScoreBar->GetSizeX() + resultLayout->GetSizeX() * 0.3f * (float)dt, progressScoreBar->GetSizeY());
 			if (progressScoreBar->GetSizeX() > barLength)
 				progressScoreBar->setScale(barLength, progressScoreBar->GetSizeY());
 		}
@@ -320,7 +320,7 @@ void CGameplayScene::winScreenUpdae(double dt)
 
 	for (unsigned int i = 0; i < Buttons.size(); ++i)
 	{
-		if (Buttons[i]->CheckMouseOver((float)Application::mouse_current_x, (float)Application::mouse_current_y));
+		Buttons[i]->CheckMouseOver((float)Application::mouse_current_x, (float)Application::mouse_current_y);
 	}
 
 }
@@ -337,17 +337,17 @@ void CGameplayScene::winScreenRender()
 		Buttons[i]->render(this, meshList[GEO_TEXT], Color(0, 0, 0), 5);
 	}
 	
-	float startX = resultLayout->GetPos().x - resultLayout->GetSizeX() * 0.2;
-	float dist = resultLayout->GetSizeX() * 0.1;
+	float startX = resultLayout->GetPos().x - resultLayout->GetSizeX() * 0.2f;
+	float dist = resultLayout->GetSizeX() * 0.1f;
 	
-	int score = progressScoreBar->GetSizeX() / (baseScoreBar->GetSizeX() / 5);
+	int score = (int)(progressScoreBar->GetSizeX() / (baseScoreBar->GetSizeX() / 5));
 	
 	for (int i = 0; i < 5; ++i)
 	{
 		if (i < score)
-			RenderMeshIn2D(meshList[GEO_SCORE_INDICATOR2], false, resultLayout->GetSizeX() * 0.1, resultLayout->GetSizeY() * 0.1, startX - resultLayout->GetSizeX() * 0.1 * 0.5 + dist * i, resultLayout->GetPos().y + resultLayout->GetSizeY() * 0.08, 5);
+			RenderMeshIn2D(meshList[GEO_SCORE_INDICATOR2], false, resultLayout->GetSizeX() * 0.1f, resultLayout->GetSizeY() * 0.1f, startX - resultLayout->GetSizeX() * 0.1f * 0.5f + dist * i, resultLayout->GetPos().y + resultLayout->GetSizeY() * 0.08f, 5.f);
 		else
-			RenderMeshIn2D(meshList[GEO_SCORE_INDICATOR1], false, resultLayout->GetSizeX() * 0.1, resultLayout->GetSizeY() * 0.1, startX - resultLayout->GetSizeX() * 0.1 * 0.5 + dist * i, resultLayout->GetPos().y + resultLayout->GetSizeY() * 0.08, 5);
+			RenderMeshIn2D(meshList[GEO_SCORE_INDICATOR1], false, resultLayout->GetSizeX() * 0.1f, resultLayout->GetSizeY() * 0.1f, startX - resultLayout->GetSizeX() * 0.1f * 0.5f + dist * i, resultLayout->GetPos().y + resultLayout->GetSizeY() * 0.08f, 5.f);
 	}
 
 	if (resultLayout->GetPos().y >= m_window_height * 0.5f)
@@ -357,11 +357,11 @@ void CGameplayScene::winScreenRender()
 
 		texts = "Level " + levelName.substr(0, levelName.length() - 4);
 		textsSize = resultLayout->GetSizeX() * 0.1f;
-		RenderTextOnScreenTrans(meshList[GEO_TEXT], texts, Color(0, 0, 0), (int)textAlpha, textsSize, resultLayout->GetPos().x - (textsSize * 0.5 * texts.size() * 0.5), resultLayout->GetPos().y - textsSize * 0.5 + resultLayout->GetSizeY() * 0.38f);
+		RenderTextOnScreenTrans(meshList[GEO_TEXT], texts, Color(0, 0, 0), (int)textAlpha, textsSize, resultLayout->GetPos().x - (textsSize * 0.5f * texts.size() * 0.5f), resultLayout->GetPos().y - textsSize * 0.5f + resultLayout->GetSizeY() * 0.38f);
 
 		texts = "Cleared!";
 		textsSize = resultLayout->GetSizeX() * 0.11f;
-		RenderTextOnScreenTrans(meshList[GEO_TEXT], texts, Color(0, 0, 0), (int)textAlpha, textsSize, resultLayout->GetPos().x - (textsSize * 0.5 * texts.size() * 0.5), resultLayout->GetPos().y - textsSize * 0.5 + resultLayout->GetSizeY() * 0.28f);
+		RenderTextOnScreenTrans(meshList[GEO_TEXT], texts, Color(0, 0, 0), (int)textAlpha, textsSize, resultLayout->GetPos().x - (textsSize * 0.5f * texts.size() * 0.5f), resultLayout->GetPos().y - textsSize * 0.5f + resultLayout->GetSizeY() * 0.28f);
 
 		//texts = "Select Avatar";
 		//textsSize = AvatarLayout->GetSizeY() * 0.09f;
@@ -373,15 +373,15 @@ void CGameplayScene::sortLevelNames(vector<string>* s)
 {
 	vector<int> tempVec;
 
-	for (int i = 0; i < s->size(); ++i)
+	for (unsigned int i = 0; i < s->size(); ++i)
 	{
 		(*s)[i].substr(0, (*s)[i].length() - 4);
 		tempVec.push_back(stoi((*s)[i]));
 	}
 
-	for (int i = 0; i < tempVec.size(); ++i)
+	for (unsigned int i = 0; i < tempVec.size(); ++i)
 	{
-		for (int j = i + 1; j < tempVec.size(); ++j)
+		for (unsigned int j = i + 1; j < tempVec.size(); ++j)
 		{
 			if (tempVec[i] > tempVec[j])
 			{
@@ -394,7 +394,7 @@ void CGameplayScene::sortLevelNames(vector<string>* s)
 
 	s->clear();
 
-	for (int i = 0; i < tempVec.size(); ++i)
+	for (unsigned int i = 0; i < tempVec.size(); ++i)
 	{
 		s->push_back(std::to_string(tempVec[i]) + ".txt");
 	}
