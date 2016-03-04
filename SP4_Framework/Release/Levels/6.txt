@@ -1,5 +1,7 @@
-true
-2,0,0
+false
+2,1,1
+max_score = 15
+highscore = 0
 ball,100,400,50
 spike,640,80,1280,130
 wall,350,60,190,400//Near Wall

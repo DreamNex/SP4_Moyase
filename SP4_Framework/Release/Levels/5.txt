@@ -1,7 +1,7 @@
-true
-2,1,5
+false
+2,1,1
 max_score = 15
-highscore = 5
+highscore = 0
 ball,150,600,50
 wall,0,360,50,800//Left Wall
 wall,640,40,1280,130//Bottom Wall

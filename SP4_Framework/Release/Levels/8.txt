@@ -1,7 +1,7 @@
 true
 2,1,0
 max_score = 10
-highscore = 5
+highscore = 0
 ball,350,600,50
 
 wall,320,20,1100,100//wall bottom

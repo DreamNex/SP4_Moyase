@@ -1,7 +1,7 @@
-true
+false
 3,1,1
 max_score = 15
-highscore = 3
+highscore = 0
 ball,150,600,50
 wall,0,360,50,800
 wall,1260,600,50,400
