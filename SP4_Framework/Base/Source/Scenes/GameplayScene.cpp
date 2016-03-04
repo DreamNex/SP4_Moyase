@@ -123,8 +123,8 @@ void CGameplayScene::UpdateScoreParticle()
 {
 	if (m_GUI->Gain())
 	{
-		gameLevel.GetParticleManager()->SpawnParticles(ParticleManager::PARTICLE_CANNON, m_GUI->GetScoreEnds(true), Vector2(15, 15), 5, 5, 0.15f, 10);
-		gameLevel.GetParticleManager()->SpawnParticles(ParticleManager::PARTICLE_CANNON, m_GUI->GetScoreEnds(false), Vector2(15, 15), 5, 5, 0.15f, 10);
+		gameLevel.GetParticleManager()->SpawnParticles(ParticleManager::PARTICLE_PLAYER_TRAIL, m_GUI->GetScoreEnds(true), Vector2(10, 10), Vector2(15, 15), 3.5, 5, 15, 0.15f, 0.3f, 5);
+		gameLevel.GetParticleManager()->SpawnParticles(ParticleManager::PARTICLE_PLAYER_TRAIL, m_GUI->GetScoreEnds(false), Vector2(10, 10), Vector2(15, 15), 3.5, 5, 15, 0.15f, 0.3f, 5);
 	}
 }
 

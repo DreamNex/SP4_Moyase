@@ -65,7 +65,7 @@ Vector2 Vector2::operator / (float scalar) const
 
 bool Vector2::operator==(const Vector2& rhs)const
 {
-	return (x == rhs.x || y == rhs.y);
+	return (x == rhs.x && y == rhs.y);
 }
 
 bool Vector2::operator!=(const Vector2& rhs)const

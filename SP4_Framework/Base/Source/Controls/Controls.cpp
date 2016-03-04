@@ -399,7 +399,7 @@ void Controls::DoRotation(std::vector<GameObject*> &levelAssets, Vector2 mousePo
 			dynamic_cast<Cannon*>(SelectedGO)->getAngleByReference() = (-angleBetween);
 			oldPos = mousePos;
 
-			if ((fabs)((fabs)(anglePrev) - (fabs)(angleBetween)) >= 1.f)
+			if ((fabs)((fabs)(anglePrev) - (fabs)(angleBetween)) >= 0.05f)
 			{
 
 				float cannonPower = ((Cannon*)(SelectedGO))->GetPower();

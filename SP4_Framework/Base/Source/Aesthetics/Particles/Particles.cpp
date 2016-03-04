@@ -1,18 +1,19 @@
 #include "Particles.h"
 #include "GL\glew.h"
 #include "../Base/Source/LoadTGA.h"
+#include "../Base/Source/Aesthetics/VectorPaths/Magnet.h"
 
 /*************************************************************************************************************
 	CONSTRUCTOR(S) && DESTRUCTOR
 *************************************************************************************************************/
-Particles::Particles(int vPath, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life)
+Particles::Particles(VectorPathing* vPath, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life)
 {
 	this->start = start;
 	this->end = &end;
 	this->size = size;
 	this->speed = speed;
 	this->life = life;
-	this->particlePath = new VectorPathing(vPath);
+	this->particlePath = vPath;
 
 	this->particleMesh = mesh;
 }
@@ -22,7 +23,7 @@ Particles::Particles()
 	, start(Vector2(1, 1))
 	, end(NULL)
 	, speed(1)
-	, particlePath(new VectorPathing(1))
+	, particlePath(new Magnet())
 {
 }
 Particles::~Particles()
@@ -104,7 +105,7 @@ bool Particles::Update(float dt)
 			start = start + offset;
 		}
 	}
-	Vector2 path = particlePath->GetPath(start, *end) * speed;
+	Vector2 path = particlePath->GetPath(start, *end, speed);
 	if (life->Update(dt) || path.IsZero())
 		return true;
 	start = start + path;
@@ -113,5 +114,5 @@ bool Particles::Update(float dt)
 }
 void Particles::Render(CSceneManager2D* scene)
 {
-	scene->RenderMeshIn2D(particleMesh, false, size.x, size.y, start.x, start.y);
+	scene->RenderMeshIn2D(particleMesh, false, size.x, size.y, start.x, start.y, 6);
 }

@@ -13,7 +13,10 @@
   <ItemGroup>
     <ClCompile Include="Source\Aesthetics\Particles\ParticleManager.cpp" />
     <ClCompile Include="Source\Aesthetics\Particles\Particles.cpp" />
+    <ClCompile Include="Source\Aesthetics\VectorPaths\Magnet.cpp" />
+    <ClCompile Include="Source\Aesthetics\VectorPaths\Orbit.cpp" />
     <ClCompile Include="Source\Aesthetics\VectorPaths\VectorPathing.cpp" />
+    <ClCompile Include="Source\Aesthetics\VectorPaths\Wave.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
@@ -74,7 +77,10 @@
   <ItemGroup>
     <ClInclude Include="Source\Aesthetics\Particles\ParticleManager.h" />
     <ClInclude Include="Source\Aesthetics\Particles\Particles.h" />
+    <ClInclude Include="Source\Aesthetics\VectorPaths\Magnet.h" />
+    <ClInclude Include="Source\Aesthetics\VectorPaths\Orbit.h" />
     <ClInclude Include="Source\Aesthetics\VectorPaths\VectorPathing.h" />
+    <ClInclude Include="Source\Aesthetics\VectorPaths\Wave.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera3.h" />

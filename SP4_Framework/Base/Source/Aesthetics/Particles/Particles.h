@@ -13,7 +13,7 @@ class Particles
 public:
 	//*************************************************************************************
 	//CONSTRUCTOR(S) && DESTRUCTOR
-	Particles(int vPath, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life);
+	Particles(VectorPathing*, Vector2 start, Vector2& end, Vector2 size, float speed, Mesh* mesh, Timer* life);
 	Particles();
 	~Particles();
 

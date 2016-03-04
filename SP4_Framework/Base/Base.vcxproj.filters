@@ -302,6 +302,15 @@
     <ClCompile Include="Source\Aesthetics\VectorPaths\VectorPathing.cpp">
       <Filter>Source Files\Aesthetics\VectorPaths</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Aesthetics\VectorPaths\Magnet.cpp">
+      <Filter>Source Files\Aesthetics\VectorPaths</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Aesthetics\VectorPaths\Orbit.cpp">
+      <Filter>Source Files\Aesthetics\VectorPaths</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Aesthetics\VectorPaths\Wave.cpp">
+      <Filter>Source Files\Aesthetics\VectorPaths</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -491,6 +500,15 @@
       <Filter>Source Files\Aesthetics\Particles</Filter>
     </ClInclude>
     <ClInclude Include="Source\Aesthetics\VectorPaths\VectorPathing.h">
+      <Filter>Source Files\Aesthetics\VectorPaths</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Aesthetics\VectorPaths\Magnet.h">
+      <Filter>Source Files\Aesthetics\VectorPaths</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Aesthetics\VectorPaths\Orbit.h">
+      <Filter>Source Files\Aesthetics\VectorPaths</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Aesthetics\VectorPaths\Wave.h">
       <Filter>Source Files\Aesthetics\VectorPaths</Filter>
     </ClInclude>
   </ItemGroup>

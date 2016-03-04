@@ -23,7 +23,7 @@ Level::Level(std::string level2load, std::string avatar2load)
 	collide = false;
 
 	pm_Particles = new ParticleManager("Image//Particles//WallParticle.tga", "Image//Particles//CannonParticle.tga",
-										"Image//Particles//BoostParticle.tga", "Image//Particles//SlowParticle.tga",
+										"Image//Particles//Boost.tga", "Image//Particles//Slow.tga",
 										orbit.c_str(), "Image//Particles//Trail.tga");
 	
 	std::string temp = fr.GetVariable("Levels//" + level2load, "max_score");
@@ -58,21 +58,24 @@ int Level::update(double dt, bool onlyUpdateGraphic, bool increaseScores)
 						if (dynamic_cast<Cannon*>(Allassets[i]))
 						{
 							this->Score += 3;
-							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_CANNON, *Allassets[i]->getPointerPos(), Vector2(15, 15), 3, 10, 0.3f, 50);
+							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_CANNON, *Allassets[i]->getPointerPos(), Vector2(15, 15), 3, 1, 0.3f, 50);
 							Allassets[i]->SetApplyEffect(true);
 						}
 						else if (dynamic_cast<Slow*>(Allassets[i]) || dynamic_cast<Boost*>(Allassets[i]))
 						{
 							this->Score += 2;
 							Vector2 *temp = Allassets[i]->getPointerPos();
-							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_SLOW, *temp, Vector2(25, 25), 2.5, 80, 0.35f, 20);
+							if (dynamic_cast<Slow*>(Allassets[i]))
+								pm_Particles->SpawnParticles(ParticleManager::PARTICLE_SLOW, *temp, Vector2(25, 25), 2.5, 80, 0.35f, 20);
+							else
+								pm_Particles->SpawnParticles(ParticleManager::PARTICLE_BOOST, *temp, Vector2(25, 25), 2.5, 80, 0.35f, 20);
 							Allassets[i]->SetApplyEffect(true);
 						}
 						else if (dynamic_cast<Wall*>(Allassets[i]))
 						{
 							this->Score += 1;
 							Vector2 *temp = new Vector2(theball->getPos().x, theball->getPos().y);
-							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_WALL, *temp, Vector2(20, 20), 2.5, 1, 0.5f, 3);
+							pm_Particles->SpawnParticles(ParticleManager::PARTICLE_WALL, *temp, Vector2(20, 20), -2.5, 1, 0.5f, 3);
 							Allassets[i]->SetApplyEffect(true);
 						}
 						else if (dynamic_cast<Exito*>(Allassets[i]))
