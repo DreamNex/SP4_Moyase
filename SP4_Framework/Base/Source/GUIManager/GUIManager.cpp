@@ -97,7 +97,6 @@ Vector2 GUIManager::GetScoreEnds(bool right)
 void GUIManager::Update(float dt)
 {
 	scoreGain = false;
-	scoreComplete = false;
 
 	for (unsigned int i = 0; i < gui_toolCount.size(); i++)
 	{
@@ -144,7 +143,7 @@ void GUIManager::Update(float dt)
 			scoreGain = true;
 		}
 		((Box*)score->GetGUIBound())->SetWidth(((Box*)score->GetGUIBound())->GetWidth() + dt * (int)(scoreLength - ((Box*)score->GetGUIBound())->GetWidth()));
-		if (((Box*)score->GetGUIBound())->GetWidth() >= scoreLength)
+		if (((Box*)score->GetGUIBound())->GetWidth() + 10 >= scoreLength)
 		{
 			((Box*)score->GetGUIBound())->SetWidth(scoreLength);
 			scoreGain = false;
