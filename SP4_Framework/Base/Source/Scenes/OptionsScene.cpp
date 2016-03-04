@@ -38,6 +38,10 @@ OptionsScene::~OptionsScene()
 		if (Buttons[j])
 			delete Buttons[j];
 	}
+	if (cursor)
+	{
+		delete cursor;
+	}
 }
 
 void OptionsScene::Init()
@@ -71,11 +75,19 @@ void OptionsScene::Init()
 		, 0.6, false));
 
 	transition = new Layout("", m_window_width, m_window_height, m_window_width * 0.5f, m_window_height * 0.5f, true);
+	cursor = new Cursor("Image//curshead.tga", "Image//curshead2.tga", "Image//curstail.tga", 1.5f, 20, 20);
 }
 
 void OptionsScene::Update(double dt)
 {
 	CSceneManager2D::Update(dt);
+
+	bool m_state = false;
+
+	if (Application::Button_Left)
+		m_state = true;
+
+	cursor->Update(dt, m_state);
 
 	for (unsigned int i = 0; i < Sliders.size(); i++)
 	{
@@ -149,6 +161,7 @@ void OptionsScene::Render()
 	}
 
 	transition->render(this, 5);
+	cursor->Render(this);
 }
 
 void OptionsScene::Exit()

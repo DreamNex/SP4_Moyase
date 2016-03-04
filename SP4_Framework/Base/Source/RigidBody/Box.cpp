@@ -41,12 +41,16 @@ void Box::SetMax(Vector2 max)
 	this->max = max;
 	this->width = (max.x - (*origin).x) * 2;
 	this->height = (max.y - (*origin).y) * 2;
+	origin->x = origin->x + width / 2;
+	origin->x = origin->x + height / 2;
 }
 void Box::SetMin(Vector2 min)
 {
 	this->min = min;
 	this->width = ((*origin).x - this->min.x) * 2;
 	this->height = ((*origin).y - this->min.y) * 2;
+	origin->x = origin->x - width / 2;
+	origin->x = origin->x - height / 2;
 }
 void Box::SetWidth(float width)
 {

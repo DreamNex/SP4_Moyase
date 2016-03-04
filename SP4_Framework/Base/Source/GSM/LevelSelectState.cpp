@@ -59,7 +59,7 @@ void CLevelSelectState::HandleEvents(CGameStateManager* theGSM, const double mou
 		{
 			for (unsigned int i = 0; i < scene->getLevelButtons()[scene->getCurrentPage()].size(); ++i)
 			{
-				if (scene->getLevelButtons()[scene->getCurrentPage()][i]->CheckMouseOver((float)mouse_x, (float)mouse_y))
+				if (scene->getLevelButtons()[scene->getCurrentPage()][i]->CheckMouseOver((float)mouse_x, (float)mouse_y) && scene->getLevelButtons()[scene->getCurrentPage()][i]->getUnlock())
 				{
 					//hover
 					if (!playonce)

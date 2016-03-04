@@ -212,6 +212,8 @@ void CGameplayScene::Update(double dt)
 		break;
 
 	case S_WIN:
+		m_GUI->Update((float)dt);
+		m_GUI->UpdateScore(gameLevel.GetScore());
 		gameLevel.update((float)dt, false, false);
 		winScreenUpdae((float)dt);
 		ctrs->Update(this, gameLevel.getGameObjects(), mL_state, mR_state, (float)dt, true);

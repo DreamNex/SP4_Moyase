@@ -10,12 +10,15 @@ GUI::GUI(Vector2 pos, int g_typeID, CollisionComponent * gui_Bound, char *Mesh, 
 
 	this->pos = pos;
 	this->g_typeID = g_typeID;
-	this->gui_Bound = gui_Bound;
-	this->gui_Bound->SetOrigin(this->pos);
 
 	if (dynamic_cast<Box*>(gui_Bound) == false)
 	{
 		gui_Bound = new Box(this->pos, 5, 5);
+	}
+	else
+	{
+		this->gui_Bound = dynamic_cast<Box*>(gui_Bound);
+		this->gui_Bound->SetOrigin(this->pos);
 	}
 
 	this->Mesh = MeshBuilder::Generate2DMesh("", Color(1, 1, 1), 0, 0, 1,1);

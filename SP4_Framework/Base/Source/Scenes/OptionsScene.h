@@ -4,6 +4,7 @@
 #include "../Luala.h"
 #include "../UI/ButtonUI.h"
 #include"../UI/Layout.h"
+#include"../Cursor/Cursor.h"
 
 class OptionsScene : public CSceneManager2D
 {
@@ -36,6 +37,8 @@ private:
 	float volume1;
 	float volume2;
 	bool soundPlaying;
+
+	Cursor * cursor;
 
 	std::vector<ButtonUI*> Buttons;
 };

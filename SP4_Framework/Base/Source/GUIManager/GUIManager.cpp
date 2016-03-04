@@ -144,10 +144,9 @@ void GUIManager::Update(float dt)
 			scoreGain = true;
 		}
 		((Box*)score->GetGUIBound())->SetWidth(((Box*)score->GetGUIBound())->GetWidth() + dt * (int)(scoreLength - ((Box*)score->GetGUIBound())->GetWidth()));
-		if (((Box*)score->GetGUIBound())->GetWidth() + 25 >= scoreLength)
+		if (((Box*)score->GetGUIBound())->GetWidth() >= scoreLength)
 		{
 			((Box*)score->GetGUIBound())->SetWidth(scoreLength);
-			scoreComplete = true;
 			scoreGain = false;
 		}
 	}
@@ -199,14 +198,15 @@ void GUIManager::Render(CSceneManager2D* SceneManager2D)
 	{
 		if (gui_Tools[i]->CheckMO())
 		{ 
-			 Box* temp = ((Box*)(toolBar));
+			 Box* temp = ((Box*)(toolBar->GetGUIBound()));
 			 Vector2 moveBy(150 * i, 30);
 
 			for (unsigned int k = 0; k < gui_toolCount[i]; ++k)
 			{
 				int tempHaha = gui_toolCount[2];
-				toolBar->SetPos(toolBar->GetPos() + moveBy);
-				toolBar->render(SceneManager2D, 2);
+				toolBar->SetPos(originPos + moveBy);
+				toolBar->render(SceneManager2D, 5);
+				float a = temp->GetHeight();
 				moveBy.y += temp->GetHeight();
 			}
 			toolBar->SetPos(originPos);
